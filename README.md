@@ -1,59 +1,291 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Website Pondok Pesantren Riyadussalikin Padaherang
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Website profil resmi Pondok Pesantren Riyadussalikin Padaherang yang dibangun dengan Laravel 12, Inertia.js (Vue 3), dan Tailwind CSS.
 
-## About Laravel
+## 🎯 Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Website Publik
+- **Beranda**: Hero section dengan logo, slogan islami, keunggulan pesantren, dan preview prestasi terbaru
+- **Visi & Misi**: Menampilkan visi, misi, dan nilai-nilai pesantren
+- **Prestasi**: Daftar prestasi santri dengan filter kategori (Akademik, Non-Akademik, Keagamaan) dan tahun
+- **Kontak**: Informasi kontak lengkap, Google Maps, dan form kontak publik
+- **Tombol PPDB**: Selalu terlihat di navbar, mengarah ke website PPDB eksternal
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Dashboard Admin (Filament) - Coming Soon
+Dashboard admin akan ditambahkan di update selanjutnya dengan fitur:
+- Manajemen data prestasi
+- Melihat dan membalas pesan kontak via WhatsApp
+- Sistem autentikasi admin
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🎨 Desain
 
-## Learning Laravel
+- **Warna Utama**: Hijau Emerald (#10b981) - diambil dari logo pesantren
+- **Warna Pendukung**: Putih (background) dan Kuning/Emas lembut (aksen)
+- **Font**: Inter (sans-serif) dan Amiri (Arabic/Islamic)
+- **Responsif**: Mobile-first design, optimal di semua perangkat
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 📋 Prasyarat
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP >= 8.2
+- Composer
+- Node.js & NPM
+- MySQL/MariaDB
+- Laragon (recommended untuk Windows)
 
-## Laravel Sponsors
+## 🚀 Instalasi
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Clone atau Extract Project
 
-### Premium Partners
+```bash
+cd c:\laragon\www\PesantrenPPDB
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 2. Install Dependencies
 
-## Contributing
+```bash
+# Install PHP dependencies
+composer install
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Install JavaScript dependencies
+npm install
+```
 
-## Code of Conduct
+### 3. Setup Environment
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+File `.env` sudah dikonfigurasi untuk MySQL:
 
-## Security Vulnerabilities
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=pesantren_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Buat Database
 
-## License
+Buat database baru bernama `pesantren_db` di phpMyAdmin atau MySQL:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```sql
+CREATE DATABASE pesantren_db;
+```
+
+### 5. Jalankan Migration & Seeder
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+Ini akan membuat tabel dan mengisi data dummy prestasi.
+
+### 6. Build Assets
+
+```bash
+npm run build
+```
+
+Atau untuk development dengan hot reload:
+
+```bash
+npm run dev
+```
+
+### 7. Jalankan Server
+
+```bash
+php artisan serve
+```
+
+Website akan berjalan di: **http://localhost:8000**
+
+## 📁 Struktur Project
+
+```
+PesantrenPPDB/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── HomeController.php
+│   │   │   ├── PrestasiController.php
+│   │   │   └── ContactController.php
+│   │   └── Middleware/
+│   │       └── HandleInertiaRequests.php
+│   └── Models/
+│       ├── Prestasi.php
+│       └── ContactMessage.php
+├── database/
+│   ├── migrations/
+│   │   ├── *_create_prestasis_table.php
+│   │   └── *_create_contact_messages_table.php
+│   └── seeders/
+│       ├── DatabaseSeeder.php
+│       └── PrestasiSeeder.php
+├── resources/
+│   ├── css/
+│   │   └── app.css (Tailwind + Custom Styles)
+│   ├── js/
+│   │   ├── app.js (Inertia Setup)
+│   │   ├── Layouts/
+│   │   │   └── MainLayout.vue
+│   │   └── Pages/
+│   │       ├── Home.vue
+│   │       ├── VisiMisi.vue
+│   │       ├── Prestasi.vue
+│   │       └── Contact.vue
+│   └── views/
+│       └── app.blade.php (Root Template)
+├── public/
+│   └── logo.png
+└── routes/
+    └── web.php
+```
+
+## 🎯 Halaman Website
+
+### 1. Beranda (/)
+- Hero section dengan logo dan slogan
+- Keunggulan pesantren (3 card)
+- Preview 6 prestasi terbaru
+- Call-to-action PPDB
+
+### 2. Visi & Misi (/visi-misi)
+- Visi pesantren
+- 5 Misi utama
+- 4 Nilai-nilai pesantren (Ikhlas, Ilmu, Ukhuwah, Amanah)
+
+### 3. Prestasi (/prestasi)
+- Filter berdasarkan kategori dan tahun
+- Prestasi dikelompokkan per kategori
+- Data dinamis dari database
+
+### 4. Kontak (/kontak)
+- Informasi kontak (Alamat, WhatsApp, Email)
+- Google Maps embed
+- Form kontak (Nama, WhatsApp, Pesan)
+- Pesan tersimpan ke database
+
+## 🔧 Kustomisasi
+
+### Mengubah Informasi Kontak
+
+Edit file `resources/js/Layouts/MainLayout.vue` dan `resources/js/Pages/Contact.vue`:
+
+```vue
+// Alamat
+<p>Jl. Raya Padaherang No. 123<br>Padaherang, Pangandaran<br>Jawa Barat 46396</p>
+
+// WhatsApp
+<a href="https://wa.me/6281234567890">+62 812-3456-7890</a>
+
+// Email
+<a href="mailto:info@riyadussalikin.sch.id">info@riyadussalikin.sch.id</a>
+```
+
+### Mengubah Link PPDB
+
+Edit file `resources/js/Layouts/MainLayout.vue`:
+
+```vue
+<a href="https://ppdb.riyadussalikin.sch.id" target="_blank">
+    PPDB
+</a>
+```
+
+### Menambah Data Prestasi
+
+Gunakan seeder atau tambahkan manual via database:
+
+```php
+// database/seeders/PrestasiSeeder.php
+Prestasi::create([
+    'judul' => 'Judul Prestasi',
+    'kategori' => 'akademik', // atau 'non_akademik', 'keagamaan'
+    'tingkat' => 'Nasional',
+    'tahun' => 2024,
+    'deskripsi' => 'Deskripsi prestasi...',
+]);
+```
+
+### Mengubah Warna
+
+Edit file `resources/css/app.css`:
+
+```css
+/* Emerald Green - Primary Color */
+--color-primary-500: #10b981; /* Ubah sesuai kebutuhan */
+
+/* Gold/Yellow Accent */
+--color-accent-500: #eab308; /* Ubah sesuai kebutuhan */
+```
+
+## 📱 Testing
+
+### Test Halaman Publik
+
+1. Buka http://localhost:8000 - Halaman Beranda
+2. Klik menu "Visi & Misi" - Halaman Visi & Misi
+3. Klik menu "Prestasi" - Halaman Prestasi dengan filter
+4. Klik menu "Kontak" - Halaman Kontak dengan form
+5. Test form kontak - Isi dan kirim pesan
+6. Cek database tabel `contact_messages` - Pesan harus tersimpan
+
+### Test Responsiveness
+
+1. Buka DevTools (F12)
+2. Toggle device toolbar (Ctrl+Shift+M)
+3. Test di berbagai ukuran:
+   - Mobile (375px)
+   - Tablet (768px)
+   - Desktop (1024px+)
+
+## 🐛 Troubleshooting
+
+### Error "SQLSTATE[HY000] [1049] Unknown database"
+
+Pastikan database `pesantren_db` sudah dibuat di MySQL.
+
+### Error "Vite manifest not found"
+
+Jalankan `npm run build` untuk build assets.
+
+### Halaman blank/error 500
+
+1. Clear cache: `php artisan cache:clear`
+2. Clear config: `php artisan config:clear`
+3. Clear route: `php artisan route:clear`
+4. Regenerate autoload: `composer dump-autoload`
+
+### Logo tidak muncul
+
+Pastikan file `public/logo.png` ada. Jika tidak, copy logo dari folder assets.
+
+## 📝 Catatan Penting
+
+1. **Data Dummy**: Data prestasi yang ada adalah contoh. Hapus dan ganti dengan data real.
+2. **Google Maps**: Update koordinat di `resources/js/Pages/Contact.vue` sesuai lokasi real pesantren.
+3. **WhatsApp**: Update nomor WhatsApp di seluruh file dengan nomor real.
+4. **Email**: Update email di seluruh file dengan email real.
+5. **Link PPDB**: Update link PPDB dengan URL real website PPDB Anda.
+
+## 🔐 Keamanan
+
+Untuk production:
+
+1. Set `APP_DEBUG=false` di `.env`
+2. Generate APP_KEY baru: `php artisan key:generate`
+3. Gunakan HTTPS
+4. Setup CORS jika diperlukan
+5. Tambahkan rate limiting untuk form kontak
+
+## 📞 Support
+
+Untuk pertanyaan atau bantuan, hubungi developer atau buka issue di repository.
+
+## 📄 License
+
+Proprietary - Pondok Pesantren Riyadussalikin Padaherang
+
+---
+
+**Dibuat dengan ❤️ untuk Pondok Pesantren Riyadussalikin Padaherang**
