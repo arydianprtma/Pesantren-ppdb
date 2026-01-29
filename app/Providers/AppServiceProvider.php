@@ -20,5 +20,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         \App\Models\Prestasi::observe(\App\Observers\PrestasiObserver::class);
+        \App\Models\ContactMessage::observe(\App\Observers\ContactMessageObserver::class);
     }
 }

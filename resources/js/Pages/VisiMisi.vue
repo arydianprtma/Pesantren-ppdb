@@ -1,11 +1,24 @@
 <template>
+    <Head title="Visi & Misi" />
     <MainLayout>
-        <!-- Header -->
-        <section class="bg-gradient-to-r from-emerald-600 to-emerald-700 py-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Visi & Misi</h1>
-                <p class="text-xl text-emerald-100">
-                    Pondok Pesantren Riyadussalikin Padaherang
+        <!-- Hero Section -->
+        <section class="relative bg-emerald-900 py-24 overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <svg class="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
+                </svg>
+            </div>
+            
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="inline-block py-1 px-3 rounded-full bg-emerald-800 text-emerald-300 text-sm font-semibold mb-4 border border-emerald-700">
+                    Profil Lembaga
+                </span>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
+                    Visi & Misi
+                </h1>
+                <p class="text-xl text-emerald-100 max-w-2xl mx-auto leading-relaxed">
+                    Komitmen teguh Pondok Pesantren Riyadussalikin Padaherang dalam mencetak generasi berkualitas.
                 </p>
             </div>
         </section>
@@ -177,5 +190,5 @@
 
 <script setup>
 import MainLayout from '../Layouts/MainLayout.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, Head } from '@inertiajs/vue3';
 </script>

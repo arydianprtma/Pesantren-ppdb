@@ -12,6 +12,7 @@ class Prestasi extends Model
         'tingkat',
         'tahun',
         'deskripsi',
+        'gambar',
     ];
 
     protected $casts = [

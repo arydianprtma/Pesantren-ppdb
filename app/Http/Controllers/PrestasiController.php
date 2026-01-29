@@ -23,15 +23,12 @@ class PrestasiController extends Controller
             $query->where('tahun', $request->tahun);
         }
 
-        // Generate cache key berdasarkan filter
-        $cacheKey = 'prestasi_list_' . serialize($request->only(['kategori', 'tahun']));
-
-        $prestasi = \Illuminate\Support\Facades\Cache::remember($cacheKey, 60 * 60, function () use ($query) {
-            return $query->latest('tahun')
-                ->latest('created_at')
-                ->get()
-                ->groupBy('kategori');
-        });
+        // Generate cache key berdasarkan filter (Removed for pagination simplicity)
+        // Pagination logic replace cache
+        $prestasi = $query->latest('tahun')
+            ->latest('created_at')
+            ->paginate(9)
+            ->withQueryString();
 
         // Ambil daftar tahun unik untuk filter (cached)
         $tahunList = \Illuminate\Support\Facades\Cache::remember('prestasi_tahun_list', 60 * 60, function () {

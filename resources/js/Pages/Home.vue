@@ -1,4 +1,5 @@
 <template>
+    <Head title="Beranda" />
     <MainLayout>
         <!-- Hero Section -->
         <section class="relative bg-gradient-to-br from-emerald-50 via-white to-yellow-50 bg-pattern">
@@ -139,7 +140,7 @@
 
 <script setup>
 import MainLayout from '../Layouts/MainLayout.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, Head } from '@inertiajs/vue3';
 
 defineProps({
     prestasi: {

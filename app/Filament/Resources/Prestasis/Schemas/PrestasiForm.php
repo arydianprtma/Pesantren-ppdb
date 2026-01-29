@@ -42,6 +42,13 @@ class PrestasiForm
                     ->minValue(2000)
                     ->maxValue(date('Y') + 1)
                     ->label('Tahun'),
+                \Filament\Forms\Components\FileUpload::make('gambar')
+                    ->image()
+                    ->disk('public') // Force public disk
+                    ->visibility('public')
+                    ->directory('prestasi')
+                    ->label('Foto Dokumentasi')
+                    ->columnSpanFull(),
                 Textarea::make('deskripsi')
                     ->columnSpanFull()
                     ->label('Deskripsi'),

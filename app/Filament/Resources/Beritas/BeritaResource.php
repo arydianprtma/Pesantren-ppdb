@@ -26,6 +26,8 @@ class BeritaResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Berita';
 
+    protected static ?string $slug = 'berita';
+
     protected static ?string $recordTitleAttribute = 'judul';
 
     public static function form(Schema $schema): Schema

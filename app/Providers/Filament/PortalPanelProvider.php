@@ -32,11 +32,14 @@ class PortalPanelProvider extends PanelProvider
                 'primary' => Color::Emerald,
                 'gray' => Color::Slate,
             ])
+            ->font('Poppins')
             ->brandName('Portal Pesantren')
             ->brandLogo(asset('Logo Riyad.png'))
             ->brandLogoHeight('3.5rem')
-            ->favicon(asset('Logo Riyad.png'))
+            ->favicon(asset('logo.png'))
             ->sidebarCollapsibleOnDesktop()
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('2s')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -44,7 +47,7 @@ class PortalPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                AccountWidget::class,
+                // AccountWidget removed for better design
             ])
             ->middleware([
                 EncryptCookies::class,

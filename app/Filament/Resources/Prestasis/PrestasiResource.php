@@ -26,6 +26,8 @@ class PrestasiResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Prestasi';
 
+    protected static ?string $slug = 'prestasi';
+
     protected static ?string $recordTitleAttribute = 'judul';
 
     public static function form(Schema $schema): Schema

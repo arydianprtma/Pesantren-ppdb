@@ -8,7 +8,6 @@ use App\Filament\Resources\ContactMessages\Pages\ListContactMessages;
 use App\Filament\Resources\ContactMessages\Schemas\ContactMessageForm;
 use App\Filament\Resources\ContactMessages\Tables\ContactMessagesTable;
 use App\Models\ContactMessage;
-use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -18,13 +17,15 @@ class ContactMessageResource extends Resource
 {
     protected static ?string $model = ContactMessage::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-envelope';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-envelope';
 
     protected static ?string $navigationLabel = 'Pesan Masuk';
 
     protected static ?string $modelLabel = 'Pesan Masuk';
 
     protected static ?string $pluralModelLabel = 'Pesan Masuk';
+
+    protected static ?string $slug = 'pesan-masuk';
 
     protected static ?string $recordTitleAttribute = 'nama';
 
