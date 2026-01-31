@@ -49,7 +49,7 @@ class ContactMessagesTable
                     ->label('Balas WA')
                     ->icon('heroicon-o-chat-bubble-left-right')
                     ->color('success')
-                    ->url(fn($record) => 'https://wa.me/' . preg_replace('/[^0-9]/', '', $record->whatsapp) . '?text=' . urlencode("Assalamu'alaikum {$record->nama}, terima kasih telah menghubungi kami."))
+                    ->url(fn($record) => 'https://wa.me/' . preg_replace('/[^0-9]/', '', $record->whatsapp) . '?text=' . urlencode("Assalamu'alaikum, Perkenalkan saya Ika Kartika staff pondok pesantren Riyadussalikin. Ada yang bisa saya bantu? {$record->nama}, terima kasih telah menghubungi kami."))
                     ->openUrlInNewTab(),
                 Action::make('delete')
                     ->label('Hapus')
