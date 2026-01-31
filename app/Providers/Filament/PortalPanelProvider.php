@@ -50,6 +50,7 @@ class PortalPanelProvider extends PanelProvider
                 // AccountWidget removed for better design
             ])
             ->middleware([
+                \App\Http\Middleware\TrustProxies::class,
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,
