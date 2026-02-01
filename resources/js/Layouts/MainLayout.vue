@@ -34,6 +34,12 @@
                             Prestasi
                         </Link>
                         <Link 
+                            :href="route('berita')" 
+                            :class="isActive('berita') ? 'navbar-link-active' : 'navbar-link'"
+                        >
+                            Berita
+                        </Link>
+                        <Link 
                             :href="route('kontak')" 
                             :class="isActive('kontak') ? 'navbar-link-active' : 'navbar-link'"
                         >
@@ -68,6 +74,9 @@
                         </Link>
                         <Link :href="route('prestasi')" :class="isActive('prestasi') ? 'navbar-link-active' : 'navbar-link'">
                             Prestasi
+                        </Link>
+                        <Link :href="route('berita')" :class="isActive('berita') ? 'navbar-link-active' : 'navbar-link'">
+                            Berita
                         </Link>
                         <Link :href="route('kontak')" :class="isActive('kontak') ? 'navbar-link-active' : 'navbar-link'">
                             Kontak
@@ -104,6 +113,7 @@
                             <Link :href="route('home')" class="text-emerald-100 hover:text-white transition-colors">Beranda</Link>
                             <Link :href="route('visi-misi')" class="text-emerald-100 hover:text-white transition-colors">Visi & Misi</Link>
                             <Link :href="route('prestasi')" class="text-emerald-100 hover:text-white transition-colors">Prestasi</Link>
+                            <Link :href="route('berita')" class="text-emerald-100 hover:text-white transition-colors">Berita</Link>
                             <Link :href="route('kontak')" class="text-emerald-100 hover:text-white transition-colors">Kontak</Link>
                         </div>
                     </div>
