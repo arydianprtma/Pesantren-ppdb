@@ -1,0 +1,23 @@
+/* Custom Filament Admin Panel Styles */
+
+/* RichEditor - Make links appear blue */
+.fi-fo-rich-editor .tiptap a,
+.tiptap a {
+    color: #2563eb !important;
+    text-decoration: underline !important;
+}
+
+.fi-fo-rich-editor .tiptap a:hover,
+.tiptap a:hover {
+    color: #1d4ed8 !important;
+}
+
+/* Preview/Content area links */
+.prose a {
+    color: #2563eb !important;
+    text-decoration: underline !important;
+}
+
+.prose a:hover {
+    color: #1d4ed8 !important;
+}

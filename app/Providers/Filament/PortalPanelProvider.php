@@ -63,6 +63,10 @@ class PortalPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->renderHook(
+                'panels::head.end',
+                fn() => view('filament.custom-styles')
+            );
     }
 }
