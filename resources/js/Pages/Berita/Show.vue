@@ -233,7 +233,12 @@ const copyLink = async () => {
 }
 
 .prose a {
-    color: #059669;
+    color: #2563eb !important;
+    text-decoration: underline !important;
+}
+
+.prose a:hover {
+    color: #1d4ed8 !important;
 }
 
 .prose img {
