@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PpdbRegistrants\Schemas;
 
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
@@ -52,6 +53,7 @@ class PpdbRegistrantForm
                                         DatePicker::make('tanggal_lahir'),
                                     ]),
                                 Textarea::make('alamat')
+                                    ->label('Alamat Siswa')
                                     ->columnSpanFull(),
                                 TextInput::make('no_hp')
                                     ->label('Nomor WhatsApp')
@@ -62,18 +64,73 @@ class PpdbRegistrantForm
                         Tab::make('Data Orang Tua')
                             ->icon('heroicon-m-users')
                             ->schema([
+                                Select::make('status_ortu')
+                                    ->label('Status Orang Tua')
+                                    ->options([
+                                        'lengkap' => 'Lengkap (Ayah & Ibu)',
+                                        'ayah_saja' => 'Ayah Saja',
+                                        'ibu_saja' => 'Ibu Saja',
+                                        'wali' => 'Wali',
+                                    ])
+                                    ->native(false),
                                 Section::make('Data Ayah')
                                     ->schema([
                                         TextInput::make('nama_ayah'),
                                         TextInput::make('pekerjaan_ayah'),
-                                    ])->columns(2),
+                                        Select::make('pendidikan_ayah')
+                                            ->label('Pendidikan Terakhir Ayah')
+                                            ->options([
+                                                'SD' => 'SD',
+                                                'SMP' => 'SMP',
+                                                'SMA' => 'SMA/SMK',
+                                                'D3' => 'D3',
+                                                'S1' => 'S1',
+                                                'S2' => 'S2',
+                                                'S3' => 'S3',
+                                            ])
+                                            ->native(false),
+                                    ])->columns(3),
                                 Section::make('Data Ibu')
                                     ->schema([
                                         TextInput::make('nama_ibu'),
                                         TextInput::make('pekerjaan_ibu'),
-                                    ])->columns(2),
-                                TextInput::make('no_hp_ortu')
-                                    ->label('No HP Orang Tua'),
+                                        Select::make('pendidikan_ibu')
+                                            ->label('Pendidikan Terakhir Ibu')
+                                            ->options([
+                                                'SD' => 'SD',
+                                                'SMP' => 'SMP',
+                                                'SMA' => 'SMA/SMK',
+                                                'D3' => 'D3',
+                                                'S1' => 'S1',
+                                                'S2' => 'S2',
+                                                'S3' => 'S3',
+                                            ])
+                                            ->native(false),
+                                    ])->columns(3),
+                                Grid::make(2)
+                                    ->schema([
+                                        TextInput::make('no_hp_ortu')
+                                            ->label('No HP Orang Tua'),
+                                        Select::make('penghasilan_ortu')
+                                            ->label('Penghasilan Orang Tua')
+                                            ->options([
+                                                '<1jt' => '< Rp 1.000.000',
+                                                '1-3jt' => 'Rp 1.000.000 - Rp 3.000.000',
+                                                '3-5jt' => 'Rp 3.000.000 - Rp 5.000.000',
+                                                '>5jt' => '> Rp 5.000.000',
+                                            ])
+                                            ->native(false),
+                                    ]),
+                                Section::make('Alamat Orang Tua')
+                                    ->schema([
+                                        Checkbox::make('alamat_ortu_sama')
+                                            ->label('Sama dengan alamat siswa')
+                                            ->live(),
+                                        Textarea::make('alamat_ortu')
+                                            ->label('Alamat Orang Tua')
+                                            ->hidden(fn($get) => $get('alamat_ortu_sama'))
+                                            ->columnSpanFull(),
+                                    ]),
                             ]),
 
                         // TAB 3: BERKAS

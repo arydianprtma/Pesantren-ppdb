@@ -11,11 +11,15 @@ Website profil resmi Pondok Pesantren Riyadussalikin Padaherang yang dibangun de
 - **Kontak**: Informasi kontak lengkap, Google Maps, dan form kontak publik
 - **Tombol PPDB**: Selalu terlihat di navbar, mengarah ke website PPDB eksternal
 
-### Dashboard Admin (Filament) - Coming Soon
-Dashboard admin akan ditambahkan di update selanjutnya dengan fitur:
-- Manajemen data prestasi
-- Melihat dan membalas pesan kontak via WhatsApp
-- Sistem autentikasi admin
+### Dashboard Admin (Filament)
+Dashboard admin sudah tersedia dengan fitur:
+- **Portal Admin**: Akses di `/portal/login`
+- **Manajemen PPDB**: Kelola pendaftaran santri baru
+- **Manajemen Prestasi**: Tambah, edit, hapus data prestasi
+- **Manajemen Pesan**: Lihat pesan kontak dari form publik
+- **Widgets**: Real-time clock, statistik PPDB terbaru
+- **Notifikasi**: Database notifications untuk aktivitas penting
+- **Sistem Autentikasi**: Login admin dengan email dan password
 
 ## 🎨 Desain
 
@@ -267,6 +271,69 @@ Pastikan file `public/logo.png` ada. Jika tidak, copy logo dari folder assets.
 3. **WhatsApp**: Update nomor WhatsApp di seluruh file dengan nomor real.
 4. **Email**: Update email di seluruh file dengan email real.
 5. **Link PPDB**: Update link PPDB dengan URL real website PPDB Anda.
+
+## 🚀 Production Deployment
+
+### Quick Start
+
+Untuk deploy ke production server, ikuti langkah berikut:
+
+1. **Build assets:**
+   ```bash
+   npm run build
+   ```
+
+2. **Upload files** (kecuali: `.env`, `node_modules`, `vendor`, `storage`)
+
+3. **Di server production:**
+   ```bash
+   # Copy template .env
+   cp .env.production .env
+   
+   # Edit .env sesuai production
+   nano .env
+   
+   # Jalankan deployment script
+   chmod +x deploy.sh
+   ./deploy.sh
+   ```
+
+### Troubleshooting 403 Forbidden Error
+
+Jika mengalami **403 Forbidden** saat login di production:
+
+**Quick Fix (Linux):**
+```bash
+chmod +x fix-403.sh
+./fix-403.sh
+```
+
+**Quick Fix (Windows):**
+```powershell
+.\fix-403.ps1
+```
+
+### Dokumentasi Lengkap
+
+Untuk panduan deployment dan troubleshooting yang lebih detail, lihat:
+
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Panduan deployment step-by-step
+- **[TROUBLESHOOTING_PRODUCTION.md](TROUBLESHOOTING_PRODUCTION.md)** - Troubleshooting guide lengkap
+- **[CHANGELOG_403_FIX.md](CHANGELOG_403_FIX.md)** - Dokumentasi fix 403 error
+
+### Kredensial Admin Default
+
+- **Email:** `admin@riyadussalikin.sch.id`
+- **Password:** `admin123`
+
+⚠️ **PENTING:** Ganti password admin setelah login pertama kali!
+
+### Scripts yang Tersedia
+
+- `deploy.sh` - Deployment automation (Linux)
+- `fix-403.sh` - Quick fix 403 error (Linux)
+- `fix-403.ps1` - Quick fix 403 error (Windows)
+- `optimize-production.ps1` - Cache optimization (Windows)
 
 ## 🔐 Keamanan
 

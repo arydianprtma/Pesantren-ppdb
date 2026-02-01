@@ -19,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (app()->environment('production')) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         \App\Models\Prestasi::observe(\App\Observers\PrestasiObserver::class);
         \App\Models\ContactMessage::observe(\App\Observers\ContactMessageObserver::class);
     }

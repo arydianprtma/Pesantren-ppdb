@@ -16,9 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         // Trust proxies for production environment
-        $middleware->trustProxies(at: [
-            \App\Http\Middleware\TrustProxies::class,
-        ]);
+        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
