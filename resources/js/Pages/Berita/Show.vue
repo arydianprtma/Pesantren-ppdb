@@ -154,6 +154,8 @@
                     ref="relatedContainer"
                     class="flex gap-6 overflow-x-auto scroll-smooth pb-4 scrollbar-hide"
                     style="scroll-snap-type: x mandatory;"
+                    @mouseenter="pauseAutoScroll"
+                    @mouseleave="resumeAutoScroll"
                 >
                     <Link 
                         v-for="related in relatedBeritas" 
@@ -215,7 +217,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import MainLayout from '../../Layouts/MainLayout.vue';
 import { Link, Head, usePage } from '@inertiajs/vue3';
 
@@ -233,6 +235,8 @@ const props = defineProps({
 const page = usePage();
 const copied = ref(false);
 const relatedContainer = ref(null);
+const isHovering = ref(false);
+let autoScrollInterval = null;
 
 const currentUrl = computed(() => {
     return window.location.href;
@@ -249,6 +253,45 @@ const scrollRelated = (direction) => {
         }
     }
 };
+
+// Auto scroll carousel
+const autoScroll = () => {
+    if (relatedContainer.value && !isHovering.value) {
+        const container = relatedContainer.value;
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        
+        // If at the end, go back to start
+        if (container.scrollLeft >= maxScroll - 10) {
+            container.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            container.scrollBy({ left: 320, behavior: 'smooth' });
+        }
+    }
+};
+
+// Pause auto-scroll on hover
+const pauseAutoScroll = () => {
+    isHovering.value = true;
+};
+
+// Resume auto-scroll when not hovering
+const resumeAutoScroll = () => {
+    isHovering.value = false;
+};
+
+// Start auto-scroll when component is mounted
+onMounted(() => {
+    if (props.relatedBeritas.length > 0) {
+        autoScrollInterval = setInterval(autoScroll, 4000); // Auto scroll every 4 seconds
+    }
+});
+
+// Clean up interval when component is unmounted
+onUnmounted(() => {
+    if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+    }
+});
 
 const formatKategori = (kategori) => {
     const map = {
