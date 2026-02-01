@@ -53,7 +53,14 @@
 
                             <!-- Content -->
                             <div class="flex-grow">
-                                <div class="flex items-center gap-3 mb-3">
+                                <div class="flex flex-wrap items-center gap-2 mb-3">
+                                    <!-- Badge Baru -->
+                                    <span 
+                                        v-if="berita.is_new"
+                                        class="px-2 py-0.5 rounded-full text-xs font-bold bg-red-500 text-white"
+                                    >
+                                        🔥 BARU
+                                    </span>
                                     <span 
                                         class="px-3 py-1 rounded-full text-xs font-semibold"
                                         :class="{
@@ -65,8 +72,15 @@
                                     >
                                         {{ formatKategori(berita.kategori) }}
                                     </span>
-                                    <span class="text-sm text-gray-500">
-                                        {{ formatDate(berita.published_at) }}
+                                </div>
+                                <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                                    <span>{{ formatDate(berita.published_at) }}</span>
+                                    <span>•</span>
+                                    <span class="flex items-center gap-1">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                        </svg>
+                                        {{ berita.author_name }}
                                     </span>
                                 </div>
                                 <h2 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors line-clamp-2">

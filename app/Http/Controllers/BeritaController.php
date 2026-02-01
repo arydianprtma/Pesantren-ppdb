@@ -13,7 +13,8 @@ class BeritaController extends Controller
      */
     public function index(): Response
     {
-        $beritas = Berita::published()
+        $beritas = Berita::with('user')
+            ->published()
             ->latest('published_at')
             ->paginate(9);
 
@@ -27,17 +28,29 @@ class BeritaController extends Controller
      */
     public function show(string $slug): Response
     {
-        $berita = Berita::published()
+        $berita = Berita::with('user')
+            ->published()
             ->where('slug', $slug)
             ->firstOrFail();
 
-        // Get related news (same category, excluding current)
-        $relatedBeritas = Berita::published()
+        // Get related news (same category, excluding current) - more items for carousel
+        $relatedBeritas = Berita::with('user')
+            ->published()
             ->where('id', '!=', $berita->id)
             ->where('kategori', $berita->kategori)
             ->latest('published_at')
-            ->take(3)
+            ->take(10)
             ->get();
+
+        // If not enough related by category, get latest news
+        if ($relatedBeritas->count() < 6) {
+            $relatedBeritas = Berita::with('user')
+                ->published()
+                ->where('id', '!=', $berita->id)
+                ->latest('published_at')
+                ->take(10)
+                ->get();
+        }
 
         return Inertia::render('Berita/Show', [
             'berita' => $berita,

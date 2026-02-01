@@ -27,8 +27,15 @@
                     </ol>
                 </nav>
 
-                <!-- Category & Date -->
-                <div class="flex items-center gap-4 mb-4">
+                <!-- Category, Date, Badge & Author -->
+                <div class="flex flex-wrap items-center gap-3 mb-4">
+                    <!-- Badge Baru -->
+                    <span 
+                        v-if="berita.is_new"
+                        class="px-3 py-1 rounded-full text-xs font-bold bg-red-500 text-white animate-pulse"
+                    >
+                        🔥 BARU
+                    </span>
                     <span 
                         class="px-4 py-1.5 rounded-full text-sm font-semibold"
                         :class="{
@@ -42,6 +49,13 @@
                     </span>
                     <span class="text-gray-500">
                         {{ formatDate(berita.published_at) }}
+                    </span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600 flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        {{ berita.author_name }}
                     </span>
                 </div>
 
@@ -110,32 +124,73 @@
             </div>
         </section>
 
-        <!-- Related Articles -->
+        <!-- Related Articles Carousel -->
         <section v-if="relatedBeritas.length > 0" class="py-16 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-2xl font-bold text-gray-900 mb-8">Berita Terkait</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900">Berita Terkait</h2>
+                    <div class="flex gap-2">
+                        <button 
+                            @click="scrollRelated('left')"
+                            class="p-2 rounded-full bg-white shadow-md hover:bg-emerald-50 hover:shadow-lg transition-all duration-300 text-gray-600 hover:text-emerald-600"
+                        >
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button 
+                            @click="scrollRelated('right')"
+                            class="p-2 rounded-full bg-white shadow-md hover:bg-emerald-50 hover:shadow-lg transition-all duration-300 text-gray-600 hover:text-emerald-600"
+                        >
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Scrollable Container -->
+                <div 
+                    ref="relatedContainer"
+                    class="flex gap-6 overflow-x-auto scroll-smooth pb-4 scrollbar-hide"
+                    style="scroll-snap-type: x mandatory;"
+                >
                     <Link 
                         v-for="related in relatedBeritas" 
                         :key="related.id"
                         :href="route('berita.show', related.slug)"
-                        class="group"
+                        class="group flex-shrink-0 w-72 sm:w-80"
+                        style="scroll-snap-align: start;"
                     >
-                        <article class="card overflow-hidden hover:shadow-lg transition-shadow h-full">
-                            <div class="aspect-video overflow-hidden bg-gray-100 -mx-6 -mt-6 mb-4">
+                        <article class="card overflow-hidden hover:shadow-xl transition-all duration-300 h-full bg-white">
+                            <div class="aspect-video overflow-hidden bg-gray-100 -mx-6 -mt-6 mb-4 relative">
+                                <!-- Badge Baru -->
+                                <span 
+                                    v-if="related.is_new"
+                                    class="absolute top-2 left-2 px-2 py-0.5 rounded-full text-xs font-bold bg-red-500 text-white z-10"
+                                >
+                                    🔥 BARU
+                                </span>
                                 <img 
                                     v-if="related.gambar"
                                     :src="'/storage/' + related.gambar" 
                                     :alt="related.judul"
-                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 />
+                                <div v-else class="w-full h-full flex items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-50">
+                                    <svg class="w-12 h-12 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                    </svg>
+                                </div>
                             </div>
-                            <h3 class="font-bold text-gray-900 group-hover:text-emerald-600 transition-colors line-clamp-2">
+                            <h3 class="font-bold text-gray-900 group-hover:text-emerald-600 transition-colors line-clamp-2 mb-2">
                                 {{ related.judul }}
                             </h3>
-                            <p class="text-sm text-gray-500 mt-2">
-                                {{ formatDate(related.published_at) }}
-                            </p>
+                            <div class="flex items-center gap-2 text-sm text-gray-500">
+                                <span>{{ formatDate(related.published_at) }}</span>
+                                <span>•</span>
+                                <span>{{ related.author_name }}</span>
+                            </div>
                         </article>
                     </Link>
                 </div>
@@ -177,10 +232,23 @@ const props = defineProps({
 
 const page = usePage();
 const copied = ref(false);
+const relatedContainer = ref(null);
 
 const currentUrl = computed(() => {
     return window.location.href;
 });
+
+// Scroll related news carousel
+const scrollRelated = (direction) => {
+    if (relatedContainer.value) {
+        const scrollAmount = 320; // Card width + gap
+        if (direction === 'left') {
+            relatedContainer.value.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+            relatedContainer.value.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }
+};
 
 const formatKategori = (kategori) => {
     const map = {
@@ -229,6 +297,15 @@ const copyLink = async () => {
 .article-justify div {
     text-align: justify !important;
     text-justify: inter-word !important;
+}
+
+/* Hide scrollbar for carousel */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
 }
 
 .prose {
