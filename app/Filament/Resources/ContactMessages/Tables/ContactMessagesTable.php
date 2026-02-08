@@ -3,20 +3,13 @@
 namespace App\Filament\Resources\ContactMessages\Tables;
 
 use Filament\Actions\DeleteBulkAction;
-
-use Filament\Actions\EditAction;
-use Filament\Tables\Actions\BulkActionGroup; // Ini mungkin masih perlu dicek
-// Tapi tunggu, BulkActionGroup tidak ada di list find_by_name tadi.
-// Mari kita cek BulkActionGroup di find_by_name
-// Tidak ada di list find_by_name sebelumnya.
-// Sepertinya BulkActionGroup juga ada di Filament\Actions?
-
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\Section;
 
 class ContactMessagesTable
 {
@@ -45,11 +38,37 @@ class ContactMessagesTable
                 //
             ])
             ->actions([
-                ViewAction::make()
+                Action::make('view')
                     ->label('Lihat')
+                    ->icon('heroicon-o-eye')
                     ->color('info')
-                    ->modalHeading('Detail Pesan')
-                    ->mountUsing(fn($record) => $record->update(['is_read' => true])),
+                    ->modalHeading('Detail Pesan Masuk')
+                    ->modalSubmitAction(false)
+                    ->modalCancelActionLabel('Tutup')
+                    ->infolist([
+                        Section::make()
+                            ->schema([
+                                TextEntry::make('nama')
+                                    ->label('Nama Pengirim'),
+                                TextEntry::make('whatsapp')
+                                    ->label('Nomor WhatsApp'),
+                                TextEntry::make('email')
+                                    ->label('Email'),
+                                TextEntry::make('pesan')
+                                    ->label('Isi Pesan')
+                                    ->columnSpanFull(),
+                                TextEntry::make('created_at')
+                                    ->label('Diterima Pada')
+                                    ->dateTime(),
+                            ])
+                            ->columns(2),
+                    ])
+                    ->mountUsing(function ($record) {
+                        // Auto mark as read when viewed
+                        if (!$record->is_read) {
+                            $record->update(['is_read' => true]);
+                        }
+                    }),
 
                 Action::make('reply')
                     ->label('Balas WA')
@@ -58,14 +77,12 @@ class ContactMessagesTable
                     ->url(fn($record) => 'https://wa.me/' . preg_replace('/[^0-9]/', '', $record->whatsapp) . '?text=' . urlencode("Assalamu'alaikum, Perkenalkan saya admin pondok pesantren Riyadussalikin. Ada yang bisa saya bantu? {$record->nama}, terima kasih telah menghubungi kami."))
                     ->openUrlInNewTab(),
 
-                DeleteAction::make(),
+                DeleteAction::make()
+                    ->label('Hapus'),
             ])
             ->recordAction('view')
             ->bulkActions([
-                // BulkActionGroup sepertinya bermasalah namespace-nya. Disable dulu.
-                // BulkActionGroup::make([
-                //    DeleteBulkAction::make(),
-                // ]),
+                //
             ]);
     }
 }
