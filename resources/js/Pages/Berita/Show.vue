@@ -2,37 +2,46 @@
     <Head :title="berita.judul" />
     <MainLayout>
         <!-- Article Header -->
-        <section class="bg-gradient-to-br from-emerald-50 via-white to-yellow-50 py-12">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section class="relative bg-gradient-to-br from-emerald-50 via-white to-teal-50 py-16 overflow-hidden">
+            <!-- Decorative Background Elements -->
+            <div class="absolute inset-0 z-0">
+                <!-- Dot Pattern -->
+                <div class="absolute inset-0 opacity-[0.15]" style="background-image: radial-gradient(#059669 1px, transparent 1px); background-size: 24px 24px;"></div>
+                <!-- Ambient Glow Blobs -->
+                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-200/30 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3"></div>
+                <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-200/30 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/3"></div>
+            </div>
+
+            <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Breadcrumb -->
-                <nav class="mb-6">
+                <nav class="mb-8">
                     <ol class="flex items-center gap-2 text-sm text-gray-500">
                         <li>
-                            <Link :href="route('home')" class="hover:text-emerald-600">Beranda</Link>
+                            <Link :href="route('home')" class="hover:text-emerald-600 transition-colors">Beranda</Link>
                         </li>
                         <li>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                             </svg>
                         </li>
                         <li>
-                            <Link :href="route('berita')" class="hover:text-emerald-600">Berita</Link>
+                            <Link :href="route('berita')" class="hover:text-emerald-600 transition-colors">Berita</Link>
                         </li>
                         <li>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                             </svg>
                         </li>
-                        <li class="text-gray-700 font-medium truncate max-w-xs">{{ berita.judul }}</li>
+                        <li class="text-emerald-800 font-medium truncate max-w-xs">{{ berita.judul }}</li>
                     </ol>
                 </nav>
 
                 <!-- Category, Date, Badge & Author -->
-                <div class="flex flex-wrap items-center gap-3 mb-4">
+                <div class="flex flex-wrap items-center gap-4 mb-6">
                     <!-- Badge Baru -->
                     <span 
                         v-if="berita.is_new"
-                        class="px-3 py-1 rounded-full text-xs font-bold bg-red-500 text-white animate-pulse flex items-center gap-1"
+                        class="px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-red-500 to-pink-600 text-white animate-pulse shadow-md flex items-center gap-1.5"
                     >
                         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -40,30 +49,34 @@
                         BARU
                     </span>
                     <span 
-                        class="px-4 py-1.5 rounded-full text-sm font-semibold"
+                        class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border"
                         :class="{
-                            'bg-emerald-100 text-emerald-800': berita.kategori === 'pengumuman',
-                            'bg-blue-100 text-blue-800': berita.kategori === 'kegiatan',
-                            'bg-purple-100 text-purple-800': berita.kategori === 'prestasi',
-                            'bg-yellow-100 text-yellow-800': berita.kategori === 'umum'
+                            'bg-emerald-50 text-emerald-700 border-emerald-200': berita.kategori === 'pengumuman',
+                            'bg-blue-50 text-blue-700 border-blue-200': berita.kategori === 'kegiatan',
+                            'bg-purple-50 text-purple-700 border-purple-200': berita.kategori === 'prestasi',
+                            'bg-amber-50 text-amber-700 border-amber-200': berita.kategori === 'umum'
                         }"
                     >
                         {{ formatKategori(berita.kategori) }}
                     </span>
-                    <span class="text-gray-500">
-                        {{ formatDate(berita.published_at) }}
-                    </span>
-                    <span class="text-gray-400">•</span>
-                    <span class="text-gray-600 flex items-center gap-1">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                        {{ berita.author_name }}
-                    </span>
+                    <div class="flex items-center gap-4 text-sm text-gray-500">
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            {{ formatDate(berita.published_at) }}
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            {{ berita.author_name }}
+                        </span>
+                    </div>
                 </div>
 
                 <!-- Title -->
-                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight tracking-tight mb-4">
                     {{ berita.judul }}
                 </h1>
             </div>
