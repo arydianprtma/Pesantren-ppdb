@@ -2,12 +2,13 @@
 
 namespace App\Filament\Resources\ContactMessages\Tables;
 
+use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\Section;
 
@@ -37,7 +38,7 @@ class ContactMessagesTable
             ->filters([
                 //
             ])
-            ->actions([
+            ->recordActions([
                 Action::make('view')
                     ->label('Lihat')
                     ->icon('heroicon-o-eye')
@@ -64,7 +65,6 @@ class ContactMessagesTable
                             ->columns(2),
                     ])
                     ->mountUsing(function ($record) {
-                        // Auto mark as read when viewed
                         if (!$record->is_read) {
                             $record->update(['is_read' => true]);
                         }
@@ -81,8 +81,10 @@ class ContactMessagesTable
                     ->label('Hapus'),
             ])
             ->recordAction('view')
-            ->bulkActions([
-                //
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
             ]);
     }
 }
