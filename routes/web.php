@@ -23,3 +23,12 @@ Route::get('/img/{size}/{path}', [ImageController::class, 'show'])
     ->where('path', '.*')
     ->name('image.optimized');
 
+
+// School Routes
+Route::get('/sma-ksatria-nusantara', function () {
+    return inertia('ComingSoon', ['title' => 'SMA Ksatria Nusantara']);
+})->name('sekolah.sma');
+
+Route::get('/smp-dharma-ksatria', function () {
+    return inertia('ComingSoon', ['title' => 'SMP Dharma Ksatria']);
+})->name('sekolah.smp');

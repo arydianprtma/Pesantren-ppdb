@@ -27,6 +27,42 @@
                         >
                             Visi & Misi
                         </Link>
+
+                        <!-- Dropdown Menu -->
+                        <div class="relative group">
+                            <button 
+                                @mouseenter="isDropdownOpen = true"
+                                class="navbar-link flex items-center gap-1 focus:outline-none"
+                                :class="{'text-emerald-600 font-semibold': isDropdownOpen || isActive('sekolah')}"
+                            >
+                                Lembaga Pendidikan
+                                <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': isDropdownOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            
+                            <!-- Dropdown Content -->
+                            <div 
+                                v-show="isDropdownOpen" 
+                                @mouseleave="isDropdownOpen = false"
+                                class="absolute left-0 mt-0 w-60 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden transform transition-all duration-200 origin-top-left z-50 py-2"
+                            >
+                                <Link 
+                                    :href="route('sekolah.sma')" 
+                                    class="block px-4 py-3 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
+                                    :class="{'bg-emerald-50 text-emerald-700 font-medium': route().current('sekolah.sma')}"
+                                >
+                                    SMA Ksatria Nusantara
+                                </Link>
+                                <Link 
+                                    :href="route('sekolah.smp')" 
+                                    class="block px-4 py-3 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
+                                    :class="{'bg-emerald-50 text-emerald-700 font-medium': route().current('sekolah.smp')}"
+                                >
+                                    SMP Dharma Ksatria
+                                </Link>
+                            </div>
+                        </div>
                         <Link 
                             :href="route('prestasi')" 
                             :class="isActive('prestasi') ? 'navbar-link-active' : 'navbar-link'"
@@ -45,6 +81,7 @@
                         >
                             Kontak
                         </Link>
+
                         <a 
                             href="https://ppdb.riyadussalikin.sch.id" 
                             target="_blank"
@@ -72,6 +109,17 @@
                         <Link :href="route('visi-misi')" :class="isActive('visi-misi') ? 'navbar-link-active' : 'navbar-link'">
                             Visi & Misi
                         </Link>
+
+                        <!-- Mobile Dropdown -->
+                        <div class="border-l-2 border-emerald-100 pl-4 space-y-2 py-2">
+                            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Lembaga Pendidikan</div>
+                            <Link :href="route('sekolah.sma')" class="block text-gray-700 hover:text-emerald-600 font-medium" :class="{'text-emerald-600': route().current('sekolah.sma')}">
+                                SMA Ksatria Nusantara
+                            </Link>
+                            <Link :href="route('sekolah.smp')" class="block text-gray-700 hover:text-emerald-600 font-medium" :class="{'text-emerald-600': route().current('sekolah.smp')}">
+                                SMP Dharma Ksatria
+                            </Link>
+                        </div>
                         <Link :href="route('prestasi')" :class="isActive('prestasi') ? 'navbar-link-active' : 'navbar-link'">
                             Prestasi
                         </Link>
@@ -112,6 +160,9 @@
                         <div class="flex flex-col space-y-2">
                             <Link :href="route('home')" class="text-emerald-100 hover:text-white transition-colors">Beranda</Link>
                             <Link :href="route('visi-misi')" class="text-emerald-100 hover:text-white transition-colors">Visi & Misi</Link>
+                            <span class="text-emerald-100/50 text-xs uppercase tracking-wider font-semibold mt-2 mb-1">Pendidikan</span>
+                            <Link :href="route('sekolah.sma')" class="text-emerald-100 hover:text-white transition-colors pl-2">SMA Ksatria Nusantara</Link>
+                            <Link :href="route('sekolah.smp')" class="text-emerald-100 hover:text-white transition-colors pl-2">SMP Dharma Ksatria</Link>
                             <Link :href="route('prestasi')" class="text-emerald-100 hover:text-white transition-colors">Prestasi</Link>
                             <Link :href="route('berita')" class="text-emerald-100 hover:text-white transition-colors">Berita</Link>
                             <Link :href="route('kontak')" class="text-emerald-100 hover:text-white transition-colors">Kontak</Link>
