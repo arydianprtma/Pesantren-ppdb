@@ -193,7 +193,12 @@ import { ref } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
 
 const mobileMenuOpen = ref(false);
+const isDropdownOpen = ref(false);
 const page = usePage();
+
+const toggleDropdown = () => {
+    isDropdownOpen.value = !isDropdownOpen.value;
+};
 
 const isActive = (routeName) => {
     const currentUrl = page.url;
