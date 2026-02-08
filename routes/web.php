@@ -6,6 +6,8 @@ use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ImageController;
+use App\Models\ContactMessage;
+use App\Models\PpdbRegistrant;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -32,3 +34,16 @@ Route::get('/sma-ksatria-nusantara', function () {
 Route::get('/smp-dharma-ksatria', function () {
     return inertia('ComingSoon', ['title' => 'SMP Dharma Ksatria']);
 })->name('sekolah.smp');
+
+// API for Realtime Sidebar
+Route::get('/api/sidebar-counts', function () {
+    // Hanya hitung jika user login (opsional, tapi lebih aman)
+    if (!auth()->check()) {
+        return response()->json(['ppdb' => 0, 'messages' => 0]);
+    }
+
+    return response()->json([
+        'ppdb' => PpdbRegistrant::where('status', 'pending')->count(),
+        'messages' => ContactMessage::where('is_read', false)->count(),
+    ]);
+});

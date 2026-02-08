@@ -43,7 +43,7 @@
             line-height: 1.6; 
             margin-bottom: 32px;
         ">
-            Modul <strong>{{ $this->getTitle() }}</strong> saat ini sedang dalam tahap pengembangan oleh tim teknis.
+            Modul <strong>{{ $this->getTitle() }}</strong> saat ini sedang dalam tahap pengembangan oleh Developer.
             Fitur ini akan segera tersedia untuk digunakan.
         </p>
 

@@ -58,4 +58,14 @@ class PpdbRegistrantResource extends Resource
     {
         return auth()->user()?->hasPermission('manage_ppdb') ?? false;
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::where('status', 'pending')->count() ?: null;
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
+    }
 }
