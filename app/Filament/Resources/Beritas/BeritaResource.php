@@ -55,4 +55,9 @@ class BeritaResource extends Resource
             'edit' => EditBerita::route('/{record}/edit'),
         ];
     }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->hasPermission('manage_berita') ?? false;
+    }
 }

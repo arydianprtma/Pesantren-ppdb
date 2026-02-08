@@ -59,4 +59,9 @@ class ContactMessageResource extends Resource
             'edit' => EditContactMessage::route('/{record}/edit'),
         ];
     }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->hasPermission('manage_contacts') ?? false;
+    }
 }

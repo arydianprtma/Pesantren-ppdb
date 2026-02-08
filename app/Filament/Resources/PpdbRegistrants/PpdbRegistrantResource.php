@@ -53,4 +53,9 @@ class PpdbRegistrantResource extends Resource
             'edit' => EditPpdbRegistrant::route('/{record}/edit'),
         ];
     }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->hasPermission('manage_ppdb') ?? false;
+    }
 }

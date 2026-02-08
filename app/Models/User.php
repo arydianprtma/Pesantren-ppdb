@@ -125,6 +125,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     {
         return [
             'manage_berita' => 'Kelola Berita',
+            'manage_prestasi' => 'Kelola Prestasi',
             'manage_ppdb' => 'Kelola PPDB',
             'manage_contacts' => 'Kelola Pesan Kontak',
             'manage_settings' => 'Kelola Pengaturan',
