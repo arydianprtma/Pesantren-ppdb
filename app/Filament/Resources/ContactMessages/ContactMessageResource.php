@@ -55,9 +55,17 @@ class ContactMessageResource extends Resource
     {
         return [
             'index' => ListContactMessages::route('/'),
-            'create' => CreateContactMessage::route('/create'),
-            'edit' => EditContactMessage::route('/{record}/edit'),
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canEdit($record): bool
+    {
+        return false;
     }
 
     public static function canAccess(): bool

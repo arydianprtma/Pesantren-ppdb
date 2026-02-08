@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\ContactMessages\Tables;
 
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\Action;
+
 use Filament\Actions\EditAction;
 use Filament\Tables\Actions\BulkActionGroup; // Ini mungkin masih perlu dicek
 // Tapi tunggu, BulkActionGroup tidak ada di list find_by_name tadi.
@@ -14,6 +14,9 @@ use Filament\Tables\Actions\BulkActionGroup; // Ini mungkin masih perlu dicek
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\Action;
 
 class ContactMessagesTable
 {
@@ -42,23 +45,22 @@ class ContactMessagesTable
                 //
             ])
             ->actions([
-                Action::make('edit') // Manual edit action
-                    ->label('Edit')
-                    ->icon('heroicon-o-pencil')
-                    ->url(fn($record) => \App\Filament\Resources\ContactMessages\ContactMessageResource::getUrl('edit', ['record' => $record])),
+                ViewAction::make()
+                    ->label('Lihat')
+                    ->color('info')
+                    ->modalHeading('Detail Pesan')
+                    ->mountUsing(fn($record) => $record->update(['is_read' => true])),
+
                 Action::make('reply')
                     ->label('Balas WA')
                     ->icon('heroicon-o-chat-bubble-left-right')
                     ->color('success')
-                    ->url(fn($record) => 'https://wa.me/' . preg_replace('/[^0-9]/', '', $record->whatsapp) . '?text=' . urlencode("Assalamu'alaikum, Perkenalkan saya Ika Kartika staff pondok pesantren Riyadussalikin. Ada yang bisa saya bantu? {$record->nama}, terima kasih telah menghubungi kami."))
+                    ->url(fn($record) => 'https://wa.me/' . preg_replace('/[^0-9]/', '', $record->whatsapp) . '?text=' . urlencode("Assalamu'alaikum, Perkenalkan saya admin pondok pesantren Riyadussalikin. Ada yang bisa saya bantu? {$record->nama}, terima kasih telah menghubungi kami."))
                     ->openUrlInNewTab(),
-                Action::make('delete')
-                    ->label('Hapus')
-                    ->icon('heroicon-o-trash')
-                    ->color('danger')
-                    ->requiresConfirmation()
-                    ->action(fn($record) => $record->delete()),
+
+                DeleteAction::make(),
             ])
+            ->recordAction('view')
             ->bulkActions([
                 // BulkActionGroup sepertinya bermasalah namespace-nya. Disable dulu.
                 // BulkActionGroup::make([
