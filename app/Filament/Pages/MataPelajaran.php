@@ -32,4 +32,9 @@ class MataPelajaran extends Page
     {
         return 3;
     }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->isAdmin() ?? false;
+    }
 }

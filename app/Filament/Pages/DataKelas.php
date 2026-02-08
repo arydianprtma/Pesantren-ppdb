@@ -32,4 +32,9 @@ class DataKelas extends Page
     {
         return 2;
     }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->isAdmin() ?? false;
+    }
 }

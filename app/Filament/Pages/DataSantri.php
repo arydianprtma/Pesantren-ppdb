@@ -32,4 +32,9 @@ class DataSantri extends Page
     {
         return 7;
     }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->isAdmin() ?? false;
+    }
 }

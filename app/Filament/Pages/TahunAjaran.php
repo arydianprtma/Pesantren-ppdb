@@ -35,4 +35,9 @@ class TahunAjaran extends Page
     {
         return 1;
     }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->isAdmin() ?? false;
+    }
 }

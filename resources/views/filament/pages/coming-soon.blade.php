@@ -1,30 +1,35 @@
 <x-filament-panels::page>
-    <x-filament::section>
-        <div class="flex flex-col items-center justify-center py-12 text-center">
-
-            {{-- Menggunakan style inline untuk memastikan ukuran ikon tetap benar walau CSS belum di-rebuild --}}
-            <div class="mb-6 rounded-full bg-gray-50 p-6 dark:bg-gray-800">
-                <x-heroicon-o-clock class="text-primary-500" style="width: 64px; height: 64px;" />
-            </div>
-
-            <h2 class="text-2xl font-bold tracking-tight text-gray-950 dark:text-white sm:text-3xl mb-2">
-                Segera Hadir
-            </h2>
-
-            <p class="mx-auto max-w-lg text-gray-500 dark:text-gray-400 mb-8 text-lg">
-                Fitur <strong>{{ $this->getTitle() }}</strong> sedang dalam tahap pengembangan. <br>
-                Nantikan pembaruan selanjutnya.
-            </p>
-
+    <div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+        {{-- Icon Container --}}
+        <div class="mb-8 relative group">
             <div
-                class="inline-flex items-center gap-2 rounded-lg bg-primary-50 px-4 py-2 text-sm font-medium text-primary-700 dark:bg-primary-900/50 dark:text-primary-300">
-                <span class="relative flex h-3 w-3">
-                    <span
-                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-primary-500"></span>
-                </span>
-                Dalam Proses Pengembangan
+                class="absolute inset-0 bg-emerald-100 rounded-full animate-pulse opacity-50 blur-xl dark:bg-emerald-900/30">
+            </div>
+            <div
+                class="relative bg-emerald-50 rounded-full p-8 shadow-sm border border-emerald-100 dark:bg-gray-800 dark:border-gray-700">
+                <x-heroicon-o-beaker class="w-16 h-16 text-emerald-600 dark:text-emerald-400" />
             </div>
         </div>
-    </x-filament::section>
+
+        {{-- Title --}}
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-3">
+            {{ $this->getTitle() }}
+        </h1>
+
+        {{-- Subtitle --}}
+        <p class="text-xl font-medium text-gray-500 uppercase tracking-widest mb-6">
+            Coming Soon
+        </p>
+
+        {{-- Description --}}
+        <p class="text-gray-500 dark:text-gray-400 max-w-lg mb-10 leading-relaxed">
+            Halaman ini sedang dalam tahap pengembangan. <br>
+            Informasi lengkap akan segera tersedia.
+        </p>
+
+        {{-- Action Button --}}
+        <x-filament::button tag="a" href="/" size="lg" color="success" icon="heroicon-m-arrow-left">
+            Kembali ke Beranda
+        </x-filament::button>
+    </div>
 </x-filament-panels::page>

@@ -32,4 +32,9 @@ class DataSiswa extends Page
     {
         return 6;
     }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->isAdmin() ?? false;
+    }
 }

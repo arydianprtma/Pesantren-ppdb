@@ -32,4 +32,9 @@ class JadwalPelajaran extends Page
     {
         return 5;
     }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->isAdmin() ?? false;
+    }
 }
