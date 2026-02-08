@@ -9,6 +9,8 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestPpdbWidget extends BaseWidget
 {
+    protected static ?string $pollingInterval = '5s';
+
     protected static ?int $sort = 3;
 
     protected int|string|array $columnSpan = 'full';

@@ -76,6 +76,7 @@ class UserResource extends Resource
     public static function table(\Filament\Tables\Table $table): \Filament\Tables\Table
     {
         return $table
+            ->poll('10s')
             ->columns([
                 \Filament\Tables\Columns\ImageColumn::make('avatar')
                     ->label('Foto')
