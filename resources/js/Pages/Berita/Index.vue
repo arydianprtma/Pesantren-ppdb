@@ -2,16 +2,24 @@
     <Head title="Berita" />
     <MainLayout>
         <!-- Header Section -->
-        <section class="bg-gradient-to-br from-emerald-50 via-white to-yellow-50 py-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center">
-                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                        Berita <span class="text-gradient">Terbaru</span>
-                    </h1>
-                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Informasi dan kegiatan terbaru dari Pondok Pesantren Riyadussalikin
-                    </p>
-                </div>
+        <section class="relative bg-emerald-900 py-24 overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <svg class="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
+                </svg>
+            </div>
+            
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="inline-block py-1 px-3 rounded-full bg-emerald-800 text-emerald-300 text-sm font-semibold mb-4 border border-emerald-700">
+                    Kabar Terkini
+                </span>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
+                    Berita Pesantren
+                </h1>
+                <p class="text-xl text-emerald-100 max-w-2xl mx-auto leading-relaxed">
+                    Informasi dan kegiatan terbaru dari Pondok Pesantren Riyadussalikin untuk santri dan wali santri.
+                </p>
             </div>
         </section>
 
