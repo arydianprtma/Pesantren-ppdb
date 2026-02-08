@@ -7,7 +7,8 @@
             </div>
             <div
                 class="relative bg-emerald-50 rounded-full p-8 shadow-sm border border-emerald-100 dark:bg-gray-800 dark:border-gray-700">
-                <x-heroicon-o-beaker class="w-16 h-16 text-emerald-600 dark:text-emerald-400" />
+                <x-heroicon-o-beaker style="width: 64px; height: 64px;"
+                    class="text-emerald-600 dark:text-emerald-400" />
             </div>
         </div>
 
