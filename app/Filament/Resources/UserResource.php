@@ -17,13 +17,14 @@ class UserResource extends Resource
     {
         return $schema
             ->components([
-                \Filament\Forms\Components\Section::make('Informasi Akun')
+                \Filament\Schemas\Components\Section::make('Informasi Akun')
                     ->schema([
                         \Filament\Forms\Components\FileUpload::make('avatar')
                             ->label('Foto Profil')
                             ->image()
                             ->avatar()
                             ->directory('avatars')
+                            ->maxSize(10240) // 10MB
                             ->columnSpanFull(),
                         \Filament\Forms\Components\TextInput::make('name')
                             ->label('Nama Lengkap')
@@ -46,7 +47,7 @@ class UserResource extends Resource
                     ])
                     ->columns(2),
 
-                \Filament\Forms\Components\Section::make('Hak Akses')
+                \Filament\Schemas\Components\Section::make('Hak Akses')
                     ->schema([
                         \Filament\Forms\Components\Select::make('role')
                             ->label('Role')
