@@ -6,11 +6,11 @@ use Filament\Pages\Page;
 
 class DataSiswa extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = 'Master Data';
+    protected static $navigationGroup = 'Master Data';
 
-    protected static ?string $navigationLabel = 'Data Siswa';
+    protected static $navigationLabel = 'Data Siswa';
 
     protected static ?string $title = 'Data Siswa Sekolah';
 

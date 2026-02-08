@@ -9,11 +9,11 @@ class TahunAjaran extends Page
 {
     // use HasPageShield;
 
-    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
+    protected static $navigationIcon = 'heroicon-o-calendar-days';
 
-    protected static ?string $navigationGroup = 'Master Data';
+    protected static $navigationGroup = 'Master Data';
 
-    protected static ?string $navigationLabel = 'Tahun Ajaran';
+    protected static $navigationLabel = 'Tahun Ajaran';
 
     protected static ?string $title = 'Tahun Ajaran';
 

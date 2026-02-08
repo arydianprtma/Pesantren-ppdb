@@ -6,11 +6,11 @@ use Filament\Pages\Page;
 
 class JadwalPelajaran extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-clock';
+    protected static $navigationIcon = 'heroicon-o-clock';
 
-    protected static ?string $navigationGroup = 'Master Data';
+    protected static $navigationGroup = 'Master Data';
 
-    protected static ?string $navigationLabel = 'Jadwal Pelajaran';
+    protected static $navigationLabel = 'Jadwal Pelajaran';
 
     protected static ?string $title = 'Jadwal Pelajaran';
 

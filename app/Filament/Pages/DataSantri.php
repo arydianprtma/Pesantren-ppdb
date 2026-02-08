@@ -6,11 +6,11 @@ use Filament\Pages\Page;
 
 class DataSantri extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-identification';
+    protected static $navigationIcon = 'heroicon-o-identification';
 
-    protected static ?string $navigationGroup = 'Master Data';
+    protected static $navigationGroup = 'Master Data';
 
-    protected static ?string $navigationLabel = 'Data Santri';
+    protected static $navigationLabel = 'Data Santri';
 
     protected static ?string $title = 'Data Santri Pondok';
 
