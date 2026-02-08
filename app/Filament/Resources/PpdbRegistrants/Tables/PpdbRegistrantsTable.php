@@ -15,7 +15,7 @@ class PpdbRegistrantsTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->poll('5s')
+            ->poll('3s')
             ->columns([
                 TextColumn::make('nama_lengkap')
                     ->label('Nama Lengkap')
