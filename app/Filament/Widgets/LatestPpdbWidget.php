@@ -9,7 +9,7 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestPpdbWidget extends BaseWidget
 {
-    protected static ?string $pollingInterval = '5s';
+
 
     protected static ?int $sort = 3;
 
@@ -20,6 +20,7 @@ class LatestPpdbWidget extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
+            ->poll('5s')
             ->query(
                 PpdbRegistrant::query()->latest()->limit(5)
             )
