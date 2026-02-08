@@ -6,15 +6,30 @@ use Filament\Pages\Page;
 
 class JadwalPelajaran extends Page
 {
-    protected static $navigationIcon = 'heroicon-o-clock';
-
-    protected static $navigationGroup = 'Master Data';
-
-    protected static $navigationLabel = 'Jadwal Pelajaran';
-
-    protected static ?string $title = 'Jadwal Pelajaran';
-
-    protected static ?int $navigationSort = 5;
-
     protected static string $view = 'filament.pages.coming-soon';
+
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-clock';
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Master Data';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Jadwal Pelajaran';
+    }
+
+    public function getTitle(): string
+    {
+        return 'Jadwal Pelajaran';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 5;
+    }
 }

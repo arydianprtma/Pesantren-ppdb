@@ -3,19 +3,33 @@
 namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
-use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 
 class DataKelas extends Page
 {
-    protected static $navigationIcon = 'heroicon-o-building-office-2';
-
-    protected static $navigationGroup = 'Master Data';
-
-    protected static $navigationLabel = 'Data Kelas';
-
-    protected static ?string $title = 'Data Kelas';
-
-    protected static ?int $navigationSort = 2;
-
     protected static string $view = 'filament.pages.coming-soon';
+
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-building-office-2';
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Master Data';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Data Kelas';
+    }
+
+    public function getTitle(): string
+    {
+        return 'Data Kelas';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 2;
+    }
 }

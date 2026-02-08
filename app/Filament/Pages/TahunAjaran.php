@@ -3,21 +3,36 @@
 namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
-use BezhanSalleh\FilamentShield\Traits\HasPageShield;
+// use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 
 class TahunAjaran extends Page
 {
     // use HasPageShield;
 
-    protected static $navigationIcon = 'heroicon-o-calendar-days';
-
-    protected static $navigationGroup = 'Master Data';
-
-    protected static $navigationLabel = 'Tahun Ajaran';
-
-    protected static ?string $title = 'Tahun Ajaran';
-
-    protected static ?int $navigationSort = 1;
-
     protected static string $view = 'filament.pages.coming-soon';
+
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-calendar-days';
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Master Data';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Tahun Ajaran';
+    }
+
+    public function getTitle(): string
+    {
+        return 'Tahun Ajaran';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 1;
+    }
 }

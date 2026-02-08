@@ -6,15 +6,30 @@ use Filament\Pages\Page;
 
 class MataPelajaran extends Page
 {
-    protected static $navigationIcon = 'heroicon-o-book-open';
-
-    protected static $navigationGroup = 'Master Data';
-
-    protected static $navigationLabel = 'Mata Pelajaran';
-
-    protected static ?string $title = 'Mata Pelajaran';
-
-    protected static ?int $navigationSort = 3;
-
     protected static string $view = 'filament.pages.coming-soon';
+
+    public static function getNavigationIcon(): ?string
+    {
+        return 'heroicon-o-book-open';
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Master Data';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Mata Pelajaran';
+    }
+
+    public function getTitle(): string
+    {
+        return 'Mata Pelajaran';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 3;
+    }
 }
