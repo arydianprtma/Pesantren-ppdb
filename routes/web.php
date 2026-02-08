@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\ImageController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -16,4 +17,9 @@ Route::post('/kontak', [ContactController::class, 'store'])->name('kontak.store'
 // Berita (News) Routes
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
+
+// Optimized Image Routes
+Route::get('/img/{size}/{path}', [ImageController::class, 'show'])
+    ->where('path', '.*')
+    ->name('image.optimized');
 

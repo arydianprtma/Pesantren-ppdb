@@ -40,9 +40,10 @@
                             <div class="aspect-video overflow-hidden bg-gray-100 -mx-6 -mt-6 mb-4">
                                 <img 
                                     v-if="berita.gambar"
-                                    :src="'/storage/' + berita.gambar" 
+                                    :src="'/img/thumbnail/' + berita.gambar" 
                                     :alt="berita.judul"
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                    loading="lazy"
                                 />
                                 <div v-else class="w-full h-full flex items-center justify-center">
                                     <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

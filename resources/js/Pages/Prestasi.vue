@@ -79,9 +79,10 @@
                             <!-- Image / Pattern -->
                             <template v-if="item.gambar">
                                 <img 
-                                    :src="'/storage/' + item.gambar" 
+                                    :src="'/img/medium/' + item.gambar" 
                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     :alt="item.judul"
+                                    loading="lazy"
                                 />
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80"></div>
                             </template>

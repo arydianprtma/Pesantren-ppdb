@@ -74,9 +74,10 @@
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="rounded-2xl overflow-hidden shadow-lg">
                     <img 
-                        :src="'/storage/' + berita.gambar" 
+                        :src="'/img/large/' + berita.gambar" 
                         :alt="berita.judul"
                         class="w-full h-auto max-h-[500px] object-cover"
+                        loading="eager"
                     />
                 </div>
             </div>
@@ -181,9 +182,10 @@
                                 </span>
                                 <img 
                                     v-if="related.gambar"
-                                    :src="'/storage/' + related.gambar" 
+                                    :src="'/img/thumbnail/' + related.gambar" 
                                     :alt="related.judul"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    loading="lazy"
                                 />
                                 <div v-else class="w-full h-full flex items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-50">
                                     <svg class="w-12 h-12 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
