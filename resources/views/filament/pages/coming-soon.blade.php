@@ -1,36 +1,58 @@
 <x-filament-panels::page>
-    <div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-        {{-- Icon Container --}}
-        <div class="mb-8 relative group">
-            <div
-                class="absolute inset-0 bg-emerald-100 rounded-full animate-pulse opacity-50 blur-xl dark:bg-emerald-900/30">
-            </div>
-            <div
-                class="relative bg-emerald-50 rounded-full p-8 shadow-sm border border-emerald-100 dark:bg-gray-800 dark:border-gray-700">
-                <x-heroicon-o-beaker style="width: 64px; height: 64px;"
-                    class="text-emerald-600 dark:text-emerald-400" />
-            </div>
+    {{-- Container Menggunakan Inline Flexbox untuk menjamin Rata Tengah --}}
+    <div style="
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: center; 
+        min-height: 60vh; 
+        text-align: center; 
+        padding: 20px;
+    ">
+
+        {{-- Decorative Icon Wrapper --}}
+        <div style="
+            background-color: #ecfdf5; 
+            border-radius: 9999px; 
+            padding: 40px; 
+            margin-bottom: 24px; 
+            display: inline-flex;
+            border: 1px solid #d1fae5;
+        ">
+            {{-- Menggunakan ikon jam/waktu yang lebih relevan untuk 'Coming Soon' --}}
+            <x-heroicon-o-clock style="width: 64px; height: 64px; color: #059669;" />
         </div>
 
-        {{-- Title --}}
-        <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-3">
-            {{ $this->getTitle() }}
-        </h1>
-
-        {{-- Subtitle --}}
-        <p class="text-xl font-medium text-gray-500 uppercase tracking-widest mb-6">
+        {{-- Subtitle "COMING SOON" --}}
+        <h2 style="
+            font-size: 24px; 
+            font-weight: 700; 
+            color: #1f2937; 
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        ">
             Coming Soon
-        </p>
+        </h2>
 
         {{-- Description --}}
-        <p class="text-gray-500 dark:text-gray-400 max-w-lg mb-10 leading-relaxed">
-            Halaman ini sedang dalam tahap pengembangan. <br>
-            Informasi lengkap akan segera tersedia.
+        <p style="
+            font-size: 16px; 
+            color: #6b7280; 
+            max-width: 480px; 
+            line-height: 1.6; 
+            margin-bottom: 32px;
+        ">
+            Modul <strong>{{ $this->getTitle() }}</strong> saat ini sedang dalam tahap pengembangan oleh tim teknis.
+            Fitur ini akan segera tersedia untuk digunakan.
         </p>
 
         {{-- Action Button --}}
-        <x-filament::button tag="a" href="/" size="lg" color="success" icon="heroicon-m-arrow-left">
-            Kembali ke Beranda
-        </x-filament::button>
+        <div style="margin-top: 10px;">
+            <x-filament::button tag="a" href="/portal" size="lg" color="success">
+                Kembali ke Dashboard
+            </x-filament::button>
+        </div>
+
     </div>
 </x-filament-panels::page>
