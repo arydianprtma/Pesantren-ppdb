@@ -47,7 +47,9 @@ class PrestasiForm
                     ->disk('public') // Force public disk
                     ->visibility('public')
                     ->directory('prestasi')
+                    ->maxSize(10240) // 10MB dalam KB
                     ->label('Foto Dokumentasi')
+                    ->helperText('Maksimal ukuran file: 10MB')
                     ->columnSpanFull(),
                 Textarea::make('deskripsi')
                     ->columnSpanFull()
