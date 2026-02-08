@@ -132,13 +132,13 @@ class UserResource extends Resource
                     ]),
             ])
             ->actions([
-                \Filament\Tables\Actions\EditAction::make(),
-                \Filament\Tables\Actions\DeleteAction::make()
+                \Filament\Actions\EditAction::make(),
+                \Filament\Actions\DeleteAction::make()
                     ->visible(fn($record) => $record->id !== auth()->id()),
             ])
             ->bulkActions([
-                \Filament\Tables\Actions\BulkActionGroup::make([
-                    \Filament\Tables\Actions\DeleteBulkAction::make(),
+                \Filament\Actions\BulkActionGroup::make([
+                    \Filament\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
