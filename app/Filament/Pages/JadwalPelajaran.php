@@ -6,7 +6,7 @@ use Filament\Pages\Page;
 
 class JadwalPelajaran extends Page
 {
-    protected static string $view = 'filament.pages.coming-soon';
+    protected string $view = 'filament.pages.coming-soon';
 
     public static function getNavigationIcon(): ?string
     {
