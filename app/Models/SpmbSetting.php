@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class SpmbSetting extends Model
+{
+    protected $fillable = [
+        'tahun_ajaran',
+        'tgl_buka',
+        'tgl_tutup',
+        'is_active',
+        'pesan_tutup',
+    ];
+
+    protected $casts = [
+        'tgl_buka' => 'datetime',
+        'tgl_tutup' => 'datetime',
+        'is_active' => 'boolean',
+    ];
+
+    protected static function booted()
+    {
+        static::creating(function ($model) {
+            if (static::count() >= 1) {
+                throw new \Exception('Hanya diperbolehkan satu data pengaturan SPMB.');
+            }
+        });
+    }
+
+    /**
+     * Cek apakah pendaftaran sedang dibuka berdasarkan waktu saat ini
+     */
+    public static function isOpen(): bool
+    {
+        $setting = self::where('is_active', true)->latest()->first();
+        
+        if (!$setting) return false;
+
+        $now = now();
+        return $now->between($setting->tgl_buka, $setting->tgl_tutup);
+    }
+}
