@@ -81,6 +81,28 @@ class WebSettingResource extends Resource
                             ->placeholder('081234567890')
                             ->tel(),
                     ]),
+                \Filament\Schemas\Components\Section::make('Statistik Pondok')
+                    ->description('Kelola data statistik yang ditampilkan di beranda dan halaman tentang pondok.')
+                    ->collapsible()
+                    ->schema([
+                        TextInput::make('base_santri_aktif')
+                            ->label('Base Santri Aktif')
+                            ->helperText('Jumlah santri aktif awal (akan ditambah otomatis dengan jumlah pendaftar yang diterima).')
+                            ->numeric()
+                            ->default(0),
+                        TextInput::make('jml_unit_sekolah')
+                            ->label('Jumlah Unit Sekolah')
+                            ->numeric()
+                            ->default(0),
+                        TextInput::make('akreditasi')
+                            ->label('Akreditasi')
+                            ->placeholder('A')
+                            ->default('A'),
+                        TextInput::make('persentase_kelulusan')
+                            ->label('Persentase Kelulusan')
+                            ->placeholder('100%')
+                            ->default('100%'),
+                    ]),
             ]);
     }
 

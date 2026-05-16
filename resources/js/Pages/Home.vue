@@ -81,19 +81,19 @@
             <div class="container mx-auto px-4 pb-16 relative z-10">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
                     <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl shadow-emerald-900/5 border border-emerald-50 text-center transform hover:scale-105 transition-all duration-300 flex flex-col justify-center min-h-[160px]">
-                        <div class="text-3xl md:text-4xl font-black text-emerald-600 mb-2">500+</div>
+                        <div class="text-3xl md:text-4xl font-black text-emerald-600 mb-2">{{ stats.santri_aktif }}+</div>
                         <div class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-[0.2em] leading-relaxed">Santri Aktif</div>
                     </div>
                     <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl shadow-emerald-900/5 border border-emerald-50 text-center transform hover:scale-105 transition-all duration-300 flex flex-col justify-center min-h-[160px]">
-                        <div class="text-3xl md:text-4xl font-black text-emerald-600 mb-2">20+</div>
+                        <div class="text-3xl md:text-4xl font-black text-emerald-600 mb-2">{{ stats.ekstrakurikuler }}+</div>
                         <div class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-[0.2em] leading-relaxed">Ekstrakurikuler</div>
                     </div>
                     <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl shadow-emerald-900/5 border border-emerald-50 text-center transform hover:scale-105 transition-all duration-300 flex flex-col justify-center min-h-[160px]">
-                        <div class="text-3xl md:text-4xl font-black text-emerald-600 mb-1 leading-tight">Akreditasi <span class="text-emerald-500">A</span></div>
+                        <div class="text-3xl md:text-4xl font-black text-emerald-600 mb-1 leading-tight">Akreditasi <span class="text-emerald-500">{{ stats.akreditasi }}</span></div>
                         <div class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-[0.2em] leading-relaxed">Kualitas Terjamin</div>
                     </div>
                     <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl shadow-emerald-900/5 border border-emerald-50 text-center transform hover:scale-105 transition-all duration-300 flex flex-col justify-center min-h-[160px]">
-                        <div class="text-3xl md:text-4xl font-black text-emerald-600 mb-2">100%</div>
+                        <div class="text-3xl md:text-4xl font-black text-emerald-600 mb-2">{{ stats.kelulusan }}</div>
                         <div class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-[0.2em] leading-relaxed">Lulus Tepat Waktu</div>
                     </div>
                 </div>
@@ -347,6 +347,99 @@
             </div>
         </section>
 
+        <!-- Ekstrakurikuler Section -->
+        <section v-if="ekstrakurikuler.length > 0" class="py-24 bg-gray-50 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-16">
+                    <span class="text-emerald-600 font-bold uppercase tracking-widest text-sm mb-3 block">Pengembangan Diri</span>
+                    <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-6">Kegiatan Ekstrakurikuler</h2>
+                    <div class="w-24 h-1.5 bg-emerald-500 mx-auto rounded-full mb-8"></div>
+                    <p class="text-gray-500 max-w-2xl mx-auto">
+                        Wadah bagi santri untuk menggali potensi, bakat, dan minat di luar bidang akademik untuk membentuk pribadi yang multitalenta.
+                    </p>
+                </div>
+
+                <div 
+                    class="relative group/slider"
+                    @mouseenter="isHovering = true"
+                    @mouseleave="isHovering = false"
+                >
+                    <!-- Navigation Buttons (Desktop) -->
+                    <button 
+                        v-if="ekstrakurikuler.length > 3"
+                        @click="scrollPrev"
+                        class="hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 z-30 w-14 h-14 bg-white rounded-2xl shadow-xl border border-emerald-100 items-center justify-center text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all duration-500 opacity-0 group-hover/slider:opacity-100 hover:scale-110 active:scale-95 group/btn"
+                    >
+                        <svg class="w-6 h-6 transition-transform group-hover/btn:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+
+                    <button 
+                        v-if="ekstrakurikuler.length > 3"
+                        @click="scrollNext"
+                        class="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-30 w-14 h-14 bg-white rounded-2xl shadow-xl border border-emerald-100 items-center justify-center text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all duration-500 opacity-0 group-hover/slider:opacity-100 hover:scale-110 active:scale-95 group/btn"
+                    >
+                        <svg class="w-6 h-6 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+
+                    <!-- Slider Wrapper -->
+                    <div 
+                        ref="ekskulContainer"
+                        @scroll="handleScroll"
+                        :class="ekstrakurikuler.length > 3 
+                            ? 'flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory no-scrollbar scroll-smooth' 
+                            : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8'"
+                    >
+                        <div v-for="item in ekstrakurikuler" :key="item.id" 
+                            :class="ekstrakurikuler.length > 3 ? 'flex-shrink-0 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.35rem)] snap-start' : ''"
+                            class="group bg-white rounded-[2rem] p-5 shadow-lg shadow-emerald-900/5 border border-emerald-100 hover:border-emerald-300 transition-all duration-300 transform hover:-translate-y-1"
+                        >
+                            <div class="aspect-[4/3] rounded-3xl overflow-hidden mb-8 bg-emerald-50 relative">
+                                <img v-if="item.gambar" :src="'/storage/' + item.gambar" :alt="item.nama" 
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <div v-else class="w-full h-full flex items-center justify-center">
+                                    <svg class="w-20 h-20 text-emerald-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="px-2">
+                                <h3 class="text-2xl font-black text-gray-900 mb-4 group-hover:text-emerald-600 transition-colors duration-300 leading-tight">{{ item.nama }}</h3>
+                                <p class="text-gray-500 text-sm leading-relaxed line-clamp-3">
+                                    {{ item.deskripsi }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination Dots -->
+                    <div v-if="ekstrakurikuler.length > 3" class="flex justify-center gap-3 mt-4">
+                        <button 
+                            v-for="(_, idx) in Math.ceil(ekstrakurikuler.length / 3)" 
+                            :key="idx"
+                            @click="scrollToIndex(idx * 3)"
+                            class="group relative h-2 transition-all duration-500 ease-out focus:outline-none"
+                            :class="activeIndex === idx ? 'w-12' : 'w-3'"
+                        >
+                            <div 
+                                class="absolute inset-0 rounded-full transition-all duration-500"
+                                :class="activeIndex === idx ? 'bg-emerald-500' : 'bg-emerald-200 group-hover:bg-emerald-300'"
+                            ></div>
+                            <div 
+                                v-if="activeIndex === idx"
+                                class="absolute inset-0 bg-white/40 rounded-full animate-progress"
+                            ></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- CTA Section -->
         <section class="py-16 bg-emerald-700 relative overflow-hidden">
             <div class="absolute inset-0 opacity-10">
@@ -407,6 +500,9 @@ import { ref, onMounted, onUnmounted, computed } from 'vue';
 
 const activeFaq = ref(null);
 const currentTime = ref(new Date());
+const ekskulContainer = ref(null);
+const activeIndex = ref(0);
+const isHovering = ref(false);
 
 const props = defineProps({
     prestasi: {
@@ -424,6 +520,21 @@ const props = defineProps({
     spmbSetting: {
         type: Object,
         default: null
+    },
+    ekstrakurikuler: {
+        type: Array,
+        default: () => []
+    },
+    stats: {
+        type: Object,
+        default: () => ({
+            santri_aktif: 0,
+            ekstrakurikuler: 0,
+            akreditasi: 'A',
+            kelulusan: '100%',
+            tenaga_pengajar: 0,
+            unit_sekolah: 0,
+        })
     }
 });
 
@@ -444,13 +555,30 @@ const isFutureOpen = computed(() => {
 const countdown = computed(() => {
     if (!props.spmbSetting) return '';
     
-    const targetDate = props.spmbSetting.is_open 
-        ? new Date(props.spmbSetting.tgl_tutup + ' 23:59:59') 
-        : new Date(props.spmbSetting.tgl_buka + ' 00:00:00');
+    // Gunakan parsing yang lebih aman untuk string tanggal
+    const parseDate = (dateStr, timeStr) => {
+        if (!dateStr) return null;
+        // Tangani jika dateStr sudah berupa objek Date atau string ISO
+        const d = new Date(dateStr);
+        if (isNaN(d.getTime())) return null;
         
-    const diff = targetDate - currentTime.value;
+        // Ambil bagian YYYY-MM-DD
+        const year = d.getFullYear();
+        const month = (d.getMonth() + 1).toString().padStart(2, '0');
+        const day = d.getDate().toString().padStart(2, '0');
+        
+        return new Date(`${year}-${month}-${day}T${timeStr}`);
+    };
+
+    const targetDate = props.spmbSetting.is_open 
+        ? parseDate(props.spmbSetting.tgl_tutup, '23:59:59') 
+        : parseDate(props.spmbSetting.tgl_buka, '00:00:00');
+        
+    if (!targetDate || isNaN(targetDate.getTime())) return '00h 00j 00m 00d';
+        
+    const diff = targetDate.getTime() - currentTime.value.getTime();
     
-    if (diff <= 0) return '00:00:00:00';
+    if (diff <= 0) return '00h 00j 00m 00d';
     
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -461,14 +589,73 @@ const countdown = computed(() => {
 });
 
 let timer;
+let scrollInterval;
+
+const handleScroll = () => {
+    if (!ekskulContainer.value) return;
+    const container = ekskulContainer.value;
+    const scrollPosition = container.scrollLeft;
+    const itemWidth = container.clientWidth;
+    activeIndex.value = Math.round(scrollPosition / itemWidth);
+};
+
+const scrollNext = () => {
+    if (!ekskulContainer.value) return;
+    const container = ekskulContainer.value;
+    const scrollAmount = container.clientWidth;
+    
+    if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
+        container.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+};
+
+const scrollPrev = () => {
+    if (!ekskulContainer.value) return;
+    const container = ekskulContainer.value;
+    const scrollAmount = container.clientWidth;
+    
+    if (container.scrollLeft <= 0) {
+        container.scrollTo({ left: container.scrollWidth, behavior: 'smooth' });
+    } else {
+        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    }
+};
+
+const scrollToIndex = (index) => {
+    if (!ekskulContainer.value) return;
+    const container = ekskulContainer.value;
+    const itemWidth = container.clientWidth;
+    container.scrollTo({ left: index * itemWidth, behavior: 'smooth' });
+};
+
+const startAutoScroll = () => {
+    if (props.ekstrakurikuler.length > 3) {
+        stopAutoScroll();
+        scrollInterval = setInterval(() => {
+            if (!isHovering.value) {
+                scrollNext();
+            }
+        }, 5000);
+    }
+};
+
+const stopAutoScroll = () => {
+    if (scrollInterval) clearInterval(scrollInterval);
+};
+
 onMounted(() => {
     timer = setInterval(() => {
         currentTime.value = new Date();
     }, 1000);
+
+    startAutoScroll();
 });
 
 onUnmounted(() => {
     clearInterval(timer);
+    stopAutoScroll();
 });
 
 const faqs = [
@@ -499,25 +686,6 @@ const testimonials = [
     }
 ];
 
-defineProps({
-    prestasi: {
-        type: Array,
-        default: () => []
-    },
-    visiMisi: {
-        type: Object,
-        default: null
-    },
-    beritaTerbaru: {
-        type: Array,
-        default: () => []
-    },
-    spmbSetting: {
-        type: Object,
-        default: null
-    }
-});
-
 const formatDate = (dateString) => {
     if (!dateString) return '';
     return new Date(dateString).toLocaleDateString('id-ID', {
@@ -532,3 +700,33 @@ const stripHtml = (html) => {
     return html.replace(/<[^>]*>?/gm, '').replace(/&nbsp;/g, ' ');
 };
 </script>
+
+<style scoped>
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.text-gradient {
+    background: linear-gradient(to right, #059669, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.bg-dot-pattern {
+    background-image: radial-gradient(#10b981 0.5px, transparent 0.5px);
+    background-size: 24px 24px;
+}
+
+@keyframes progress {
+    0% { transform: scaleX(0); transform-origin: left; }
+    100% { transform: scaleX(1); transform-origin: left; }
+}
+
+.animate-progress {
+    animation: progress 5s linear infinite;
+}
+</style>

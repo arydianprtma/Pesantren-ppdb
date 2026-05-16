@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Fasilitas;
 use App\Models\Prestasi;
 use App\Models\Sejarah;
+use App\Models\WebSetting;
+use App\Models\SpmbPendaftaran;
+use App\Models\Ekstrakurikuler;
+use App\Models\Guru;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -30,6 +34,19 @@ class HomeController extends Controller
         });
 
         $spmbSetting = \App\Models\SpmbSetting::where('is_active', true)->first();
+        $webSetting = WebSetting::first();
+        
+        $ekstrakurikuler = Ekstrakurikuler::where('is_active', true)->get();
+
+        // Calculate statistics
+        $stats = [
+            'santri_aktif' => ($webSetting->base_santri_aktif ?? 0) + SpmbPendaftaran::whereIn('status', ['diterima', 'diterima_ula', 'diterima_wustho', 'diterima_ulya'])->count(),
+            'ekstrakurikuler' => Ekstrakurikuler::where('is_active', true)->count(),
+            'akreditasi' => $webSetting->akreditasi ?? 'A',
+            'kelulusan' => $webSetting->persentase_kelulusan ?? '100%',
+            'tenaga_pengajar' => Guru::where('is_active', true)->count(),
+            'unit_sekolah' => $webSetting->jml_unit_sekolah ?? 0,
+        ];
 
         // Check if current date is within range for status info
         if ($spmbSetting) {
@@ -45,6 +62,8 @@ class HomeController extends Controller
             'visiMisi' => $visiMisi,
             'beritaTerbaru' => $beritaTerbaru,
             'spmbSetting' => $spmbSetting,
+            'stats' => $stats,
+            'ekstrakurikuler' => $ekstrakurikuler,
         ]);
     }
 
@@ -58,9 +77,20 @@ class HomeController extends Controller
             return Sejarah::where('is_active', true)->orderBy('urutan')->get();
         });
 
+        $webSetting = WebSetting::first();
+        $stats = [
+            'santri_aktif' => ($webSetting->base_santri_aktif ?? 0) + SpmbPendaftaran::whereIn('status', ['diterima', 'diterima_ula', 'diterima_wustho', 'diterima_ulya'])->count(),
+            'ekstrakurikuler' => Ekstrakurikuler::where('is_active', true)->count(),
+            'akreditasi' => $webSetting->akreditasi ?? 'A',
+            'kelulusan' => $webSetting->persentase_kelulusan ?? '100%',
+            'tenaga_pengajar' => Guru::where('is_active', true)->count(),
+            'unit_sekolah' => $webSetting->jml_unit_sekolah ?? 0,
+        ];
+
         return Inertia::render('TentangPondok', [
             'fasilitasList' => $fasilitasList,
             'sejarahList'   => $sejarahList,
+            'stats'         => $stats,
         ]);
     }
 

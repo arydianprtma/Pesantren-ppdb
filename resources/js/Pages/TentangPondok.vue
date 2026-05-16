@@ -37,20 +37,20 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="card bg-gradient-to-br from-emerald-50 to-white text-center border border-emerald-100">
-                            <div class="text-4xl font-extrabold text-emerald-600 mb-1">500+</div>
+                            <div class="text-4xl font-extrabold text-emerald-600 mb-1">{{ stats.santri_aktif }}+</div>
                             <div class="text-sm text-gray-500 font-medium">Santri Aktif</div>
                         </div>
                         <div class="card bg-gradient-to-br from-emerald-50 to-white text-center border border-emerald-100">
-                            <div class="text-4xl font-extrabold text-emerald-600 mb-1">2</div>
+                            <div class="text-4xl font-extrabold text-emerald-600 mb-1">{{ stats.unit_sekolah }}</div>
                             <div class="text-sm text-gray-500 font-medium">Unit Sekolah</div>
                         </div>
                         <div class="card bg-gradient-to-br from-emerald-50 to-white text-center border border-emerald-100">
-                            <div class="text-4xl font-extrabold text-emerald-600 mb-1">50+</div>
+                            <div class="text-4xl font-extrabold text-emerald-600 mb-1">{{ stats.tenaga_pengajar }}+</div>
                             <div class="text-sm text-gray-500 font-medium">Tenaga Pengajar</div>
                         </div>
                         <div class="card bg-gradient-to-br from-emerald-50 to-white text-center border border-emerald-100">
-                            <div class="text-4xl font-extrabold text-emerald-600 mb-1">100%</div>
-                            <div class="text-sm text-gray-500 font-medium">Berbasis Islami</div>
+                            <div class="text-4xl font-extrabold text-emerald-600 mb-1">{{ stats.akreditasi }}</div>
+                            <div class="text-sm text-gray-500 font-medium">Akreditasi</div>
                         </div>
                     </div>
                 </div>
@@ -223,6 +223,17 @@ import { Link, Head } from '@inertiajs/vue3';
 defineProps({
     fasilitasList: { type: Array, default: () => [] },
     sejarahList:   { type: Array, default: () => [] },
+    stats: {
+        type: Object,
+        default: () => ({
+            santri_aktif: 0,
+            ekstrakurikuler: 0,
+            akreditasi: 'A',
+            kelulusan: '100%',
+            tenaga_pengajar: 0,
+            unit_sekolah: 0,
+        })
+    }
 });
 
 const getIkonPath = (key) => {
