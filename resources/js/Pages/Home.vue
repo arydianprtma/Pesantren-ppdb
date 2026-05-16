@@ -345,55 +345,31 @@
             </div>
         </section>
 
-        <!-- FAQ & Testimonials Section -->
+        <!-- FAQ Section -->
         <section class="py-20 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                    <!-- FAQ Column -->
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-900 mb-8">Pertanyaan Umum (FAQ)</h2>
-                        <div class="space-y-4">
-                            <div v-for="(faq, index) in faqs" :key="index" class="bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
-                                <button 
-                                    @click="activeFaq = activeFaq === index ? null : index"
-                                    class="w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none"
-                                >
-                                    <span class="font-bold text-gray-800">{{ faq.question }}</span>
-                                    <svg 
-                                        class="w-5 h-5 text-emerald-500 transform transition-transform duration-300"
-                                        :class="{'rotate-180': activeFaq === index}"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </button>
-                                <div 
-                                    v-show="activeFaq === index"
-                                    class="px-6 pb-4 text-gray-600 text-sm leading-relaxed"
-                                >
-                                    {{ faq.answer }}
-                                </div>
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">Pertanyaan Umum (FAQ)</h2>
+                    <p class="text-gray-500">Temukan jawaban cepat untuk pertanyaan yang sering diajukan</p>
+                </div>
+                <div class="space-y-4">
+                    <div v-for="(faq, index) in faqs" :key="index" class="bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
+                        <button 
+                            @click="activeFaq = activeFaq === index ? null : index"
+                            class="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none"
+                        >
+                            <span class="font-bold text-gray-800">{{ faq.question }}</span>
+                            <div class="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500 transition-transform duration-300" :class="{'rotate-180 bg-emerald-500 text-white': activeFaq === index}">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                                </svg>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonials Column -->
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-900 mb-8">Apa Kata Mereka?</h2>
-                        <div class="space-y-6">
-                            <div v-for="(testi, index) in testimonials" :key="index" class="bg-white p-8 rounded-3xl border border-emerald-50 shadow-sm relative italic text-gray-600">
-                                <div class="absolute -top-4 -left-2 text-6xl text-emerald-100 font-serif opacity-50">“</div>
-                                <p class="mb-6 relative z-10">{{ testi.text }}</p>
-                                <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center font-bold text-emerald-600">
-                                        {{ testi.name.charAt(0) }}
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-gray-900 not-italic">{{ testi.name }}</h4>
-                                        <p class="text-xs text-gray-500 not-italic">{{ testi.role }}</p>
-                                    </div>
-                                </div>
-                            </div>
+                        </button>
+                        <div 
+                            v-show="activeFaq === index"
+                            class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-50 pt-4"
+                        >
+                            {{ faq.answer }}
                         </div>
                     </div>
                 </div>
