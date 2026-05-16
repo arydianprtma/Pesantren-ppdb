@@ -4,7 +4,21 @@
         <!-- Hero Section -->
         <section class="relative bg-gradient-to-br from-emerald-50 via-white to-emerald-50/30 overflow-hidden">
             <div class="absolute inset-0 bg-dot-pattern opacity-40"></div>
-            <div class="container mx-auto px-4 pt-24 pb-20 relative z-10">
+            
+            <!-- Registration Period Banner -->
+            <div v-if="spmbSetting && spmbSetting.is_active" class="bg-emerald-600 text-white py-3 relative z-20">
+                <div class="container mx-auto px-4 text-center">
+                    <p class="text-sm md:text-base font-bold flex items-center justify-center gap-2">
+                        <span class="inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                        Pendaftaran Santri Baru Tahun Ajaran {{ spmbSetting.tahun_ajaran }} Dibuka: 
+                        <span class="underline decoration-wavy decoration-emerald-300">
+                            {{ formatDate(spmbSetting.tgl_buka) }} s/d {{ formatDate(spmbSetting.tgl_tutup) }}
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 pt-24 pb-12 relative z-10">
                 <div class="text-center">
                     <div class="mb-6">
                         <img src="/Logo Riyad.png" alt="Logo Riyadussalikin" class="h-24 w-24 mx-auto mb-4" />
@@ -21,7 +35,7 @@
                                 href="https://spmb.riyadussalikin.my.id/login" 
                                 class="btn-primary w-full sm:w-auto text-center"
                             >
-                                SPMB
+                                Daftar Sekarang
                             </a>
                         <Link 
                             :href="route('kontak')" 
@@ -29,6 +43,90 @@
                         >
                             Hubungi Kami
                         </Link>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Counter Section -->
+            <div class="container mx-auto px-4 pb-16 relative z-10">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
+                    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl shadow-emerald-900/5 border border-emerald-50 text-center transform hover:scale-105 transition-all duration-300 flex flex-col justify-center min-h-[160px]">
+                        <div class="text-3xl md:text-4xl font-black text-emerald-600 mb-2">500+</div>
+                        <div class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-[0.2em] leading-relaxed">Santri Aktif</div>
+                    </div>
+                    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl shadow-emerald-900/5 border border-emerald-50 text-center transform hover:scale-105 transition-all duration-300 flex flex-col justify-center min-h-[160px]">
+                        <div class="text-3xl md:text-4xl font-black text-emerald-600 mb-2">20+</div>
+                        <div class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-[0.2em] leading-relaxed">Ekstrakurikuler</div>
+                    </div>
+                    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl shadow-emerald-900/5 border border-emerald-50 text-center transform hover:scale-105 transition-all duration-300 flex flex-col justify-center min-h-[160px]">
+                        <div class="text-3xl md:text-4xl font-black text-emerald-600 mb-1 leading-tight">Akreditasi <span class="text-emerald-500">A</span></div>
+                        <div class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-[0.2em] leading-relaxed">Kualitas Terjamin</div>
+                    </div>
+                    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl shadow-emerald-900/5 border border-emerald-50 text-center transform hover:scale-105 transition-all duration-300 flex flex-col justify-center min-h-[160px]">
+                        <div class="text-3xl md:text-4xl font-black text-emerald-600 mb-2">100%</div>
+                        <div class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-[0.2em] leading-relaxed">Lulus Tepat Waktu</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alur Pendaftaran Section -->
+        <section class="py-24 bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-20">
+                    <span class="text-emerald-600 font-bold uppercase tracking-widest text-sm mb-3 block">Prosedur Penerimaan</span>
+                    <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-6">Alur Pendaftaran Santri Baru</h2>
+                    <div class="w-24 h-1.5 bg-emerald-500 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="relative">
+                    <!-- Progress Line (Desktop) -->
+                    <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-emerald-50 -translate-y-1/2"></div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                        <!-- Step 1 -->
+                        <div class="relative group">
+                            <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center border-4 border-emerald-500 mx-auto mb-8 relative z-20 group-hover:bg-emerald-500 transition-all duration-300 shadow-xl shadow-emerald-500/20">
+                                <span class="text-2xl font-black text-emerald-600 group-hover:text-white">01</span>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold text-gray-900 mb-3">Daftar Akun</h3>
+                                <p class="text-gray-500 text-sm leading-relaxed px-4">Buat akun calon santri di portal SPMB untuk memulai proses pendaftaran awal.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative group">
+                            <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center border-4 border-emerald-500 mx-auto mb-8 relative z-20 group-hover:bg-emerald-500 transition-all duration-300 shadow-xl shadow-emerald-500/20">
+                                <span class="text-2xl font-black text-emerald-600 group-hover:text-white">02</span>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold text-gray-900 mb-3">Lengkapi Berkas</h3>
+                                <p class="text-gray-500 text-sm leading-relaxed px-4">Unggah dokumen persyaratan digital (Ijazah, KK, Akte) melalui dashboard pendaftaran.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative group">
+                            <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center border-4 border-emerald-500 mx-auto mb-8 relative z-20 group-hover:bg-emerald-500 transition-all duration-300 shadow-xl shadow-emerald-500/20">
+                                <span class="text-2xl font-black text-emerald-600 group-hover:text-white">03</span>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold text-gray-900 mb-3">Tes Seleksi</h3>
+                                <p class="text-gray-500 text-sm leading-relaxed px-4">Ikuti rangkaian tes seleksi (akademik & wawancara) sesuai jadwal yang ditentukan.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="relative group">
+                            <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center border-4 border-emerald-500 mx-auto mb-8 relative z-20 group-hover:bg-emerald-500 transition-all duration-300 shadow-xl shadow-emerald-500/20">
+                                <span class="text-2xl font-black text-emerald-600 group-hover:text-white">04</span>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold text-gray-900 mb-3">Pengumuman</h3>
+                                <p class="text-gray-500 text-sm leading-relaxed px-4">Hasil kelulusan akan diumumkan secara real-time melalui dashboard pendaftaran.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -220,17 +318,77 @@
         </section>
 
         <!-- CTA Section -->
-        <section class="py-16 bg-emerald-700">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <section class="py-16 bg-emerald-700 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white"></path>
+                </svg>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
                     Bergabunglah Bersama Kami
                 </h2>
                 <p class="text-xl text-emerald-100 mb-8 max-w-2xl mx-auto">
                     Daftarkan putra-putri Anda untuk menjadi bagian dari keluarga besar Pondok Pesantren Riyadussalikin
                 </p>
-                <a href="https://spmb.riyadussalikin.my.id/login" class="bg-white text-emerald-600 hover:bg-gray-50 font-bold py-4 px-8 rounded-lg inline-block transition-all duration-300 shadow-lg hover:shadow-xl">
+                <a href="https://spmb.riyadussalikin.my.id/login" class="bg-white text-emerald-600 hover:bg-gray-50 font-bold py-4 px-8 rounded-lg inline-block transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                     Daftar Sekarang
                 </a>
+            </div>
+        </section>
+
+        <!-- FAQ & Testimonials Section -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    <!-- FAQ Column -->
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-8">Pertanyaan Umum (FAQ)</h2>
+                        <div class="space-y-4">
+                            <div v-for="(faq, index) in faqs" :key="index" class="bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
+                                <button 
+                                    @click="activeFaq = activeFaq === index ? null : index"
+                                    class="w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none"
+                                >
+                                    <span class="font-bold text-gray-800">{{ faq.question }}</span>
+                                    <svg 
+                                        class="w-5 h-5 text-emerald-500 transform transition-transform duration-300"
+                                        :class="{'rotate-180': activeFaq === index}"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    >
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                <div 
+                                    v-show="activeFaq === index"
+                                    class="px-6 pb-4 text-gray-600 text-sm leading-relaxed"
+                                >
+                                    {{ faq.answer }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonials Column -->
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-8">Apa Kata Mereka?</h2>
+                        <div class="space-y-6">
+                            <div v-for="(testi, index) in testimonials" :key="index" class="bg-white p-8 rounded-3xl border border-emerald-50 shadow-sm relative italic text-gray-600">
+                                <div class="absolute -top-4 -left-2 text-6xl text-emerald-100 font-serif opacity-50">“</div>
+                                <p class="mb-6 relative z-10">{{ testi.text }}</p>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center font-bold text-emerald-600">
+                                        {{ testi.name.charAt(0) }}
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 not-italic">{{ testi.name }}</h4>
+                                        <p class="text-xs text-gray-500 not-italic">{{ testi.role }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </MainLayout>
@@ -239,6 +397,37 @@
 <script setup>
 import MainLayout from '../Layouts/MainLayout.vue';
 import { Link, Head } from '@inertiajs/vue3';
+import { ref } from 'vue';
+
+const activeFaq = ref(null);
+
+const faqs = [
+    {
+        question: "Berapa biaya pendaftaran santri baru?",
+        answer: "Biaya pendaftaran awal meliputi biaya formulir dan tes seleksi. Rincian lengkap biaya pendidikan dapat dilihat pada dashboard pendaftaran setelah Anda membuat akun."
+    },
+    {
+        question: "Kapan jadwal tes seleksi dilaksanakan?",
+        answer: "Jadwal tes seleksi akan diinformasikan melalui akun pendaftaran masing-masing santri setelah semua berkas persyaratan diverifikasi oleh panitia."
+    },
+    {
+        question: "Apa saja perlengkapan yang harus dibawa saat mulai mondok?",
+        answer: "Perlengkapan wajib meliputi pakaian ibadah, seragam, perlengkapan tidur mandiri, dan peralatan mandi. Daftar detail akan diberikan saat daftar ulang."
+    }
+];
+
+const testimonials = [
+    {
+        name: "H. Ahmad Jaelani",
+        role: "Wali Santri",
+        text: "Alhamdulillah, sejak anak saya mondok di Riyadussalikin, perubahan akhlaknya sangat terasa. Menjadi lebih mandiri dan hafalannya meningkat pesat."
+    },
+    {
+        name: "Siti Maryam",
+        role: "Alumni 2022",
+        text: "Pengalaman belajar di sini sangat berkesan. Tidak hanya ilmu agama, tapi kami juga diajarkan kemandirian dan keterampilan hidup yang sangat berguna di bangku kuliah."
+    }
+];
 
 defineProps({
     prestasi: {
@@ -252,6 +441,10 @@ defineProps({
     beritaTerbaru: {
         type: Array,
         default: () => []
+    },
+    spmbSetting: {
+        type: Object,
+        default: null
     }
 });
 

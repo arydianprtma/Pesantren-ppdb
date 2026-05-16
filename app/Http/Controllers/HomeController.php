@@ -29,10 +29,21 @@ class HomeController extends Controller
                 ->get();
         });
 
+        $spmbSetting = \App\Models\SpmbSetting::where('is_active', true)->first();
+
+        // Check if current date is within range
+        if ($spmbSetting) {
+            $now = now();
+            if (!$now->between($spmbSetting->tgl_buka, $spmbSetting->tgl_tutup)) {
+                $spmbSetting = null;
+            }
+        }
+
         return Inertia::render('Home', [
             'prestasi' => $prestasi,
             'visiMisi' => $visiMisi,
             'beritaTerbaru' => $beritaTerbaru,
+            'spmbSetting' => $spmbSetting,
         ]);
     }
 
