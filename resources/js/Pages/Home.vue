@@ -9,12 +9,16 @@
             <div v-if="spmbSetting && spmbSetting.is_active" 
                  :class="spmbSetting.is_open ? 'bg-emerald-600' : 'bg-amber-500'" 
                  class="text-white py-3 relative z-20 transition-colors duration-500">
-                <div class="container mx-auto px-4 text-center">
+                <div class="container mx-auto px-4 text-center relative">
                     <p v-if="spmbSetting.is_open" class="text-sm md:text-base font-bold flex items-center justify-center gap-2">
                         <span class="inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
                         Pendaftaran Santri Baru Tahun Ajaran {{ spmbSetting.tahun_ajaran }} Dibuka: 
                         <span class="underline decoration-wavy decoration-emerald-300">
                             {{ formatDate(spmbSetting.tgl_buka) }} s/d {{ formatDate(spmbSetting.tgl_tutup) }}
+                        </span>
+                        <span class="hidden md:inline-block mx-2 text-emerald-300">|</span>
+                        <span class="font-mono bg-black/20 px-2 py-0.5 rounded text-xs md:text-sm">
+                            {{ currentTime }}
                         </span>
                     </p>
                     <p v-else class="text-sm md:text-base font-bold flex items-center justify-center gap-2">
@@ -22,6 +26,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         Pendaftaran Tahun Ajaran {{ spmbSetting.tahun_ajaran }} Belum Dibuka / Sudah Tutup
+                        <span class="hidden md:inline-block mx-2 text-amber-200">|</span>
+                        <span class="font-mono bg-black/20 px-2 py-0.5 rounded text-xs md:text-sm">
+                            {{ currentTime }}
+                        </span>
                     </p>
                 </div>
             </div>
@@ -381,9 +389,30 @@
 <script setup>
 import MainLayout from '../Layouts/MainLayout.vue';
 import { Link, Head } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const activeFaq = ref(null);
+const currentTime = ref('');
+
+const updateTime = () => {
+    const now = new Date();
+    currentTime.value = now.toLocaleTimeString('id-ID', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+};
+
+let timer;
+onMounted(() => {
+    updateTime();
+    timer = setInterval(updateTime, 1000);
+});
+
+onUnmounted(() => {
+    clearInterval(timer);
+});
 
 const faqs = [
     {
