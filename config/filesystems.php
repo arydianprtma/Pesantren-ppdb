@@ -47,6 +47,15 @@ return [
             'report' => false,
         ],
 
+        'spmb' => [
+            'driver' => 'local',
+            'root' => base_path('SPMB/storage/app/public'),
+            'url' => '/spmb-storage',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

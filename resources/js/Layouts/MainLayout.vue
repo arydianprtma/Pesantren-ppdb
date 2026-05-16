@@ -133,7 +133,7 @@
                         </div>
 
                         <a 
-                            href="http://192.168.1.7:8081/register"
+                            href="https://spmb.riyadussalikin.my.id/login"
                             class="btn-primary"
                         >
                             SPMB
@@ -191,7 +191,7 @@
                         <Link :href="route('kontak')" :class="isActive('kontak') ? 'navbar-link-active' : 'navbar-link'">
                             Kontak
                         </Link>
-                        <a href="http://192.168.1.7:8081/register" class="btn-primary text-center">
+                        <a href="https://spmb.riyadussalikin.my.id/login" class="btn-primary text-center">
                             SPMB
                         </a>
                     </div>

@@ -18,7 +18,7 @@
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                             <a 
-                                href="http://192.168.1.7:8081/register" 
+                                href="https://spmb.riyadussalikin.my.id/login" 
                                 class="btn-primary w-full sm:w-auto text-center"
                             >
                                 SPMB
@@ -228,7 +228,7 @@
                 <p class="text-xl text-emerald-100 mb-8 max-w-2xl mx-auto">
                     Daftarkan putra-putri Anda untuk menjadi bagian dari keluarga besar Pondok Pesantren Riyadussalikin
                 </p>
-                <a href="http://192.168.1.7:8081/register" class="bg-white text-emerald-600 hover:bg-gray-50 font-bold py-4 px-8 rounded-lg inline-block transition-all duration-300 shadow-lg hover:shadow-xl">
+                <a href="https://spmb.riyadussalikin.my.id/login" class="bg-white text-emerald-600 hover:bg-gray-50 font-bold py-4 px-8 rounded-lg inline-block transition-all duration-300 shadow-lg hover:shadow-xl">
                     Daftar Sekarang
                 </a>
             </div>

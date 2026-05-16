@@ -44,8 +44,7 @@ class PrestasiForm
                     ->label('Tahun'),
                 \Filament\Forms\Components\FileUpload::make('gambar')
                     ->image()
-                    ->imageResizeTargetWidth('1200')
-                    ->imageQuality(80)
+                    ->imageResizeTargetWidth(1200)
                     ->disk('public') // Force public disk
                     ->visibility('public')
                     ->directory('prestasi')

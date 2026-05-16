@@ -40,6 +40,12 @@ class DataSiswaResource extends Resource
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
+                ImageColumn::make('pendaftaran.user.avatar')
+                    ->label('Foto')
+                    ->circular()
+                    ->disk('spmb')
+                    ->defaultImageUrl(fn($record) => 'https://ui-avatars.com/api/?name=' . urlencode($record->nama_lengkap) . '&color=10b981&background=d1fae5'),
+
                 TextColumn::make('nama_lengkap')
                     ->label('Nama Lengkap')
                     ->searchable()

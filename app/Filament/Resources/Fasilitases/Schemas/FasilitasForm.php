@@ -58,8 +58,7 @@ class FasilitasForm
                     FileUpload::make('gambar')
                         ->label('Foto Fasilitas')
                         ->image()
-                        ->imageResizeTargetWidth('1200')
-                        ->imageQuality(80)
+                        ->imageResizeTargetWidth(1200)
                         ->directory('fasilitas')
                         ->maxSize(3072) // 3MB
                         ->columnSpanFull()

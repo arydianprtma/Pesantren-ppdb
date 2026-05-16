@@ -45,8 +45,7 @@ class VisiMisiForm
                                 FileUpload::make('foto_pengasuh')
                                     ->label('Foto Pengasuh')
                                     ->image()
-                                    ->imageResizeTargetWidth('800')
-                                    ->imageQuality(80)
+                                    ->imageResizeTargetWidth(800)
                                     ->directory('pengasuh')
                                     ->maxSize(3072)
                                     ->helperText('Format: JPG, PNG. Maksimal 3MB. Gambar akan dioptimalkan otomatis.'),

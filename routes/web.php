@@ -33,6 +33,20 @@ Route::get('/smp', function () { return Inertia::render('ComingSoon'); })->name(
 Route::get('/kontak', [ContactController::class, 'index'])->name('kontak');
 Route::post('/kontak', [ContactController::class, 'store'])->name('kontak.store');
 
+// Proxy route for SPMB storage to avoid CORS issues
+Route::get('/spmb-storage/{path}', function ($path) {
+    $fullPath = base_path('SPMB/storage/app/public/' . $path);
+
+    if (!file_exists($fullPath)) {
+        abort(404);
+    }
+
+    $file = file_get_contents($fullPath);
+    $type = mime_content_type($fullPath);
+
+    return response($file)->header('Content-Type', $type);
+})->where('path', '.*');
+
 // Login Route (for Admin access)
 // Route::get('/login', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'create'])->name('login');
 // Route::post('/login', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store']);

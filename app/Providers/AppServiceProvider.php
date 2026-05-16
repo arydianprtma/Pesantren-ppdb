@@ -24,5 +24,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Vite::prefetch(concurrency: 3);
         SpmbPendaftaran::observe(SpmbRegistrantObserver::class);
+
+        if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === '192.168.1.7:8080') {
+            \Illuminate\Support\Facades\URL::forceRootUrl('http://192.168.1.7:8080');
+        }
     }
 }

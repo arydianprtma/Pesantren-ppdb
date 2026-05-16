@@ -66,8 +66,7 @@ class BeritaForm
                     ->columnSpanFull(),
                 FileUpload::make('gambar')
                     ->image()
-                    ->imageResizeTargetWidth('1200')
-                    ->imageQuality(80)
+                    ->imageResizeTargetWidth(1200)
                     ->directory('berita-images')
                     ->maxSize(5120) // Kurangi ke 5MB agar tidak membebani RAM saat proses
                     ->helperText('Maksimal ukuran file: 5MB. Gambar akan dioptimalkan otomatis.'),

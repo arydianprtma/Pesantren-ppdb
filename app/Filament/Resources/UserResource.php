@@ -24,6 +24,12 @@ class UserResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Sistem';
 
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('role', '!=', 'siswa');
+    }
+
     public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
     {
         return $schema
@@ -34,9 +40,8 @@ class UserResource extends Resource
                             ->label('Foto Profil')
                             ->image()
                             ->avatar()
-                            ->imageResizeTargetWidth('300')
-                            ->imageResizeTargetHeight('300')
-                            ->imageQuality(80)
+                            ->imageResizeTargetWidth(300)
+                            ->imageResizeTargetHeight(300)
                             ->directory('avatars')
                             ->maxSize(2048) // 2MB untuk avatar sudah sangat cukup
                             ->columnSpanFull()
