@@ -6,14 +6,22 @@
             <div class="absolute inset-0 bg-dot-pattern opacity-40"></div>
             
             <!-- Registration Period Banner -->
-            <div v-if="spmbSetting && spmbSetting.is_active" class="bg-emerald-600 text-white py-3 relative z-20">
+            <div v-if="spmbSetting && spmbSetting.is_active" 
+                 :class="spmbSetting.is_open ? 'bg-emerald-600' : 'bg-amber-500'" 
+                 class="text-white py-3 relative z-20 transition-colors duration-500">
                 <div class="container mx-auto px-4 text-center">
-                    <p class="text-sm md:text-base font-bold flex items-center justify-center gap-2">
+                    <p v-if="spmbSetting.is_open" class="text-sm md:text-base font-bold flex items-center justify-center gap-2">
                         <span class="inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
                         Pendaftaran Santri Baru Tahun Ajaran {{ spmbSetting.tahun_ajaran }} Dibuka: 
                         <span class="underline decoration-wavy decoration-emerald-300">
                             {{ formatDate(spmbSetting.tgl_buka) }} s/d {{ formatDate(spmbSetting.tgl_tutup) }}
                         </span>
+                    </p>
+                    <p v-else class="text-sm md:text-base font-bold flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Pendaftaran Tahun Ajaran {{ spmbSetting.tahun_ajaran }} Belum Dibuka / Sudah Tutup
                     </p>
                 </div>
             </div>

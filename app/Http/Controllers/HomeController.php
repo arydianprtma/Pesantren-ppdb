@@ -31,12 +31,10 @@ class HomeController extends Controller
 
         $spmbSetting = \App\Models\SpmbSetting::where('is_active', true)->first();
 
-        // Check if current date is within range
+        // Check if current date is within range for status info
         if ($spmbSetting) {
             $now = now();
-            if (!$now->between($spmbSetting->tgl_buka, $spmbSetting->tgl_tutup)) {
-                $spmbSetting = null;
-            }
+            $spmbSetting->is_open = $now->between($spmbSetting->tgl_buka, $spmbSetting->tgl_tutup);
         }
 
         return Inertia::render('Home', [
