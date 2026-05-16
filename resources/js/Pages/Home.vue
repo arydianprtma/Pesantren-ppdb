@@ -62,7 +62,7 @@
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                             <a 
-                                href="https://spmb.riyadussalikin.my.id/login" 
+                                :href="spmbUrl" 
                                 class="btn-primary w-full sm:w-auto text-center"
                             >
                                 Daftar Sekarang
@@ -361,7 +361,7 @@
                 <p class="text-xl text-emerald-100 mb-8 max-w-2xl mx-auto">
                     Daftarkan putra-putri Anda untuk menjadi bagian dari keluarga besar Pondok Pesantren Riyadussalikin
                 </p>
-                <a href="https://spmb.riyadussalikin.my.id/login" class="bg-white text-emerald-600 hover:bg-gray-50 font-bold py-4 px-8 rounded-lg inline-block transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                <a :href="spmbUrl" class="bg-white text-emerald-600 hover:bg-gray-50 font-bold py-4 px-8 rounded-lg inline-block transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                     Daftar Sekarang
                 </a>
             </div>
@@ -425,6 +425,15 @@ const props = defineProps({
         type: Object,
         default: null
     }
+});
+
+const spmbUrl = computed(() => {
+    // In local development with IP, use the local IP for SPMB
+    if (window.location.hostname === '192.168.1.7') {
+        return 'http://192.168.1.7:8081/login';
+    }
+    // Default to production URL
+    return 'https://spmb.riyadussalikin.my.id/login';
 });
 
 const isFutureOpen = computed(() => {
