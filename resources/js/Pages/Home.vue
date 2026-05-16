@@ -10,26 +10,40 @@
                  :class="spmbSetting.is_open ? 'bg-emerald-600' : 'bg-amber-500'" 
                  class="text-white py-3 relative z-20 transition-colors duration-500">
                 <div class="container mx-auto px-4 text-center relative">
-                    <p v-if="spmbSetting.is_open" class="text-sm md:text-base font-bold flex items-center justify-center gap-2">
+                    <!-- Case 1: Registration is Open (Counting down to closing) -->
+                    <p v-if="spmbSetting.is_open" class="text-sm md:text-base font-bold flex flex-wrap items-center justify-center gap-2">
                         <span class="inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                        Pendaftaran Santri Baru Tahun Ajaran {{ spmbSetting.tahun_ajaran }} Dibuka: 
-                        <span class="underline decoration-wavy decoration-emerald-300">
-                            {{ formatDate(spmbSetting.tgl_buka) }} s/d {{ formatDate(spmbSetting.tgl_tutup) }}
-                        </span>
+                        Pendaftaran Santri Baru Tahun Ajaran {{ spmbSetting.tahun_ajaran }} Dibuka!
                         <span class="hidden md:inline-block mx-2 text-emerald-300">|</span>
-                        <span class="font-mono bg-black/20 px-2 py-0.5 rounded text-xs md:text-sm">
-                            {{ currentTime }}
+                        <span class="flex items-center gap-2">
+                            <span class="text-xs md:text-sm font-normal text-emerald-100 uppercase tracking-tighter">Berakhir dalam:</span>
+                            <span class="font-mono bg-black/20 px-3 py-1 rounded text-xs md:text-sm shadow-inner border border-white/10">
+                                {{ countdown }}
+                            </span>
                         </span>
                     </p>
-                    <p v-else class="text-sm md:text-base font-bold flex items-center justify-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    
+                    <!-- Case 2: Registration not yet open (Counting down to opening) -->
+                    <p v-else-if="!spmbSetting.is_open && isFutureOpen" class="text-sm md:text-base font-bold flex flex-wrap items-center justify-center gap-2">
+                        <svg class="w-5 h-5 text-amber-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        Pendaftaran Tahun Ajaran {{ spmbSetting.tahun_ajaran }} Belum Dibuka / Sudah Tutup
+                        Pendaftaran Tahun Ajaran {{ spmbSetting.tahun_ajaran }} Segera Dibuka
                         <span class="hidden md:inline-block mx-2 text-amber-200">|</span>
-                        <span class="font-mono bg-black/20 px-2 py-0.5 rounded text-xs md:text-sm">
-                            {{ currentTime }}
+                        <span class="flex items-center gap-2">
+                            <span class="text-xs md:text-sm font-normal text-amber-100 uppercase tracking-tighter">Dibuka dalam:</span>
+                            <span class="font-mono bg-black/20 px-3 py-1 rounded text-xs md:text-sm shadow-inner border border-white/10">
+                                {{ countdown }}
+                            </span>
                         </span>
+                    </p>
+
+                    <!-- Case 3: Registration Closed (Already passed closing date) -->
+                    <p v-else class="text-sm md:text-base font-bold flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5 text-amber-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Pendaftaran Tahun Ajaran {{ spmbSetting.tahun_ajaran }} Sudah Ditutup
                     </p>
                 </div>
             </div>
@@ -389,25 +403,59 @@
 <script setup>
 import MainLayout from '../Layouts/MainLayout.vue';
 import { Link, Head } from '@inertiajs/vue3';
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 
 const activeFaq = ref(null);
-const currentTime = ref('');
+const currentTime = ref(new Date());
 
-const updateTime = () => {
-    const now = new Date();
-    currentTime.value = now.toLocaleTimeString('id-ID', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-    });
-};
+const props = defineProps({
+    prestasi: {
+        type: Array,
+        default: () => []
+    },
+    visiMisi: {
+        type: Object,
+        default: null
+    },
+    beritaTerbaru: {
+        type: Array,
+        default: () => []
+    },
+    spmbSetting: {
+        type: Object,
+        default: null
+    }
+});
+
+const isFutureOpen = computed(() => {
+    if (!props.spmbSetting) return false;
+    return new Date() < new Date(props.spmbSetting.tgl_buka);
+});
+
+const countdown = computed(() => {
+    if (!props.spmbSetting) return '';
+    
+    const targetDate = props.spmbSetting.is_open 
+        ? new Date(props.spmbSetting.tgl_tutup + ' 23:59:59') 
+        : new Date(props.spmbSetting.tgl_buka + ' 00:00:00');
+        
+    const diff = targetDate - currentTime.value;
+    
+    if (diff <= 0) return '00:00:00:00';
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    return `${days}h ${hours.toString().padStart(2, '0')}j ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}d`;
+});
 
 let timer;
 onMounted(() => {
-    updateTime();
-    timer = setInterval(updateTime, 1000);
+    timer = setInterval(() => {
+        currentTime.value = new Date();
+    }, 1000);
 });
 
 onUnmounted(() => {
