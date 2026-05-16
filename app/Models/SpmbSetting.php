@@ -39,6 +39,9 @@ class SpmbSetting extends Model
         if (!$setting) return false;
 
         $now = now();
-        return $now->between($setting->tgl_buka, $setting->tgl_tutup);
+        $tglBuka = $setting->tgl_buka->startOfDay();
+        $tglTutup = $setting->tgl_tutup->endOfDay();
+
+        return $now->between($tglBuka, $tglTutup);
     }
 }

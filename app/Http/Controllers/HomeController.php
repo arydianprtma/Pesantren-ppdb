@@ -50,11 +50,7 @@ class HomeController extends Controller
 
         // Check if current date is within range for status info
         if ($spmbSetting) {
-            $now = now()->startOfDay();
-            $tglBuka = \Illuminate\Support\Carbon::parse($spmbSetting->tgl_buka)->startOfDay();
-            $tglTutup = \Illuminate\Support\Carbon::parse($spmbSetting->tgl_tutup)->endOfDay();
-            
-            $spmbSetting->is_open = $now->between($tglBuka, $tglTutup);
+            $spmbSetting->is_open = \App\Models\SpmbSetting::isOpen();
         }
 
         return Inertia::render('Home', [
