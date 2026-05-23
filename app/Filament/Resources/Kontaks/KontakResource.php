@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Kontaks;
 
+use App\Filament\Resources\Concerns\ContentManagerAccess;
 use App\Filament\Resources\Kontaks\Pages\CreateKontak;
 use App\Filament\Resources\Kontaks\Pages\EditKontak;
 use App\Filament\Resources\Kontaks\Pages\ListKontaks;
@@ -16,6 +17,7 @@ use Filament\Tables\Table;
 
 class KontakResource extends Resource
 {
+    use ContentManagerAccess;
     protected static ?string $model = Kontak::class;
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-phone';

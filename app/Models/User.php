@@ -24,11 +24,14 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     protected $fillable = [
         'name',
         'email',
+        'whatsapp',
         'password',
         'avatar',
         'role',
         'permissions',
         'is_active',
+        'otp_code',
+        'otp_expires_at',
     ];
 
     /**
@@ -92,7 +95,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     }
 
     /**
-     * Check if user is admin
+     * Check if user is admin (super_admin or admin, NOT editor)
      */
     public function isAdmin(): bool
     {
@@ -100,11 +103,20 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     }
 
     /**
-     * Check if user is editor
+     * Check if user is editor only
      */
     public function isEditor(): bool
     {
         return $this->role === 'editor';
+    }
+
+    /**
+     * Check if user can manage web content (Berita, Prestasi, Fasilitas, Sejarah, VisiMisi, Ekstrakurikuler, Kontak)
+     * Includes super_admin, admin, AND editor
+     */
+    public function canManageContent(): bool
+    {
+        return in_array($this->role, ['super_admin', 'admin', 'editor']);
     }
 
     /**

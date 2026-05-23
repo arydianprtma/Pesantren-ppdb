@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ContactMessages;
 
+use App\Filament\Resources\Concerns\AdminOnlyAccess;
 use App\Filament\Resources\ContactMessages\Pages\ListContactMessages;
 use App\Filament\Resources\ContactMessages\Schemas\ContactMessageForm;
 use App\Filament\Resources\ContactMessages\Tables\ContactMessagesTable;
@@ -9,10 +10,13 @@ use App\Models\ContactMessage;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Auth;
 
 class ContactMessageResource extends Resource
 {
+    use AdminOnlyAccess;
+
+    protected static ?string $permission = 'manage_contacts';
+
     protected static ?string $model = ContactMessage::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-envelope';
@@ -65,10 +69,4 @@ class ContactMessageResource extends Resource
         return false;
     }
 
-    public static function canAccess(): bool
-    {
-        /** @var \App\Models\User|null $user */
-        $user = Auth::user();
-        return $user?->isAdmin() ?? false;
-    }
 }

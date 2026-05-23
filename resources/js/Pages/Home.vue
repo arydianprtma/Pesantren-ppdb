@@ -540,8 +540,8 @@ const props = defineProps({
 
 const spmbUrl = computed(() => {
     // In local development with IP, use the local IP for SPMB
-    if (window.location.hostname === '192.168.1.7') {
-        return 'http://192.168.1.7:8081/login';
+    if (window.location.hostname.startsWith('192.168.') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return `http://${window.location.hostname}:8081/login`;
     }
     // Default to production URL
     return 'https://spmb.riyadussalikin.my.id/login';
@@ -717,7 +717,7 @@ const stripHtml = (html) => {
 }
 
 .bg-dot-pattern {
-    background-image: radial-gradient(#10b981 0.5px, transparent 0.5px);
+    background-image: radial-gradient(#10b981 1px, transparent 1px);
     background-size: 24px 24px;
 }
 

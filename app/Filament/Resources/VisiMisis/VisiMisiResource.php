@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\VisiMisis;
 
+use App\Filament\Resources\Concerns\ContentManagerAccess;
 use App\Filament\Resources\VisiMisis\Pages\CreateVisiMisi;
 use App\Filament\Resources\VisiMisis\Pages\EditVisiMisi;
 use App\Filament\Resources\VisiMisis\Pages\ListVisiMisis;
@@ -16,6 +17,7 @@ use Filament\Tables\Table;
 
 class VisiMisiResource extends Resource
 {
+    use ContentManagerAccess;
     protected static ?string $model = VisiMisi::class;
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-document-text';

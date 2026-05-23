@@ -2,11 +2,13 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Resources\Concerns\AdminOnlyAccess;
 use Filament\Pages\Page;
 // use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 
 class TahunAjaran extends Page
 {
+    use AdminOnlyAccess;
     // use HasPageShield;
 
     protected string $view = 'filament.pages.coming-soon';
@@ -36,8 +38,4 @@ class TahunAjaran extends Page
         return 1;
     }
 
-    public static function canAccess(): bool
-    {
-        return auth()->user()?->isAdmin() ?? false;
-    }
 }

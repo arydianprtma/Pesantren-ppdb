@@ -174,8 +174,52 @@ class UserResource extends Resource
         ];
     }
 
+    /**
+     * Hanya Super Admin yang bisa mengakses Manajemen User
+     */
     public static function canAccess(): bool
     {
+        /** @var \App\Models\User|null $user */
+        $user = \Illuminate\Support\Facades\Auth::user();
+        return $user?->isSuperAdmin() ?? false;
+    }
+
+    /**
+     * Hanya Super Admin yang bisa membuat user baru
+     */
+    public static function canCreate(): bool
+    {
+        return static::canAccess();
+    }
+
+    /**
+     * Hanya Super Admin yang bisa mengedit user.
+     * Super Admin tidak bisa mengedit dirinya sendiri dari sini (gunakan profile).
+     */
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return static::canAccess();
+    }
+
+    /**
+     * Hanya Super Admin yang bisa menghapus user.
+     * Tidak bisa menghapus diri sendiri atau sesama Super Admin.
+     */
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        /** @var \App\Models\User|null $user */
+        $user = \Illuminate\Support\Facades\Auth::user();
+        if (!$user?->isSuperAdmin()) {
+            return false;
+        }
+        // Tidak bisa hapus diri sendiri
+        if ($record->getKey() === $user->getKey()) {
+            return false;
+        }
+        // Tidak bisa hapus sesama Super Admin
+        if ($record->role === 'super_admin') {
+            return false;
+        }
         return true;
     }
 }

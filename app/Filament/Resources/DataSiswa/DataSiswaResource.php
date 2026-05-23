@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\DataSiswa;
 
+use App\Filament\Resources\Concerns\AdminOnlyAccess;
 use App\Filament\Resources\DataSiswa\Pages\ListDataSiswa;
 use App\Filament\Resources\DataSiswa\Pages\ViewDataSiswa;
 use App\Models\SpmbSiswa;
@@ -16,6 +17,8 @@ use Filament\Tables\Actions\Action;
 
 class DataSiswaResource extends Resource
 {
+    use AdminOnlyAccess;
+
     protected static ?string $model = SpmbSiswa::class;
     protected static ?string $slug = 'data-siswa';
 

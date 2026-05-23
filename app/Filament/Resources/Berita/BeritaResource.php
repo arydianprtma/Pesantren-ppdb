@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Berita;
 
+use App\Filament\Resources\Concerns\ContentManagerAccess;
 use App\Filament\Resources\Berita\Pages\CreateBerita;
 use App\Filament\Resources\Berita\Pages\EditBerita;
 use App\Filament\Resources\Berita\Pages\ListBerita;
@@ -11,10 +12,13 @@ use App\Models\Berita;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Auth;
 
 class BeritaResource extends Resource
 {
+    use ContentManagerAccess;
+
+    protected static ?string $permission = 'manage_berita';
+
     protected static ?string $model = Berita::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-newspaper';
@@ -59,10 +63,4 @@ class BeritaResource extends Resource
         ];
     }
 
-    public static function canAccess(): bool
-    {
-        /** @var \App\Models\User|null $user */
-        $user = Auth::user();
-        return $user?->isAdmin() ?? false;
-    }
 }

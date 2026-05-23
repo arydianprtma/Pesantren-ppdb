@@ -5,6 +5,7 @@ namespace App\Filament\Widgets;
 use App\Models\ContactMessage;
 use App\Models\SpmbPendaftaran;
 use App\Models\Prestasi;
+use App\Models\Berita;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -23,6 +24,23 @@ class StatsOverview extends BaseWidget
 
     protected function getStats(): array
     {
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+
+        if ($user?->isEditor()) {
+            return [
+                Stat::make('Total Berita', Berita::count())
+                    ->description('Artikel berita diterbitkan')
+                    ->descriptionIcon('heroicon-m-newspaper')
+                    ->color('success'),
+
+                Stat::make('Total Prestasi', Prestasi::count())
+                    ->description('Prestasi tercatat')
+                    ->descriptionIcon('heroicon-m-trophy')
+                    ->color('warning'),
+            ];
+        }
+
         return [
             Stat::make('Pesan Masuk Baru', ContactMessage::where('is_read', false)->count())
                 ->description('Perlu dibaca segera')

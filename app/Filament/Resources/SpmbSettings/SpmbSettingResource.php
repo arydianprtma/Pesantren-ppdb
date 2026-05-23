@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SpmbSettings;
 
+use App\Filament\Resources\Concerns\AdminOnlyAccess;
 use App\Filament\Resources\SpmbSettings\Pages\ManageSpmbSettings;
 use App\Models\SpmbSetting;
 use Filament\Actions\BulkActionGroup;
@@ -21,6 +22,10 @@ use Filament\Tables\Table;
 
 class SpmbSettingResource extends Resource
 {
+    use AdminOnlyAccess;
+
+    protected static ?string $permission = 'manage_Spmb';
+
     protected static ?string $model = SpmbSetting::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-cog-6-tooth';

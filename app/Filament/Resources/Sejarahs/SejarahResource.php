@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Sejarahs;
 
+use App\Filament\Resources\Concerns\ContentManagerAccess;
 use App\Filament\Resources\Sejarahs\Pages\CreateSejarah;
 use App\Filament\Resources\Sejarahs\Pages\EditSejarah;
 use App\Filament\Resources\Sejarahs\Pages\ListSejarahs;
@@ -15,6 +16,7 @@ use Filament\Tables\Table;
 
 class SejarahResource extends Resource
 {
+    use ContentManagerAccess;
     protected static ?string $model = Sejarah::class;
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-clock';

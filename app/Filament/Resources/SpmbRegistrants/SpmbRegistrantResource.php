@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SpmbRegistrants;
 
+use App\Filament\Resources\Concerns\AdminOnlyAccess;
 use App\Filament\Resources\SpmbRegistrants\Pages\CreateSpmbRegistrant;
 use App\Filament\Resources\SpmbRegistrants\Pages\EditSpmbRegistrant;
 use App\Filament\Resources\SpmbRegistrants\Pages\ListSpmbRegistrants;
@@ -15,6 +16,10 @@ use Illuminate\Support\Facades\Auth;
 
 class SpmbRegistrantResource extends Resource
 {
+    use AdminOnlyAccess;
+
+    protected static ?string $permission = 'manage_Spmb';
+
     protected static ?string $model = SpmbPendaftaran::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-plus';
@@ -57,12 +62,6 @@ class SpmbRegistrantResource extends Resource
         ];
     }
 
-    public static function canAccess(): bool
-    {
-        /** @var \App\Models\User|null $user */
-        $user = Auth::user();
-        return $user?->isAdmin() ?? false;
-    }
 
     public static function getNavigationBadge(): ?string
     {

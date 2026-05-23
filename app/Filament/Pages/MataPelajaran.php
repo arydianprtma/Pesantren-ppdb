@@ -2,10 +2,12 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Resources\Concerns\AdminOnlyAccess;
 use Filament\Pages\Page;
 
 class MataPelajaran extends Page
 {
+    use AdminOnlyAccess;
     protected string $view = 'filament.pages.coming-soon';
 
     public static function getNavigationIcon(): ?string
@@ -33,8 +35,4 @@ class MataPelajaran extends Page
         return 3;
     }
 
-    public static function canAccess(): bool
-    {
-        return auth()->user()?->isAdmin() ?? false;
-    }
 }

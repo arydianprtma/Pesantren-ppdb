@@ -49,7 +49,7 @@ class PortalPanelProvider extends PanelProvider
                 'Master Data',
                 'Manajemen Web',
             ])
-            ->profile()
+            ->profile(\App\Filament\Pages\Auth\EditProfile::class, isSimple: false)
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 // AccountWidget removed for better design

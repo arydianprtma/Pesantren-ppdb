@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Fasilitases;
 
+use App\Filament\Resources\Concerns\ContentManagerAccess;
 use App\Filament\Resources\Fasilitases\Pages\CreateFasilitas;
 use App\Filament\Resources\Fasilitases\Pages\EditFasilitas;
 use App\Filament\Resources\Fasilitases\Pages\ListFasilitases;
@@ -16,6 +17,7 @@ use Filament\Tables\Table;
 
 class FasilitasResource extends Resource
 {
+    use ContentManagerAccess;
     protected static ?string $model = Fasilitas::class;
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-building-office';

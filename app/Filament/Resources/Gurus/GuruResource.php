@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Gurus;
 
+use App\Filament\Resources\Concerns\AdminOnlyAccess;
 use App\Filament\Resources\Gurus\Pages\CreateGuru;
 use App\Filament\Resources\Gurus\Pages\EditGuru;
 use App\Filament\Resources\Gurus\Pages\ListGurus;
@@ -15,6 +16,8 @@ use Filament\Tables\Table;
 
 class GuruResource extends Resource
 {
+    use AdminOnlyAccess;
+
     protected static ?string $model = Guru::class;
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';

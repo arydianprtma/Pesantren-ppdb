@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Ekstrakurikulers;
 
+use App\Filament\Resources\Concerns\ContentManagerAccess;
 use App\Filament\Resources\Ekstrakurikulers\Pages\CreateEkstrakurikuler;
 use App\Filament\Resources\Ekstrakurikulers\Pages\EditEkstrakurikuler;
 use App\Filament\Resources\Ekstrakurikulers\Pages\ListEkstrakurikulers;
@@ -15,6 +16,7 @@ use Filament\Tables\Table;
 
 class EkstrakurikulerResource extends Resource
 {
+    use ContentManagerAccess;
     protected static ?string $model = Ekstrakurikuler::class;
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-puzzle-piece';

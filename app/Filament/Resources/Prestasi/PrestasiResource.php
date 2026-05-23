@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Prestasi;
 
+use App\Filament\Resources\Concerns\ContentManagerAccess;
 use App\Filament\Resources\Prestasi\Pages\CreatePrestasi;
 use App\Filament\Resources\Prestasi\Pages\EditPrestasi;
 use App\Filament\Resources\Prestasi\Pages\ListPrestasi;
@@ -11,10 +12,13 @@ use App\Models\Prestasi;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Auth;
 
 class PrestasiResource extends Resource
 {
+    use ContentManagerAccess;
+
+    protected static ?string $permission = 'manage_prestasi';
+
     protected static ?string $model = Prestasi::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-trophy';
@@ -59,10 +63,4 @@ class PrestasiResource extends Resource
         ];
     }
 
-    public static function canAccess(): bool
-    {
-        /** @var \App\Models\User|null $user */
-        $user = Auth::user();
-        return $user?->isAdmin() ?? false;
-    }
 }
