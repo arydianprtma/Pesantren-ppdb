@@ -24,8 +24,8 @@ class EditProfile extends BaseEditProfile
                             ->imageResizeTargetWidth(300)
                             ->imageResizeTargetHeight(300)
                             ->directory('avatars')
-                            ->maxSize(2048) // 2MB
-                            ->helperText('Maksimal 2MB. Foto akan di-resize otomatis.')
+                            ->maxSize(4096) // 4MB
+                            ->helperText('Maksimal 4MB. Foto akan di-resize otomatis.')
                             ->columnSpanFull(),
                         
                         $this->getNameFormComponent(),

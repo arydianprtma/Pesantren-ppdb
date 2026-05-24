@@ -34,6 +34,11 @@ class KontakResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Manajemen Web';
 
+    public static function canCreate(): bool
+    {
+        return static::getModel()::count() === 0;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return KontakForm::configure($schema);

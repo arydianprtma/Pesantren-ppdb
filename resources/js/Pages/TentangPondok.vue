@@ -60,23 +60,15 @@
         <!-- Sejarah Preview -->
         <section class="py-16 bg-gray-50">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-end justify-between mb-10">
-                    <div>
-                        <div class="inline-block bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-semibold mb-2">Sejarah</div>
-                        <h2 class="text-3xl font-bold text-gray-900">Perjalanan Pondok Pesantren</h2>
-                    </div>
-                    <Link :href="route('sejarah')" class="hidden sm:inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-semibold text-sm transition-colors">
-                        Lihat Semua
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </Link>
+                <div class="mb-10 text-center">
+                    <div class="inline-block bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-semibold mb-2">Sejarah</div>
+                    <h2 class="text-3xl font-bold text-gray-900">Perjalanan Pondok Pesantren</h2>
                 </div>
 
                 <!-- Data dinamis sejarah -->
                 <div v-if="sejarahList && sejarahList.length > 0" class="space-y-6">
                     <div
-                        v-for="(item, index) in sejarahList.slice(0, 3)"
+                        v-for="(item, index) in sejarahList"
                         :key="item.id"
                         class="flex gap-5 items-start"
                     >
@@ -100,10 +92,6 @@
                             <p class="text-gray-600 text-sm leading-relaxed text-justify">{{ fase.konten }}</p>
                         </div>
                     </div>
-                </div>
-
-                <div class="mt-6 text-center sm:hidden">
-                    <Link :href="route('sejarah')" class="btn-primary inline-block">Lihat Selengkapnya</Link>
                 </div>
             </div>
         </section>
@@ -171,9 +159,20 @@
                     Lokasi
                 </div>
                 <h2 class="text-3xl font-bold text-gray-900 mb-4">Temukan Kami</h2>
-                <p class="text-gray-500 mb-8">Jl. Raya Padaherang, Kec. Padaherang, Kab. Pangandaran, Jawa Barat</p>
+                <p class="text-gray-500 mb-8">{{ $page.props.kontak?.alamat ?? 'Jl. Raya Padaherang, Kec. Padaherang, Kab. Pangandaran, Jawa Barat' }}</p>
                 <div class="card overflow-hidden p-0">
+                    <!-- Google Maps embed dari database atau default -->
+                    <div v-if="$page.props.kontak?.maps_link && $page.props.kontak.maps_link.includes('iframe')"
+                        v-html="$page.props.kontak.maps_link">
+                    </div>
                     <iframe
+                        v-else-if="$page.props.kontak?.maps_link"
+                        :src="$page.props.kontak.maps_link"
+                        width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade" class="w-full"
+                    ></iframe>
+                    <iframe
+                        v-else
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31742.28!2d108.5!3d-7.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMjcnMDAuMCJTIDEwOMKwMzAnMDAuMCJF!5e0!3m2!1sid!10sid!4v1"
                         width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade" class="w-full"
@@ -182,15 +181,26 @@
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
                     <div class="card text-center">
                         <div class="text-emerald-600 font-bold mb-1">Alamat</div>
-                        <p class="text-sm text-gray-600">Jl. Raya Padaherang, Pangandaran</p>
+                        <p class="text-sm text-gray-600">{{ $page.props.kontak?.alamat ?? 'Jl. Raya Padaherang, Pangandaran' }}</p>
                     </div>
                     <div class="card text-center">
                         <div class="text-emerald-600 font-bold mb-1">WhatsApp</div>
-                        <p class="text-sm text-gray-600">+62 812-3456-7890</p>
+                        <a v-if="$page.props.kontak?.whatsapp"
+                            :href="'https://wa.me/' + $page.props.kontak.whatsapp.replace(/[^0-9]/g, '')"
+                            target="_blank"
+                            class="text-sm text-emerald-600 hover:text-emerald-700 font-semibold">
+                            {{ $page.props.kontak.whatsapp }}
+                        </a>
+                        <p v-else class="text-sm text-gray-600">+62 812-3456-7890</p>
                     </div>
                     <div class="card text-center">
                         <div class="text-emerald-600 font-bold mb-1">Email</div>
-                        <p class="text-sm text-gray-600">info@riyadussalikin.sch.id</p>
+                        <a v-if="$page.props.kontak?.email"
+                            :href="'mailto:' + $page.props.kontak.email"
+                            class="text-sm text-emerald-600 hover:text-emerald-700 font-semibold">
+                            {{ $page.props.kontak.email }}
+                        </a>
+                        <p v-else class="text-sm text-gray-600">info@riyadussalikin.sch.id</p>
                     </div>
                 </div>
             </div>

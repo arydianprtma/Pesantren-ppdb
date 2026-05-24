@@ -34,7 +34,13 @@ class DataSiswaResource extends Resource
         return parent::getEloquentQuery()
             ->with(['pendaftaran.user'])
             ->whereHas('pendaftaran', function (Builder $query) {
-                $query->where('status', '!=', 'pending');
+                // Hanya tampilkan siswa yang SUDAH DITERIMA
+                // (menyelesaikan seluruh proses seleksi & administrasi)
+                $query->whereIn('status', [
+                    'diterima_ula',
+                    'diterima_wustho',
+                    'diterima_ulya',
+                ]);
             });
     }
 
@@ -62,14 +68,14 @@ class DataSiswaResource extends Resource
                     ->formatStateUsing(fn($state) => $state === 'L' ? 'Laki-laki' : 'Perempuan'),
 
                 TextColumn::make('pendaftaran.status')
-                    ->label('Status SPMB')
+                    ->label('Status')
                     ->badge()
                     ->color(fn($state) => match($state) {
                         'diterima_ula', 'diterima_wustho', 'diterima_ulya' => 'success',
-                        'ditolak' => 'danger',
-                        'wawancara' => 'warning',
+                        'ditolak'         => 'danger',
+                        'wawancara'       => 'warning',
                         'jadwal_tes', 'tes_berlangsung' => 'info',
-                        default => 'gray',
+                        default           => 'gray',
                     })
                     ->formatStateUsing(fn($state) => match($state) {
                         'pending'           => 'Menunggu Verifikasi',
@@ -102,23 +108,18 @@ class DataSiswaResource extends Resource
                     ->placeholder('-'),
             ])
             ->filters([
+                SelectFilter::make('pendaftaran.status')
+                    ->label('Jenjang Diterima')
+                    ->relationship('pendaftaran', 'status')
+                    ->options([
+                        'diterima_ula'    => 'Ula',
+                        'diterima_wustho' => 'Wustho',
+                        'diterima_ulya'   => 'Ulya',
+                    ]),
+
                 SelectFilter::make('jenis_kelamin')
                     ->label('Jenis Kelamin')
                     ->options(['L' => 'Laki-laki', 'P' => 'Perempuan']),
-
-                SelectFilter::make('pendaftaran.status')
-                    ->label('Status SPMB')
-                    ->relationship('pendaftaran', 'status')
-                    ->options([
-                        'pending'         => 'Menunggu Verifikasi',
-                        'jadwal_tes'      => 'Jadwal Tes',
-                        'tes_berlangsung' => 'Tes Berlangsung',
-                        'wawancara'       => 'Wawancara',
-                        'diterima_ula'    => 'Diterima - Ula',
-                        'diterima_wustho' => 'Diterima - Wustho',
-                        'diterima_ulya'   => 'Diterima - Ulya',
-                        'ditolak'         => 'Tidak Diterima',
-                    ]),
             ])
             ->recordUrl(fn($record) => static::getUrl('view', ['record' => $record]));
     }

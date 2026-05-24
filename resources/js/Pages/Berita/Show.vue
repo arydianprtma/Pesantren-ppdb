@@ -83,6 +83,7 @@
                             <img 
                                 :src="'/storage/' + berita.gambar" 
                                 :alt="berita.judul"
+                                loading="lazy"
                                 class="w-full h-auto object-cover max-h-[650px]"
                             />
                         </div>
@@ -132,7 +133,7 @@
                             <div class="space-y-6">
                                 <Link v-for="latest in relatedBeritas.slice(0, 4)" :key="latest.id" :href="route('berita.show', latest.slug)" class="flex gap-4 group">
                                     <div class="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 bg-gray-100 shadow-sm border border-gray-50">
-                                        <img v-if="latest.gambar" :src="'/storage/' + latest.gambar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                        <img v-if="latest.gambar" :src="'/storage/' + latest.gambar" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <h4 class="text-sm font-bold text-gray-900 group-hover:text-emerald-600 transition-colors line-clamp-2 leading-snug">

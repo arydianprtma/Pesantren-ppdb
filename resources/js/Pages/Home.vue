@@ -51,7 +51,7 @@
             <div class="container mx-auto px-4 pt-24 pb-12 relative z-10">
                 <div class="text-center">
                     <div class="mb-6">
-                        <img src="/Logo Riyad.png" alt="Logo Riyadussalikin" class="h-24 w-24 mx-auto mb-4" />
+                        <img :src="logoUrl" alt="Logo Riyadussalikin" class="h-24 w-24 mx-auto mb-4" />
                     </div>
                     <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight tracking-tight">
                         Pondok Pesantren <span class="text-gradient">Riyadussalikin</span>
@@ -154,7 +154,7 @@
                             </div>
                             <div class="text-center">
                                 <h3 class="text-xl font-bold text-gray-900 mb-3">Pengumuman</h3>
-                                <p class="text-gray-500 text-sm leading-relaxed px-4">Hasil kelulusan akan diumumkan secara real-time melalui dashboard pendaftaran.</p>
+                                <p class="text-gray-500 text-sm leading-relaxed px-4">Hasil kelulusan akan diumumkan secara real-time melalui dashboard pendaftaran dan whatsaap.</p>
                             </div>
                         </div>
                     </div>
@@ -242,6 +242,7 @@
                                 v-if="item.gambar"
                                 :src="'/storage/' + item.gambar" 
                                 :alt="item.judul"
+                                loading="lazy"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                             <div v-else class="w-full h-full flex items-center justify-center bg-emerald-50">
@@ -307,6 +308,7 @@
                                     v-if="berita.gambar"
                                     :src="'/storage/' + berita.gambar" 
                                     :alt="berita.judul"
+                                    loading="lazy"
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                 />
                                 <div v-else class="w-full h-full flex items-center justify-center">
@@ -343,6 +345,84 @@
                             </div>
                         </article>
                     </Link>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agenda Terdekat Section -->
+        <section v-if="agendas && agendas.length > 0" class="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+            <div class="absolute inset-0 bg-dot-pattern opacity-10"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+                    <div class="text-left">
+                        <span class="text-emerald-600 font-bold uppercase tracking-widest text-sm mb-3 block">Jadwal Penting</span>
+                        <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-2">Agenda Terdekat</h2>
+                        <div class="w-20 h-1.5 bg-emerald-500 rounded-full mt-3"></div>
+                    </div>
+                    <Link :href="route('jadwal')" class="text-emerald-600 font-bold hover:text-emerald-700 flex items-center gap-2 transition-all hover:translate-x-1 duration-300">
+                        Lihat Kalender Lengkap
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </Link>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div 
+                        v-for="agenda in agendas" 
+                        :key="agenda.id"
+                        class="bg-white rounded-[2rem] p-6 shadow-lg shadow-gray-200/50 border border-gray-100 hover:border-emerald-300 hover:shadow-xl transition-all duration-300 flex flex-col h-full transform hover:-translate-y-1"
+                    >
+                        <!-- Date Badge -->
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-2">
+                                <span 
+                                    class="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"
+                                    :class="{
+                                        'bg-emerald-50 text-emerald-700 border border-emerald-200': agenda.kategori === 'spmb',
+                                        'bg-blue-50 text-blue-700 border border-blue-200': agenda.kategori === 'akademik',
+                                        'bg-purple-50 text-purple-700 border border-purple-200': agenda.kategori === 'umum'
+                                    }"
+                                >
+                                    {{ agenda.kategori === 'spmb' ? 'SPMB' : agenda.kategori === 'akademik' ? 'Akademik' : 'Kegiatan' }}
+                                </span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-gray-400 font-semibold">{{ formatTime(agenda.jam_mulai) }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Date Block -->
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="bg-emerald-50 rounded-2xl w-14 h-14 flex flex-col items-center justify-center text-emerald-700 font-bold p-2 flex-shrink-0">
+                                <span class="text-xl leading-none font-black">{{ getDayDate(agenda.tgl_mulai) }}</span>
+                                <span class="text-[10px] uppercase font-semibold tracking-wider mt-0.5">{{ getMonthName(agenda.tgl_mulai) }}</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-sm font-semibold text-gray-800 leading-tight">
+                                    {{ getDayName(agenda.tgl_mulai) }}
+                                </span>
+                                <span v-if="agenda.tgl_selesai && getDayDate(agenda.tgl_selesai) !== getDayDate(agenda.tgl_mulai)" class="text-xs text-gray-500">
+                                    s/d {{ formatDateFull(agenda.tgl_selesai) }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Title & Desc -->
+                        <h3 class="text-lg font-bold text-gray-900 mb-2 leading-snug line-clamp-2">{{ agenda.judul }}</h3>
+                        <p class="text-gray-500 text-sm line-clamp-3 mb-6 leading-relaxed flex-grow">{{ agenda.deskripsi }}</p>
+
+                        <!-- Location & Details -->
+                        <div class="border-t border-gray-100 pt-4 mt-auto">
+                            <div class="flex items-center gap-2 text-gray-600 text-xs">
+                                <svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                <span class="truncate font-medium">{{ agenda.lokasi || 'Pondok Pesantren' }}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -399,6 +479,7 @@
                         >
                             <div class="aspect-[4/3] rounded-3xl overflow-hidden mb-8 bg-emerald-50 relative">
                                 <img v-if="item.gambar" :src="'/storage/' + item.gambar" :alt="item.nama" 
+                                    loading="lazy"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                                 <div v-else class="w-full h-full flex items-center justify-center">
                                     <svg class="w-20 h-20 text-emerald-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -497,6 +578,7 @@
 import MainLayout from '../Layouts/MainLayout.vue';
 import { Link, Head } from '@inertiajs/vue3';
 import { ref, onMounted, onUnmounted, computed } from 'vue';
+import logoUrl from '../../assets/logo/logo_pondok.png';
 
 const activeFaq = ref(null);
 const currentTime = ref(new Date());
@@ -522,6 +604,10 @@ const props = defineProps({
         default: null
     },
     ekstrakurikuler: {
+        type: Array,
+        default: () => []
+    },
+    agendas: {
         type: Array,
         default: () => []
     },
@@ -686,13 +772,67 @@ const testimonials = [
     }
 ];
 
+const parseDateLocal = (dateString) => {
+    if (!dateString) return null;
+    if (typeof dateString === 'string') {
+        const match = dateString.match(/^(\d{4})-(\d{2})-(\d{2})/);
+        if (match) {
+            const year = parseInt(match[1], 10);
+            const month = parseInt(match[2], 10) - 1; // 0-indexed month
+            const day = parseInt(match[3], 10);
+            return new Date(year, month, day);
+        }
+    }
+    const d = new Date(dateString);
+    if (isNaN(d.getTime())) return null;
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+};
+
 const formatDate = (dateString) => {
-    if (!dateString) return '';
-    return new Date(dateString).toLocaleDateString('id-ID', {
+    const date = parseDateLocal(dateString);
+    if (!date) return '';
+    return date.toLocaleDateString('id-ID', {
         day: 'numeric',
         month: 'long',
         year: 'numeric'
     });
+};
+
+const getDayDate = (dateString) => {
+    const date = parseDateLocal(dateString);
+    if (!date) return '';
+    return date.getDate();
+};
+
+const getMonthName = (dateString) => {
+    const date = parseDateLocal(dateString);
+    if (!date) return '';
+    return date.toLocaleDateString('id-ID', { month: 'short' });
+};
+
+const getDayName = (dateString) => {
+    const date = parseDateLocal(dateString);
+    if (!date) return '';
+    return date.toLocaleDateString('id-ID', { weekday: 'long' });
+};
+
+const formatDateFull = (dateString) => {
+    const date = parseDateLocal(dateString);
+    if (!date) return '';
+    return date.toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+};
+
+const formatTime = (timeString) => {
+    if (!timeString) return 'Selesai';
+    const parts = timeString.split(':');
+    if (parts.length >= 2) {
+        return `${parts[0]}:${parts[1]} WIB`;
+    }
+    return timeString;
 };
 
 const stripHtml = (html) => {

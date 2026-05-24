@@ -19,6 +19,7 @@ class GuruTable
             ->columns([
                 ImageColumn::make('foto')
                     ->label('Foto')
+                    ->disk('public')
                     ->circular(),
 
                 TextColumn::make('nama')
@@ -50,6 +51,20 @@ class GuruTable
                 DeleteAction::make(),
             ])
             ->toolbarActions([
+                \Filament\Actions\Action::make('export_excel')
+                    ->label('Export Excel')
+                    ->icon('heroicon-o-table-cells')
+                    ->color('success')
+                    ->url(fn () => route('export.guru.excel'))
+                    ->openUrlInNewTab(),
+
+                \Filament\Actions\Action::make('export_pdf')
+                    ->label('Export PDF')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->color('danger')
+                    ->url(fn () => route('export.guru.pdf'))
+                    ->openUrlInNewTab(),
+
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),

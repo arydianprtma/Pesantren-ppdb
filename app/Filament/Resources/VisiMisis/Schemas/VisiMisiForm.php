@@ -47,8 +47,8 @@ class VisiMisiForm
                                     ->image()
                                     ->imageResizeTargetWidth(800)
                                     ->directory('pengasuh')
-                                    ->maxSize(3072)
-                                    ->helperText('Format: JPG, PNG. Maksimal 3MB. Gambar akan dioptimalkan otomatis.'),
+                                    ->maxSize(4096)
+                                    ->helperText('Format: JPG, PNG. Maksimal 4MB. Gambar akan dioptimalkan otomatis.'),
                             ]),
                         Textarea::make('kata_sambutan')
                             ->label('Kata Sambutan / Biografi Singkat')

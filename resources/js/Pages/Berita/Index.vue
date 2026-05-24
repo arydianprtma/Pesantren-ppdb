@@ -46,6 +46,7 @@
                                     v-if="berita.gambar"
                                     :src="'/storage/' + berita.gambar" 
                                     :alt="berita.judul"
+                                    loading="lazy"
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                 />
                                 <div v-else class="w-full h-full flex items-center justify-center">

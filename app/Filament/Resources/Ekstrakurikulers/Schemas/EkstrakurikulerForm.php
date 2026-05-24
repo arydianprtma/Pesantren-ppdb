@@ -27,8 +27,8 @@ class EkstrakurikulerForm
                         ->label('Foto Kegiatan')
                         ->image()
                         ->directory('ekstrakurikuler')
-                        ->maxSize(2048)
-                        ->helperText('Format: JPG, PNG, WEBP (Maksimal 2MB).'),
+                        ->maxSize(4096)
+                        ->helperText('Format: JPG, PNG, WEBP (Maksimal 4MB).'),
 
                     Textarea::make('deskripsi')
                         ->label('Deskripsi Singkat')

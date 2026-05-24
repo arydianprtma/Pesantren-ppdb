@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Kontak;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -34,6 +36,9 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'kontak' => fn () => Cache::remember('global_kontak', 60 * 60 * 24, function () {
+                return Kontak::first();
+            }),
         ];
     }
 }

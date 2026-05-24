@@ -33,6 +33,14 @@ class HomeController extends Controller
                 ->get();
         });
 
+        $agendas = Cache::remember('home_agenda', 60 * 60, function () {
+            return \App\Models\Agenda::active()
+                ->upcoming()
+                ->orderBy('tgl_mulai', 'asc')
+                ->take(4)
+                ->get();
+        });
+
         $spmbSetting = \App\Models\SpmbSetting::where('is_active', true)->first();
         $webSetting = WebSetting::first();
         
@@ -60,6 +68,7 @@ class HomeController extends Controller
             'spmbSetting' => $spmbSetting,
             'stats' => $stats,
             'ekstrakurikuler' => $ekstrakurikuler,
+            'agendas' => $agendas,
         ]);
     }
 
@@ -104,17 +113,6 @@ class HomeController extends Controller
         ]);
     }
 
-    public function sejarah(): Response
-    {
-        $sejarahList = Cache::remember('sejarah', 60 * 60, function () {
-            return Sejarah::where('is_active', true)->orderBy('urutan')->get();
-        });
-
-        return Inertia::render('Sejarah', [
-            'sejarahList' => $sejarahList,
-        ]);
-    }
-
     public function visiMisi(): Response
     {
         $visiMisi = Cache::remember('home_visi_misi', 60 * 60, function () {
@@ -123,6 +121,19 @@ class HomeController extends Controller
 
         return Inertia::render('VisiMisi', [
             'visiMisi' => $visiMisi,
+        ]);
+    }
+
+    public function jadwal(): Response
+    {
+        $agendas = Cache::remember('schedules_list', 60 * 60, function () {
+            return \App\Models\Agenda::active()
+                ->orderBy('tgl_mulai', 'asc')
+                ->get();
+        });
+
+        return Inertia::render('Jadwal', [
+            'agendas' => $agendas,
         ]);
     }
 }

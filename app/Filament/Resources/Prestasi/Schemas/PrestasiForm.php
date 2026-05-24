@@ -48,9 +48,9 @@ class PrestasiForm
                     ->disk('public') // Force public disk
                     ->visibility('public')
                     ->directory('prestasi')
-                    ->maxSize(5120) // 5MB
+                    ->maxSize(4096) // 4MB
                     ->label('Foto Dokumentasi')
-                    ->helperText('Maksimal ukuran file: 5MB. Gambar akan dioptimalkan otomatis.')
+                    ->helperText('Maksimal ukuran file: 4MB. Gambar akan dioptimalkan otomatis.')
                     ->columnSpanFull(),
                 Textarea::make('deskripsi')
                     ->columnSpanFull()

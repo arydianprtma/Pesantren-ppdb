@@ -68,8 +68,8 @@ class BeritaForm
                     ->image()
                     ->imageResizeTargetWidth(1200)
                     ->directory('berita-images')
-                    ->maxSize(5120) // Kurangi ke 5MB agar tidak membebani RAM saat proses
-                    ->helperText('Maksimal ukuran file: 5MB. Gambar akan dioptimalkan otomatis.'),
+                    ->maxSize(4096) // 4MB
+                    ->helperText('Maksimal ukuran file: 4MB. Gambar akan dioptimalkan otomatis.'),
                 Select::make('kategori')
                     ->options([
                         'pengumuman' => 'Pengumuman',

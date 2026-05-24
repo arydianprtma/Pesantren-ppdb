@@ -44,7 +44,7 @@
                         >
                             <!-- Cover Image -->
                             <div class="h-48 w-full bg-gray-200 relative overflow-hidden">
-                                <img v-if="fasilitas.gambar" :src="`/storage/${fasilitas.gambar}`" :alt="fasilitas.nama" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <img v-if="fasilitas.gambar" :src="`/storage/${fasilitas.gambar}`" :alt="fasilitas.nama" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                 <div v-else class="w-full h-full bg-emerald-50 flex items-center justify-center">
                                     <svg class="w-16 h-16 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                                         <path stroke-linecap="round" stroke-linejoin="round" :d="getIkonPath(fasilitas.ikon)" />
@@ -101,7 +101,7 @@
                 </p>
                 
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl group cursor-pointer max-w-4xl mx-auto border border-gray-800 bg-gray-800 aspect-video">
-                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Video Thumbnail" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Video Thumbnail" loading="lazy" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
                     <div class="absolute inset-0 flex items-center justify-center">
                         <div class="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-emerald-900/50 group-hover:scale-110 group-hover:bg-emerald-500 transition-all duration-300">
                             <svg class="w-10 h-10 ml-1" fill="currentColor" viewBox="0 0 24 24">

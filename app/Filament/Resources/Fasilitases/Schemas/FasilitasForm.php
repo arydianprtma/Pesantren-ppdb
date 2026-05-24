@@ -60,9 +60,9 @@ class FasilitasForm
                         ->image()
                         ->imageResizeTargetWidth(1200)
                         ->directory('fasilitas')
-                        ->maxSize(3072) // 3MB
+                        ->maxSize(4096) // 4MB
                         ->columnSpanFull()
-                        ->helperText('Format: JPG, PNG, WEBP (Maksimal 3MB). Gambar akan dioptimalkan otomatis.'),
+                        ->helperText('Format: JPG, PNG, WEBP (Maksimal 4MB). Gambar akan dioptimalkan otomatis.'),
 
                     Textarea::make('deskripsi')
                         ->label('Deskripsi')

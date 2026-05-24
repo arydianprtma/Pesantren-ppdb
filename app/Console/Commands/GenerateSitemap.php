@@ -38,10 +38,10 @@ class GenerateSitemap extends Command
         $sitemap->add(Url::create('/berita')->setPriority(0.8)->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY));
         $sitemap->add(Url::create('/prestasi')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY));
         $sitemap->add(Url::create('/fasilitas')->setPriority(0.6)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY));
-        $sitemap->add(Url::create('/sejarah')->setPriority(0.5)->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));
         $sitemap->add(Url::create('/visi-misi')->setPriority(0.5)->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));
         $sitemap->add(Url::create('/tentang-pondok')->setPriority(0.5)->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));
-        $sitemap->add(Url::create('/contact')->setPriority(0.4)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY));
+        $sitemap->add(Url::create('/kontak')->setPriority(0.4)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY));
+        $sitemap->add(Url::create('/jadwal')->setPriority(0.6)->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY));
 
         // 2. Halaman Berita Dinamis
         Berita::where('is_published', true)->get()->each(function (Berita $berita) use ($sitemap) {

@@ -43,9 +43,9 @@ class UserResource extends Resource
                             ->imageResizeTargetWidth(300)
                             ->imageResizeTargetHeight(300)
                             ->directory('avatars')
-                            ->maxSize(2048) // 2MB untuk avatar sudah sangat cukup
+                            ->maxSize(4096) // 4MB
                             ->columnSpanFull()
-                            ->helperText('Maksimal 2MB. Foto akan di-resize otomatis.'),
+                            ->helperText('Maksimal 4MB. Foto akan di-resize otomatis.'),
                         \Filament\Forms\Components\TextInput::make('name')
                             ->label('Nama Lengkap')
                             ->required()

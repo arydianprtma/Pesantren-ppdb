@@ -71,6 +71,7 @@
                                         v-if="visiMisi.foto_pengasuh" 
                                         :src="'/storage/' + visiMisi.foto_pengasuh" 
                                         :alt="visiMisi.nama_pengasuh"
+                                        loading="lazy"
                                         class="w-full h-full object-cover transform-gpu backface-hidden"
                                     />
                                     <div v-else class="w-full h-full bg-emerald-100 flex items-center justify-center">

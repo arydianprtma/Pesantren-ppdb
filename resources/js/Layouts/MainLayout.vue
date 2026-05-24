@@ -6,7 +6,7 @@
                 <div class="flex justify-between items-center h-20">
                     <!-- Logo & Name -->
                     <Link :href="route('home')" class="flex items-center space-x-3 flex-shrink-0">
-                        <img src="/Logo Riyad.png" alt="Logo Riyadussalikin" class="h-12 w-12" />
+                        <img :src="logoUrl" alt="Logo Riyadussalikin" class="h-12 w-12" />
                         <!-- Mobile: Nama Pondok -->
                         <div class="block lg:hidden">
                             <div class="text-emerald-700 font-bold text-base leading-tight">Riyadussalikin</div>
@@ -32,7 +32,7 @@
                             <button 
                                 @mouseenter="isTentangOpen = true"
                                 class="navbar-link flex items-center gap-1 focus:outline-none"
-                                :class="{'text-emerald-600 font-semibold': isTentangOpen || isActive('visi-misi') || isActive('tentang-pondok') || isActive('fasilitas') || isActive('sejarah')}"
+                                 :class="{'text-emerald-600 font-semibold': isTentangOpen || isActive('visi-misi') || isActive('tentang-pondok') || isActive('fasilitas')}"
                             >
                                 Tentang Riyad
                                 <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': isTentangOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,13 +52,6 @@
                                     :class="{'bg-emerald-50 text-emerald-700 font-medium': route().current('tentang-pondok')}"
                                 >
                                     Tentang Pondok Pesantren
-                                </Link>
-                                <Link 
-                                    :href="route('sejarah')" 
-                                    class="block px-4 py-3 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
-                                    :class="{'bg-emerald-50 text-emerald-700 font-medium': route().current('sejarah')}"
-                                >
-                                    Sejarah Pondok
                                 </Link>
                                 <Link 
                                     :href="route('fasilitas')" 
@@ -83,6 +76,12 @@
                             :class="isActive('prestasi') ? 'navbar-link-active' : 'navbar-link'"
                         >
                             Prestasi
+                        </Link>
+                        <Link 
+                            :href="route('jadwal')" 
+                            :class="isActive('jadwal') ? 'navbar-link-active' : 'navbar-link'"
+                        >
+                            Jadwal
                         </Link>
                         <Link 
                             :href="route('berita')" 
@@ -161,9 +160,6 @@
                             <Link :href="route('tentang-pondok')" class="block text-gray-700 hover:text-emerald-600 font-medium" :class="{'text-emerald-600': route().current('tentang-pondok')}">
                                 Tentang Pondok
                             </Link>
-                            <Link :href="route('sejarah')" class="block text-gray-700 hover:text-emerald-600 font-medium" :class="{'text-emerald-600': route().current('sejarah')}">
-                                Sejarah Pondok
-                            </Link>
                             <Link :href="route('fasilitas')" class="block text-gray-700 hover:text-emerald-600 font-medium" :class="{'text-emerald-600': route().current('fasilitas')}">
                                 Fasilitas
                             </Link>
@@ -184,6 +180,9 @@
                         </div>
                         <Link :href="route('prestasi')" :class="isActive('prestasi') ? 'navbar-link-active' : 'navbar-link'">
                             Prestasi
+                        </Link>
+                        <Link :href="route('jadwal')" :class="isActive('jadwal') ? 'navbar-link-active' : 'navbar-link'">
+                            Jadwal
                         </Link>
                         <Link :href="route('berita')" :class="isActive('berita') ? 'navbar-link-active' : 'navbar-link'">
                             Berita
@@ -227,6 +226,7 @@
                             <Link :href="route('sekolah.sma')" class="text-emerald-100 hover:text-white transition-colors pl-2">SMA Ksatria Nusantara</Link>
                             <Link :href="route('sekolah.smp')" class="text-emerald-100 hover:text-white transition-colors pl-2">SMP Dharma Ksatria</Link>
                             <Link :href="route('prestasi')" class="text-emerald-100 hover:text-white transition-colors">Prestasi</Link>
+                            <Link :href="route('jadwal')" class="text-emerald-100 hover:text-white transition-colors">Jadwal & Agenda</Link>
                             <Link :href="route('berita')" class="text-emerald-100 hover:text-white transition-colors">Berita</Link>
                             <Link :href="route('kontak')" class="text-emerald-100 hover:text-white transition-colors">Kontak</Link>
                         </div>
@@ -260,6 +260,7 @@
 <script setup>
 import { ref } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
+import logoUrl from '../../assets/logo/logo_pondok.png';
 
 const mobileMenuOpen = ref(false);
 const isDropdownOpen = ref(false);

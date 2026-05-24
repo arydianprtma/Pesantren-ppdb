@@ -15,8 +15,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Route::get('/test-route', function() { return "Laravel is working"; });
 Route::get('/tentang-pondok', [HomeController::class, 'tentangPondok'])->name('tentang-pondok');
 Route::get('/fasilitas', [HomeController::class, 'fasilitas'])->name('fasilitas');
-Route::get('/sejarah', [HomeController::class, 'sejarah'])->name('sejarah');
 Route::get('/visi-misi', [HomeController::class, 'visiMisi'])->name('visi-misi');
+Route::get('/jadwal', [HomeController::class, 'jadwal'])->name('jadwal');
 
 // Berita Routes
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
@@ -59,6 +59,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Export Routes (Admin Only)
+Route::middleware('auth')->prefix('export')->name('export.')->group(function () {
+    Route::get('/pendaftar/excel', [\App\Http\Controllers\ExportController::class, 'pendaftarExcel'])->name('pendaftar.excel');
+    Route::get('/pendaftar/pdf',   [\App\Http\Controllers\ExportController::class, 'pendaftarPdf'])->name('pendaftar.pdf');
+    Route::get('/guru/excel',      [\App\Http\Controllers\ExportController::class, 'guruExcel'])->name('guru.excel');
+    Route::get('/guru/pdf',        [\App\Http\Controllers\ExportController::class, 'guruPdf'])->name('guru.pdf');
+    Route::get('/siswa/excel',     [\App\Http\Controllers\ExportController::class, 'siswaExcel'])->name('siswa.excel');
+    Route::get('/siswa/pdf',       [\App\Http\Controllers\ExportController::class, 'siswaPdf'])->name('siswa.pdf');
 });
 
 require __DIR__.'/auth.php';
