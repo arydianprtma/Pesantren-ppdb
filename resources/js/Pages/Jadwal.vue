@@ -21,7 +21,7 @@
                 <div class="main-grid gap-8 items-start">
                     
                     <!-- Left/Middle Column: Calendar & Filters (8 cols) -->
-                    <div class="col-span-8 space-y-6">
+                    <div class="main-content-col space-y-6">
                         <!-- Category Filters -->
                         <div class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 flex flex-wrap gap-2 justify-center sm:justify-start">
                             <button 
@@ -154,7 +154,7 @@
                     </div>
 
                     <!-- Right Column: Agenda Details & Timeline (4 cols) -->
-                    <div class="col-span-4 space-y-6">
+                    <div class="sidebar-col space-y-6">
                         <!-- Selected Date Details Panel -->
                         <div class="bg-white rounded-[2rem] p-6 shadow-lg shadow-gray-200/50 border border-gray-100 transition-all duration-300">
                             <h3 class="text-lg font-black text-gray-900 border-b border-gray-100 pb-4 mb-4 flex items-center justify-between">
@@ -592,11 +592,11 @@ watch(selectedCategory, () => {
     background: linear-gradient(to right, #065f46, #047857);
 }
 
-.col-span-8 {
+.main-content-col {
     width: 100%;
 }
 
-.col-span-4 {
+.sidebar-col {
     width: 100%;
 }
 
@@ -605,11 +605,11 @@ watch(selectedCategory, () => {
         grid-template-columns: repeat(12, minmax(0, 1fr));
     }
     
-    .col-span-8 {
+    .main-content-col {
         grid-column: span 8 / span 8;
     }
     
-    .col-span-4 {
+    .sidebar-col {
         grid-column: span 4 / span 4;
     }
 }
