@@ -140,7 +140,7 @@
 <table>
     <thead>
         <tr>
-            <th>#</th>
+            <th>No</th>
             <th>No. Registrasi</th>
             <th>Nama Calon Santri</th>
             <th>L/P</th>

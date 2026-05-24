@@ -110,7 +110,7 @@
 <table>
     <thead>
         <tr>
-            <th>#</th>
+            <th>No</th>
             <th>Nama Lengkap</th>
             <th>NIP / NIK</th>
             <th>Jabatan</th>

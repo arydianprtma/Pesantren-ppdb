@@ -109,7 +109,7 @@
 <table>
     <thead>
         <tr>
-            <th style="width: 5%;">#</th>
+            <th style="width: 5%;">No</th>
             <th style="width: 35%;">Nama Lengkap</th>
             <th style="width: 30%;">Email</th>
             <th style="width: 15%;">No. WhatsApp</th>
