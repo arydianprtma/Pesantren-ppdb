@@ -36,9 +36,13 @@ class GuruForm
                         ->label('Foto Profil')
                         ->image()
                         ->avatar()
+                        ->imageEditor()
+                        ->imageEditorAspectRatios([
+                            '1:1',
+                        ])
                         ->directory('guru')
                         ->maxSize(4096)
-                        ->helperText('Format: JPG, PNG, WEBP (Maksimal 4MB).'),
+                        ->helperText('Format: JPG, PNG, WEBP (Maksimal 4MB). Gunakan editor gambar untuk memotong pas foto profil (rasio 1:1).'),
 
                     Toggle::make('is_active')
                         ->label('Aktif')

@@ -26,9 +26,15 @@ class EkstrakurikulerForm
                     FileUpload::make('gambar')
                         ->label('Foto Kegiatan')
                         ->image()
+                        ->imageEditor()
+                        ->imageEditorAspectRatios([
+                            '16:9',
+                            '4:3',
+                            '1:1',
+                        ])
                         ->directory('ekstrakurikuler')
                         ->maxSize(4096)
-                        ->helperText('Format: JPG, PNG, WEBP (Maksimal 4MB).'),
+                        ->helperText('Format: JPG, PNG, WEBP (Maksimal 4MB). Gunakan editor gambar untuk memotong dan menyesuaikan posisi gambar sebelum mengunggah.'),
 
                     Textarea::make('deskripsi')
                         ->label('Deskripsi Singkat')

@@ -58,11 +58,17 @@ class FasilitasForm
                     FileUpload::make('gambar')
                         ->label('Foto Fasilitas')
                         ->image()
+                        ->imageEditor()
+                        ->imageEditorAspectRatios([
+                            '16:9',
+                            '4:3',
+                            '1:1',
+                        ])
                         ->imageResizeTargetWidth(1200)
                         ->directory('fasilitas')
                         ->maxSize(4096) // 4MB
                         ->columnSpanFull()
-                        ->helperText('Format: JPG, PNG, WEBP (Maksimal 4MB). Gambar akan dioptimalkan otomatis.'),
+                        ->helperText('Format: JPG, PNG, WEBP (Maksimal 4MB). Gunakan editor gambar untuk memotong dan menyesuaikan posisi gambar sebelum mengunggah.'),
 
                     Textarea::make('deskripsi')
                         ->label('Deskripsi')

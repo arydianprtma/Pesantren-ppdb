@@ -40,12 +40,16 @@ class UserResource extends Resource
                             ->label('Foto Profil')
                             ->image()
                             ->avatar()
+                            ->imageEditor()
+                            ->imageEditorAspectRatios([
+                                '1:1',
+                            ])
                             ->imageResizeTargetWidth(300)
                             ->imageResizeTargetHeight(300)
                             ->directory('avatars')
                             ->maxSize(4096) // 4MB
                             ->columnSpanFull()
-                            ->helperText('Maksimal 4MB. Foto akan di-resize otomatis.'),
+                            ->helperText('Maksimal 4MB. Gunakan editor gambar untuk memotong pas foto profil (rasio 1:1).'),
                         \Filament\Forms\Components\TextInput::make('name')
                             ->label('Nama Lengkap')
                             ->required()

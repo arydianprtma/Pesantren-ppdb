@@ -45,10 +45,16 @@ class VisiMisiForm
                                 FileUpload::make('foto_pengasuh')
                                     ->label('Foto Pengasuh')
                                     ->image()
+                                    ->imageEditor()
+                                    ->imageEditorAspectRatios([
+                                        '3:4',
+                                        '2:3',
+                                        '1:1',
+                                    ])
                                     ->imageResizeTargetWidth(800)
                                     ->directory('pengasuh')
                                     ->maxSize(4096)
-                                    ->helperText('Format: JPG, PNG. Maksimal 4MB. Gambar akan dioptimalkan otomatis.'),
+                                    ->helperText('Format: JPG, PNG. Maksimal 4MB. Gunakan editor gambar untuk memotong foto (rasio rekomendasi: 3:4).'),
                             ]),
                         Textarea::make('kata_sambutan')
                             ->label('Kata Sambutan / Biografi Singkat')

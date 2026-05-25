@@ -66,10 +66,16 @@ class BeritaForm
                     ->columnSpanFull(),
                 FileUpload::make('gambar')
                     ->image()
+                    ->imageEditor()
+                    ->imageEditorAspectRatios([
+                        '16:9',
+                        '4:3',
+                        '1:1',
+                    ])
                     ->imageResizeTargetWidth(1200)
                     ->directory('berita-images')
                     ->maxSize(4096) // 4MB
-                    ->helperText('Maksimal ukuran file: 4MB. Gambar akan dioptimalkan otomatis.'),
+                    ->helperText('Maksimal ukuran file: 4MB. Gunakan editor gambar untuk memotong dan menyesuaikan posisi gambar sebelum mengunggah.'),
                 Select::make('kategori')
                     ->options([
                         'pengumuman' => 'Pengumuman',

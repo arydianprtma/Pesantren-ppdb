@@ -44,13 +44,19 @@ class PrestasiForm
                     ->label('Tahun'),
                 \Filament\Forms\Components\FileUpload::make('gambar')
                     ->image()
+                    ->imageEditor()
+                    ->imageEditorAspectRatios([
+                        '16:9',
+                        '4:3',
+                        '1:1',
+                    ])
                     ->imageResizeTargetWidth(1200)
                     ->disk('public') // Force public disk
                     ->visibility('public')
                     ->directory('prestasi')
                     ->maxSize(4096) // 4MB
                     ->label('Foto Dokumentasi')
-                    ->helperText('Maksimal ukuran file: 4MB. Gambar akan dioptimalkan otomatis.')
+                    ->helperText('Maksimal ukuran file: 4MB. Gunakan editor gambar untuk memotong dan menyesuaikan posisi gambar sebelum mengunggah.')
                     ->columnSpanFull(),
                 Textarea::make('deskripsi')
                     ->columnSpanFull()
