@@ -198,4 +198,26 @@ defineProps({
 img {
     image-rendering: -webkit-optimize-contrast;
 }
+
+/* Fix: Tailwind reset hides list markers inside v-html content */
+.prose :deep(ol) {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.prose :deep(ul) {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.prose :deep(ol li),
+.prose :deep(ul li) {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
+}
 </style>
