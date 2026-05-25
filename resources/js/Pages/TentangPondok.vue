@@ -207,27 +207,13 @@
         </section>
 
         <!-- CTA Section -->
-        <section class="py-16 bg-emerald-700">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Bergabunglah Bersama Kami</h2>
-                <p class="text-xl text-emerald-100 mb-8 max-w-2xl mx-auto">
-                    Daftarkan putra-putri Anda untuk menjadi bagian dari keluarga besar Pondok Pesantren Riyadussalikin
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#" class="bg-white text-emerald-600 hover:bg-gray-50 font-bold py-4 px-8 rounded-lg inline-block transition-all duration-300 shadow-lg hover:shadow-xl">
-                        SPMB
-                    </a>
-                    <Link :href="route('kontak')" class="bg-emerald-800 text-white hover:bg-emerald-900 font-bold py-4 px-8 rounded-lg inline-block transition-all duration-300">
-                        Hubungi Kami
-                    </Link>
-                </div>
-            </div>
-        </section>
+        <CallToAction />
     </MainLayout>
 </template>
 
 <script setup>
 import MainLayout from '../Layouts/MainLayout.vue';
+import CallToAction from '../Components/CallToAction.vue';
 import { Link, Head } from '@inertiajs/vue3';
 
 defineProps({

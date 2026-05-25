@@ -522,24 +522,7 @@
         </section>
 
         <!-- CTA Section -->
-        <section class="py-16 bg-emerald-700 relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10">
-                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white"></path>
-                </svg>
-            </div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                    Bergabunglah Bersama Kami
-                </h2>
-                <p class="text-xl text-emerald-100 mb-8 max-w-2xl mx-auto">
-                    Daftarkan putra-putri Anda untuk menjadi bagian dari keluarga besar Pondok Pesantren Riyadussalikin
-                </p>
-                <a :href="spmbUrl" class="bg-white text-emerald-600 hover:bg-gray-50 font-bold py-4 px-8 rounded-lg inline-block transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    Daftar Sekarang
-                </a>
-            </div>
-        </section>
+        <CallToAction />
 
         <!-- FAQ Section -->
         <section class="py-20 bg-gray-50">
@@ -576,6 +559,7 @@
 
 <script setup>
 import MainLayout from '../Layouts/MainLayout.vue';
+import CallToAction from '../Components/CallToAction.vue';
 import { Link, Head } from '@inertiajs/vue3';
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import logoUrl from '../../assets/logo/logo_pondok.png';

@@ -27,14 +27,14 @@
                         >
                             Beranda
                         </Link>
-                        <!-- Tentang Riyad Dropdown -->
+                        <!-- Tentang Kami Dropdown -->
                         <div class="relative group">
                             <button 
                                 @mouseenter="isTentangOpen = true"
                                 class="navbar-link flex items-center gap-1 focus:outline-none"
                                  :class="{'text-emerald-600 font-semibold': isTentangOpen || isActive('visi-misi') || isActive('tentang-pondok') || isActive('fasilitas')}"
                             >
-                                Tentang Riyad
+                                Tentang Kami
                                 <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': isTentangOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                 </svg>
@@ -154,9 +154,9 @@
                         <Link :href="route('home')" :class="isActive('home') ? 'navbar-link-active' : 'navbar-link'">
                             Beranda
                         </Link>
-                        <!-- Mobile Tentang Riyad -->
+                        <!-- Mobile Tentang Kami -->
                         <div class="border-l-2 border-emerald-100 pl-4 space-y-2 py-2">
-                            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Tentang Riyad</div>
+                            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Tentang Kami</div>
                             <Link :href="route('tentang-pondok')" class="block text-gray-700 hover:text-emerald-600 font-medium" :class="{'text-emerald-600': route().current('tentang-pondok')}">
                                 Tentang Pondok
                             </Link>
