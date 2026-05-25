@@ -32,3 +32,108 @@
         background-size: 24px 24px;
     }
 }
+
+/* Custom rich text / prose styles to support all Filament editor features */
+.prose {
+    max-width: none !important;
+}
+
+/* Subscript & Superscript styling (Tailwind reset strips this by default) */
+.prose sub {
+    font-size: 75% !important;
+    line-height: 0 !important;
+    position: relative !important;
+    vertical-align: baseline !important;
+    bottom: -0.25em !important;
+}
+
+.prose sup {
+    font-size: 75% !important;
+    line-height: 0 !important;
+    position: relative !important;
+    vertical-align: baseline !important;
+    top: -0.5em !important;
+}
+
+/* Strikethrough & Underline */
+.prose s, 
+.prose del, 
+.prose strike {
+    text-decoration: line-through !important;
+}
+
+.prose u {
+    text-decoration: underline !important;
+}
+
+/* Text Alignments (Supports classes and inline styles) */
+.prose .text-left,
+.prose [style*="text-align: left"],
+.prose [style*="text-align:left"] {
+    text-align: left !important;
+}
+
+.prose .text-center,
+.prose [style*="text-align: center"],
+.prose [style*="text-align:center"] {
+    text-align: center !important;
+}
+
+.prose .text-right,
+.prose [style*="text-align: right"],
+.prose [style*="text-align:right"] {
+    text-align: right !important;
+}
+
+.prose .text-justify,
+.prose [style*="text-align: justify"],
+.prose [style*="text-align:justify"] {
+    text-align: justify !important;
+}
+
+/* Table Styling for Tiptap */
+.prose table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 1.5rem 0 !important;
+}
+
+.prose table th,
+.prose table td {
+    border: 1px solid #e2e8f0 !important;
+    padding: 0.75rem 1rem !important;
+}
+
+.prose table th {
+    background-color: #f8fafc !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+}
+
+/* List styles fallback (in case prose tailwind is overridden) */
+.prose ol {
+    list-style-type: decimal !important;
+    padding-left: 1.625rem !important;
+}
+
+.prose ul {
+    list-style-type: disc !important;
+    padding-left: 1.625rem !important;
+}
+
+/* Task list styles (if any checkbox lists are used) */
+.prose ul[data-type="taskList"] {
+    list-style-type: none !important;
+    padding-left: 0 !important;
+}
+
+.prose ul[data-type="taskList"] li {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+}
+
+.prose ul[data-type="taskList"] input[type="checkbox"] {
+    margin-top: 0.3rem !important;
+}
+
