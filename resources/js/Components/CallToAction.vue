@@ -1,13 +1,13 @@
 <template>
-    <section class="py-16 bg-emerald-800 text-white text-center relative">
+    <section class="py-16 bg-white text-center relative border-t border-gray-100">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Headline -->
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 {{ title }}
             </h2>
 
             <!-- Description -->
-            <p class="text-emerald-100 text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-gray-600 text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
                 {{ description }}
             </p>
 
@@ -16,7 +16,10 @@
                 <!-- Primary Button -->
                 <a 
                     :href="spmbUrl" 
-                    class="w-full sm:w-auto bg-white text-emerald-800 hover:bg-emerald-50 font-bold py-3.5 px-8 rounded-lg inline-block transition-colors duration-300 shadow-sm"
+                    class="w-full sm:w-auto bg-emerald-750 text-white hover:bg-emerald-850 font-bold py-3.5 px-8 rounded-lg inline-block transition-colors duration-300 shadow-sm"
+                    style="background-color: #047857;"
+                    onmouseover="this.style.backgroundColor='#065f46'"
+                    onmouseout="this.style.backgroundColor='#047857'"
                 >
                     Daftar Sekarang
                 </a>
@@ -25,7 +28,7 @@
                 <Link 
                     v-if="showContactBtn"
                     :href="route('kontak')" 
-                    class="w-full sm:w-auto border border-white hover:bg-white/10 text-white font-semibold py-3.5 px-8 rounded-lg inline-block transition-colors duration-300"
+                    class="w-full sm:w-auto border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-3.5 px-8 rounded-lg inline-block transition-colors duration-300"
                 >
                     Hubungi Kami
                 </Link>
