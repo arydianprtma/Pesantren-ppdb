@@ -1,5 +1,5 @@
 <template>
-    <section class="py-16 bg-white text-center relative border-t border-gray-100">
+    <section class="py-16 text-center relative bg-transparent">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Headline -->
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
