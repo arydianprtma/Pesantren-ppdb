@@ -522,7 +522,7 @@
         </section>
 
         <!-- CTA Section -->
-        <CallToAction />
+        <CallToAction bgClass="bg-gray-50" />
 
         <!-- FAQ Section -->
         <section class="py-20 bg-gray-50">
@@ -740,19 +740,6 @@ const faqs = [
     {
         question: "Apa saja perlengkapan yang harus dibawa saat mulai mondok?",
         answer: "Perlengkapan wajib meliputi pakaian ibadah, seragam, perlengkapan tidur mandiri, dan peralatan mandi. Daftar detail akan diberikan saat daftar ulang."
-    }
-];
-
-const testimonials = [
-    {
-        name: "H. Ahmad Jaelani",
-        role: "Wali Santri",
-        text: "Alhamdulillah, sejak anak saya mondok di Riyadussalikin, perubahan akhlaknya sangat terasa. Menjadi lebih mandiri dan hafalannya meningkat pesat."
-    },
-    {
-        name: "Siti Maryam",
-        role: "Alumni 2022",
-        text: "Pengalaman belajar di sini sangat berkesan. Tidak hanya ilmu agama, tapi kami juga diajarkan kemandirian dan keterampilan hidup yang sangat berguna di bangku kuliah."
     }
 ];
 

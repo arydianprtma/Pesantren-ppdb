@@ -1,5 +1,5 @@
 <template>
-    <section class="py-16 text-center relative bg-transparent">
+    <section class="py-16 text-center relative" :class="bgClass">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Headline -->
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -53,6 +53,10 @@ const props = defineProps({
     showContactBtn: {
         type: Boolean,
         default: true
+    },
+    bgClass: {
+        type: String,
+        default: 'bg-transparent'
     }
 });
 
