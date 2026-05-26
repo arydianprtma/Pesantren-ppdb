@@ -11,10 +11,25 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Support\Facades\Storage;
 
+use Spatie\Permission\Traits\HasRoles;
+
 class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
+
+    /**
+     * Ninja Fix: Mencegah konflik kolom 'permissions' dengan Spatie
+     */
+    protected static function booted()
+    {
+        static::retrieved(function ($model) {
+            if (array_key_exists('permissions', $model->attributes)) {
+                $model->attributes['custom_permissions'] = $model->attributes['permissions'];
+                unset($model->attributes['permissions']);
+            }
+        });
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -28,7 +43,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'password',
         'avatar',
         'role',
-        'permissions',
+        'custom_permissions',
         'is_active',
         'otp_code',
         'otp_expires_at',
@@ -54,7 +69,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'permissions' => 'array',
+            'custom_permissions' => 'array',
             'is_active' => 'boolean',
         ];
     }
@@ -64,9 +79,14 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
      */
     public function getFilamentAvatarUrl(): ?string
     {
-        return $this->avatar
-            ? Storage::disk('public')->url($this->avatar)
-            : null;
+        if (!$this->avatar) {
+            return null;
+        }
+
+        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+        $disk = \Illuminate\Support\Facades\Storage::disk('public');
+        
+        return $disk->url($this->avatar);
     }
 
     /**
@@ -78,12 +98,21 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     }
 
     /**
+     * Get the custom permissions attribute.
+     * Mencegah konflik dengan sistem Spatie Permission.
+     */
+    public function getCustomPermissionsAttribute()
+    {
+        return $this->attributes['custom_permissions'] ?? $this->attributes['permissions'] ?? null;
+    }
+
+    /**
      * Check if user can access Filament panel
      */
     public function canAccessPanel(\Filament\Panel $panel): bool
     {
         return ($this->is_active ?? true)
-            && in_array($this->role, ['super_admin', 'admin', 'editor'], true);
+            && ($this->hasAnyRole(['super_admin', 'admin', 'panel_user']) || $this->hasPermission('view_admin_panel'));
     }
 
     /**
@@ -91,32 +120,31 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
      */
     public function isSuperAdmin(): bool
     {
-        return $this->role === 'super_admin';
+        return $this->hasRole('super_admin');
     }
 
     /**
-     * Check if user is admin (super_admin or admin, NOT editor)
+     * Check if user is admin (super_admin or admin)
      */
     public function isAdmin(): bool
     {
-        return in_array($this->role, ['super_admin', 'admin']);
+        return $this->hasAnyRole(['super_admin', 'admin']);
     }
 
     /**
-     * Check if user is editor only
+     * Check if user is editor only (based on permissions usually)
      */
     public function isEditor(): bool
     {
-        return $this->role === 'editor';
+        return $this->hasRole('editor');
     }
 
     /**
-     * Check if user can manage web content (Berita, Prestasi, Fasilitas, Sejarah, VisiMisi, Ekstrakurikuler, Kontak)
-     * Includes super_admin, admin, AND editor
+     * Check if user can manage web content
      */
     public function canManageContent(): bool
     {
-        return in_array($this->role, ['super_admin', 'admin', 'editor']);
+        return $this->isAdmin() || $this->hasRole('editor');
     }
 
     /**
@@ -124,25 +152,17 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
      */
     public function hasPermission(string $permission): bool
     {
-        if ($this->isSuperAdmin()) {
+        // Super Admin selalu memiliki semua permission
+        if ($this->hasRole('super_admin')) {
             return true;
         }
 
-        return in_array($permission, $this->permissions ?? []);
-    }
-
-    /**
-     * Available permissions
-     */
-    public static function availablePermissions(): array
-    {
-        return [
-            'manage_berita' => 'Kelola Berita',
-            'manage_prestasi' => 'Kelola Prestasi',
-            'manage_Spmb' => 'Kelola Spmb',
-            'manage_contacts' => 'Kelola Pesan Kontak',
-            'manage_settings' => 'Kelola Pengaturan',
-            'view_reports' => 'Lihat Laporan',
-        ];
+        // Gunakan can() tapi bungkus dengan try-catch karena Spatie bisa throw exception
+        // jika permission name tidak terdaftar di database.
+        try {
+            return $this->can($permission);
+        } catch (\Spatie\Permission\Exceptions\PermissionDoesNotExist $e) {
+            return false;
+        }
     }
 }

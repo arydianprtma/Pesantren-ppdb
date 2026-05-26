@@ -15,8 +15,6 @@ class ContactMessageResource extends Resource
 {
     use AdminOnlyAccess;
 
-    protected static ?string $permission = 'manage_contacts';
-
     protected static ?string $model = ContactMessage::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-envelope';
@@ -64,7 +62,7 @@ class ContactMessageResource extends Resource
         return false;
     }
 
-    public static function canEdit($record): bool
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
     {
         return false;
     }

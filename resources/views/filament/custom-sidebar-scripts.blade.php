@@ -81,8 +81,18 @@
 
         // Tambahan: Refresh saat ada event notification dari Livewire
         const userId = "{{ auth()->id() ?? 0 }}";
-        window.addEventListener('echo:private-App.Models.User.' + userId + ',.Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', () => {
-            setTimeout(fetchCounts, 1000);
-        });
+        
+        const initEchoListener = () => {
+            if (typeof window.Echo !== 'undefined') {
+                window.addEventListener('echo:private-App.Models.User.' + userId + ',.Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', () => {
+                    setTimeout(fetchCounts, 1000);
+                });
+            } else {
+                // Wait for Echo to be available (Filament might load it slightly later)
+                setTimeout(initEchoListener, 1000);
+            }
+        };
+        
+        initEchoListener();
     });
 </script>

@@ -18,8 +18,6 @@ class SpmbRegistrantResource extends Resource
 {
     use AdminOnlyAccess;
 
-    protected static ?string $permission = 'manage_Spmb';
-
     protected static ?string $model = SpmbPendaftaran::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-plus';

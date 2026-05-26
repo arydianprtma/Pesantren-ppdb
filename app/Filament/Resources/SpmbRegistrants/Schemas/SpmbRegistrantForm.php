@@ -225,41 +225,78 @@ class SpmbRegistrantForm
                                             ->schema([
                                                 \Filament\Forms\Components\FileUpload::make('ijazah_skhu')
                                                     ->label('Ijazah / SKHU')
-                                                    ->disk('spmb')->disabled()->openable()->downloadable(),
+                                                    ->image()
+                                                    ->disk('local')
+                                                    ->visibility('private')
+                                                    ->directory('Spmb/ijazah')
+                                                    ->disabled()->openable()->downloadable(),
                                                 \Filament\Forms\Components\FileUpload::make('akte_kelahiran')
                                                     ->label('Akte Kelahiran')
-                                                    ->disk('spmb')->disabled()->openable()->downloadable(),
+                                                    ->image()
+                                                    ->disk('local')
+                                                    ->visibility('private')
+                                                    ->directory('Spmb/akte')
+                                                    ->disabled()->openable()->downloadable(),
                                                 \Filament\Forms\Components\FileUpload::make('ktp_orang_tua')
                                                     ->label('KTP Orang Tua')
-                                                    ->disk('spmb')->disabled()->openable()->downloadable(),
+                                                    ->disk('local')
+                                                    ->visibility('private')
+                                                    ->directory('Spmb/ktp')
+                                                    ->disabled()->openable()->downloadable(),
                                                 \Filament\Forms\Components\FileUpload::make('kartu_keluarga')
                                                     ->label('Kartu Keluarga')
-                                                    ->disk('spmb')->disabled()->openable()->downloadable(),
+                                                    ->image()
+                                                    ->disk('local')
+                                                    ->visibility('private')
+                                                    ->directory('Spmb/kk')
+                                                    ->disabled()->openable()->downloadable(),
                                                 \Filament\Forms\Components\FileUpload::make('surat_sehat')
                                                     ->label('Surat Sehat')
-                                                    ->disk('spmb')->disabled()->openable()->downloadable(),
+                                                    ->disk('local')
+                                                    ->visibility('private')
+                                                    ->directory('Spmb/sehat')
+                                                    ->disabled()->openable()->downloadable(),
                                                 \Filament\Forms\Components\FileUpload::make('surat_kelakuan_baik')
                                                     ->label('Surat Kelakuan Baik')
-                                                    ->disk('spmb')->disabled()->openable()->downloadable(),
+                                                    ->disk('local')
+                                                    ->visibility('private')
+                                                    ->directory('Spmb/skkb')
+                                                    ->disabled()->openable()->downloadable(),
                                             ])->columns(2),
 
                                         Section::make('Berkas Opsional')
                                             ->schema([
                                                 \Filament\Forms\Components\FileUpload::make('kartu_kks_pkh')
                                                     ->label('Kartu KKS/PKH')
-                                                    ->disk('spmb')->disabled()->openable()->downloadable(),
+                                                    ->disk('local')
+                                                    ->visibility('private')
+                                                    ->directory('Spmb/kks')
+                                                    ->disabled()->openable()->downloadable(),
                                                 \Filament\Forms\Components\FileUpload::make('kartu_kps')
                                                     ->label('Kartu KPS')
-                                                    ->disk('spmb')->disabled()->openable()->downloadable(),
+                                                    ->disk('local')
+                                                    ->visibility('private')
+                                                    ->directory('Spmb/kps')
+                                                    ->disabled()->openable()->downloadable(),
                                                 \Filament\Forms\Components\FileUpload::make('kartu_kip')
                                                     ->label('Kartu KIP')
-                                                    ->disk('spmb')->disabled()->openable()->downloadable(),
+                                                    ->image()
+                                                    ->disk('local')
+                                                    ->visibility('private')
+                                                    ->directory('Spmb/kip')
+                                                    ->disabled()->openable()->downloadable(),
                                                 \Filament\Forms\Components\FileUpload::make('kartu_kis_bpjs')
                                                     ->label('Kartu KIS/BPJS Kesehatan')
-                                                    ->disk('spmb')->disabled()->openable()->downloadable(),
+                                                    ->disk('local')
+                                                    ->visibility('private')
+                                                    ->directory('Spmb/kis')
+                                                    ->disabled()->openable()->downloadable(),
                                                 \Filament\Forms\Components\FileUpload::make('kartu_nisn')
                                                     ->label('Kartu NISN')
-                                                    ->disk('spmb')->disabled()->openable()->downloadable(),
+                                                    ->disk('local')
+                                                    ->visibility('private')
+                                                    ->directory('Spmb/nisn')
+                                                    ->disabled()->openable()->downloadable(),
                                             ])->columns(2),
                                     ]),
                             ]),

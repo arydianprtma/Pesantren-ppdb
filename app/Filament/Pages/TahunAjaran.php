@@ -20,17 +20,17 @@ class TahunAjaran extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Master Data';
+        return 'Sistem';
     }
 
     public static function getNavigationLabel(): string
     {
-        return 'Tahun Ajaran';
+        return 'Tahun Ajaran SPMB';
     }
 
     public function getTitle(): string
     {
-        return 'Tahun Ajaran';
+        return 'Tahun Ajaran SPMB';
     }
 
     public static function getNavigationSort(): ?int

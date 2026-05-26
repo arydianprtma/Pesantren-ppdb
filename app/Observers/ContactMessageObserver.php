@@ -15,7 +15,7 @@ class ContactMessageObserver
      */
     public function created(ContactMessage $contactMessage): void
     {
-        $admins = User::whereIn('role', ['admin', 'super_admin'])->get();
+        $admins = User::role(['admin', 'super_admin'])->get();
 
         if ($admins->isEmpty()) {
             return;

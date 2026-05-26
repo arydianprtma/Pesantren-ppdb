@@ -45,7 +45,7 @@ class SpmbRegistrantObserver
      */
     public function created(SpmbPendaftaran $pendaftaran): void
     {
-        $admins = User::whereIn('role', ['admin', 'super_admin'])->get();
+        $admins = User::role(['admin', 'super_admin'])->get();
 
         if ($admins->isEmpty()) {
             return;
@@ -109,8 +109,8 @@ class SpmbRegistrantObserver
      */
     protected function portalUrl(): string
     {
-        $parts = parse_url(config('app.url'));
+        $parts = parse_url(config('app.url') ?? 'http://localhost');
 
-        return sprintf('%s://%s:8081', $parts['scheme'] ?? 'http', $parts['host'] ?? 'localhost');
+        return sprintf('%s://%s:8081', (string) ($parts['scheme'] ?? 'http'), (string) ($parts['host'] ?? 'localhost'));
     }
 }

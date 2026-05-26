@@ -17,8 +17,6 @@ class PrestasiResource extends Resource
 {
     use ContentManagerAccess;
 
-    protected static ?string $permission = 'manage_prestasi';
-
     protected static ?string $model = Prestasi::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-trophy';

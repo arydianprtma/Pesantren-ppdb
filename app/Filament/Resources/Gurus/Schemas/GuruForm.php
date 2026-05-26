@@ -33,16 +33,13 @@ class GuruForm
                         ->placeholder('Contoh: Guru Fiqih, Kepala Sekolah'),
 
                     FileUpload::make('foto')
-                        ->label('Foto Profil')
                         ->image()
-                        ->avatar()
-                        ->imageEditor()
-                        ->imageEditorAspectRatios([
-                            '1:1',
-                        ])
                         ->directory('guru')
-                        ->maxSize(4096)
-                        ->helperText('Format: JPG, PNG, WEBP (Maksimal 4MB). Gunakan editor gambar untuk memotong pas foto profil (rasio 1:1).'),
+                        ->saveUploadedFileUsing(function ($file) {
+                            return \App\Services\ImageService::processUpload($file, 'guru', 600);
+                        })
+                        ->maxSize(2048)
+                        ->helperText('Maksimal 2MB. Gambar akan di-resize dan dikonversi otomatis ke format WebP.'),
 
                     Toggle::make('is_active')
                         ->label('Aktif')

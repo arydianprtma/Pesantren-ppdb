@@ -15,7 +15,10 @@ class ExportController extends Controller
      */
     private function authorizeAdmin()
     {
-        if (!Auth::check() || !in_array(Auth::user()->role, ['super_admin', 'admin'])) {
+        /** @var \App\Models\User|null $user */
+        $user = Auth::user();
+        
+        if (!$user || !$user->isAdmin()) {
             abort(403, 'Akses ditolak.');
         }
     }

@@ -17,8 +17,6 @@ class BeritaResource extends Resource
 {
     use ContentManagerAccess;
 
-    protected static ?string $permission = 'manage_berita';
-
     protected static ?string $model = Berita::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-newspaper';

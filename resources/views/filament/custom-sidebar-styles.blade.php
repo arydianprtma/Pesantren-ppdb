@@ -72,20 +72,11 @@
         font-weight: 800;
         padding-left: 0.5rem;
         border-left: 3px solid rgba(16, 185, 129, 0.5);
-        
-        /* Gradient Text Effect - Darker for Light Mode Visibility */
-        background: linear-gradient(to right, #374151, #6b7280); /* Gray-700 to Gray-500 */
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent;
+        color: #374151;
     }
 
     /* Dark mode adjustment for labels - Lighter for Dark Mode Visibility */
     .dark .fi-sidebar-group-label {
-        background: linear-gradient(to right, #d1d5db, #9ca3af); /* Gray-300 to Gray-400 */
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #d1d5db;
     }
 </style>

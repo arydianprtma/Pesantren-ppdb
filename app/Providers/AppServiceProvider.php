@@ -10,6 +10,10 @@ use App\Observers\SpmbRegistrantObserver;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -29,6 +33,11 @@ class AppServiceProvider extends ServiceProvider
         SpmbPendaftaran::observe(SpmbRegistrantObserver::class);
         SpmbPendaftaran::observe(SpmbPendaftaranObserver::class);
         Guru::observe(GuruObserver::class);
+
+        // Rate Limiter untuk Panel Admin
+        RateLimiter::for('admin', function (Request $request) {
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
 
         if (isset($_SERVER['HTTP_HOST']) && (str_starts_with($_SERVER['HTTP_HOST'], '192.168.') || $_SERVER['HTTP_HOST'] === 'localhost' || str_starts_with($_SERVER['HTTP_HOST'], '127.0.0.1'))) {
             $scheme = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';

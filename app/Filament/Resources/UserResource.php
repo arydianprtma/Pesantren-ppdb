@@ -27,7 +27,9 @@ class UserResource extends Resource
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
         return parent::getEloquentQuery()
-            ->where('role', '!=', 'siswa');
+            ->whereDoesntHave('roles', function ($query) {
+                $query->where('name', 'siswa');
+            });
     }
 
     public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
@@ -40,16 +42,13 @@ class UserResource extends Resource
                             ->label('Foto Profil')
                             ->image()
                             ->avatar()
-                            ->imageEditor()
-                            ->imageEditorAspectRatios([
-                                '1:1',
-                            ])
-                            ->imageResizeTargetWidth(300)
-                            ->imageResizeTargetHeight(300)
                             ->directory('avatars')
-                            ->maxSize(4096) // 4MB
+                            ->saveUploadedFileUsing(function ($file) {
+                                return \App\Services\ImageService::processUpload($file, 'avatars', 400); // Pas foto cukup 400px
+                            })
+                            ->maxSize(2048)
                             ->columnSpanFull()
-                            ->helperText('Maksimal 4MB. Gunakan editor gambar untuk memotong pas foto profil (rasio 1:1).'),
+                            ->helperText('Maksimal 2MB. Gambar akan dikonversi otomatis ke format WebP.'),
                         \Filament\Forms\Components\TextInput::make('name')
                             ->label('Nama Lengkap')
                             ->required()
@@ -73,22 +72,14 @@ class UserResource extends Resource
 
                 \Filament\Schemas\Components\Section::make('Hak Akses')
                     ->schema([
-                        \Filament\Forms\Components\Select::make('role')
-                            ->label('Role')
-                            ->options([
-                                'super_admin' => 'Super Admin',
-                                'admin' => 'Admin',
-                                'editor' => 'Editor',
-                            ])
-                            ->default('admin')
+                        \Filament\Forms\Components\Select::make('roles')
+                            ->label('Role (Grup Akses)')
+                            ->relationship('roles', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable()
                             ->required()
-                            ->live(),
-                        \Filament\Forms\Components\CheckboxList::make('permissions')
-                            ->label('Hak Akses Khusus')
-                            ->options(\App\Models\User::availablePermissions())
-                            ->columns(2)
-                            ->visible(fn($get) => $get('role') !== 'super_admin')
-                            ->helperText('Super Admin memiliki akses ke semua fitur secara otomatis.'),
+                            ->helperText('Pilih satu atau lebih role untuk menentukan hak akses user.'),
                         \Filament\Forms\Components\Toggle::make('is_active')
                             ->label('Aktif')
                             ->default(true)
@@ -114,21 +105,16 @@ class UserResource extends Resource
                     ->label('Email')
                     ->searchable()
                     ->sortable(),
-                \Filament\Tables\Columns\TextColumn::make('role')
+                \Filament\Tables\Columns\TextColumn::make('roles.name')
                     ->label('Role')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         'super_admin' => 'danger',
                         'admin' => 'warning',
-                        'editor' => 'info',
-                        default => 'gray',
+                        'panel_user' => 'success',
+                        default => 'info',
                     })
-                    ->formatStateUsing(fn(string $state): string => match ($state) {
-                        'super_admin' => 'Super Admin',
-                        'admin' => 'Admin',
-                        'editor' => 'Editor',
-                        default => $state,
-                    }),
+                    ->searchable(),
                 \Filament\Tables\Columns\IconColumn::make('is_active')
                     ->label('Aktif')
                     ->boolean()
@@ -143,13 +129,9 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                \Filament\Tables\Filters\SelectFilter::make('role')
+                \Filament\Tables\Filters\SelectFilter::make('roles')
                     ->label('Role')
-                    ->options([
-                        'super_admin' => 'Super Admin',
-                        'admin' => 'Admin',
-                        'editor' => 'Editor',
-                    ]),
+                    ->relationship('roles', 'name'),
                 \Filament\Tables\Filters\SelectFilter::make('is_active')
                     ->label('Status')
                     ->options([
