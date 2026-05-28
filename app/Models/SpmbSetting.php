@@ -12,6 +12,9 @@ class SpmbSetting extends Model
         'tgl_tutup',
         'is_active',
         'pesan_tutup',
+        'kartu_header_1',
+        'kartu_header_2',
+        'kartu_alamat',
     ];
 
     protected $casts = [

@@ -74,6 +74,24 @@ class SpmbSettingResource extends Resource
                             ->placeholder('Pesan yang muncul jika pendaftaran sedang ditutup...')
                             ->columnSpanFull(),
                     ])->columns(2),
+
+                Section::make('Pengaturan Kop Kartu Pendaftaran')
+                    ->description('Sesuaikan teks yang muncul pada kop/header kartu bukti pendaftaran.')
+                    ->schema([
+                        TextInput::make('kartu_header_1')
+                            ->label('Header 1 (Nama Panitia)')
+                            ->placeholder('Contoh: Panitia Penerimaan Santri Baru (PSB)')
+                            ->maxLength(255),
+                        TextInput::make('kartu_header_2')
+                            ->label('Header 2 (Nama Lembaga)')
+                            ->placeholder('Contoh: Pondok Pesantren Riyadussalikin')
+                            ->maxLength(255),
+                        TextInput::make('kartu_alamat')
+                            ->label('Alamat / Subtitle')
+                            ->placeholder('Contoh: Padaherang, Kabupaten Pangandaran, Jawa Barat')
+                            ->maxLength(255)
+                            ->columnSpanFull(),
+                    ])->columns(2),
             ]);
     }
 
