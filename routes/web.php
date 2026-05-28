@@ -35,7 +35,7 @@ Route::post('/kontak', [ContactController::class, 'store'])->name('kontak.store'
 
 // Proxy route for SPMB storage to avoid CORS issues
 Route::get('/spmb-storage/{path}', function ($path) {
-    $fullPath = base_path('SPMB/storage/app/public/' . $path);
+    $fullPath = config('filesystems.disks.spmb.root') . '/' . $path;
 
     if (!file_exists($fullPath)) {
         abort(404);
