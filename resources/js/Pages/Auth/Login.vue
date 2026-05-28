@@ -11,6 +11,9 @@ defineProps({
     canResetPassword: {
         type: Boolean,
     },
+    canRegister: {
+        type: Boolean,
+    },
     status: {
         type: String,
     },
@@ -99,7 +102,7 @@ const submit = () => {
                     Masuk
                 </PrimaryButton>
 
-                <div class="text-sm text-gray-600">
+                <div v-if="canRegister" class="text-sm text-gray-600">
                     Belum punya akun?
                     <Link
                         :href="route('register')"
