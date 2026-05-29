@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SpmbWali extends Model
 {
-    protected $table = 'spmb_wali';
+    protected $table = 'ppdb_wali';
     protected $guarded = [];
 
     public function pendaftaran()

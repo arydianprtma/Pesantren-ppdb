@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SpmbOrangTua extends Model
 {
-    protected $table = 'spmb_orang_tua';
+    protected $table = 'ppdb_orang_tua';
     protected $guarded = [];
 
     public function pendaftaran()

@@ -52,7 +52,7 @@ class SpmbRegistrantObserver
         }
 
         Notification::make()
-            ->title('Pendaftaran SPMB Baru')
+            ->title('Pendaftaran PPDB Baru')
             ->body("Siswa baru: {$pendaftaran->siswa?->nama_lengkap} telah mendaftar.")
             ->icon('heroicon-o-user-plus')
             ->iconColor('success')
@@ -90,7 +90,7 @@ class SpmbRegistrantObserver
         }
 
         return implode("\n", [
-            "*PENGUMUMAN SPMB*",
+            "*PENGUMUMAN PPDB*",
             "*Pondok Pesantren Riyadussalikin*",
             "",
             "Assalamu'alaikum wr. wb.,",
@@ -105,7 +105,7 @@ class SpmbRegistrantObserver
     }
 
     /**
-     * URL portal SPMB (port terpisah dari app utama).
+     * URL portal PPDB (port terpisah dari app utama).
      */
     protected function portalUrl(): string
     {

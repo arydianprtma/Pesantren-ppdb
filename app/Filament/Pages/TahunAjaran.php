@@ -25,12 +25,12 @@ class TahunAjaran extends Page
 
     public static function getNavigationLabel(): string
     {
-        return 'Tahun Ajaran SPMB';
+        return 'Tahun Ajaran PPDB';
     }
 
     public function getTitle(): string
     {
-        return 'Tahun Ajaran SPMB';
+        return 'Tahun Ajaran PPDB';
     }
 
     public static function getNavigationSort(): ?int

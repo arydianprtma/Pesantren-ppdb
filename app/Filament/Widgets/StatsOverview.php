@@ -53,7 +53,7 @@ class StatsOverview extends BaseWidget
                 ->descriptionIcon('heroicon-m-trophy')
                 ->color('warning'),
 
-            Stat::make('Total Pendaftar Spmb', SpmbPendaftaran::count())
+            Stat::make('Total Pendaftar PPDB', SpmbPendaftaran::count())
                 ->description('Total siswa mendaftar')
                 ->descriptionIcon('heroicon-m-users')
                 ->color('primary')

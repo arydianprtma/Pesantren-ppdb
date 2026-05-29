@@ -24,7 +24,7 @@ class ExportController extends Controller
     }
 
     // ─────────────────────────────────────────
-    // EXPORT PENDAFTAR SPMB
+    // EXPORT PENDAFTAR PPDB
     // ─────────────────────────────────────────
 
     public function pendaftarExcel(Request $request)
@@ -37,7 +37,7 @@ class ExportController extends Controller
             ->orderBy('tanggal_daftar', 'desc')
             ->get();
 
-        $filename = 'pendaftar_spmb_' . now()->format('Ymd_His') . '.csv';
+        $filename = 'pendaftar_ppdb_' . now()->format('Ymd_His') . '.csv';
 
         $headers = [
             'Content-Type'        => 'text/csv; charset=UTF-8',

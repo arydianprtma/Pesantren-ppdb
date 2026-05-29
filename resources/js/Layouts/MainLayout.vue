@@ -132,10 +132,10 @@
                         </div>
 
                         <a 
-                            href="https://spmb.riyadussalikin.my.id/login"
+                            href="https://ppdb.riyadussalikin.my.id/login"
                             class="btn-primary"
                         >
-                            SPMB
+                            PPDB
                         </a>
                     </div>
 
@@ -190,8 +190,8 @@
                         <Link :href="route('kontak')" :class="isActive('kontak') ? 'navbar-link-active' : 'navbar-link'">
                             Kontak
                         </Link>
-                        <a href="https://spmb.riyadussalikin.my.id/login" class="btn-primary text-center">
-                            SPMB
+                        <a href="https://ppdb.riyadussalikin.my.id/login" class="btn-primary text-center">
+                            PPDB
                         </a>
                     </div>
                 </div>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SpmbPendaftaran extends Model
 {
-    protected $table = 'spmb_pendaftaran';
+    protected $table = 'ppdb_pendaftaran';
     protected $guarded = [];
 
     protected static function booted()

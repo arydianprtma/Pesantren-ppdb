@@ -42,7 +42,7 @@ class ActivityLogTable
                         'pengaturan' => 'gray',
                         default      => 'primary',
                     })
-                    ->formatStateUsing(fn (string $state): string => strtoupper($state))
+                    ->formatStateUsing(fn (string $state): string => $state === 'spmb' ? 'PPDB' : strtoupper($state))
                     ->searchable(),
 
                 TextColumn::make('aksi')
@@ -102,7 +102,7 @@ class ActivityLogTable
                 SelectFilter::make('modul')
                     ->label('Modul')
                     ->options([
-                        'spmb'       => 'SPMB',
+                        'spmb'       => 'PPDB',
                         'guru'       => 'Guru',
                         'siswa'      => 'Siswa',
                         'auth'       => 'Login/Logout',

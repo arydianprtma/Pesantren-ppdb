@@ -22,17 +22,17 @@ class SpmbRegistrantResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-plus';
 
-    protected static ?string $modelLabel = 'Pendaftar SPMB';
+    protected static ?string $modelLabel = 'Pendaftar PPDB';
 
-    protected static ?string $pluralModelLabel = 'Pendaftaran SPMB';
+    protected static ?string $pluralModelLabel = 'Pendaftaran PPDB';
 
-    protected static ?string $navigationLabel = 'Pendaftaran SPMB';
+    protected static ?string $navigationLabel = 'Pendaftaran PPDB';
 
     protected static string|\UnitEnum|null $navigationGroup = 'Sistem';
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $slug = 'spmb';
+    protected static ?string $slug = 'ppdb';
 
     public static function form(Schema $schema): Schema
     {

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SpmbBeasiswa extends Model
 {
-    protected $table = 'spmb_beasiswa';
+    protected $table = 'ppdb_beasiswa';
     protected $guarded = [];
 
     public function pendaftaran()

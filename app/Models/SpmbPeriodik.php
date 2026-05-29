@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SpmbPeriodik extends Model
 {
-    protected $table = 'spmb_periodik';
+    protected $table = 'ppdb_periodik';
     protected $guarded = [];
 
     public function pendaftaran()

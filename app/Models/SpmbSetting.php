@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SpmbSetting extends Model
 {
+    protected $table = 'ppdb_settings';
+
     protected $fillable = [
         'tahun_ajaran',
         'tgl_buka',
@@ -27,7 +29,7 @@ class SpmbSetting extends Model
     {
         static::creating(function ($model) {
             if (static::count() >= 1) {
-                throw new \Exception('Hanya diperbolehkan satu data pengaturan SPMB.');
+                throw new \Exception('Hanya diperbolehkan satu data pengaturan PPDB.');
             }
         });
     }

@@ -15,7 +15,7 @@
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <!-- Primary Button -->
                 <a 
-                    :href="spmbUrl" 
+                    :href="ppdbUrl" 
                     class="w-full sm:w-auto bg-emerald-750 text-white hover:bg-emerald-850 font-bold py-3.5 px-8 rounded-lg inline-block transition-colors duration-300 shadow-sm"
                     style="background-color: #047857;"
                     onmouseover="this.style.backgroundColor='#065f46'"
@@ -60,12 +60,12 @@ const props = defineProps({
     }
 });
 
-const spmbUrl = computed(() => {
+const ppdbUrl = computed(() => {
     // In local development with IP or localhost, use local port 8001
     if (window.location.hostname.startsWith('192.168.') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         return `http://${window.location.hostname}:8001/login`;
     }
     // Default to production URL
-    return 'https://spmb.riyadussalikin.my.id/login';
+    return 'https://ppdb.riyadussalikin.my.id/login';
 });
 </script>

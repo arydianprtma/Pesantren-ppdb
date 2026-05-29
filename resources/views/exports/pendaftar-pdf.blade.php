@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Data Pendaftar SPMB</title>
+    <title>Data Pendaftar PPDB</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; font-size: 11px; color: #111; background: #fff; padding-top: 56px; }
@@ -129,12 +129,12 @@
     <div class="kop-text">
         <h1>PONDOK PESANTREN RIYADUSSALIKIN PADAHERANG</h1>
         <p>Jl. Raya Padaherang, Kab. Pangandaran, Jawa Barat</p>
-        <p>Portal SPMB — Penerimaan Santri Baru</p>
+        <p>Portal PPDB — Penerimaan Peserta Didik Baru</p>
     </div>
     <div class="kop-spacer"></div>
 </div>
 
-<div class="judul-laporan">Laporan Data Pendaftar SPMB</div>
+<div class="judul-laporan">Laporan Data Pendaftar PPDB</div>
 
 
 <table>
@@ -206,7 +206,7 @@
 </div>
 
 <div class="footer">
-    <span>Dokumen ini dicetak dari Sistem Portal Admin SPMB — {{ config('app.name') }}</span>
+    <span>Dokumen ini dicetak dari Sistem Portal Admin PPDB — {{ config('app.name') }}</span>
     <span>Halaman dicetak: {{ now()->format('d/m/Y H:i') }}</span>
 </div>
 

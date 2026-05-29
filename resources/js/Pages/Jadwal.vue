@@ -13,7 +13,7 @@
                     <h1 class="text-4xl md:text-5xl font-black text-gray-900 mb-4">Jadwal & Agenda Kegiatan</h1>
                     <div class="w-24 h-1.5 bg-emerald-500 mx-auto rounded-full mb-6"></div>
                     <p class="text-gray-500 max-w-2xl mx-auto">
-                        Ikuti berbagai agenda penting, jadwal seleksi penerimaan santri baru (SPMB), kegiatan akademik, dan acara umum Pondok Pesantren Riyadussalikin.
+                        Ikuti berbagai agenda penting, jadwal seleksi penerimaan santri baru (PPDB), kegiatan akademik, dan acara umum Pondok Pesantren Riyadussalikin.
                     </p>
                 </div>
 
@@ -186,7 +186,7 @@
                                                 'bg-purple-100 text-purple-800': event.kategori === 'umum'
                                             }"
                                         >
-                                            {{ event.kategori === 'spmb' ? 'SPMB' : event.kategori === 'akademik' ? 'Akademik' : 'Umum' }}
+                                            {{ event.kategori === 'spmb' ? 'PPDB' : event.kategori === 'akademik' ? 'Akademik' : 'Umum' }}
                                         </span>
                                         <span class="text-xs text-gray-500 font-semibold">{{ formatTime(event.jam_mulai) }}</span>
                                     </div>
@@ -310,7 +310,7 @@ const props = defineProps({
 // Category definition
 const categories = [
     { value: 'all', label: 'Semua Agenda', dotColor: '' },
-    { value: 'spmb', label: 'SPMB', dotColor: 'bg-emerald-500' },
+    { value: 'spmb', label: 'PPDB', dotColor: 'bg-emerald-500' },
     { value: 'akademik', label: 'Akademik', dotColor: 'bg-blue-500' },
     { value: 'umum', label: 'Kegiatan Umum', dotColor: 'bg-purple-500' }
 ];

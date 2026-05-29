@@ -28,11 +28,11 @@ class SpmbSettingResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-cog-6-tooth';
     
-    protected static ?string $navigationLabel = 'Tahun Ajaran (SPMB)';
+    protected static ?string $navigationLabel = 'Tahun Ajaran (PPDB)';
     
     protected static ?string $modelLabel = 'Tahun Ajaran';
     
-    protected static ?string $pluralModelLabel = 'Tahun Ajaran (SPMB)';
+    protected static ?string $pluralModelLabel = 'Tahun Ajaran (PPDB)';
     
     protected static ?int $navigationSort = 2;
     

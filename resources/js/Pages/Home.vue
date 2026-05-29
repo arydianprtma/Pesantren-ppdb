@@ -62,7 +62,7 @@
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                             <a 
-                                :href="spmbUrl" 
+                                :href="ppdbUrl" 
                                 class="btn-primary w-full sm:w-auto text-center"
                             >
                                 Daftar Sekarang
@@ -121,7 +121,7 @@
                             </div>
                             <div class="text-center">
                                 <h3 class="text-xl font-bold text-gray-900 mb-3">Daftar Akun</h3>
-                                <p class="text-gray-500 text-sm leading-relaxed px-4">Buat akun calon santri di portal SPMB untuk memulai proses pendaftaran awal.</p>
+                                <p class="text-gray-500 text-sm leading-relaxed px-4">Buat akun calon santri di portal PPDB untuk memulai proses pendaftaran awal.</p>
                             </div>
                         </div>
 
@@ -384,7 +384,7 @@
                                         'bg-purple-50 text-purple-700 border border-purple-200': agenda.kategori === 'umum'
                                     }"
                                 >
-                                    {{ agenda.kategori === 'spmb' ? 'SPMB' : agenda.kategori === 'akademik' ? 'Akademik' : 'Kegiatan' }}
+                                    {{ agenda.kategori === 'spmb' ? 'PPDB' : agenda.kategori === 'akademik' ? 'Akademik' : 'Kegiatan' }}
                                 </span>
                             </div>
                             <div class="text-right">
@@ -608,13 +608,13 @@ const props = defineProps({
     }
 });
 
-const spmbUrl = computed(() => {
-    // In local development with IP, use the local IP for SPMB
+const ppdbUrl = computed(() => {
+    // In local development with IP, use the local IP for PPDB
     if (window.location.hostname.startsWith('192.168.') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        return `http://${window.location.hostname}:8081/login`;
+        return `http://${window.location.hostname}:8001/login`;
     }
     // Default to production URL
-    return 'https://spmb.riyadussalikin.my.id/login';
+    return 'https://ppdb.riyadussalikin.my.id/login';
 });
 
 const isFutureOpen = computed(() => {
