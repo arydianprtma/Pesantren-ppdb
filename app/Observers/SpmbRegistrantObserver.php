@@ -109,8 +109,8 @@ class SpmbRegistrantObserver
      */
     protected function portalUrl(): string
     {
-        $parts = parse_url(config('app.url') ?? 'http://localhost');
+        $parts = parse_url(config('app.url') ?? 'http://192.168.1.8');
 
-        return sprintf('%s://%s:8081', (string) ($parts['scheme'] ?? 'http'), (string) ($parts['host'] ?? 'localhost'));
+        return sprintf('%s://%s:8001', (string) ($parts['scheme'] ?? 'http'), (string) ($parts['host'] ?? '192.168.1.8'));
     }
 }

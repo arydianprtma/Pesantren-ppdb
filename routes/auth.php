@@ -17,8 +17,9 @@ Route::middleware('guest')->group(function () {
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-        ->name('login');
+    // Hapus route login bawaan port 8000 karena portal login admin ada di /portal/login
+    // Route::get('login', [AuthenticatedSessionController::class, 'create'])
+    //     ->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 

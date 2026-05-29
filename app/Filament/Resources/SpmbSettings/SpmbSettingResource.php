@@ -36,7 +36,10 @@ class SpmbSettingResource extends Resource
     
     protected static ?int $navigationSort = 2;
     
-    protected static string|\UnitEnum|null $navigationGroup = 'Sistem';
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Sistem';
+    }
 
     public static function canCreate(): bool
     {

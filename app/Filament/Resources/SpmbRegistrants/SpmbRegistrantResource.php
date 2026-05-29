@@ -6,10 +6,12 @@ use App\Filament\Resources\Concerns\AdminOnlyAccess;
 use App\Filament\Resources\SpmbRegistrants\Pages\CreateSpmbRegistrant;
 use App\Filament\Resources\SpmbRegistrants\Pages\EditSpmbRegistrant;
 use App\Filament\Resources\SpmbRegistrants\Pages\ListSpmbRegistrants;
+use App\Filament\Resources\SpmbRegistrants\Pages\ScanQR;
 use App\Filament\Resources\SpmbRegistrants\Schemas\SpmbRegistrantForm;
 use App\Filament\Resources\SpmbRegistrants\Tables\SpmbRegistrantsTable;
 use App\Models\SpmbPendaftaran;
 use Filament\Resources\Resource;
+use Filament\Navigation\NavigationItem;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +36,25 @@ class SpmbRegistrantResource extends Resource
 
     protected static ?string $slug = 'ppdb';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Sistem';
+    }
+
+    public static function getNavigationItems(): array
+    {
+        return [
+            ...parent::getNavigationItems(),
+            NavigationItem::make('Scan Verifikasi')
+                ->group('Sistem')
+                ->icon('heroicon-o-qr-code')
+                ->activeIcon('heroicon-s-qr-code')
+                ->isActiveWhen(fn () => request()->routeIs('filament.portal.resources.ppdb.scan'))
+                ->url(static::getUrl('scan'))
+                ->sort(4),
+        ];
+    }
+
     public static function form(Schema $schema): Schema
     {
         return SpmbRegistrantForm::configure($schema);
@@ -56,6 +77,7 @@ class SpmbRegistrantResource extends Resource
         return [
             'index' => ListSpmbRegistrants::route('/'),
             'create' => CreateSpmbRegistrant::route('/create'),
+            'scan' => ScanQR::route('/scan'),
             'edit' => EditSpmbRegistrant::route('/{record}/edit'),
         ];
     }

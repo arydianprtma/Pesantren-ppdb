@@ -22,7 +22,10 @@ class UserResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Sistem';
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Sistem';
+    }
 
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {

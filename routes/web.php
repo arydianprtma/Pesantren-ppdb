@@ -59,6 +59,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    // Scan QR Route untuk Admin
+    Route::get('/scan-qr', function () {
+        return Inertia::render('ScanQR');
+    })->name('scan.qr');
 });
 
 // Export Routes (Admin Only)
@@ -70,5 +75,12 @@ Route::middleware('auth')->prefix('export')->name('export.')->group(function () 
     Route::get('/siswa/excel',     [\App\Http\Controllers\ExportController::class, 'siswaExcel'])->name('siswa.excel');
     Route::get('/siswa/pdf',       [\App\Http\Controllers\ExportController::class, 'siswaPdf'])->name('siswa.pdf');
 });
+
+use App\Http\Controllers\VerificationController;
+
+// Verification Route (Portal Utama - Port 8000)
+// Hapus middleware auth sementara untuk debugging atau gunakan pengecekan manual di controller
+Route::get('/verifikasi/{no_reg}', [VerificationController::class, 'verify'])
+    ->name('verifikasi.publik');
 
 require __DIR__.'/auth.php';
