@@ -27,6 +27,10 @@ class UserResource extends Resource
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
         return parent::getEloquentQuery()
+            ->where(function ($query) {
+                $query->where('role', '!=', 'siswa')
+                    ->orWhereNull('role');
+            })
             ->whereDoesntHave('roles', function ($query) {
                 $query->where('name', 'siswa');
             });
