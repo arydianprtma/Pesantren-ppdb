@@ -83,10 +83,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
             return null;
         }
 
-        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
-        $disk = \Illuminate\Support\Facades\Storage::disk('public');
+        if (filter_var($this->avatar, FILTER_VALIDATE_URL)) {
+            return $this->avatar;
+        }
         
-        return $disk->url($this->avatar);
+        return '/storage/' . ltrim($this->avatar, '/');
     }
 
     /**
