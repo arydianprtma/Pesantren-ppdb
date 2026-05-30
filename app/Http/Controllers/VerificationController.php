@@ -24,7 +24,7 @@ class VerificationController extends Controller
         
         // Jika masih tidak login, arahkan ke login portal admin yang benar
         if (!$user) {
-            return redirect('http://192.168.1.8:8000/portal/login');
+            return redirect(url('/portal/login'));
         }
 
         // Cek apakah user memiliki role admin atau super_admin
