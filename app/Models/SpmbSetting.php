@@ -17,6 +17,7 @@ class SpmbSetting extends Model
         'kartu_header_1',
         'kartu_header_2',
         'kartu_alamat',
+        'kartu_logo',
     ];
 
     protected $casts = [

@@ -13,6 +13,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\FileUpload;
 use Filament\Schemas\Components\Section;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -79,8 +80,17 @@ class SpmbSettingResource extends Resource
                     ])->columns(2),
 
                 Section::make('Pengaturan Kop Kartu Pendaftaran')
-                    ->description('Sesuaikan teks yang muncul pada kop/header kartu bukti pendaftaran.')
+                    ->description('Sesuaikan teks dan logo yang muncul pada kop/header kartu bukti pendaftaran.')
                     ->schema([
+                        FileUpload::make('kartu_logo')
+                            ->label('Logo Kop Surat')
+                            ->image()
+                            ->disk('public')
+                            ->directory('logo-kartu')
+                            ->imagePreviewHeight('80')
+                            ->maxSize(2048)
+                            ->helperText('Upload logo untuk kop surat kartu pendaftaran (maks 2MB). Kosongkan untuk gunakan logo default.')
+                            ->columnSpanFull(),
                         TextInput::make('kartu_header_1')
                             ->label('Header 1 (Nama Panitia)')
                             ->placeholder('Contoh: Panitia Penerimaan Santri Baru (PSB)')
