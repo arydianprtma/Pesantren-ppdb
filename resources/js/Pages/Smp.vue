@@ -9,6 +9,8 @@
             <div class="absolute inset-0 bg-dot-pattern opacity-10"></div>
             
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+                <!-- Logo Sekolah -->
+                <img src="/assets/Logo_Sekolah/smp_dharma_ksatria.png" alt="Logo SMP Dharma Ksatria" class="w-28 h-28 mx-auto mb-6 object-contain filter drop-shadow-xl" />
                 <span class="inline-flex items-center gap-1.5 py-1 px-3.5 rounded-full bg-blue-900/50 text-blue-300 text-xs font-bold mb-6 border border-blue-700/50 backdrop-blur-md">
                     <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
                     Unit Pendidikan Formal
