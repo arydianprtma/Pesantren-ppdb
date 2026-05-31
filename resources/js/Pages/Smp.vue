@@ -1,0 +1,342 @@
+<template>
+    <Head title="SMP Dharma Ksatria" />
+    <MainLayout>
+        <!-- Hero Section -->
+        <section class="relative bg-gradient-to-br from-blue-950 via-blue-900 to-slate-950 py-24 md:py-32 overflow-hidden">
+            <!-- Decorative Glow Elements -->
+            <div class="absolute top-1/4 left-1/10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -z-0"></div>
+            <div class="absolute bottom-1/4 right-1/10 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl -z-0"></div>
+            <div class="absolute inset-0 bg-dot-pattern opacity-10"></div>
+            
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+                <span class="inline-flex items-center gap-1.5 py-1 px-3.5 rounded-full bg-blue-900/50 text-blue-300 text-xs font-bold mb-6 border border-blue-700/50 backdrop-blur-md">
+                    <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+                    Unit Pendidikan Formal
+                </span>
+                <h1 class="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight leading-none uppercase">
+                    SMP Dharma Ksatria
+                </h1>
+                <p class="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed font-medium mb-10">
+                    Mengintegrasikan Kurikulum Nasional (Merdeka) dengan Pendidikan Kepesantrenan Klasik untuk Membentuk Generasi Berkarakter, Cerdas, dan Berakhlakul Karimah.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a 
+                        :href="ppdbUrl"
+                        class="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-blue-500 transition-all duration-300 shadow-lg shadow-blue-900/30 border border-blue-500 hover:scale-105"
+                    >
+                        Daftar PPDB SMP
+                    </a>
+                    <Link 
+                        :href="route('kontak')"
+                        class="w-full sm:w-auto px-8 py-4 bg-white/10 text-white border border-white/20 font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-white/25 transition-all duration-300 backdrop-blur-sm"
+                    >
+                        Tanya Pendaftaran
+                    </Link>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="relative -mt-8 z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-8 bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-100/50">
+                <div class="text-center p-4 border-r border-slate-100 last:border-0">
+                    <div class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-1">A</div>
+                    <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Akreditasi BAN-SM</div>
+                </div>
+                <div class="text-center p-4 md:border-r border-slate-100 last:border-0">
+                    <div class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-1">100%</div>
+                    <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Kurikulum Terintegrasi</div>
+                </div>
+                <div class="text-center p-4 border-r border-slate-100 last:border-0">
+                    <div class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-1">1:15</div>
+                    <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Rasio Guru & Siswa</div>
+                </div>
+                <div class="text-center p-4 last:border-0">
+                    <div class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-1">10+</div>
+                    <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Fasilitas Penunjang</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visi & Misi Unit -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left: Description and Visi -->
+                    <div class="space-y-6">
+                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider">Arah & Tujuan</span>
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                            Visi & Misi Pendidikan SMP Dharma Ksatria
+                        </h2>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            SMP Dharma Ksatria berkomitmen mendidik siswa usia remaja dalam masa transisi kritis menuju kedewasaan, menanamkan pondasi karakter keagamaan yang kokoh sekaligus mengasah kepekaan nalar kritis ilmiah.
+                        </p>
+                        
+                        <div class="p-6 bg-gradient-to-br from-blue-50/50 to-white border border-blue-100 rounded-3xl shadow-sm">
+                            <h3 class="text-xs font-black text-blue-900 uppercase tracking-widest mb-3">Visi Unit</h3>
+                            <p class="text-slate-800 font-bold italic text-base leading-relaxed">
+                                "Mewujudkan lulusan SMP yang unggul dalam Imtaq, terampil dalam teknologi dasar, berbudaya ilmiah, dan tangguh berakhlak mulia."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Misi Cards -->
+                    <div class="space-y-4">
+                        <div class="flex gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:border-blue-200 transition-all duration-300">
+                            <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white font-bold rounded-xl flex items-center justify-center shadow-md shadow-blue-200">1</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm mb-1">Pendidikan Karakter & Adab</h4>
+                                <p class="text-xs text-slate-600 leading-relaxed">Mengedepankan pembelajaran karakter berbasis nilai kepesantrenan dan pembiasaan adab Islami sehari-hari.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:border-blue-200 transition-all duration-300">
+                            <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white font-bold rounded-xl flex items-center justify-center shadow-md shadow-blue-200">2</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm mb-1">Penguasaan Akademik & Literasi</h4>
+                                <p class="text-xs text-slate-600 leading-relaxed">Menyelenggarakan pembelajaran Kurikulum Merdeka yang menantang akal budi dan mengasah literasi-numerasi dasar.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:border-blue-200 transition-all duration-300">
+                            <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white font-bold rounded-xl flex items-center justify-center shadow-md shadow-blue-200">3</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm mb-1">Teknologi & Keterampilan Praktis</h4>
+                                <p class="text-xs text-slate-600 leading-relaxed">Membekali murid dengan keterampilan komputer dasar, logika pemrograman sederhana (coding), dan bahasa asing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Program Unggulan Unit -->
+        <section class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider mb-3">Keunggulan Kami</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                        Program Khusus SMP Dharma Ksatria
+                    </h2>
+                    <p class="text-slate-500 text-xs font-semibold max-w-xl mx-auto mt-2">
+                        Program khas terintegrasi yang disiapkan khusus untuk akselerasi kecerdasan intelektual dan spiritual santri.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Prog 1 -->
+                    <div class="bg-white border border-slate-100 p-6 rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                            </div>
+                            <h3 class="text-sm font-bold text-slate-900 mb-2">Tahfidz & Tahsin Intensif</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">Penyelarasan bacaan tajwid yang fasih disertai target hafalan Juz 30 dan surat-surat pilihan yang diuji periodik.</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-50 text-[10px] font-bold text-blue-650">Target: Hafal & Fasih Juz 30</div>
+                    </div>
+
+                    <!-- Prog 2 -->
+                    <div class="bg-white border border-slate-100 p-6 rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-sm font-bold text-slate-900 mb-2">IT & Kelas Coding Dasar</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">Pengenalan dasar logika komputer, pemrograman blok, web statis dasar, dan pengoperasian software perkantoran.</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-50 text-[10px] font-bold text-blue-650">Keterampilan: Digital Literacy</div>
+                    </div>
+
+                    <!-- Prog 3 -->
+                    <div class="bg-white border border-slate-100 p-6 rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 11.37 7.362 16.5 3 19" />
+                                </svg>
+                            </div>
+                            <h3 class="text-sm font-bold text-slate-900 mb-2">Bilingual Day</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">Pembiasaan percakapan harian menggunakan Bahasa Arab dan Bahasa Inggris sederhana untuk melatih kepercayaan diri.</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-50 text-[10px] font-bold text-blue-650">Lingkungan: Aktif Berbahasa</div>
+                    </div>
+
+                    <!-- Prog 4 -->
+                    <div class="bg-white border border-slate-100 p-6 rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-sm font-bold text-slate-900 mb-2">Kemandirian & Kewirausahaan</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">Melalui proyek kolaboratif, santri diajarkan manajemen diri, kerapihan asrama, dan dasar kewirausahaan santri (Kopsis).</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-50 text-[10px] font-bold text-blue-650">Karakter: Mandiri & Kolaboratif</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kurikulum & Ekstrakurikuler -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row gap-12 items-start">
+                    <!-- Left: Kurikulum -->
+                    <div class="w-full lg:w-1/2 space-y-6">
+                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider">Metode Pembelajaran</span>
+                        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">Kurikulum Terintegrasi</h2>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            Kurikulum kami didesain khusus agar siswa tidak terbebani secara berlebihan, melainkan terangsang untuk aktif belajar melalui keterpaduan dua pilar kurikulum:
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="p-6 bg-slate-50 border border-slate-100 rounded-2xl">
+                                <h4 class="font-bold text-sm text-slate-900 mb-2 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                                    Kurikulum Nasional (Kementerian Pendidikan)
+                                </h4>
+                                <p class="text-xs text-slate-550 leading-relaxed">Fokus pada sains dasar, matematika terapan, ilmu sosial, bahasa Indonesia, dan pendidikan pancasila dengan pendekatan Kurikulum Merdeka yang interaktif.</p>
+                            </div>
+                            <div class="p-6 bg-slate-50 border border-slate-100 rounded-2xl">
+                                <h4 class="font-bold text-sm text-slate-900 mb-2 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+                                    Kurikulum Diniyah Pesantren
+                                    <span class="text-[8px] bg-blue-100 text-blue-700 font-bold px-1.5 py-0.5 rounded">Khas</span>
+                                </h4>
+                                <p class="text-xs text-slate-550 leading-relaxed">Mempelajari fiqih ibadah (Safinah), akhlak dasar (Taisirul Kholaq), nahwu-shorof praktis, hafalan doa-doa harian, dan kajian hadits Arbain Nawawi.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Ekstrakurikuler -->
+                    <div class="w-full lg:w-1/2 space-y-6 lg:pl-6">
+                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider">Kreativitas & Bakat</span>
+                        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">Ekstrakurikuler Unggulan</h2>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            Untuk menyalurkan minat, bakat, kreativitas, dan kesehatan fisik siswa, kami memfasilitasi berbagai macam kegiatan ekskul yang menyenangkan:
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-5 border border-slate-100 rounded-2xl hover:bg-slate-50/50 transition-colors">
+                                <div class="font-bold text-sm text-slate-900 mb-1">Pramuka & Pasukan Khusus</div>
+                                <p class="text-[11px] text-slate-500">Melatih kepemimpinan, kepanduan, kedisiplinan, kemandirian fisik mental.</p>
+                            </div>
+                            <div class="p-5 border border-slate-100 rounded-2xl hover:bg-slate-50/50 transition-colors">
+                                <div class="font-bold text-sm text-slate-900 mb-1">Hadroh & Seni Kaligrafi</div>
+                                <p class="text-[11px] text-slate-500">Mewadahi kecintaan santri pada seni musik religi islami dan tulisan kaligrafi.</p>
+                            </div>
+                            <div class="p-5 border border-slate-100 rounded-2xl hover:bg-slate-50/50 transition-colors">
+                                <div class="font-bold text-sm text-slate-900 mb-1">Klub Olahraga (Futsal & Bulutangkis)</div>
+                                <p class="text-[11px] text-slate-500">Menjaga kebugaran jasmani serta mengasah jiwa sportifitas kompetitif.</p>
+                            </div>
+                            <div class="p-5 border border-slate-100 rounded-2xl hover:bg-slate-50/50 transition-colors">
+                                <div class="font-bold text-sm text-slate-900 mb-1">English & Arabic Club</div>
+                                <p class="text-[11px] text-slate-500">Klub asah ketrampilan debat, pidato, dan percakapan bahasa asing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alur Pendaftaran Section -->
+        <section class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider mb-3">Informasi PPDB</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">Alur Pendaftaran SMP</h2>
+                <p class="text-slate-500 text-xs font-semibold max-w-xl mx-auto mt-2 mb-16">
+                    Sistem pendaftaran terintegrasi secara online untuk memudahkan proses admisi santri baru.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-left">
+                    <!-- Step 1 -->
+                    <div class="bg-white border border-slate-100 p-6 rounded-3xl relative shadow-sm hover:scale-102 transition-transform duration-300">
+                        <div class="absolute -top-5 left-6 w-10 h-10 bg-blue-600 text-white font-black rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200">01</div>
+                        <h4 class="font-bold text-slate-900 text-sm mt-2 mb-2">Pendaftaran Online</h4>
+                        <p class="text-[11px] text-slate-600 leading-relaxed">Membuat akun pendaftaran di portal PPDB online dan mengisi biodata serta tingkat pendaftaran (SMP).</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-white border border-slate-100 p-6 rounded-3xl relative shadow-sm hover:scale-102 transition-transform duration-300">
+                        <div class="absolute -top-5 left-6 w-10 h-10 bg-blue-600 text-white font-black rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200">02</div>
+                        <h4 class="font-bold text-slate-900 text-sm mt-2 mb-2">Unggah Dokumen</h4>
+                        <p class="text-[11px] text-slate-600 leading-relaxed">Melengkapi berkas digital seperti Akta Kelahiran, Kartu Keluarga, dan pas foto melalui dashboard portal.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-white border border-slate-100 p-6 rounded-3xl relative shadow-sm hover:scale-102 transition-transform duration-300">
+                        <div class="absolute -top-5 left-6 w-10 h-10 bg-blue-600 text-white font-black rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200">03</div>
+                        <h4 class="font-bold text-slate-900 text-sm mt-2 mb-2">Ujian Seleksi</h4>
+                        <p class="text-[11px] text-slate-600 leading-relaxed">Mengikuti ujian seleksi yang meliputi tes akademik dasar, tes membaca Al-Qur'an, dan wawancara kepribadian.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="bg-white border border-slate-100 p-6 rounded-3xl relative shadow-sm hover:scale-102 transition-transform duration-300">
+                        <div class="absolute -top-5 left-6 w-10 h-10 bg-emerald-600 text-white font-black rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-200">04</div>
+                        <h4 class="font-bold text-slate-900 text-sm mt-2 mb-2">Pengumuman & Daftar Ulang</h4>
+                        <p class="text-[11px] text-slate-600 leading-relaxed">Hasil seleksi diumumkan via WhatsApp & portal. Calon santri yang dinyatakan lolos melakukan konfirmasi daftar ulang.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blue Call to Action Section -->
+        <section class="py-20 relative bg-gradient-to-br from-blue-950 to-slate-950 overflow-hidden text-center">
+            <!-- Decorative Glow Elements -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-3xl -z-0"></div>
+            
+            <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 uppercase tracking-tight">
+                    Mulai Masa Depan Gemilang di SMP Dharma Ksatria
+                </h2>
+                <p class="text-blue-100 text-sm md:text-base mb-10 max-w-2xl mx-auto leading-relaxed">
+                    Kuota pendaftaran santri baru terbatas untuk menjaga rasio ideal dan kualitas kegiatan belajar mengajar. Amankan kursi pendaftaran putra-putri Anda segera.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a 
+                        :href="ppdbUrl"
+                        class="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-blue-500 transition-all duration-300 shadow-lg shadow-blue-900/30 border border-blue-500"
+                    >
+                        Mulai Registrasi PPDB
+                    </a>
+                    <Link 
+                        :href="route('kontak')"
+                        class="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/20 hover:bg-white/5 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all duration-300"
+                    >
+                        Hubungi Panitia
+                    </Link>
+                </div>
+            </div>
+        </section>
+    </MainLayout>
+</template>
+
+<script setup>
+import MainLayout from '../Layouts/MainLayout.vue';
+import { computed } from 'vue';
+import { Link, Head } from '@inertiajs/vue3';
+
+const ppdbUrl = computed(() => {
+    // In local development with IP or localhost, use local port 8001 with tingkat parameter
+    if (window.location.hostname.startsWith('192.168.') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return `http://${window.location.hostname}:8001/register?tingkat=smp`;
+    }
+    // Default to production URL
+    return 'https://ppdb.riyadussalikin.my.id/register?tingkat=smp';
+});
+</script>
+
+<style scoped>
+.bg-dot-pattern {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+</style>
