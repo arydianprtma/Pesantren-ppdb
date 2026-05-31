@@ -53,6 +53,7 @@ class PortalPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
                 'Sistem',
+                'Manajemen Sekolah',
                 'Master Data',
                 'Manajemen Web',
             ])
