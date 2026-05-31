@@ -47,6 +47,14 @@ class SmpPageTest extends TestCase
             'nama' => 'Pramuka',
             'deskripsi' => 'Klub Pramuka',
             'is_active' => true,
+            'is_unggulan' => true,
+        ]);
+
+        \App\Models\Ekstrakurikuler::create([
+            'nama' => 'Paskibra',
+            'deskripsi' => 'Klub Paskibra',
+            'is_active' => true,
+            'is_unggulan' => false,
         ]);
 
         $response = $this->get('/smp');
@@ -55,7 +63,7 @@ class SmpPageTest extends TestCase
         $response->assertInertia(fn ($page) => $page
             ->component('Smp')
             ->has('agendas', 1) // Only category 'spmb' agenda is passed
-            ->has('ekstrakurikuler', 1)
+            ->has('ekstrakurikuler', 1) // Only is_unggulan=true is passed
         );
     }
 }

@@ -35,6 +35,11 @@ class EkstrakurikulerTable
                     ->label('Aktif')
                     ->boolean(),
 
+                IconColumn::make('is_unggulan')
+                    ->label('Unggulan')
+                    ->boolean()
+                    ->sortable(),
+
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime('d M Y')

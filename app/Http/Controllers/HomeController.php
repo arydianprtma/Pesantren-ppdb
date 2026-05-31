@@ -146,7 +146,9 @@ class HomeController extends Controller
         });
 
         $agendas = $allAgendas->where('kategori', 'spmb')->values();
-        $ekstrakurikuler = Ekstrakurikuler::where('is_active', true)->get();
+        $ekstrakurikuler = Ekstrakurikuler::where('is_active', true)
+            ->where('is_unggulan', true)
+            ->get();
 
         return Inertia::render('Smp', [
             'agendas' => $agendas,

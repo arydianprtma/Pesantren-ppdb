@@ -43,6 +43,10 @@ class EkstrakurikulerForm
                     Toggle::make('is_active')
                         ->label('Aktif')
                         ->default(true),
+
+                    Toggle::make('is_unggulan')
+                        ->label('Tampilkan sebagai Unggulan')
+                        ->default(false),
                 ]),
         ]);
     }
