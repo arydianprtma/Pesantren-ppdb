@@ -129,15 +129,15 @@
                                 {{ profil?.stat_2_val ?? '100%' }}
                             </div>
                             <div class="text-xs font-black text-slate-500 uppercase tracking-widest">
-                                {{ profil?.stat_2_lbl ?? 'Kelulusan Siswa' }}
+                                {{ profil?.stat_2_lbl ?? 'Kurikulum Terintegrasi' }}
                             </div>
                         </div>
                         <div class="p-6 bg-white text-center border border-slate-150 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
                             <div class="text-4xl font-extrabold text-blue-900 mb-1">
-                                {{ profil?.stat_3_val ?? '2' }}
+                                {{ profil?.stat_3_val ?? '1:15' }}
                             </div>
                             <div class="text-xs font-black text-slate-500 uppercase tracking-widest">
-                                {{ profil?.stat_3_lbl ?? 'Kurikulum Terpadu' }}
+                                {{ profil?.stat_3_lbl ?? 'Rasio Guru & Siswa' }}
                             </div>
                         </div>
                         <div class="p-6 bg-white text-center border border-slate-150 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
@@ -145,7 +145,7 @@
                                 {{ profil?.stat_4_val ?? '10+' }}
                             </div>
                             <div class="text-xs font-black text-slate-500 uppercase tracking-widest">
-                                {{ profil?.stat_4_lbl ?? 'Ekskul & Kegiatan' }}
+                                {{ profil?.stat_4_lbl ?? 'Fasilitas Penunjang' }}
                             </div>
                         </div>
                     </div>
