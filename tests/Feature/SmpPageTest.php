@@ -66,4 +66,26 @@ class SmpPageTest extends TestCase
             ->has('ekstrakurikuler', 1) // Only is_unggulan=true is passed
         );
     }
+
+    /**
+     * Test if the public smp profil page can be rendered.
+     */
+    public function test_smp_profil_page_is_accessible(): void
+    {
+        \App\Models\SekolahProfil::create([
+            'profil' => 'SMP Dharma Ksatria adalah...',
+            'visi' => 'Visi sekolah',
+            'misi' => 'Misi sekolah',
+            'nama_kepsek' => 'Drs. H. Ahmad Dahlan, M.Pd.',
+            'is_active' => true,
+        ]);
+
+        $response = $this->get(route('sekolah.smp.profil'));
+
+        $response->assertStatus(200);
+        $response->assertInertia(fn ($page) => $page
+            ->component('SmpProfil')
+            ->has('profil')
+        );
+    }
 }

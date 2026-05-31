@@ -44,7 +44,7 @@
                             <button 
                                 @mouseenter="isTentangOpen = true"
                                 class="flex items-center gap-1 focus:outline-none"
-                                :class="getDropdownTriggerClass(['visi-misi', 'tentang-pondok', 'fasilitas'], isTentangOpen)"
+                                :class="getDropdownTriggerClass(['visi-misi', 'tentang-pondok', 'fasilitas', 'sekolah.smp.profil'], isTentangOpen)"
                             >
                                 Tentang Kami
                                 <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': isTentangOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,28 +58,46 @@
                                 @mouseleave="isTentangOpen = false"
                                 class="absolute left-0 mt-0 w-64 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden transform transition-all duration-200 origin-top-left z-50 py-2"
                             >
-                                <Link 
-                                    :href="route('tentang-pondok')" 
-                                    class="block px-4 py-3 text-sm text-gray-700 transition-colors"
-                                    :class="dropdownItemClass('tentang-pondok')"
-                                >
-                                    Tentang Pondok Pesantren
-                                </Link>
-                                <Link 
-                                    :href="route('fasilitas')" 
-                                    class="block px-4 py-3 text-sm text-gray-700 transition-colors"
-                                    :class="dropdownItemClass('fasilitas')"
-                                >
-                                    Fasilitas
-                                </Link>
-                                <div class="border-t border-gray-100 my-1"></div>
-                                <Link 
-                                    :href="route('visi-misi')" 
-                                    class="block px-4 py-3 text-sm text-gray-700 transition-colors"
-                                    :class="dropdownItemClass('visi-misi')"
-                                >
-                                    Visi &amp; Misi
-                                </Link>
+                                <template v-if="isSmpPage">
+                                    <Link 
+                                        :href="route('sekolah.smp.profil')" 
+                                        class="block px-4 py-3 text-sm text-gray-700 transition-colors"
+                                        :class="dropdownItemClass('sekolah.smp.profil')"
+                                    >
+                                        Profil Sekolah
+                                    </Link>
+                                    <Link 
+                                        :href="route('fasilitas')" 
+                                        class="block px-4 py-3 text-sm text-gray-700 transition-colors"
+                                        :class="dropdownItemClass('fasilitas')"
+                                    >
+                                        Fasilitas
+                                    </Link>
+                                </template>
+                                <template v-else>
+                                    <Link 
+                                        :href="route('tentang-pondok')" 
+                                        class="block px-4 py-3 text-sm text-gray-700 transition-colors"
+                                        :class="dropdownItemClass('tentang-pondok')"
+                                    >
+                                        Tentang Pondok Pesantren
+                                    </Link>
+                                    <Link 
+                                        :href="route('fasilitas')" 
+                                        class="block px-4 py-3 text-sm text-gray-700 transition-colors"
+                                        :class="dropdownItemClass('fasilitas')"
+                                    >
+                                        Fasilitas
+                                    </Link>
+                                    <div class="border-t border-gray-100 my-1"></div>
+                                    <Link 
+                                        :href="route('visi-misi')" 
+                                        class="block px-4 py-3 text-sm text-gray-700 transition-colors"
+                                        :class="dropdownItemClass('visi-misi')"
+                                    >
+                                        Visi &amp; Misi
+                                    </Link>
+                                </template>
                             </div>
                         </div>
 
@@ -169,15 +187,25 @@
                         <!-- Mobile Tentang Kami -->
                         <div class="border-l-2 pl-4 space-y-2 py-2" :class="isSmpPage ? 'border-blue-100' : 'border-emerald-100'">
                             <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Tentang Kami</div>
-                            <Link :href="route('tentang-pondok')" class="block text-gray-700 font-medium" :class="[route().current('tentang-pondok') ? (isSmpPage ? 'text-blue-600' : 'text-emerald-600') : (isSmpPage ? 'hover:text-blue-600' : 'hover:text-emerald-600')]">
-                                Tentang Pondok
-                            </Link>
-                            <Link :href="route('fasilitas')" class="block text-gray-700 font-medium" :class="[route().current('fasilitas') ? (isSmpPage ? 'text-blue-600' : 'text-emerald-600') : (isSmpPage ? 'hover:text-blue-600' : 'hover:text-emerald-600')]">
-                                Fasilitas
-                            </Link>
-                            <Link :href="route('visi-misi')" class="block text-gray-700 font-medium" :class="[route().current('visi-misi') ? (isSmpPage ? 'text-blue-600' : 'text-emerald-600') : (isSmpPage ? 'hover:text-blue-600' : 'hover:text-emerald-650')]">
-                                Visi &amp; Misi
-                            </Link>
+                            <template v-if="isSmpPage">
+                                <Link :href="route('sekolah.smp.profil')" class="block text-gray-700 font-medium" :class="[route().current('sekolah.smp.profil') ? 'text-blue-600' : 'hover:text-blue-600']">
+                                    Profil Sekolah
+                                </Link>
+                                <Link :href="route('fasilitas')" class="block text-gray-700 font-medium" :class="[route().current('fasilitas') ? 'text-blue-600 font-bold' : 'hover:text-blue-600']">
+                                    Fasilitas
+                                </Link>
+                            </template>
+                            <template v-else>
+                                <Link :href="route('tentang-pondok')" class="block text-gray-700 font-medium" :class="[route().current('tentang-pondok') ? (isSmpPage ? 'text-blue-600' : 'text-emerald-600') : (isSmpPage ? 'hover:text-blue-600' : 'hover:text-emerald-600')]">
+                                    Tentang Pondok
+                                </Link>
+                                <Link :href="route('fasilitas')" class="block text-gray-700 font-medium" :class="[route().current('fasilitas') ? (isSmpPage ? 'text-blue-600' : 'text-emerald-600') : (isSmpPage ? 'hover:text-blue-600' : 'hover:text-emerald-600')]">
+                                    Fasilitas
+                                </Link>
+                                <Link :href="route('visi-misi')" class="block text-gray-700 font-medium" :class="[route().current('visi-misi') ? (isSmpPage ? 'text-blue-600' : 'text-emerald-600') : (isSmpPage ? 'hover:text-blue-600' : 'hover:text-emerald-650')]">
+                                    Visi &amp; Misi
+                                </Link>
+                            </template>
                         </div>
 
                         <!-- Mobile Dropdown -->

@@ -9,6 +9,7 @@ use App\Models\WebSetting;
 use App\Models\SpmbPendaftaran;
 use App\Models\Ekstrakurikuler;
 use App\Models\Guru;
+use App\Models\SekolahProfil;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -153,6 +154,17 @@ class HomeController extends Controller
         return Inertia::render('Smp', [
             'agendas' => $agendas,
             'ekstrakurikuler' => $ekstrakurikuler,
+        ]);
+    }
+
+    public function smpProfil(): Response
+    {
+        $profil = Cache::remember('smp_profil', 60 * 60, function () {
+            return SekolahProfil::where('is_active', true)->latest()->first();
+        });
+
+        return Inertia::render('SmpProfil', [
+            'profil' => $profil,
         ]);
     }
 }
