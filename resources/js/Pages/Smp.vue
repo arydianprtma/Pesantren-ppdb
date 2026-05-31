@@ -226,22 +226,34 @@
                         </p>
 
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="p-5 border border-slate-100 rounded-2xl hover:bg-slate-50/50 transition-colors">
-                                <div class="font-bold text-sm md:text-base text-slate-900 mb-1">Pramuka & Pasukan Khusus</div>
-                                <p class="text-xs md:text-sm text-slate-600">Melatih kepemimpinan, kepanduan, kedisiplinan, kemandirian fisik mental.</p>
-                            </div>
-                            <div class="p-5 border border-slate-100 rounded-2xl hover:bg-slate-50/50 transition-colors">
-                                <div class="font-bold text-sm md:text-base text-slate-900 mb-1">Hadroh & Seni Kaligrafi</div>
-                                <p class="text-xs md:text-sm text-slate-600">Mewadahi kecintaan santri pada seni musik religi islami dan tulisan kaligrafi.</p>
-                            </div>
-                            <div class="p-5 border border-slate-100 rounded-2xl hover:bg-slate-50/50 transition-colors">
-                                <div class="font-bold text-sm md:text-base text-slate-900 mb-1">Klub Olahraga (Futsal & Bulutangkis)</div>
-                                <p class="text-xs md:text-sm text-slate-600">Menjaga kebugaran jasmani serta mengasah jiwa sportifitas kompetitif.</p>
-                            </div>
-                            <div class="p-5 border border-slate-100 rounded-2xl hover:bg-slate-50/50 transition-colors">
-                                <div class="font-bold text-sm md:text-base text-slate-900 mb-1">English & Arabic Club</div>
-                                <p class="text-xs md:text-sm text-slate-600">Klub asah ketrampilan debat, pidato, dan percakapan bahasa asing.</p>
-                            </div>
+                            <template v-if="ekstrakurikuler && ekstrakurikuler.length > 0">
+                                <div 
+                                    v-for="item in ekstrakurikuler" 
+                                    :key="item.id"
+                                    class="p-5 border border-slate-100 rounded-2xl hover:bg-slate-50/50 transition-colors"
+                                >
+                                    <div class="font-bold text-sm md:text-base text-slate-900 mb-1">{{ item.nama }}</div>
+                                    <p class="text-xs md:text-sm text-slate-600 leading-relaxed">{{ item.deskripsi }}</p>
+                                </div>
+                            </template>
+                            <template v-else>
+                                <div class="p-5 border border-slate-100 rounded-2xl hover:bg-slate-50/50 transition-colors">
+                                    <div class="font-bold text-sm md:text-base text-slate-900 mb-1">Pramuka & Pasukan Khusus</div>
+                                    <p class="text-xs md:text-sm text-slate-600">Melatih kepemimpinan, kepanduan, kedisiplinan, kemandirian fisik mental.</p>
+                                </div>
+                                <div class="p-5 border border-slate-100 rounded-2xl hover:bg-slate-50/50 transition-colors">
+                                    <div class="font-bold text-sm md:text-base text-slate-900 mb-1">Hadroh & Seni Kaligrafi</div>
+                                    <p class="text-xs md:text-sm text-slate-600">Mewadahi kecintaan santri pada seni musik religi islami dan tulisan kaligrafi.</p>
+                                </div>
+                                <div class="p-5 border border-slate-100 rounded-2xl hover:bg-slate-50/50 transition-colors">
+                                    <div class="font-bold text-sm md:text-base text-slate-900 mb-1">Klub Olahraga (Futsal & Bulutangkis)</div>
+                                    <p class="text-xs md:text-sm text-slate-600">Menjaga kebugaran jasmani serta mengasah jiwa sportifitas kompetitif.</p>
+                                </div>
+                                <div class="p-5 border border-slate-100 rounded-2xl hover:bg-slate-50/50 transition-colors">
+                                    <div class="font-bold text-sm md:text-base text-slate-900 mb-1">English & Arabic Club</div>
+                                    <p class="text-xs md:text-sm text-slate-600">Klub asah ketrampilan debat, pidato, dan percakapan bahasa asing.</p>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -527,6 +539,10 @@ import { Link, Head } from '@inertiajs/vue3';
 
 const props = defineProps({
     agendas: {
+        type: Array,
+        default: () => []
+    },
+    ekstrakurikuler: {
         type: Array,
         default: () => []
     }

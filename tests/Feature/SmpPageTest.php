@@ -43,12 +43,19 @@ class SmpPageTest extends TestCase
             'is_active' => true,
         ]);
 
+        \App\Models\Ekstrakurikuler::create([
+            'nama' => 'Pramuka',
+            'deskripsi' => 'Klub Pramuka',
+            'is_active' => true,
+        ]);
+
         $response = $this->get('/smp');
 
         $response->assertStatus(200);
         $response->assertInertia(fn ($page) => $page
             ->component('Smp')
             ->has('agendas', 1) // Only category 'spmb' agenda is passed
+            ->has('ekstrakurikuler', 1)
         );
     }
 }
