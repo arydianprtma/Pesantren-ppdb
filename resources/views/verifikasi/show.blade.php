@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verifikasi Pendaftaran - {{ $no_reg }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/verification.css'])
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -47,8 +47,21 @@
                 <!-- Foto & Nama Utama -->
                 <div class="flex flex-col items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100">
                     <div class="w-24 h-32 rounded-xl overflow-hidden border-4 border-white shadow-md bg-white">
-                        @if($pendaftaran->user && $pendaftaran->user->avatar)
-                            <img src="{{ filter_var($pendaftaran->user->avatar, FILTER_VALIDATE_URL) ? $pendaftaran->user->avatar : asset('storage/' . ltrim($pendaftaran->user->avatar, '/')) }}" class="w-full h-full object-cover" alt="Foto {{ $pendaftaran->siswa->nama_lengkap }}">
+                        @php
+                            $avatarUrl = null;
+                            if ($pendaftaran->user && $pendaftaran->user->avatar) {
+                                if (filter_var($pendaftaran->user->avatar, FILTER_VALIDATE_URL)) {
+                                    $avatarUrl = $pendaftaran->user->avatar;
+                                } else {
+                                    $avatarPath = ltrim($pendaftaran->user->avatar, '/');
+                                    if (\Illuminate\Support\Facades\Storage::disk('public')->exists($avatarPath)) {
+                                        $avatarUrl = asset('storage/' . $avatarPath);
+                                    }
+                                }
+                            }
+                        @endphp
+                        @if($avatarUrl)
+                            <img src="{{ $avatarUrl }}" class="w-full h-full object-cover" alt="Foto {{ $pendaftaran->siswa->nama_lengkap }}">
                         @else
                             <div class="w-full h-full flex items-center justify-center bg-slate-100 text-slate-300">
                                 <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>

@@ -12,7 +12,7 @@ export default defineConfig({
     },
     plugins: [
         laravel({
-            input: 'resources/js/app.js',
+            input: ['resources/css/verification.css', 'resources/js/app.js'],
             refresh: true,
         }),
         vue({
