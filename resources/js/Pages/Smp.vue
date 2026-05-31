@@ -311,22 +311,31 @@
                                 <!-- Dot indicator on timeline -->
                                 <div 
                                     class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-4 border-white"
-                                    :class="isAgendaOpen(event) ? 'bg-blue-600 ring-4 ring-blue-100' : 'bg-slate-300'"
+                                    :class="checkAgendaStatus(event) === 'buka' ? 'bg-blue-600 ring-4 ring-blue-100' : 'bg-slate-300'"
                                 ></div>
                                 <div 
                                     class="bg-slate-50 p-5 rounded-2xl border transition-all"
-                                    :class="isAgendaOpen(event) ? 'border-blue-200 shadow-sm bg-blue-50/10' : 'border-slate-100'"
+                                    :class="checkAgendaStatus(event) === 'buka' ? 'border-blue-200 shadow-sm bg-blue-50/10' : 'border-slate-100'"
                                 >
                                     <div class="flex justify-between items-start mb-2">
                                         <h4 class="font-bold text-sm md:text-base text-slate-900">{{ event.judul }}</h4>
                                         <span 
-                                            v-if="isAgendaOpen(event)"
+                                            v-if="checkAgendaStatus(event) === 'buka'"
                                             class="text-xs bg-sky-100 text-sky-750 font-black px-2 py-0.5 rounded-full uppercase tracking-wide"
                                         >
                                             Dibuka
                                         </span>
+                                        <span 
+                                            v-else
+                                            class="text-xs bg-slate-200 text-slate-600 font-black px-2 py-0.5 rounded-full uppercase tracking-wide"
+                                        >
+                                            Tutup
+                                        </span>
                                     </div>
-                                    <p class="text-xs md:text-sm text-slate-700 mb-2">Pendaftaran: {{ formatDateString(event.tgl_mulai, event.tgl_selesai) }}</p>
+                                    <p class="text-xs md:text-sm text-slate-700 mb-2">
+                                        Pendaftaran: {{ formatDateString(event.tgl_mulai, event.tgl_selesai) }}
+                                        <span v-if="formatTimeRange(event)" class="text-slate-500 font-normal"> | {{ formatTimeRange(event) }}</span>
+                                    </p>
                                     <p v-if="event.deskripsi" class="text-xs md:text-sm text-slate-550 leading-relaxed mt-2 whitespace-pre-line">{{ event.deskripsi }}</p>
                                 </div>
                             </div>
@@ -539,17 +548,47 @@ const parseDateLocal = (dateString) => {
     return new Date(d.getFullYear(), d.getMonth(), d.getDate());
 };
 
-const isAgendaOpen = (event) => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const start = parseDateLocal(event.tgl_mulai);
-    if (!start) return false;
-    const end = event.tgl_selesai ? parseDateLocal(event.tgl_selesai) : null;
-    if (end) {
-        end.setHours(23, 59, 59, 999);
-        return today >= start && today <= end;
+const combineDateTime = (dateStr, timeStr, defaultTime = '00:00:00') => {
+    if (!dateStr) return null;
+    const match = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!match) return null;
+    const year = parseInt(match[1], 10);
+    const month = parseInt(match[2], 10) - 1; // 0-indexed month
+    const day = parseInt(match[3], 10);
+    
+    let hours = 0;
+    let minutes = 0;
+    let seconds = 0;
+    
+    const timeToUse = timeStr || defaultTime;
+    const timeMatch = timeToUse.match(/^(\d{2}):(\d{2})(?::(\d{2}))?/);
+    if (timeMatch) {
+        hours = parseInt(timeMatch[1], 10);
+        minutes = parseInt(timeMatch[2], 10);
+        if (timeMatch[3]) {
+            seconds = parseInt(timeMatch[3], 10);
+        }
     }
-    return today.getTime() === start.getTime();
+    
+    return new Date(year, month, day, hours, minutes, seconds);
+};
+
+const checkAgendaStatus = (event) => {
+    const start = combineDateTime(event.tgl_mulai, event.jam_mulai, '00:00:00');
+    if (!start) return 'tutup';
+    
+    let end = null;
+    if (event.tgl_selesai) {
+        end = combineDateTime(event.tgl_selesai, event.jam_selesai, '23:59:59');
+    } else {
+        end = combineDateTime(event.tgl_mulai, event.jam_selesai, '23:59:59');
+    }
+    
+    const now = new Date();
+    if (now >= start && now <= end) {
+        return 'buka';
+    }
+    return 'tutup';
 };
 
 const formatDateString = (startStr, endStr) => {
@@ -565,6 +604,25 @@ const formatDateString = (startStr, endStr) => {
         }
     }
     return startFormatted;
+};
+
+const formatTime = (timeString) => {
+    if (!timeString) return '';
+    const parts = timeString.split(':');
+    if (parts.length >= 2) {
+        return `${parts[0]}:${parts[1]}`;
+    }
+    return timeString;
+};
+
+const formatTimeRange = (event) => {
+    if (!event.jam_mulai) return '';
+    const start = formatTime(event.jam_mulai);
+    if (event.jam_selesai) {
+        const end = formatTime(event.jam_selesai);
+        return `Pukul ${start} - ${end} WIB`;
+    }
+    return `Mulai Pukul ${start} WIB`;
 };
 
 const activeFaq = ref(null);
