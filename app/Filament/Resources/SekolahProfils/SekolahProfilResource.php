@@ -30,9 +30,9 @@ class SekolahProfilResource extends Resource
 
     protected static ?string $slug = 'sekolah-profil';
 
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 1;
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Manajemen Web';
+    protected static string|\UnitEnum|null $navigationGroup = 'Manajemen Sekolah';
 
     public static function form(Schema $schema): Schema
     {
