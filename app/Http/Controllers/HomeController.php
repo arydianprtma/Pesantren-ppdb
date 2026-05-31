@@ -136,4 +136,19 @@ class HomeController extends Controller
             'agendas' => $agendas,
         ]);
     }
+
+    public function smp(): Response
+    {
+        $allAgendas = Cache::remember('schedules_list', 60 * 60, function () {
+            return \App\Models\Agenda::active()
+                ->orderBy('tgl_mulai', 'asc')
+                ->get();
+        });
+
+        $agendas = $allAgendas->where('kategori', 'spmb')->values();
+
+        return Inertia::render('Smp', [
+            'agendas' => $agendas,
+        ]);
+    }
 }

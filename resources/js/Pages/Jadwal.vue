@@ -95,59 +95,61 @@
                                         'bg-emerald-50/80 ring-2 ring-emerald-500 ring-inset': cell.isSelected,
                                     }"
                                 >
-                                    <!-- Date Number -->
-                                    <div class="flex justify-between items-center">
-                                        <span 
-                                            class="w-8 h-8 rounded-full flex flex-col items-center justify-center font-bold text-sm relative"
-                                            :class="cell.isToday 
-                                                ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25' 
-                                                : (cell.isSelected ? 'bg-emerald-50 text-emerald-700 border border-emerald-300' : 'text-gray-700')"
-                                        >
-                                            {{ cell.day }}
-                                            <!-- Dot indicator under the number -->
+                                    <template v-if="cell.isCurrentMonth">
+                                        <!-- Date Number -->
+                                        <div class="flex justify-between items-center">
                                             <span 
-                                                v-if="cell.events.length > 0" 
-                                                class="absolute bottom-1 w-1.5 h-1.5 rounded-full"
-                                                :class="cell.isToday ? 'bg-white' : getEventDotColorClass(cell.events)"
+                                                class="w-8 h-8 rounded-full flex flex-col items-center justify-center font-bold text-sm relative"
+                                                :class="cell.isToday 
+                                                    ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25' 
+                                                    : (cell.isSelected ? 'bg-emerald-50 text-emerald-700 border border-emerald-300' : 'text-gray-700')"
+                                            >
+                                                {{ cell.day }}
+                                                <!-- Dot indicator under the number -->
+                                                <span 
+                                                    v-if="cell.events.length > 0" 
+                                                    class="absolute bottom-1 w-1.5 h-1.5 rounded-full"
+                                                    :class="cell.isToday ? 'bg-white' : getEventDotColorClass(cell.events)"
+                                                ></span>
+                                            </span>
+                                            
+                                            <!-- Mobile dot counts -->
+                                            <span v-if="cell.events.length > 0" class="block sm:hidden w-2 h-2 rounded-full" :class="getEventDotColorClass(cell.events)"></span>
+                                        </div>
+
+                                        <!-- Events list inside cell (Desktop only) -->
+                                        <div class="hidden sm:block space-y-1 mt-2 grow overflow-hidden">
+                                            <div 
+                                                v-for="event in cell.events.slice(0, 2)" 
+                                                :key="event.id"
+                                                class="text-[10px] px-2 py-1 rounded-lg truncate font-medium border"
+                                                :class="getEventStyleClass(event.kategori)"
+                                                :title="event.judul"
+                                            >
+                                                {{ event.judul }}
+                                            </div>
+                                            <div 
+                                                v-if="cell.events.length > 2" 
+                                                class="text-[9px] text-emerald-600 font-bold pl-2"
+                                            >
+                                                +{{ cell.events.length - 2 }} lainnya
+                                            </div>
+                                        </div>
+
+                                        <!-- Bottom Category Dot Indicators (Desktop only when no events slice fits) -->
+                                        <div class="hidden sm:flex gap-1 mt-1 justify-end">
+                                            <span 
+                                                v-for="cat in getUniqueCategories(cell.events)" 
+                                                :key="cat"
+                                                class="w-1.5 h-1.5 rounded-full"
+                                                :class="{
+                                                    'bg-emerald-500': cat === 'spmb',
+                                                    'bg-blue-500': cat === 'akademik',
+                                                    'bg-purple-500': cat === 'umum'
+                                                }"
                                             ></span>
-                                        </span>
-                                        
-                                        <!-- Mobile dot counts -->
-                                        <span v-if="cell.events.length > 0" class="block sm:hidden w-2 h-2 rounded-full" :class="getEventDotColorClass(cell.events)"></span>
-                                    </div>
-
-                                    <!-- Events list inside cell (Desktop only) -->
-                                    <div class="hidden sm:block space-y-1 mt-2 grow overflow-hidden">
-                                        <div 
-                                            v-for="event in cell.events.slice(0, 2)" 
-                                            :key="event.id"
-                                            class="text-[10px] px-2 py-1 rounded-lg truncate font-medium border"
-                                            :class="getEventStyleClass(event.kategori)"
-                                            :title="event.judul"
-                                        >
-                                            {{ event.judul }}
                                         </div>
-                                        <div 
-                                            v-if="cell.events.length > 2" 
-                                            class="text-[9px] text-emerald-600 font-bold pl-2"
-                                        >
-                                            +{{ cell.events.length - 2 }} lainnya
-                                        </div>
-                                    </div>
-
-                                    <!-- Bottom Category Dot Indicators (Desktop only when no events slice fits) -->
-                                    <div class="hidden sm:flex gap-1 mt-1 justify-end">
-                                        <span 
-                                            v-for="cat in getUniqueCategories(cell.events)" 
-                                            :key="cat"
-                                            class="w-1.5 h-1.5 rounded-full"
-                                            :class="{
-                                                'bg-emerald-500': cat === 'spmb',
-                                                'bg-blue-500': cat === 'akademik',
-                                                'bg-purple-500': cat === 'umum'
-                                            }"
-                                        ></span>
-                                    </div>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -362,7 +364,7 @@ const calendarCells = computed(() => {
             isCurrentMonth: false,
             isToday: isSameDay(cellDate, today),
             isSelected: isSameDay(cellDate, selectedDate.value),
-            events: getEventsForDate(cellDate)
+            events: []
         });
     }
 
@@ -389,7 +391,7 @@ const calendarCells = computed(() => {
             isCurrentMonth: false,
             isToday: isSameDay(cellDate, today),
             isSelected: isSameDay(cellDate, selectedDate.value),
-            events: getEventsForDate(cellDate)
+            events: []
         });
     }
 

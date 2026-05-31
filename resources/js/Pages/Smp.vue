@@ -299,33 +299,35 @@
                         <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">Jadwal & Gelombang Pendaftaran</h2>
                         <p class="text-slate-650 text-sm font-medium">Timeline gelombang seleksi penerimaan santri baru SMP Dharma Ksatria:</p>
 
-                        <div class="relative pl-6 border-l-2 border-blue-100 space-y-8">
-                            <!-- Gelombang 1 -->
-                            <div class="relative">
-                                <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-blue-600 border-4 border-white ring-4 ring-blue-150"></div>
-                                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                        <div v-if="agendas.length === 0" class="p-6 bg-slate-50 border border-slate-100 rounded-3xl text-center text-slate-550 text-sm font-medium">
+                            Belum ada jadwal gelombang pendaftaran yang dirilis di portal admin.
+                        </div>
+                        <div v-else class="relative pl-6 border-l-2 border-blue-100 space-y-8">
+                            <div 
+                                v-for="event in agendas" 
+                                :key="event.id"
+                                class="relative"
+                            >
+                                <!-- Dot indicator on timeline -->
+                                <div 
+                                    class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-4 border-white"
+                                    :class="isAgendaOpen(event) ? 'bg-blue-600 ring-4 ring-blue-100' : 'bg-slate-300'"
+                                ></div>
+                                <div 
+                                    class="bg-slate-50 p-5 rounded-2xl border transition-all"
+                                    :class="isAgendaOpen(event) ? 'border-blue-200 shadow-sm bg-blue-50/10' : 'border-slate-100'"
+                                >
                                     <div class="flex justify-between items-start mb-2">
-                                        <h4 class="font-bold text-sm md:text-base text-slate-900">Gelombang I (Utama)</h4>
-                                        <span class="text-xs bg-sky-100 text-sky-750 font-black px-2 py-0.5 rounded-full uppercase tracking-wide">Dibuka</span>
+                                        <h4 class="font-bold text-sm md:text-base text-slate-900">{{ event.judul }}</h4>
+                                        <span 
+                                            v-if="isAgendaOpen(event)"
+                                            class="text-xs bg-sky-100 text-sky-750 font-black px-2 py-0.5 rounded-full uppercase tracking-wide"
+                                        >
+                                            Dibuka
+                                        </span>
                                     </div>
-                                    <p class="text-xs md:text-sm text-slate-700 mb-2">Pendaftaran: 1 November 2026 - 31 Januari 2027</p>
-                                    <div class="text-xs font-semibold text-blue-700 flex gap-4">
-                                        <span>• Pelaksanaan Tes: 1 Februari 2027</span>
-                                        <span>• Pengumuman: 4 Februari 2027</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Gelombang 2 -->
-                            <div class="relative">
-                                <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-300 border-4 border-white"></div>
-                                <div class="bg-slate-50/50 p-5 rounded-2xl border border-slate-100/80">
-                                    <h4 class="font-bold text-sm md:text-base text-slate-700 mb-1">Gelombang II</h4>
-                                    <p class="text-xs md:text-sm text-slate-700 mb-2">Pendaftaran: 5 Februari 2027 - 30 April 2027</p>
-                                    <div class="text-xs font-semibold text-slate-500 flex gap-4">
-                                        <span>• Pelaksanaan Tes: 2 Mei 2027</span>
-                                        <span>• Pengumuman: 5 Mei 2027</span>
-                                    </div>
+                                    <p class="text-xs md:text-sm text-slate-700 mb-2">Pendaftaran: {{ formatDateString(event.tgl_mulai, event.tgl_selesai) }}</p>
+                                    <p v-if="event.deskripsi" class="text-xs md:text-sm text-slate-550 leading-relaxed mt-2 whitespace-pre-line">{{ event.deskripsi }}</p>
                                 </div>
                             </div>
                         </div>
@@ -490,6 +492,57 @@
 import MainLayout from '../Layouts/MainLayout.vue';
 import { ref, computed } from 'vue';
 import { Link, Head } from '@inertiajs/vue3';
+
+const props = defineProps({
+    agendas: {
+        type: Array,
+        default: () => []
+    }
+});
+
+const parseDateLocal = (dateString) => {
+    if (!dateString) return null;
+    if (typeof dateString === 'string') {
+        const match = dateString.match(/^(\d{4})-(\d{2})-(\d{2})/);
+        if (match) {
+            const year = parseInt(match[1], 10);
+            const month = parseInt(match[2], 10) - 1; // 0-indexed month
+            const day = parseInt(match[3], 10);
+            return new Date(year, month, day);
+        }
+    }
+    const d = new Date(dateString);
+    if (isNaN(d.getTime())) return null;
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+};
+
+const isAgendaOpen = (event) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const start = parseDateLocal(event.tgl_mulai);
+    if (!start) return false;
+    const end = event.tgl_selesai ? parseDateLocal(event.tgl_selesai) : null;
+    if (end) {
+        end.setHours(23, 59, 59, 999);
+        return today >= start && today <= end;
+    }
+    return today.getTime() === start.getTime();
+};
+
+const formatDateString = (startStr, endStr) => {
+    const start = parseDateLocal(startStr);
+    if (!start) return '';
+    const startFormatted = start.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+    
+    if (endStr) {
+        const end = parseDateLocal(endStr);
+        if (end && start.getTime() !== end.getTime()) {
+            const endFormatted = end.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            return `${startFormatted} - ${endFormatted}`;
+        }
+    }
+    return startFormatted;
+};
 
 const activeFaq = ref(null);
 
