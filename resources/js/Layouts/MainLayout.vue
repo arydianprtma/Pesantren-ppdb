@@ -11,22 +11,22 @@
                         <div class="block lg:hidden">
                             <template v-if="isSmpPage">
                                 <div class="text-blue-900 font-extrabold text-base leading-tight">SMP Dharma Ksatria</div>
-                                <div class="text-blue-600 text-xs font-semibold">Formal Unit</div>
+                                <div class="text-blue-600 text-xs font-medium">Formal Unit</div>
                             </template>
                             <template v-else>
-                                <div class="text-emerald-700 font-bold text-base leading-tight">Riyadussalikin</div>
-                                <div class="text-emerald-600 text-xs font-semibold">Padaherang</div>
+                                <div class="text-emerald-700 font-extrabold text-base leading-tight">Riyadussalikin</div>
+                                <div class="text-emerald-600 text-xs font-medium">Padaherang</div>
                             </template>
                         </div>
                         <!-- Desktop: Nama lengkap -->
                         <div class="hidden lg:block">
                             <template v-if="isSmpPage">
-                                <div class="text-blue-900 font-bold text-lg leading-tight">SMP Dharma Ksatria</div>
-                                <div class="text-blue-600 text-sm font-semibold">Riyadussalikin Padaherang</div>
+                                <div class="text-blue-900 font-extrabold text-lg leading-tight">SMP Dharma Ksatria</div>
+                                <div class="text-blue-600 text-sm font-medium">Riyadussalikin Padaherang</div>
                             </template>
                             <template v-else>
-                                <div class="text-emerald-700 font-bold text-lg leading-tight">Pondok Pesantren</div>
-                                <div class="text-emerald-600 text-sm font-semibold">Riyadussalikin Padaherang</div>
+                                <div class="text-emerald-700 font-extrabold text-lg leading-tight">Pondok Pesantren</div>
+                                <div class="text-emerald-600 text-sm font-medium">Riyadussalikin Padaherang</div>
                             </template>
                         </div>
                     </Link>
