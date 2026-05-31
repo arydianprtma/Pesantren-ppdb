@@ -5,7 +5,7 @@
             <div class="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
                 <div class="flex justify-between items-center h-20">
                     <!-- Logo & Name -->
-                    <Link :href="route('home')" class="flex items-center space-x-3 flex-shrink-0">
+                    <Link :href="route('home')" class="flex items-center space-x-3 flex-shrink-0 font-poppins">
                         <img :src="isSmpPage ? '/assets/Logo_Sekolah/smp_dharma_ksatria.png' : logoUrl" :alt="isSmpPage ? 'Logo SMP Dharma Ksatria' : 'Logo Riyadussalikin'" class="h-12 w-12 object-contain" />
                         <!-- Mobile: Nama Pondok / Sekolah -->
                         <div class="block lg:hidden">
