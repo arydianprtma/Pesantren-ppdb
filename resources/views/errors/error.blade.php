@@ -29,8 +29,9 @@
                     </svg>
                 @endif
             </div>
-            <h1 class="text-3xl font-black text-slate-900 uppercase tracking-tighter italic">{{ $code }} {{ $title }}</h1>
-            <p class="text-slate-500 text-xs font-bold mt-2 uppercase tracking-[0.2em]">Pondok Pesantren Riyadussalikin</p>
+            <div class="text-6xl font-black text-slate-900 tracking-tighter italic mb-1">{{ $code }}</div>
+            <h1 class="text-sm font-black text-slate-500 uppercase tracking-[0.2em]">{{ $title }}</h1>
+            <p class="text-slate-400 text-[10px] font-bold mt-2 uppercase tracking-[0.2em]">Pondok Pesantren Riyadussalikin</p>
         </div>
 
         <!-- Error Content -->
@@ -46,9 +47,10 @@
             </p>
 
             @if(config('app.debug') && isset($debug))
-            <div class="mb-8 p-4 bg-slate-900 rounded-xl overflow-x-auto">
+            <div class="mb-8 p-4 bg-slate-900 rounded-xl text-left overflow-x-auto">
                 <p class="text-[10px] font-mono text-emerald-400 mb-2 uppercase tracking-widest border-b border-slate-700 pb-1">Debug Information</p>
-                <pre class="text-[10px] font-mono text-slate-300 leading-tight">File: {{ $debug['file'] }}
+                <pre class="text-[10px] font-mono text-slate-300 leading-tight">Message: {{ $debug['message'] }}
+File: {{ $debug['file'] }}
 Line: {{ $debug['line'] }}
 Exception: {{ $debug['class'] }}</pre>
             </div>
