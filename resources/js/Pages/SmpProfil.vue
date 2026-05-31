@@ -22,8 +22,78 @@
             </div>
         </section>
 
+        <!-- Sambutan Kepala Sekolah Section -->
+        <section class="py-20 bg-white overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+                    <!-- Left: Foto Kepala Sekolah -->
+                    <div class="w-full lg:w-5/12 flex flex-col items-center relative">
+                        <!-- Decorative Shapes -->
+                        <div class="absolute -bottom-6 -right-6 w-72 h-72 bg-blue-100 rounded-full blur-3xl -z-0"></div>
+                        <div class="absolute -top-6 -left-6 w-36 h-36 bg-sky-100 rounded-full blur-2xl -z-0"></div>
+
+                        <div class="relative group z-10 w-full max-w-sm mb-4">
+                            <div class="aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl relative border-8 border-slate-50 group hover:scale-102 transition-transform duration-500 bg-slate-100 flex items-center justify-center">
+                                <img 
+                                    v-if="profil?.foto_kepsek" 
+                                    :src="'/storage/' + profil.foto_kepsek" 
+                                    :alt="profil?.nama_kepsek || 'Kepala Sekolah'"
+                                    class="w-full h-full object-cover object-center"
+                                />
+                                <div v-else class="w-full h-full bg-blue-50 flex flex-col items-center justify-center py-10 px-6 text-center text-blue-300">
+                                    <svg class="w-24 h-24 mb-4 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                    <span class="text-xs font-semibold text-blue-400">Belum ada foto kepala sekolah</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nama di Bawah Foto -->
+                        <div class="relative z-10 text-center">
+                            <h3 class="text-lg font-extrabold text-slate-900 font-poppins">
+                                {{ profil?.nama_kepsek || 'Drs. H. Ahmad Dahlan, M.Pd.' }}
+                            </h3>
+                            <p class="text-xs text-blue-600 font-bold tracking-wider uppercase mt-0.5">
+                                Kepala Sekolah SMP Dharma Ksatria
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Sambutan Konten -->
+                    <div class="w-full lg:w-7/12 space-y-6">
+                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-sm font-bold rounded-full uppercase tracking-wider">Sambutan Pimpinan</span>
+                        
+                        <div class="space-y-1">
+                            <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight font-poppins">
+                                {{ profil?.nama_kepsek || 'Kepala Sekolah SMP Dharma Ksatria' }}
+                            </h2>
+                            <p class="text-blue-600 font-bold text-sm tracking-wide uppercase">
+                                Kepala Sekolah SMP Dharma Ksatria
+                            </p>
+                        </div>
+
+                        <div class="h-1 w-20 bg-blue-600 rounded-full my-4"></div>
+
+                        <div class="text-slate-700 leading-relaxed text-justify whitespace-pre-line text-base font-medium italic">
+                            <template v-if="profil?.sambutan_kepsek">
+                                "{{ profil.sambutan_kepsek }}"
+                            </template>
+                            <template v-else>
+                                "Assalamualaikum Warahmatullahi Wabarakatuh,<br/><br/>
+                                Selamat datang di halaman profil resmi SMP Dharma Ksatria Padaherang. Kami sangat bersyukur dan bangga menyambut Anda di lembaga pendidikan tingkat pertama kami yang dirancang khusus untuk mengintegrasikan keunggulan akademik umum dengan kurikulum akhlak diniyah pesantren klasik.<br/><br/>
+                                Di SMP Dharma Ksatria, kami berikhtiar semaksimal mungkin untuk melatih nalar kritis keilmuan para murid di masa transisi remaja mereka, sekaligus membentengi jiwa mereka dengan adab Islami yang luhur. Kami percaya bahwa kecerdasan intelektual yang diimbangi dengan kedalaman spiritual adalah kunci utama untuk membentuk generasi masa depan yang tangguh, cerdas, berkarakter, dan berakhlakul karimah.<br/><br/>
+                                Terima kasih atas amanah dan kepercayaan yang diberikan kepada kami untuk mendidik putra-putri Anda. Mari berkolaborasi bersama demi mewujudkan masa depan anak-anak kita yang gemilang.<br/><br/>
+                                Wassalamualaikum Warahmatullahi Wabarakatuh."
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Profil Singkat & Stats -->
-        <section class="py-20 bg-white relative">
+        <section class="py-20 bg-slate-50 border-t border-b border-slate-100 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                     <!-- Left: Description -->
@@ -46,19 +116,19 @@
 
                     <!-- Right: Stats / Info Cards -->
                     <div class="lg:col-span-5 grid grid-cols-2 gap-4">
-                        <div class="p-6 bg-gradient-to-br from-blue-50/50 to-white text-center border border-blue-100 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
+                        <div class="p-6 bg-white text-center border border-slate-150 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
                             <div class="text-4xl font-extrabold text-blue-900 mb-1">A</div>
                             <div class="text-xs font-black text-slate-500 uppercase tracking-widest">Akreditasi BAN-SM</div>
                         </div>
-                        <div class="p-6 bg-gradient-to-br from-blue-50/50 to-white text-center border border-blue-100 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
+                        <div class="p-6 bg-white text-center border border-slate-150 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
                             <div class="text-4xl font-extrabold text-blue-900 mb-1">100%</div>
                             <div class="text-xs font-black text-slate-500 uppercase tracking-widest">Kelulusan Siswa</div>
                         </div>
-                        <div class="p-6 bg-gradient-to-br from-blue-50/50 to-white text-center border border-blue-100 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
+                        <div class="p-6 bg-white text-center border border-slate-150 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
                             <div class="text-4xl font-extrabold text-blue-900 mb-1">2</div>
                             <div class="text-xs font-black text-slate-500 uppercase tracking-widest">Kurikulum Terpadu</div>
                         </div>
-                        <div class="p-6 bg-gradient-to-br from-blue-50/50 to-white text-center border border-blue-100 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
+                        <div class="p-6 bg-white text-center border border-slate-150 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
                             <div class="text-4xl font-extrabold text-blue-900 mb-1">10+</div>
                             <div class="text-xs font-black text-slate-500 uppercase tracking-widest">Ekskul & Kegiatan</div>
                         </div>
@@ -68,7 +138,7 @@
         </section>
 
         <!-- Visi & Misi Section -->
-        <section class="py-20 bg-slate-50 border-t border-b border-slate-100">
+        <section class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-sm font-bold rounded-full uppercase tracking-wider mb-3">Arah & Komitmen</span>
@@ -79,7 +149,7 @@
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                     <!-- Visi Card -->
-                    <div class="bg-white border border-slate-200/60 p-8 shadow-sm rounded-3xl relative overflow-hidden group hover:shadow-md transition-all duration-300">
+                    <div class="bg-slate-50 border border-slate-200/60 p-8 shadow-sm rounded-3xl relative overflow-hidden group hover:shadow-md transition-all duration-300">
                         <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-blue-50 rounded-full -z-0 group-hover:scale-110 transition-transform duration-500"></div>
                         <div class="relative z-10 space-y-4">
                             <div class="inline-block bg-blue-600 text-white px-5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider shadow-md shadow-blue-200">
@@ -93,7 +163,7 @@
                     </div>
 
                     <!-- Misi Card -->
-                    <div class="bg-white border border-slate-200/60 p-8 shadow-sm rounded-3xl relative overflow-hidden group hover:shadow-md transition-all duration-300">
+                    <div class="bg-slate-50 border border-slate-200/60 p-8 shadow-sm rounded-3xl relative overflow-hidden group hover:shadow-md transition-all duration-300">
                         <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-sky-50/70 rounded-full -z-0 group-hover:scale-110 transition-transform duration-500"></div>
                         <div class="relative z-10 space-y-4">
                             <div class="inline-block bg-sky-500 text-white px-5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider shadow-md shadow-sky-100">
@@ -114,66 +184,6 @@
                                     <p class="text-sm text-slate-700 leading-relaxed">Membekali murid dengan keterampilan komputer dasar, logika pemrograman sederhana (coding), serta bahasa asing harian.</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sambutan Kepala Sekolah Section -->
-        <section class="py-20 bg-white overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
-                    <!-- Left: Foto Kepala Sekolah -->
-                    <div class="w-full lg:w-5/12 flex justify-center relative">
-                        <!-- Decorative Shapes -->
-                        <div class="absolute -bottom-6 -right-6 w-72 h-72 bg-blue-100 rounded-full blur-3xl -z-0"></div>
-                        <div class="absolute -top-6 -left-6 w-36 h-36 bg-sky-100 rounded-full blur-2xl -z-0"></div>
-
-                        <div class="relative group z-10 w-full max-w-sm">
-                            <div class="aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl relative border-8 border-slate-50 group hover:scale-102 transition-transform duration-500 bg-slate-100 flex items-center justify-center">
-                                <img 
-                                    v-if="profil?.foto_kepsek" 
-                                    :src="'/storage/' + profil.foto_kepsek" 
-                                    :alt="profil?.nama_kepsek || 'Kepala Sekolah'"
-                                    class="w-full h-full object-cover object-center"
-                                />
-                                <div v-else class="w-full h-full bg-blue-50 flex flex-col items-center justify-center py-10 px-6 text-center text-blue-300">
-                                    <svg class="w-24 h-24 mb-4 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
-                                    <span class="text-xs font-semibold text-blue-400">Belum ada foto kepala sekolah</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Sambutan Konten -->
-                    <div class="w-full lg:w-7/12 space-y-6">
-                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-sm font-bold rounded-full uppercase tracking-wider">Sambutan Pimpinan</span>
-                        
-                        <div class="space-y-1">
-                            <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                                {{ profil?.nama_kepsek || 'Kepala Sekolah SMP Dharma Ksatria' }}
-                            </h2>
-                            <p class="text-blue-600 font-bold text-sm tracking-wide uppercase">
-                                Kepala Sekolah SMP Dharma Ksatria
-                            </p>
-                        </div>
-
-                        <div class="h-1 w-20 bg-blue-600 rounded-full my-4"></div>
-
-                        <div class="text-slate-700 leading-relaxed text-justify whitespace-pre-line text-base font-medium italic">
-                            <template v-if="profil?.sambutan_kepsek">
-                                "{{ profil.sambutan_kepsek }}"
-                            </template>
-                            <template v-else>
-                                "Assalamualaikum Warahmatullahi Wabarakatuh,<br/><br/>
-                                Selamat datang di halaman profil resmi SMP Dharma Ksatria Padaherang. Kami sangat bersyukur dan bangga menyambut Anda di lembaga pendidikan tingkat pertama kami yang dirancang khusus untuk mengintegrasikan keunggulan akademik umum dengan kurikulum akhlak diniyah pesantren klasik.<br/><br/>
-                                Di SMP Dharma Ksatria, kami berikhtiar semaksimal mungkin untuk melatih nalar kritis keilmuan para murid di masa transisi remaja mereka, sekaligus membentengi jiwa mereka dengan adab Islami yang luhur. Kami percaya bahwa kecerdasan intelektual yang diimbangi dengan kedalaman spiritual adalah kunci utama untuk membentuk generasi masa depan yang tangguh, cerdas, berkarakter, dan berakhlakul karimah.<br/><br/>
-                                Terima kasih atas amanah dan kepercayaan yang diberikan kepada kami untuk mendidik putra-putri Anda. Mari berkolaborasi bersama demi mewujudkan masa depan anak-anak kita yang gemilang.<br/><br/>
-                                Wassalamualaikum Warahmatullahi Wabarakatuh."
-                            </template>
                         </div>
                     </div>
                 </div>
