@@ -47,8 +47,8 @@
                 <!-- Foto & Nama Utama -->
                 <div class="flex flex-col items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100">
                     <div class="w-24 h-32 rounded-xl overflow-hidden border-4 border-white shadow-md bg-white">
-                        @if($pendaftaran->siswa && $pendaftaran->siswa->foto)
-                            <img src="{{ Storage::url($pendaftaran->siswa->foto) }}" class="w-full h-full object-cover">
+                        @if($pendaftaran->user && $pendaftaran->user->avatar)
+                            <img src="{{ filter_var($pendaftaran->user->avatar, FILTER_VALIDATE_URL) ? $pendaftaran->user->avatar : asset('storage/' . ltrim($pendaftaran->user->avatar, '/')) }}" class="w-full h-full object-cover" alt="Foto {{ $pendaftaran->siswa->nama_lengkap }}">
                         @else
                             <div class="w-full h-full flex items-center justify-center bg-slate-100 text-slate-300">
                                 <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
@@ -63,6 +63,10 @@
 
                 <!-- Detail Grid -->
                 <div class="grid grid-cols-1 gap-4 text-sm">
+                    <div class="flex justify-between items-center py-2 border-b border-slate-50">
+                        <span class="text-slate-400 font-bold uppercase text-[10px] tracking-wider">Tempat, Tgl Lahir</span>
+                        <span class="text-slate-700 font-bold">{{ $pendaftaran->siswa->tempat_lahir ?? '-' }}, {{ $pendaftaran->siswa->tanggal_lahir ? \Carbon\Carbon::parse($pendaftaran->siswa->tanggal_lahir)->translatedFormat('d F Y') : '-' }}</span>
+                    </div>
                     <div class="flex justify-between items-center py-2 border-b border-slate-50">
                         <span class="text-slate-400 font-bold uppercase text-[10px] tracking-wider">NISN / NIK</span>
                         <span class="text-slate-700 font-bold">{{ $pendaftaran->siswa->nisn ?? '-' }} / {{ $pendaftaran->siswa->nik ?? '-' }}</span>

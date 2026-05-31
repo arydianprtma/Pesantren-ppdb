@@ -36,7 +36,7 @@ class VerificationController extends Controller
 
         $token = $request->query('token');
         
-        $pendaftaran = SpmbPendaftaran::with(['siswa', 'ayah', 'ibu'])
+        $pendaftaran = SpmbPendaftaran::with(['siswa', 'ayah', 'ibu', 'user'])
             ->where('no_reg', $no_reg)
             ->where('verification_token', $token)
             ->first();
