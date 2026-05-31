@@ -21,8 +21,8 @@
                         <!-- Desktop: Nama lengkap -->
                         <div class="hidden lg:block">
                             <template v-if="isSmpPage">
-                                <div class="text-blue-900 font-extrabold text-lg leading-tight">SMP Dharma Ksatria</div>
-                                <div class="text-blue-600 text-sm font-semibold">Pondok Pesantren Riyadussalikin</div>
+                                <div class="text-blue-900 font-bold text-lg leading-tight">SMP Dharma Ksatria</div>
+                                <div class="text-blue-600 text-sm font-semibold">Riyadussalikin Padaherang</div>
                             </template>
                             <template v-else>
                                 <div class="text-emerald-700 font-bold text-lg leading-tight">Pondok Pesantren</div>
@@ -152,7 +152,7 @@
                     </div>
 
                     <!-- Mobile Menu Button -->
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2">
                         <svg class="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                             <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
