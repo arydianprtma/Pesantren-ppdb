@@ -68,16 +68,18 @@
                     <!-- Left: Description and Visi -->
                     <div class="space-y-6">
                         <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-sm font-bold rounded-full uppercase tracking-wider">Arah & Tujuan</span>
-                        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight font-poppins">
                             Visi & Misi Pendidikan SMP Dharma Ksatria
                         </h2>
-                        <p class="text-slate-700 leading-relaxed text-base">
+                        <div v-if="profil?.profil" class="prose prose-blue text-slate-700 leading-relaxed text-base text-justify whitespace-pre-line" v-html="profil.profil"></div>
+                        <p v-else class="text-slate-700 leading-relaxed text-base text-justify">
                             SMP Dharma Ksatria berkomitmen mendidik siswa usia remaja dalam masa transisi kritis menuju kedewasaan, menanamkan pondasi karakter keagamaan yang kokoh sekaligus mengasah kepekaan nalar kritis ilmiah.
                         </p>
                         
                         <div class="p-6 bg-gradient-to-br from-blue-50/50 to-white border border-blue-100 rounded-3xl shadow-sm">
                             <h3 class="text-sm font-black text-blue-900 uppercase tracking-widest mb-3">Visi Unit</h3>
-                            <p class="text-slate-800 font-bold italic text-base md:text-lg leading-relaxed">
+                            <div v-if="profil?.visi" class="prose prose-blue text-slate-805 leading-relaxed text-justify text-base md:text-lg font-bold italic" v-html="profil.visi"></div>
+                            <p v-else class="text-slate-805 font-bold italic text-base md:text-lg leading-relaxed text-justify">
                                 "Mewujudkan lulusan SMP yang unggul dalam Imtaq, terampil dalam teknologi dasar, berbudaya ilmiah, dan tangguh berakhlak mulia."
                             </p>
                         </div>
@@ -85,29 +87,37 @@
 
                     <!-- Right: Misi Cards -->
                     <div class="space-y-4">
-                        <div class="flex gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:border-blue-200 transition-all duration-300">
-                            <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white font-bold rounded-xl flex items-center justify-center shadow-md shadow-blue-200">1</div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-base mb-1">Pendidikan Karakter & Adab</h4>
-                                <p class="text-sm text-slate-700 leading-relaxed">Mengedepankan pembelajaran karakter berbasis nilai kepesantrenan dan pembiasaan adab Islami sehari-hari.</p>
+                        <template v-if="profil?.misi">
+                            <div class="p-6 bg-gradient-to-br from-blue-50/50 to-white border border-blue-100 rounded-3xl shadow-sm">
+                                <h3 class="text-sm font-black text-blue-900 uppercase tracking-widest mb-3">Misi Unit</h3>
+                                <div class="prose prose-blue text-slate-700 leading-relaxed text-sm text-justify list-decimal pl-2 prose-ol:list-decimal prose-ol:pl-5" v-html="profil.misi"></div>
                             </div>
-                        </div>
+                        </template>
+                        <template v-else>
+                            <div class="flex gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:border-blue-200 transition-all duration-300">
+                                <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white font-bold rounded-xl flex items-center justify-center shadow-md shadow-blue-200">1</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-base mb-1">Pendidikan Karakter & Adab</h4>
+                                    <p class="text-sm text-slate-700 leading-relaxed">Mengedepankan pembelajaran karakter berbasis nilai kepesantrenan dan pembiasaan adab Islami sehari-hari.</p>
+                                </div>
+                            </div>
 
-                        <div class="flex gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:border-blue-200 transition-all duration-300">
-                            <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white font-bold rounded-xl flex items-center justify-center shadow-md shadow-blue-200">2</div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-base mb-1">Penguasaan Akademik & Literasi</h4>
-                                <p class="text-sm text-slate-700 leading-relaxed">Menyelenggarakan pembelajaran Kurikulum Merdeka yang menantang akal budi dan mengasah literasi-numerasi dasar.</p>
+                            <div class="flex gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:border-blue-200 transition-all duration-300">
+                                <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white font-bold rounded-xl flex items-center justify-center shadow-md shadow-blue-200">2</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-base mb-1">Penguasaan Akademik & Literasi</h4>
+                                    <p class="text-sm text-slate-700 leading-relaxed">Menyelenggarakan pembelajaran Kurikulum Merdeka yang menantang akal budi dan mengasah literasi-numerasi dasar.</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="flex gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:border-blue-200 transition-all duration-300">
-                            <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white font-bold rounded-xl flex items-center justify-center shadow-md shadow-blue-200">3</div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-base mb-1">Teknologi & Keterampilan Praktis</h4>
-                                <p class="text-sm text-slate-700 leading-relaxed">Membekali murid dengan keterampilan komputer dasar, logika pemrograman sederhana (coding), dan bahasa asing.</p>
+                            <div class="flex gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:border-blue-200 transition-all duration-300">
+                                <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white font-bold rounded-xl flex items-center justify-center shadow-md shadow-blue-200">3</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-base mb-1">Teknologi & Keterampilan Praktis</h4>
+                                    <p class="text-sm text-slate-700 leading-relaxed">Membekali murid dengan keterampilan komputer dasar, logika pemrograman sederhana (coding), dan bahasa asing.</p>
+                                </div>
                             </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -545,6 +555,10 @@ const props = defineProps({
     ekstrakurikuler: {
         type: Array,
         default: () => []
+    },
+    profil: {
+        type: Object,
+        default: () => null
     }
 });
 

@@ -151,9 +151,14 @@ class HomeController extends Controller
             ->where('is_unggulan', true)
             ->get();
 
+        $profil = Cache::remember('smp_profil', 60 * 60, function () {
+            return SekolahProfil::where('is_active', true)->latest()->first();
+        });
+
         return Inertia::render('Smp', [
             'agendas' => $agendas,
             'ekstrakurikuler' => $ekstrakurikuler,
+            'profil' => $profil,
         ]);
     }
 
