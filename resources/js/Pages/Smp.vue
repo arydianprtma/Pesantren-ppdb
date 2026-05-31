@@ -378,7 +378,10 @@
                             </div>
                             <div class="flex items-start gap-3 pt-2 border-t border-blue-800/40">
                                 <svg class="w-4 h-4 text-sky-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <p class="text-xs text-sky-200">Catatan: Semua berkas dimasukkan ke dalam <span class="font-bold text-white">Map Snelhecker Berwarna Biru (SMP)</span> dan diberi nama calon siswa.</p>
+                                <div class="text-xs text-sky-200 space-y-1">
+                                    <p>Catatan: Semua berkas dimasukkan ke dalam <span class="font-bold text-white">Map Snelhecker Berwarna Biru (SMP)</span> dan diberi nama calon siswa.</p>
+                                    <p class="font-bold text-white">• Harap membawa seluruh dokumen fisik asli/fotokopi yang telah diunggah di portal pada saat verifikasi fisik/daftar ulang.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
