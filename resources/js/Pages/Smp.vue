@@ -432,7 +432,7 @@
                     <div v-for="(faq, idx) in faqs" :key="idx" class="border border-slate-100 rounded-2xl overflow-hidden transition-all">
                         <button 
                             @click="toggleFaq(idx)"
-                            class="w-full flex justify-between items-center p-6 text-left font-bold text-sm text-slate-900 bg-slate-50/50 hover:bg-slate-50 transition-colors"
+                            class="w-full flex justify-between items-center p-6 text-left font-bold text-base text-slate-900 bg-slate-50/50 hover:bg-slate-50 transition-colors"
                         >
                             <span>{{ faq.q }}</span>
                             <svg 
@@ -445,7 +445,7 @@
                         </button>
                         <div 
                             v-show="activeFaq === idx"
-                            class="p-6 bg-white border-t border-slate-100 text-xs text-slate-600 leading-relaxed transition-all"
+                            class="p-6 bg-slate-50/20 border-t border-slate-100 text-sm text-slate-800 font-medium leading-relaxed transition-all"
                         >
                             {{ faq.a }}
                         </div>
