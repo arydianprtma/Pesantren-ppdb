@@ -342,23 +342,43 @@
                         <div class="p-6 bg-gradient-to-br from-blue-900 to-slate-950 text-white rounded-3xl space-y-4 shadow-xl shadow-blue-950/20 border border-blue-800/40">
                             <div class="flex items-start gap-3">
                                 <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <p class="text-sm text-blue-100">Fotokopi Akta Kelahiran & Kartu Keluarga (KK) - <span class="font-bold text-white">Masing-masing 2 Lembar</span></p>
+                                <p class="text-sm text-blue-100">Formulir Pendaftaran yang sudah diisi - <span class="font-bold text-white">1 Rangkap</span></p>
                             </div>
                             <div class="flex items-start gap-3">
                                 <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <p class="text-sm text-blue-100">Fotokopi Ijazah SD/MI atau SKL dilegalisir - <span class="font-bold text-white">2 Lembar</span></p>
+                                <p class="text-sm text-blue-100">Fotokopi Rapor semester terakhir SD/MI dilegalisir + Lembar Data Siswa - <span class="font-bold text-white">1 Rangkap</span></p>
                             </div>
                             <div class="flex items-start gap-3">
                                 <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <p class="text-sm text-blue-100">Fotokopi KTP Orang Tua (Ayah & Ibu) atau Wali - <span class="font-bold text-white">2 Lembar</span></p>
+                                <p class="text-sm text-blue-100">Fotokopi Ijazah SD/MI atau SKHU dilegalisir - <span class="font-bold text-white">3 Lembar</span></p>
                             </div>
                             <div class="flex items-start gap-3">
                                 <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <p class="text-sm text-blue-100">Pas Foto Berwarna Terbaru 3x4 (Latar belakang biru) - <span class="font-bold text-white">4 Lembar</span></p>
+                                <p class="text-sm text-blue-100">Fotokopi Akta Kelahiran & Kartu Keluarga (KK) masih berlaku - <span class="font-bold text-white">Masing-masing 3 Lembar</span></p>
                             </div>
                             <div class="flex items-start gap-3">
                                 <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <p class="text-sm text-blue-100">Surat Keterangan Sehat Fisik & Mental dari Puskesmas/Dokter</p>
+                                <p class="text-sm text-blue-100">Fotokopi KTP Kedua Orang Tua (Ayah & Ibu) diperbesar 200% - <span class="font-bold text-white">Masing-masing 3 Lembar</span></p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <p class="text-sm text-blue-100">Pas Foto Berwarna latar belakang merah berseragam SD/MI - <span class="font-bold text-white">Ukuran 2x3 (3 Lembar) & 3x4 (3 Lembar)</span></p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <p class="text-sm text-blue-100">Fotokopi Kartu KKS / PKH / KPS / KIP / KIS / BPJS & NISN (jika ada) - <span class="font-bold text-white">Masing-masing 3 Lembar</span></p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <p class="text-sm text-blue-100">Surat Keterangan Sehat dari Puskesmas/Dokter</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <p class="text-sm text-blue-100">Surat Keterangan Kelakuan Baik (SKKB) dari Kepala Sekolah asal - <span class="font-bold text-white">1 Lembar</span></p>
+                            </div>
+                            <div class="flex items-start gap-3 pt-2 border-t border-blue-800/40">
+                                <svg class="w-4 h-4 text-sky-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <p class="text-xs text-sky-200">Catatan: Semua berkas dimasukkan ke dalam <span class="font-bold text-white">Map Snelhecker Berwarna Biru (SMP)</span> dan diberi nama calon siswa.</p>
                             </div>
                         </div>
                     </div>
