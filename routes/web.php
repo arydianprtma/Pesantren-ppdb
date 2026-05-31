@@ -27,7 +27,7 @@ Route::get('/prestasi', [PrestasiController::class, 'index'])->name('prestasi');
 
 // Sekolah Routes (Placeholders)
 Route::get('/sma', function () { return Inertia::render('ComingSoon'); })->name('sekolah.sma');
-Route::get('/smp', [HomeController::class, 'smp'])->name('sekolah.smp');
+Route::get('/smp-dharma-ksatria', [HomeController::class, 'smp'])->name('sekolah.smp');
 
 // Contact Routes
 Route::get('/kontak', [ContactController::class, 'index'])->name('kontak');

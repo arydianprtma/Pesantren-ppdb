@@ -15,7 +15,7 @@ class SmpPageTest extends TestCase
      */
     public function test_smp_page_is_accessible(): void
     {
-        $response = $this->get('/smp');
+        $response = $this->get(route('sekolah.smp'));
 
         $response->assertStatus(200);
     }
@@ -57,7 +57,7 @@ class SmpPageTest extends TestCase
             'is_unggulan' => false,
         ]);
 
-        $response = $this->get('/smp');
+        $response = $this->get(route('sekolah.smp'));
 
         $response->assertStatus(200);
         $response->assertInertia(fn ($page) => $page
