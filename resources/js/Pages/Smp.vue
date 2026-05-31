@@ -289,6 +289,171 @@
             </div>
         </section>
 
+        <!-- Jadwal & Persyaratan (Side-by-side) -->
+        <section class="py-20 bg-white border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <!-- Left: Jadwal Pendaftaran (7 cols) -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider">Agenda PPDB</span>
+                        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">Jadwal & Gelombang Pendaftaran</h2>
+                        <p class="text-slate-600 text-xs">Timeline gelombang seleksi penerimaan santri baru SMP Dharma Ksatria:</p>
+
+                        <div class="relative pl-6 border-l-2 border-blue-100 space-y-8">
+                            <!-- Gelombang 1 -->
+                            <div class="relative">
+                                <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-blue-600 border-4 border-white ring-4 ring-blue-150"></div>
+                                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="font-bold text-sm text-slate-900">Gelombang I (Utama)</h4>
+                                        <span class="text-[9px] bg-sky-100 text-sky-750 font-black px-2 py-0.5 rounded-full uppercase tracking-wide">Dibuka</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-600 mb-2">Pendaftaran: 1 November 2026 - 31 Januari 2027</p>
+                                    <div class="text-[10px] font-semibold text-blue-700 flex gap-4">
+                                        <span>• Pelaksanaan Tes: 1 Februari 2027</span>
+                                        <span>• Pengumuman: 4 Februari 2027</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Gelombang 2 -->
+                            <div class="relative">
+                                <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-300 border-4 border-white"></div>
+                                <div class="bg-slate-50/50 p-5 rounded-2xl border border-slate-100/80">
+                                    <h4 class="font-bold text-sm text-slate-700 mb-1">Gelombang II</h4>
+                                    <p class="text-[11px] text-slate-550 mb-2">Pendaftaran: 5 Februari 2027 - 30 April 2027</p>
+                                    <div class="text-[10px] font-semibold text-slate-500 flex gap-4">
+                                        <span>• Pelaksanaan Tes: 2 Mei 2027</span>
+                                        <span>• Pengumuman: 5 Mei 2027</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Persyaratan Dokumen (5 cols) -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider">Persyaratan</span>
+                        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">Dokumen Pendaftaran</h2>
+                        <p class="text-slate-600 text-xs">Berkas administrasi yang wajib disiapkan untuk verifikasi fisik saat daftar ulang:</p>
+
+                        <div class="p-6 bg-gradient-to-br from-blue-900 to-slate-950 text-white rounded-3xl space-y-4 shadow-xl shadow-blue-950/20 border border-blue-800/40">
+                            <div class="flex items-start gap-3">
+                                <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <p class="text-xs text-blue-100">Fotokopi Akta Kelahiran & Kartu Keluarga (KK) - <span class="font-bold text-white">Masing-masing 2 Lembar</span></p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <p class="text-xs text-blue-100">Fotokopi Ijazah SD/MI atau SKL dilegalisir - <span class="font-bold text-white">2 Lembar</span></p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <p class="text-xs text-blue-100">Fotokopi KTP Orang Tua (Ayah & Ibu) atau Wali - <span class="font-bold text-white">2 Lembar</span></p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <p class="text-xs text-blue-100">Pas Foto Berwarna Terbaru 3x4 (Latar belakang biru) - <span class="font-bold text-white">4 Lembar</span></p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <p class="text-xs text-blue-100">Surat Keterangan Sehat Fisik & Mental dari Puskesmas/Dokter</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rincian Biaya Pendidikan -->
+        <section class="py-20 bg-slate-50 border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider mb-3">Transparansi</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                        Estimasi Biaya Pendidikan SMP
+                    </h2>
+                    <p class="text-slate-500 text-xs font-semibold max-w-xl mx-auto mt-2">
+                        Komitmen kami memberikan rincian biaya yang transparan dan bersahabat untuk kelancaran kegiatan belajar santri.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Biaya Sekali Bayar -->
+                    <div class="bg-white border border-slate-100 p-8 rounded-3xl shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 bg-blue-50 text-blue-700 text-[10px] font-black rounded uppercase tracking-wider mb-4">Investasi Awal</span>
+                            <h4 class="text-lg font-black text-slate-900 mb-2">Uang Pangkal / Pembangunan</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed mb-6">Dialokasikan untuk pengembangan fasilitas gedung, pemeliharaan sarana asrama, dan operasional awal.</p>
+                            <div class="text-3xl font-extrabold text-blue-900">Rp 3.500.000</div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-50 text-[10px] font-bold text-slate-400 uppercase">Dibayar 1x selama masa pendidikan</div>
+                    </div>
+
+                    <!-- Biaya Tahunan & Perlengkapan -->
+                    <div class="bg-white border border-slate-100 p-8 rounded-3xl shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 bg-blue-50 text-blue-700 text-[10px] font-black rounded uppercase tracking-wider mb-4">Perlengkapan</span>
+                            <h4 class="text-lg font-black text-slate-900 mb-2">Seragam & Buku Paket</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed mb-6">Meliputi 5 stel seragam sekolah/pesantren lengkap beserta kelengkapan buku pelajaran/kitab kuning setahun.</p>
+                            <div class="space-y-1">
+                                <div class="text-3xl font-extrabold text-blue-900">Rp 1.550.000</div>
+                                <div class="text-[10px] text-slate-500 font-semibold">• Seragam: Rp 950.000 (1x bayar) | • Kitab: Rp 600.000 (per tahun)</div>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-50 text-[10px] font-bold text-slate-400 uppercase">Paket Seragam & Kitab Lengkap</div>
+                    </div>
+
+                    <!-- SPP Bulanan (Makan, Asrama, dll) -->
+                    <div class="bg-gradient-to-br from-blue-900 to-slate-950 text-white p-8 rounded-3xl shadow-xl flex flex-col justify-between border border-blue-800">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 bg-sky-400 text-blue-950 text-[10px] font-black rounded uppercase tracking-wider mb-4">Bulanan (All-In)</span>
+                            <h4 class="text-lg font-black text-white mb-2">Iuran Syahriyah / SPP</h4>
+                            <p class="text-xs text-blue-200 leading-relaxed mb-6">Biaya bulanan mencakup makan 3x sehari, sewa asrama, bimbingan ustadz/ustadzah 24 jam, listrik, air, dan kesehatan dasar.</p>
+                            <div class="text-3xl font-extrabold text-sky-400">Rp 750.000 <span class="text-xs text-blue-200 font-normal">/ bulan</span></div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-blue-800 text-[10px] font-bold text-blue-300 uppercase">Makan 3x sehari + Asrama</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tanya Jawab (FAQ Accordion) -->
+        <section class="py-20 bg-white border-t border-slate-100">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider mb-3">Tanya Jawab</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">FAQ Calon Orang Tua</h2>
+                    <p class="text-slate-500 text-xs font-semibold mt-2">
+                        Jawaban praktis untuk berbagai pertanyaan umum seputar kehidupan di asrama SMP Dharma Ksatria.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div v-for="(faq, idx) in faqs" :key="idx" class="border border-slate-100 rounded-2xl overflow-hidden transition-all">
+                        <button 
+                            @click="toggleFaq(idx)"
+                            class="w-full flex justify-between items-center p-6 text-left font-bold text-sm text-slate-900 bg-slate-50/50 hover:bg-slate-50 transition-colors"
+                        >
+                            <span>{{ faq.q }}</span>
+                            <svg 
+                                class="w-4 h-4 text-slate-400 transform transition-transform duration-300"
+                                :class="{'rotate-180': activeFaq === idx}"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div 
+                            v-show="activeFaq === idx"
+                            class="p-6 bg-white border-t border-slate-100 text-xs text-slate-600 leading-relaxed transition-all"
+                        >
+                            {{ faq.a }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Blue Call to Action Section -->
         <section class="py-20 relative bg-gradient-to-br from-blue-950 to-slate-950 overflow-hidden text-center">
             <!-- Decorative Glow Elements -->
@@ -323,8 +488,37 @@
 
 <script setup>
 import MainLayout from '../Layouts/MainLayout.vue';
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import { Link, Head } from '@inertiajs/vue3';
+
+const activeFaq = ref(null);
+
+const toggleFaq = (index) => {
+    if (activeFaq.value === index) {
+        activeFaq.value = null;
+    } else {
+        activeFaq.value = index;
+    }
+};
+
+const faqs = [
+    {
+        q: 'Apakah santri SMP wajib tinggal di asrama (mukim)?',
+        a: 'Ya, seluruh santri SMP wajib tinggal di asrama (mukim) untuk mengikuti seluruh program kepesantrenan terpadu selama 24 jam.'
+    },
+    {
+        q: 'Apakah santri diperbolehkan membawa HP/Gadget pribadi?',
+        a: 'Tidak, santri SMP tidak diperkenankan membawa HP/Gadget pribadi. Fasilitas komunikasi terstruktur dengan orang tua disediakan secara berkala melalui layanan telepon kantor asrama.'
+    },
+    {
+        q: 'Bagaimana dengan jadwal kunjungan (sambang) orang tua?',
+        a: 'Kunjungan atau sambang santri oleh orang tua dijadwalkan sebulan sekali pada hari Ahad pekan ke-3.'
+    },
+    {
+        q: 'Bagaimana jika santri mengalami sakit di asrama?',
+        a: 'Pesantren dilengkapi Pos Kesehatan Pesantren (Poskestren) dengan petugas medis yang siaga. Jika memerlukan pemeriksaan mendalam, santri akan dirujuk ke Klinik/Puskesmas terdekat, dan wali santri akan segera dihubungi oleh pihak asrama.'
+    }
+];
 
 const ppdbUrl = computed(() => {
     // In local development with IP or localhost, use local port 8001 with tingkat parameter
