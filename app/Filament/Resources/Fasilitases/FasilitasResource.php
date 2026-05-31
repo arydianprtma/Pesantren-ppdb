@@ -30,9 +30,9 @@ class FasilitasResource extends Resource
 
     protected static ?string $slug = 'fasilitas';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 2;
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Manajemen Web';
+    protected static string|\UnitEnum|null $navigationGroup = 'Manajemen Sekolah';
 
     public static function form(Schema $schema): Schema
     {

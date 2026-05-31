@@ -43,20 +43,36 @@
         <section class="relative -mt-8 z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-8 bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-100/50">
                 <div class="text-center p-4 border-r border-slate-100 last:border-0">
-                    <div class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-1">A</div>
-                    <div class="text-xs font-black text-slate-500 uppercase tracking-widest">Akreditasi BAN-SM</div>
+                    <div class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-1">
+                        {{ profil?.stat_1_val ?? 'A' }}
+                    </div>
+                    <div class="text-xs font-black text-slate-500 uppercase tracking-widest">
+                        {{ profil?.stat_1_lbl ?? 'Akreditasi BAN-SM' }}
+                    </div>
                 </div>
                 <div class="text-center p-4 md:border-r border-slate-100 last:border-0">
-                    <div class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-1">100%</div>
-                    <div class="text-xs font-black text-slate-500 uppercase tracking-widest">Kurikulum Terintegrasi</div>
+                    <div class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-1">
+                        {{ profil?.stat_2_val ?? '100%' }}
+                    </div>
+                    <div class="text-xs font-black text-slate-500 uppercase tracking-widest">
+                        {{ profil?.stat_2_lbl ?? 'Kurikulum Terintegrasi' }}
+                    </div>
                 </div>
                 <div class="text-center p-4 border-r border-slate-100 last:border-0">
-                    <div class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-1">1:15</div>
-                    <div class="text-xs font-black text-slate-500 uppercase tracking-widest">Rasio Guru & Siswa</div>
+                    <div class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-1">
+                        {{ profil?.stat_3_val ?? '1:15' }}
+                    </div>
+                    <div class="text-xs font-black text-slate-500 uppercase tracking-widest">
+                        {{ profil?.stat_3_lbl ?? 'Rasio Guru & Siswa' }}
+                    </div>
                 </div>
                 <div class="text-center p-4 last:border-0">
-                    <div class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-1">10+</div>
-                    <div class="text-xs font-black text-slate-500 uppercase tracking-widest">Fasilitas Penunjang</div>
+                    <div class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-1">
+                        {{ profil?.stat_4_val ?? '10+' }}
+                    </div>
+                    <div class="text-xs font-black text-slate-500 uppercase tracking-widest">
+                        {{ profil?.stat_4_lbl ?? 'Fasilitas Penunjang' }}
+                    </div>
                 </div>
             </div>
         </section>

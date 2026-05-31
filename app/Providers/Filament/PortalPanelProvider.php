@@ -56,6 +56,7 @@ class PortalPanelProvider extends PanelProvider
                 'Manajemen Sekolah',
                 'Master Data',
                 'Manajemen Web',
+                'Laporan',
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([

@@ -117,20 +117,36 @@
                     <!-- Right: Stats / Info Cards -->
                     <div class="lg:col-span-5 grid grid-cols-2 gap-4">
                         <div class="p-6 bg-white text-center border border-slate-150 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
-                            <div class="text-4xl font-extrabold text-blue-900 mb-1">A</div>
-                            <div class="text-xs font-black text-slate-500 uppercase tracking-widest">Akreditasi BAN-SM</div>
+                            <div class="text-4xl font-extrabold text-blue-900 mb-1">
+                                {{ profil?.stat_1_val ?? 'A' }}
+                            </div>
+                            <div class="text-xs font-black text-slate-500 uppercase tracking-widest">
+                                {{ profil?.stat_1_lbl ?? 'Akreditasi BAN-SM' }}
+                            </div>
                         </div>
                         <div class="p-6 bg-white text-center border border-slate-150 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
-                            <div class="text-4xl font-extrabold text-blue-900 mb-1">100%</div>
-                            <div class="text-xs font-black text-slate-500 uppercase tracking-widest">Kelulusan Siswa</div>
+                            <div class="text-4xl font-extrabold text-blue-900 mb-1">
+                                {{ profil?.stat_2_val ?? '100%' }}
+                            </div>
+                            <div class="text-xs font-black text-slate-500 uppercase tracking-widest">
+                                {{ profil?.stat_2_lbl ?? 'Kelulusan Siswa' }}
+                            </div>
                         </div>
                         <div class="p-6 bg-white text-center border border-slate-150 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
-                            <div class="text-4xl font-extrabold text-blue-900 mb-1">2</div>
-                            <div class="text-xs font-black text-slate-500 uppercase tracking-widest">Kurikulum Terpadu</div>
+                            <div class="text-4xl font-extrabold text-blue-900 mb-1">
+                                {{ profil?.stat_3_val ?? '2' }}
+                            </div>
+                            <div class="text-xs font-black text-slate-500 uppercase tracking-widest">
+                                {{ profil?.stat_3_lbl ?? 'Kurikulum Terpadu' }}
+                            </div>
                         </div>
                         <div class="p-6 bg-white text-center border border-slate-150 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
-                            <div class="text-4xl font-extrabold text-blue-900 mb-1">10+</div>
-                            <div class="text-xs font-black text-slate-500 uppercase tracking-widest">Ekskul & Kegiatan</div>
+                            <div class="text-4xl font-extrabold text-blue-900 mb-1">
+                                {{ profil?.stat_4_val ?? '10+' }}
+                            </div>
+                            <div class="text-xs font-black text-slate-500 uppercase tracking-widest">
+                                {{ profil?.stat_4_lbl ?? 'Ekskul & Kegiatan' }}
+                            </div>
                         </div>
                     </div>
                 </div>

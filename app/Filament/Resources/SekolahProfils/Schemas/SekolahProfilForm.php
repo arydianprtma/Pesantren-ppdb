@@ -38,6 +38,58 @@ class SekolahProfilForm
                             ->default(true),
                     ]),
 
+                Section::make('Statistik Sekolah')
+                    ->description('Atur 4 poin statistik yang akan ditampilkan di halaman depan dan profil sekolah.')
+                    ->schema([
+                        Grid::make(2)
+                            ->schema([
+                                Grid::make(2)
+                                    ->schema([
+                                        TextInput::make('stat_1_val')
+                                            ->label('Statistik 1 (Nilai)')
+                                            ->default('A')
+                                            ->required(),
+                                        TextInput::make('stat_1_lbl')
+                                            ->label('Statistik 1 (Label)')
+                                            ->default('Akreditasi BAN-SM')
+                                            ->required(),
+                                    ]),
+                                Grid::make(2)
+                                    ->schema([
+                                        TextInput::make('stat_2_val')
+                                            ->label('Statistik 2 (Nilai)')
+                                            ->default('100%')
+                                            ->required(),
+                                        TextInput::make('stat_2_lbl')
+                                            ->label('Statistik 2 (Label)')
+                                            ->default('Kurikulum Terintegrasi')
+                                            ->required(),
+                                    ]),
+                                Grid::make(2)
+                                    ->schema([
+                                        TextInput::make('stat_3_val')
+                                            ->label('Statistik 3 (Nilai)')
+                                            ->default('1:15')
+                                            ->required(),
+                                        TextInput::make('stat_3_lbl')
+                                            ->label('Statistik 3 (Label)')
+                                            ->default('Rasio Guru & Siswa')
+                                            ->required(),
+                                    ]),
+                                Grid::make(2)
+                                    ->schema([
+                                        TextInput::make('stat_4_val')
+                                            ->label('Statistik 4 (Nilai)')
+                                            ->default('10+')
+                                            ->required(),
+                                        TextInput::make('stat_4_lbl')
+                                            ->label('Statistik 4 (Label)')
+                                            ->default('Fasilitas Penunjang')
+                                            ->required(),
+                                    ]),
+                            ])
+                    ]),
+
                 Section::make('Sambutan Kepala Sekolah')
                     ->description('Informasi kepala sekolah dan kata sambutan yang akan ditampilkan di halaman Profil.')
                     ->schema([
