@@ -297,7 +297,22 @@ const isTentangOpen = ref(false);
 const page = usePage();
 
 const isSmpPage = computed(() => {
-    return page.url === '/smp-dharma-ksatria' || page.url.startsWith('/smp-dharma-ksatria');
+    // Cek berdasarkan nama rute Ziggy jika tersedia
+    try {
+        if (typeof route !== 'undefined' && route().current('sekolah.smp')) {
+            return true;
+        }
+    } catch (e) {
+        // Abaikan jika helper route tidak terdefinisi
+    }
+
+    const currentUrl = page.url;
+    return currentUrl === '/smp' || 
+           currentUrl.startsWith('/smp/') || 
+           currentUrl.startsWith('/smp?') ||
+           currentUrl === '/smp-dharma-ksatria' || 
+           currentUrl.startsWith('/smp-dharma-ksatria/') ||
+           currentUrl.startsWith('/smp-dharma-ksatria?');
 });
 
 const updateFavicon = (url) => {
