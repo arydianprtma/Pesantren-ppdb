@@ -95,6 +95,12 @@ class DataSiswaResource extends Resource
                     ->badge()
                     ->color('gray'),
 
+                TextColumn::make('nis')
+                    ->label('NIS (Nomor Induk Siswa)')
+                    ->searchable()
+                    ->copyable()
+                    ->placeholder('-'),
+
                 TextColumn::make('nik')
                     ->label('NIK')
                     ->searchable()

@@ -3,9 +3,11 @@
 namespace App\Observers;
 
 use App\Models\SpmbPendaftaran;
+use App\Models\SpmbSiswa;
 use App\Models\User;
 use App\Services\WhatsappService;
 use Filament\Notifications\Notification;
+use Carbon\Carbon;
 
 class SpmbRegistrantObserver
 {
@@ -28,11 +30,44 @@ class SpmbRegistrantObserver
             return;
         }
 
+        // --- AUTOMATIC NIS GENERATION ---
+        $acceptedStatuses = ['diterima_ula', 'diterima_wustho', 'diterima_ulya'];
+        if (in_array($pendaftaran->status, $acceptedStatuses)) {
+            if ($siswa && !$siswa->nis) {
+                // Determine kode jenjang
+                $kodeJenjang = match ($pendaftaran->status) {
+                    'diterima_ula' => '1',
+                    'diterima_wustho' => '2',
+                    'diterima_ulya' => '3',
+                    default => '0',
+                };
+                
+                $year = Carbon::parse($pendaftaran->tanggal_daftar ?? now())->format('y');
+                $prefix = $year . $kodeJenjang; // e.g., '261' for 2026 Ula
+                
+                // Find the latest NIS with this prefix
+                $lastSiswa = SpmbSiswa::where('nis', 'like', $prefix . '%')
+                    ->orderBy('nis', 'desc')
+                    ->first();
+                
+                $nextSeq = 1;
+                if ($lastSiswa && $lastSiswa->nis) {
+                    $lastSeq = (int) substr($lastSiswa->nis, strlen($prefix));
+                    $nextSeq = $lastSeq + 1;
+                }
+                
+                $siswa->nis = $prefix . sprintf('%04d', $nextSeq);
+                $siswa->save();
+            }
+        }
+        // --------------------------------
+
         $message = $this->buildMessage(
             nama:   $siswa->nama_lengkap,
             status: $pendaftaran->status,
             tingkat: strtoupper($pendaftaran->tingkat),
             noReg:  $pendaftaran->no_reg,
+            nis:    $siswa->nis,
         );
 
         if ($message) {
@@ -62,7 +97,7 @@ class SpmbRegistrantObserver
     /**
      * Buat isi pesan WA sesuai status.
      */
-    protected function buildMessage(string $nama, string $status, string $tingkat, string $noReg): ?string
+    protected function buildMessage(string $nama, string $status, string $tingkat, string $noReg, ?string $nis = null): ?string
     {
         $body = match ($status) {
             'jadwal_tes' => "Halo *{$nama}*, pendaftaran Anda (No: {$noReg}) untuk tingkat *{$tingkat}* telah diverifikasi. Silakan cek dashboard untuk melihat *Jadwal Tes* Anda.",
@@ -74,10 +109,11 @@ class SpmbRegistrantObserver
             'diterima_ula',
             'diterima_wustho',
             'diterima_ulya' => sprintf(
-                "ALHAMDULILLAH! Selamat *%s*, Anda dinyatakan *DITERIMA* di Pondok Pesantren Riyadussalikin (Tingkat: %s - %s). Silakan segera lakukan daftar ulang melalui dashboard pendaftaran.",
+                "ALHAMDULILLAH! Selamat *%s*, Anda dinyatakan *DITERIMA* di Pondok Pesantren Riyadussalikin (Tingkat: %s - %s).\n\n*Nomor Induk Siswa (NIS) Anda:* %s\n\nSilakan segera lakukan daftar ulang melalui dashboard pendaftaran.",
                 $nama,
                 $tingkat,
                 ucfirst(str_replace('diterima_', '', $status)),
+                $nis ?? '-',
             ),
 
             'ditolak' => "Mohon maaf *{$nama}*, berdasarkan hasil seleksi, pendaftaran Anda belum dapat kami terima saat ini. Tetap semangat!",

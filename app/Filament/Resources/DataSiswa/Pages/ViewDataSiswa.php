@@ -58,11 +58,12 @@ class ViewDataSiswa extends ViewRecord
                         ->icon('heroicon-m-user')
                         ->schema([
                             Grid::make(3)->schema([
+                                TextEntry::make('nis')->label('NIS (Nomor Induk Siswa)')->placeholder('-'),
+                                TextEntry::make('nisn')->label('NISN')->placeholder('-'),
+                                TextEntry::make('nik')->label('NIK')->placeholder('-'),
                                 TextEntry::make('jenis_kelamin')
                                     ->label('Jenis Kelamin')
                                     ->formatStateUsing(fn($state) => $state === 'L' ? 'Laki-laki' : 'Perempuan'),
-                                TextEntry::make('nisn')->label('NISN')->placeholder('-'),
-                                TextEntry::make('nik')->label('NIK')->placeholder('-'),
                                 TextEntry::make('tempat_lahir')->label('Tempat Lahir'),
                                 TextEntry::make('tanggal_lahir')->label('Tanggal Lahir')->date('d M Y'),
                                 TextEntry::make('berkebutuhan_khusus')->label('Berkebutuhan Khusus')->placeholder('Tidak Ada'),
