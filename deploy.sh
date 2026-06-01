@@ -19,11 +19,9 @@ composer install --no-dev --optimize-autoloader --no-interaction
 echo "🗄️ Menjalankan migrasi database..."
 php artisan migrate --force
 
-# Cache konfigurasi dan route untuk performa
+# Cache konfigurasi dan route untuk performa (kecuali views karena Filament tidak mendukung view caching)
 echo "⚡ Mengoptimalkan aplikasi..."
-php artisan optimize
-php artisan view:cache
-php artisan event:cache
+php artisan optimize --except=views
 
 # Install dan build aset frontend (Inertia/Vue)
 echo "🎨 Membangun aset frontend..."

@@ -84,4 +84,7 @@ use App\Http\Controllers\VerificationController;
 Route::get('/verifikasi/{no_reg}', [VerificationController::class, 'verify'])
     ->name('verifikasi.publik');
 
+// Fallback login route to redirect to Filament login page and satisfy named route requirements
+Route::get('/login', fn () => redirect('/portal/login'))->name('login');
+
 require __DIR__.'/auth.php';

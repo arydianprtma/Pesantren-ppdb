@@ -24,10 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\HandleInertiaRequests::class,
         ]);
 
-        $middleware->redirectGuestsTo(fn ($request) => $request->is('portal/*') || $request->is('verifikasi/*')
-            ? 'http://192.168.1.8:8000/portal/login'
-            : route('login')
-        );
+        $middleware->redirectGuestsTo(fn ($request) => url('/portal/login'));
 
         // Trust proxies for production environment
         $middleware->trustProxies(at: '*');
