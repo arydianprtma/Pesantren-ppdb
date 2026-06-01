@@ -49,9 +49,10 @@ return [
 
         'spmb' => [
             'driver' => 'local',
-            'root' => env('SPMB_STORAGE_PATH', base_path('SPMB/storage/app/public')),
+            'root' => env('SPMB_STORAGE_PATH', base_path('SPMB/storage/app')),
             'url' => '/spmb-storage',
-            'visibility' => 'public',
+            'visibility' => 'private',
+            'serve' => true,
             'throw' => false,
             'report' => false,
         ],
