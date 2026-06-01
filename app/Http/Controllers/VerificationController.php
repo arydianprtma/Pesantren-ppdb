@@ -22,16 +22,14 @@ class VerificationController extends Controller
             }
         }
         
-        // Jika masih tidak login, arahkan ke login portal admin yang benar
+        // Jika masih tidak login, abort 404
         if (!$user) {
-            return redirect(url('/portal/login'));
+            abort(404);
         }
 
         // Cek apakah user memiliki role admin atau super_admin
         if (!$user->hasAnyRole(['admin', 'super_admin']) && ($user->role ?? null) !== 'admin' && ($user->role ?? null) !== 'super_admin') {
-            return response()->view('errors.403', [
-                'exception' => new \Exception('Hanya Admin atau Super Admin yang dapat melakukan verifikasi data pendaftar.')
-            ], 403);
+            abort(404);
         }
 
         $token = $request->query('token');
