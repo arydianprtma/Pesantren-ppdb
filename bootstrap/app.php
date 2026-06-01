@@ -101,6 +101,7 @@ return Application::configure(basePath: dirname(__DIR__))
                     'description' => $error['desc'],
                     'is_client_error' => $code < 500,
                     'debug' => [
+                        'message' => $e->getMessage(),
                         'file' => $e->getFile(),
                         'line' => $e->getLine(),
                         'class' => get_class($e),
