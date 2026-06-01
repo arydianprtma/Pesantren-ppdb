@@ -87,7 +87,17 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
             return $this->avatar;
         }
         
-        return '/storage/' . ltrim($this->avatar, '/');
+        $avatarPath = ltrim($this->avatar, '/');
+        
+        if (Storage::disk('public')->exists($avatarPath)) {
+            return asset('storage/' . $avatarPath);
+        }
+        
+        if (Storage::disk('spmb')->exists($avatarPath)) {
+            return asset('spmb-storage/' . $avatarPath);
+        }
+        
+        return asset('storage/' . $avatarPath);
     }
 
     /**
