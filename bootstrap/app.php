@@ -34,13 +34,6 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (\Throwable $e, \Illuminate\Http\Request $request) {
-            if ($e instanceof \Illuminate\Auth\AuthenticationException) {
-                return null;
-            }
-            if ($e instanceof \Illuminate\Validation\ValidationException) {
-                return null;
-            }
-
             $code = 500;
             if ($e instanceof \Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
                 $code = $e->getStatusCode();
@@ -67,7 +60,7 @@ return Application::configure(basePath: dirname(__DIR__))
                     401 => ['title' => 'Unauthorized', 'message' => 'Akses tidak diizinkan.', 'desc' => 'Anda harus masuk terlebih dahulu untuk mengakses halaman ini.'],
                     403 => ['title' => 'Forbidden', 'message' => 'Akses ditolak.', 'desc' => 'Anda tidak memiliki otoritas yang cukup untuk melihat konten ini.'],
                     404 => ['title' => 'Not Found', 'message' => 'Halaman tidak ditemukan.', 'desc' => 'Alamat yang Anda tuju mungkin sudah dihapus atau dipindahkan.'],
-                    405 => ['title' => 'Method Not Allowed', 'message' => 'Permintaan yang Anda lakukan tidak dapat diproses karena metode akses yang digunakan tidak sesuai.', 'desc' => 'Metode permintaan HTTP yang digunakan tidak diizinkan untuk endpoint ini.'],
+                    405 => ['title' => 'Method Not Allowed', 'message' => 'Metode tidak didukung.', 'desc' => 'Metode permintaan HTTP yang digunakan tidak diizinkan untuk endpoint ini.'],
                     408 => ['title' => 'Request Timeout', 'message' => 'Waktu permintaan habis.', 'desc' => 'Server terlalu lama menunggu respon, silakan coba lagi.'],
                     419 => ['title' => 'Page Expired', 'message' => 'Halaman kedaluwarsa.', 'desc' => 'Sesi Anda telah berakhir karena terlalu lama tidak ada aktivitas.'],
                     422 => ['title' => 'Unprocessable Entity', 'message' => 'Data tidak valid.', 'desc' => 'Input yang Anda berikan tidak dapat diproses oleh sistem kami.'],
@@ -107,14 +100,13 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->view('errors.error', [
                     'code' => $code,
                     'title' => $error['title'],
-                    'message' => $error['message'],
+                    'message' => (config('app.debug') || $code < 500) ? ($e->getMessage() ?: $error['message']) : $error['message'],
                     'description' => $error['desc'],
                     'is_client_error' => $code < 500,
                     'debug' => [
                         'file' => $e->getFile(),
                         'line' => $e->getLine(),
                         'class' => get_class($e),
-                        'message' => $e->getMessage(),
                     ]
                 ], $code);
             }
