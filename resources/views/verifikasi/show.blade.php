@@ -87,6 +87,10 @@
                         <span class="text-slate-700 font-bold">{{ $pendaftaran->siswa->nisn ?? '-' }} / {{ $pendaftaran->siswa->nik ?? '-' }}</span>
                     </div>
                     <div class="flex justify-between items-center py-2 border-b border-slate-50">
+                        <span class="text-slate-400 font-bold uppercase text-[10px] tracking-wider">Asal Sekolah</span>
+                        <span class="text-slate-700 font-bold uppercase">{{ $pendaftaran->siswa->asal_sekolah ?? '-' }}</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 border-b border-slate-50">
                         <span class="text-slate-400 font-bold uppercase text-[10px] tracking-wider">Jenjang Pendidikan</span>
                         <span class="text-emerald-700 font-black uppercase">{{ $pendaftaran->tingkat }}</span>
                     </div>

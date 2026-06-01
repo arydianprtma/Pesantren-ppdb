@@ -56,6 +56,11 @@ class SpmbRegistrantForm
                                             ->formatStateUsing(fn ($record) => $record?->siswa?->nik),
                                     ]),
 
+                                TextInput::make('siswa_asal_sekolah')
+                                    ->label('Asal Sekolah')
+                                    ->disabled()
+                                    ->formatStateUsing(fn ($record) => $record?->siswa?->asal_sekolah),
+
                                 Grid::make(2)
                                     ->schema([
                                         TextInput::make('siswa_jenis_kelamin')
