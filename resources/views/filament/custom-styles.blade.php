@@ -28,10 +28,49 @@
         .fi-topbar-header {
             padding-left: 0.75rem !important;
             padding-right: 0.75rem !important;
-            gap: 0.75rem !important;
+            gap: 0.5rem !important;
         }
 
-        /* Styling for the Global Search input on mobile - high specificity overrides */
+        /* Ensure hamburger trigger is clickable and positioned on top */
+        .fi-topbar-trigger {
+            z-index: 20 !important;
+            position: relative !important;
+            cursor: pointer !important;
+            padding: 0.5rem !important;
+        }
+
+        /* Prevent global search from overlapping other elements */
+        html .fi-global-search,
+        html.dark .fi-global-search {
+            margin-left: 0.5rem !important;
+            margin-right: 0.5rem !important;
+            flex-grow: 1 !important;
+            max-width: calc(100% - 7.5rem) !important;
+            z-index: 10 !important;
+            position: relative !important;
+        }
+
+        /* Remove default Filament outer search container styling (gray border, dark rectangle) */
+        html .fi-global-search,
+        html.dark .fi-global-search,
+        html .fi-global-search > div,
+        html.dark .fi-global-search > div,
+        html .fi-global-search-field,
+        html.dark .fi-global-search-field,
+        html .fi-global-search-input-container,
+        html.dark .fi-global-search-input-container {
+            border: none !important;
+            background: transparent !important;
+            background-color: transparent !important;
+            box-shadow: none !important;
+            --tw-ring-color: transparent !important;
+            --tw-ring-shadow: none !important;
+            --tw-shadow: none !important;
+            outline: none !important;
+            ring: none !important;
+        }
+
+        /* Styling for the Global Search input on mobile - beautiful pill design */
         html .fi-global-search input,
         html .fi-topbar-header input[type="search"],
         html .fi-global-search-input,
@@ -43,7 +82,7 @@
             background-color: rgba(243, 244, 246, 0.8) !important; /* Soft light grey in light mode */
             color: #1f2937 !important; /* Dark text in light mode */
             font-size: 0.85rem !important;
-            height: 2.35rem !important;
+            height: 2.25rem !important;
             padding-left: 2.5rem !important;
             padding-right: 1rem !important;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.05) !important;
