@@ -31,6 +31,12 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (\Throwable $e, \Illuminate\Http\Request $request) {
+            if ($e instanceof \Illuminate\Auth\AuthenticationException ||
+                $e instanceof \Illuminate\Validation\ValidationException ||
+                $e instanceof \Illuminate\Http\Exceptions\HttpResponseException) {
+                return null;
+            }
+
             $code = 500;
             if ($e instanceof \Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
                 $code = $e->getStatusCode();
