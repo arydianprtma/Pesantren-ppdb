@@ -21,15 +21,15 @@ class SmpPageTest extends TestCase
     }
 
     /**
-     * Test if smp page receives agendas of kategori spmb.
+     * Test if smp page receives agendas of kategori ppdb.
      */
     public function test_smp_page_receives_agendas(): void
     {
         Agenda::create([
-            'judul' => 'Ujian Seleksi SPMB Gelombang 1',
+            'judul' => 'Ujian Seleksi PPDB Gelombang 1',
             'deskripsi' => 'Ujian seleksi akademik dan wawancara',
             'tgl_mulai' => now()->addDays(5)->format('Y-m-d'),
-            'kategori' => 'spmb',
+            'kategori' => 'ppdb',
             'lokasi' => 'Gedung Madrasah Utama',
             'is_active' => true,
         ]);
@@ -62,7 +62,7 @@ class SmpPageTest extends TestCase
         $response->assertStatus(200);
         $response->assertInertia(fn ($page) => $page
             ->component('Smp')
-            ->has('agendas', 1) // Only category 'spmb' agenda is passed
+            ->has('agendas', 1) // Only category 'ppdb' agenda is passed
             ->has('ekstrakurikuler', 1) // Only is_unggulan=true is passed
         );
     }

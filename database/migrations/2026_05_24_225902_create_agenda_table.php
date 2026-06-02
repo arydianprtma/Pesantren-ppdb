@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('tgl_selesai')->nullable();
             $table->time('jam_mulai')->nullable();
             $table->time('jam_selesai')->nullable();
-            $table->string('kategori'); // spmb, akademik, umum
+            $table->string('kategori'); // ppdb, akademik, umum
             $table->string('lokasi')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();

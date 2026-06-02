@@ -27,13 +27,13 @@ class AgendaTable
                     ->label('Kategori')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'spmb' => 'success',
+                        'ppdb' => 'success',
                         'akademik' => 'info',
                         'umum' => 'warning',
                         default => 'gray',
                     })
                     ->formatStateUsing(fn (string $state): string => match ($state) {
-                        'spmb' => 'PPDB',
+                        'ppdb' => 'PPDB',
                         'akademik' => 'Akademik',
                         'umum' => 'Umum',
                         default => $state,
@@ -70,7 +70,7 @@ class AgendaTable
             ->filters([
                 SelectFilter::make('kategori')
                     ->options([
-                        'spmb' => 'PPDB',
+                        'ppdb' => 'PPDB',
                         'akademik' => 'Akademik',
                         'umum' => 'Umum',
                     ]),

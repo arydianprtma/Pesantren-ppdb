@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         // 1. Master Pendaftaran
-        Schema::create('spmb_pendaftaran', function (Blueprint $table) {
+        Schema::create('ppdb_pendaftaran', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('no_reg')->unique();
@@ -23,9 +23,9 @@ return new class extends Migration
         });
 
         // 2. Identitas Siswa
-        Schema::create('spmb_siswa', function (Blueprint $table) {
+        Schema::create('ppdb_siswa', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pendaftaran_id')->constrained('spmb_pendaftaran')->onDelete('cascade');
+            $table->foreignId('pendaftaran_id')->constrained('ppdb_pendaftaran')->onDelete('cascade');
             $table->string('nama_lengkap');
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('nisn', 10)->nullable();
@@ -74,9 +74,9 @@ return new class extends Migration
         });
 
         // 3. Data Orang Tua (Ayah & Ibu)
-        Schema::create('spmb_orang_tua', function (Blueprint $table) {
+        Schema::create('ppdb_orang_tua', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pendaftaran_id')->constrained('spmb_pendaftaran')->onDelete('cascade');
+            $table->foreignId('pendaftaran_id')->constrained('ppdb_pendaftaran')->onDelete('cascade');
             $table->enum('jenis', ['ayah', 'ibu']);
             $table->string('nama');
             $table->string('nik', 16)->nullable();
@@ -89,9 +89,9 @@ return new class extends Migration
         });
 
         // 4. Data Wali
-        Schema::create('spmb_wali', function (Blueprint $table) {
+        Schema::create('ppdb_wali', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pendaftaran_id')->constrained('spmb_pendaftaran')->onDelete('cascade');
+            $table->foreignId('pendaftaran_id')->constrained('ppdb_pendaftaran')->onDelete('cascade');
             $table->string('nama');
             $table->string('nik', 16)->nullable();
             $table->year('tahun_lahir')->nullable();
@@ -102,9 +102,9 @@ return new class extends Migration
         });
 
         // 5. Data Periodik
-        Schema::create('spmb_periodik', function (Blueprint $table) {
+        Schema::create('ppdb_periodik', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pendaftaran_id')->constrained('spmb_pendaftaran')->onDelete('cascade');
+            $table->foreignId('pendaftaran_id')->constrained('ppdb_pendaftaran')->onDelete('cascade');
             $table->integer('tinggi_badan')->nullable();
             $table->integer('berat_badan')->nullable();
             $table->string('jarak_ke_sekolah')->nullable();
@@ -116,9 +116,9 @@ return new class extends Migration
         });
 
         // 6. Data Prestasi
-        Schema::create('spmb_prestasi', function (Blueprint $table) {
+        Schema::create('ppdb_prestasi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pendaftaran_id')->constrained('spmb_pendaftaran')->onDelete('cascade');
+            $table->foreignId('pendaftaran_id')->constrained('ppdb_pendaftaran')->onDelete('cascade');
             $table->string('jenis_prestasi')->nullable();
             $table->string('tingkat')->nullable();
             $table->string('nama_prestasi')->nullable();
@@ -128,9 +128,9 @@ return new class extends Migration
         });
 
         // 7. Data Beasiswa
-        Schema::create('spmb_beasiswa', function (Blueprint $table) {
+        Schema::create('ppdb_beasiswa', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pendaftaran_id')->constrained('spmb_pendaftaran')->onDelete('cascade');
+            $table->foreignId('pendaftaran_id')->constrained('ppdb_pendaftaran')->onDelete('cascade');
             $table->string('jenis_beasiswa')->nullable();
             $table->string('penyelenggara_sumber')->nullable();
             $table->year('tahun_mulai')->nullable();
@@ -144,12 +144,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('spmb_beasiswa');
-        Schema::dropIfExists('spmb_prestasi');
-        Schema::dropIfExists('spmb_periodik');
-        Schema::dropIfExists('spmb_wali');
-        Schema::dropIfExists('spmb_orang_tua');
-        Schema::dropIfExists('spmb_siswa');
-        Schema::dropIfExists('spmb_pendaftaran');
+        Schema::dropIfExists('ppdb_beasiswa');
+        Schema::dropIfExists('ppdb_prestasi');
+        Schema::dropIfExists('ppdb_periodik');
+        Schema::dropIfExists('ppdb_wali');
+        Schema::dropIfExists('ppdb_orang_tua');
+        Schema::dropIfExists('ppdb_siswa');
+        Schema::dropIfExists('ppdb_pendaftaran');
     }
 };

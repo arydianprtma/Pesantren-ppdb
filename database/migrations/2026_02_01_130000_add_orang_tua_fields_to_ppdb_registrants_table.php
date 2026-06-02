@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('spmb_registrants', function (Blueprint $table) {
+        Schema::table('ppdb_registrants', function (Blueprint $table) {
             // Pendidikan Terakhir Orang Tua
             $table->enum('pendidikan_ayah', ['SD', 'SMP', 'SMA', 'D3', 'S1', 'S2', 'S3'])->nullable()->after('pekerjaan_ayah');
             $table->enum('pendidikan_ibu', ['SD', 'SMP', 'SMA', 'D3', 'S1', 'S2', 'S3'])->nullable()->after('pekerjaan_ibu');
@@ -32,7 +32,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('spmb_registrants', function (Blueprint $table) {
+        Schema::table('ppdb_registrants', function (Blueprint $table) {
             $table->dropColumn([
                 'pendidikan_ayah',
                 'pendidikan_ibu',

@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('spmb_registrants', function (Blueprint $table) {
+        Schema::create('ppdb_registrants', function (Blueprint $table) {
             $table->id();
             // Data Diri
             $table->string('nama_lengkap');
@@ -47,6 +47,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('spmb_registrants');
+        Schema::dropIfExists('ppdb_registrants');
     }
 };

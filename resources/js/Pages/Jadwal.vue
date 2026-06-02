@@ -143,7 +143,7 @@
                                                 :key="cat"
                                                 class="w-1.5 h-1.5 rounded-full"
                                                 :class="{
-                                                    'bg-emerald-500': cat === 'spmb',
+                                                    'bg-emerald-500': cat === 'ppdb',
                                                     'bg-blue-500': cat === 'akademik',
                                                     'bg-purple-500': cat === 'umum'
                                                 }"
@@ -183,12 +183,12 @@
                                         <span 
                                             class="px-2.5 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wider"
                                             :class="{
-                                                'bg-emerald-100 text-emerald-800': event.kategori === 'spmb',
+                                                'bg-emerald-100 text-emerald-800': event.kategori === 'ppdb',
                                                 'bg-blue-100 text-blue-800': event.kategori === 'akademik',
                                                 'bg-purple-100 text-purple-800': event.kategori === 'umum'
                                             }"
                                         >
-                                            {{ event.kategori === 'spmb' ? 'PPDB' : event.kategori === 'akademik' ? 'Akademik' : 'Umum' }}
+                                            {{ event.kategori === 'ppdb' ? 'PPDB' : event.kategori === 'akademik' ? 'Akademik' : 'Umum' }}
                                         </span>
                                         <span class="text-xs text-gray-500 font-semibold">{{ formatTime(event.jam_mulai) }}</span>
                                     </div>
@@ -230,7 +230,7 @@
                                     <div 
                                         class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 border-white ring-2 transition-all duration-300 group-hover:scale-125"
                                         :class="{
-                                            'bg-emerald-500 ring-emerald-200': event.kategori === 'spmb',
+                                            'bg-emerald-500 ring-emerald-200': event.kategori === 'ppdb',
                                             'bg-blue-500 ring-blue-200': event.kategori === 'akademik',
                                             'bg-purple-500 ring-purple-200': event.kategori === 'umum'
                                         }"
@@ -312,7 +312,7 @@ const props = defineProps({
 // Category definition
 const categories = [
     { value: 'all', label: 'Semua Agenda', dotColor: '' },
-    { value: 'spmb', label: 'PPDB', dotColor: 'bg-emerald-500' },
+    { value: 'ppdb', label: 'PPDB', dotColor: 'bg-emerald-500' },
     { value: 'akademik', label: 'Akademik', dotColor: 'bg-blue-500' },
     { value: 'umum', label: 'Kegiatan Umum', dotColor: 'bg-purple-500' }
 ];
@@ -418,7 +418,7 @@ const parseDateLocal = (dateString) => {
 const getEventDotColorClass = (events) => {
     if (!events || events.length === 0) return '';
     const categories = events.map(e => e.kategori);
-    if (categories.includes('spmb')) return 'bg-emerald-500';
+    if (categories.includes('ppdb')) return 'bg-emerald-500';
     if (categories.includes('akademik')) return 'bg-blue-500';
     return 'bg-purple-500';
 };
@@ -512,7 +512,7 @@ const getUniqueCategories = (events) => {
 
 const getEventStyleClass = (category) => {
     switch (category) {
-        case 'spmb':
+        case 'ppdb':
             return 'bg-emerald-50 text-emerald-700 border-emerald-100 hover:bg-emerald-100/50';
         case 'akademik':
             return 'bg-blue-50 text-blue-700 border-blue-100 hover:bg-blue-100/50';

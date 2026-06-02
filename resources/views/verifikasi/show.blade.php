@@ -56,8 +56,8 @@
                                     $avatarPath = ltrim($pendaftaran->user->avatar, '/');
                                     if (\Illuminate\Support\Facades\Storage::disk('public')->exists($avatarPath)) {
                                         $avatarUrl = asset('storage/' . $avatarPath);
-                                    } elseif (\Illuminate\Support\Facades\Storage::disk('spmb')->exists($avatarPath)) {
-                                        $avatarUrl = asset('spmb-storage/' . $avatarPath);
+                                    } elseif (\Illuminate\Support\Facades\Storage::disk('ppdb')->exists($avatarPath)) {
+                                        $avatarUrl = asset('ppdb-storage/' . $avatarPath);
                                     }
                                 }
                             }

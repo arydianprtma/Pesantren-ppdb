@@ -93,8 +93,8 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
             return asset('storage/' . $avatarPath);
         }
         
-        if (Storage::disk('spmb')->exists($avatarPath)) {
-            return asset('spmb-storage/' . $avatarPath);
+        if (Storage::disk('ppdb')->exists($avatarPath)) {
+            return asset('ppdb-storage/' . $avatarPath);
         }
         
         return asset('storage/' . $avatarPath);

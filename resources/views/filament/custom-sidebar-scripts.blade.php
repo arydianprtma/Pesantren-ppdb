@@ -9,7 +9,7 @@
                 if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
 
-                updateBadge('Pendaftar SPMB', data.Spmb);
+                updateBadge('Pendaftar PPDB', data.Ppdb);
 
             } catch (error) {
                 // Silently fail to avoid console clutter

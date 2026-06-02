@@ -5,7 +5,7 @@ namespace App\Filament\Resources\DataSiswa;
 use App\Filament\Resources\Concerns\AdminOnlyAccess;
 use App\Filament\Resources\DataSiswa\Pages\ListDataSiswa;
 use App\Filament\Resources\DataSiswa\Pages\ViewDataSiswa;
-use App\Models\SpmbSiswa;
+use App\Models\PpdbSiswa;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
@@ -19,7 +19,7 @@ class DataSiswaResource extends Resource
 {
     use AdminOnlyAccess;
 
-    protected static ?string $model = SpmbSiswa::class;
+    protected static ?string $model = PpdbSiswa::class;
     protected static ?string $slug = 'data-siswa';
 
     public static function getNavigationIcon(): string|\BackedEnum|null { return 'heroicon-o-users'; }
@@ -52,7 +52,7 @@ class DataSiswaResource extends Resource
                 ImageColumn::make('pendaftaran.user.avatar')
                     ->label('Foto')
                     ->circular()
-                    ->disk('spmb')
+                    ->disk('ppdb')
                     ->defaultImageUrl(fn($record) => 'https://ui-avatars.com/api/?name=' . urlencode($record->nama_lengkap) . '&color=10b981&background=d1fae5'),
 
                 TextColumn::make('nama_lengkap')

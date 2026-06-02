@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SpmbPendaftaran;
+use App\Models\PpdbPendaftaran;
 use Illuminate\Http\Request;
 
 class VerificationController extends Controller
@@ -34,7 +34,7 @@ class VerificationController extends Controller
 
         $token = $request->query('token');
         
-        $pendaftaran = SpmbPendaftaran::with(['siswa', 'ayah', 'ibu', 'user'])
+        $pendaftaran = PpdbPendaftaran::with(['siswa', 'ayah', 'ibu', 'user'])
             ->where('no_reg', $no_reg)
             ->where('verification_token', $token)
             ->first();

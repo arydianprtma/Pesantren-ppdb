@@ -34,9 +34,9 @@ Route::get('/smp-dharma-ksatria/profil', [HomeController::class, 'smpProfil'])->
 Route::get('/kontak', [ContactController::class, 'index'])->name('kontak');
 Route::post('/kontak', [ContactController::class, 'store'])->name('kontak.store');
 
-// Proxy route for SPMB storage to avoid CORS issues
-Route::get('/spmb-storage/{path}', function ($path) {
-    $fullPath = config('filesystems.disks.spmb.root') . '/' . $path;
+// Proxy route for PPDB storage to avoid CORS issues
+Route::get('/ppdb-storage/{path}', function ($path) {
+    $fullPath = config('filesystems.disks.ppdb.root') . '/' . $path;
 
     if (!file_exists($fullPath)) {
         abort(404);

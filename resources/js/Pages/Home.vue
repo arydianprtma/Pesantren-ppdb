@@ -6,14 +6,14 @@
             <div class="absolute inset-0 bg-dot-pattern opacity-40"></div>
             
             <!-- Registration Period Banner -->
-            <div v-if="spmbSetting && spmbSetting.is_active" 
-                 :class="spmbSetting.is_open ? 'bg-emerald-600' : 'bg-amber-500'" 
+            <div v-if="ppdbSetting && ppdbSetting.is_active" 
+                 :class="ppdbSetting.is_open ? 'bg-emerald-600' : 'bg-amber-500'" 
                  class="text-white py-3 relative z-20 transition-colors duration-500">
                 <div class="container mx-auto px-4 text-center relative">
                     <!-- Case 1: Registration is Open (Counting down to closing) -->
-                    <p v-if="spmbSetting.is_open" class="text-sm md:text-base font-bold flex flex-wrap items-center justify-center gap-2">
+                    <p v-if="ppdbSetting.is_open" class="text-sm md:text-base font-bold flex flex-wrap items-center justify-center gap-2">
                         <span class="inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                        Pendaftaran Santri Baru Tahun Ajaran {{ spmbSetting.tahun_ajaran }} Dibuka!
+                        Pendaftaran Santri Baru Tahun Ajaran {{ ppdbSetting.tahun_ajaran }} Dibuka!
                         <span class="hidden md:inline-block mx-2 text-emerald-300">|</span>
                         <span class="flex items-center gap-2">
                             <span class="text-xs md:text-sm font-normal text-emerald-100 uppercase tracking-tighter">Berakhir dalam:</span>
@@ -24,11 +24,11 @@
                     </p>
                     
                     <!-- Case 2: Registration not yet open (Counting down to opening) -->
-                    <p v-else-if="!spmbSetting.is_open && isFutureOpen" class="text-sm md:text-base font-bold flex flex-wrap items-center justify-center gap-2">
+                    <p v-else-if="!ppdbSetting.is_open && isFutureOpen" class="text-sm md:text-base font-bold flex flex-wrap items-center justify-center gap-2">
                         <svg class="w-5 h-5 text-amber-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        Pendaftaran Tahun Ajaran {{ spmbSetting.tahun_ajaran }} Segera Dibuka
+                        Pendaftaran Tahun Ajaran {{ ppdbSetting.tahun_ajaran }} Segera Dibuka
                         <span class="hidden md:inline-block mx-2 text-amber-200">|</span>
                         <span class="flex items-center gap-2">
                             <span class="text-xs md:text-sm font-normal text-amber-100 uppercase tracking-tighter">Dibuka dalam:</span>
@@ -43,7 +43,7 @@
                         <svg class="w-5 h-5 text-amber-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        Pendaftaran Tahun Ajaran {{ spmbSetting.tahun_ajaran }} Sudah Ditutup
+                        Pendaftaran Tahun Ajaran {{ ppdbSetting.tahun_ajaran }} Sudah Ditutup
                     </p>
                 </div>
             </div>
@@ -379,12 +379,12 @@
                                 <span 
                                     class="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"
                                     :class="{
-                                        'bg-emerald-50 text-emerald-700 border border-emerald-200': agenda.kategori === 'spmb',
+                                        'bg-emerald-50 text-emerald-700 border border-emerald-200': agenda.kategori === 'ppdb',
                                         'bg-blue-50 text-blue-700 border border-blue-200': agenda.kategori === 'akademik',
                                         'bg-purple-50 text-purple-700 border border-purple-200': agenda.kategori === 'umum'
                                     }"
                                 >
-                                    {{ agenda.kategori === 'spmb' ? 'PPDB' : agenda.kategori === 'akademik' ? 'Akademik' : 'Kegiatan' }}
+                                    {{ agenda.kategori === 'ppdb' ? 'PPDB' : agenda.kategori === 'akademik' ? 'Akademik' : 'Kegiatan' }}
                                 </span>
                             </div>
                             <div class="text-right">
@@ -583,7 +583,7 @@ const props = defineProps({
         type: Array,
         default: () => []
     },
-    spmbSetting: {
+    ppdbSetting: {
         type: Object,
         default: null
     },
@@ -618,12 +618,12 @@ const ppdbUrl = computed(() => {
 });
 
 const isFutureOpen = computed(() => {
-    if (!props.spmbSetting) return false;
-    return new Date() < new Date(props.spmbSetting.tgl_buka);
+    if (!props.ppdbSetting) return false;
+    return new Date() < new Date(props.ppdbSetting.tgl_buka);
 });
 
 const countdown = computed(() => {
-    if (!props.spmbSetting) return '';
+    if (!props.ppdbSetting) return '';
     
     // Gunakan parsing yang lebih aman untuk string tanggal
     const parseDate = (dateStr, timeStr) => {
@@ -640,9 +640,9 @@ const countdown = computed(() => {
         return new Date(`${year}-${month}-${day}T${timeStr}`);
     };
 
-    const targetDate = props.spmbSetting.is_open 
-        ? parseDate(props.spmbSetting.tgl_tutup, '23:59:59') 
-        : parseDate(props.spmbSetting.tgl_buka, '00:00:00');
+    const targetDate = props.ppdbSetting.is_open 
+        ? parseDate(props.ppdbSetting.tgl_tutup, '23:59:59') 
+        : parseDate(props.ppdbSetting.tgl_buka, '00:00:00');
         
     if (!targetDate || isNaN(targetDate.getTime())) return '00h 00j 00m 00d';
         

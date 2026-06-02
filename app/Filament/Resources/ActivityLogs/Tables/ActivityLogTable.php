@@ -35,14 +35,14 @@ class ActivityLogTable
                     ->label('Modul')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'spmb'       => 'info',
+                        'ppdb'       => 'info',
                         'guru'       => 'success',
                         'siswa'      => 'warning',
                         'auth'       => 'danger',
                         'pengaturan' => 'gray',
                         default      => 'primary',
                     })
-                    ->formatStateUsing(fn (string $state): string => $state === 'spmb' ? 'PPDB' : strtoupper($state))
+                    ->formatStateUsing(fn (string $state): string => $state === 'ppdb' ? 'PPDB' : strtoupper($state))
                     ->searchable(),
 
                 TextColumn::make('aksi')
@@ -102,7 +102,7 @@ class ActivityLogTable
                 SelectFilter::make('modul')
                     ->label('Modul')
                     ->options([
-                        'spmb'       => 'PPDB',
+                        'ppdb'       => 'PPDB',
                         'guru'       => 'Guru',
                         'siswa'      => 'Siswa',
                         'auth'       => 'Login/Logout',

@@ -3,10 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Guru;
-use App\Models\SpmbPendaftaran;
+use App\Models\PpdbPendaftaran;
 use App\Observers\GuruObserver;
-use App\Observers\SpmbPendaftaranObserver;
-use App\Observers\SpmbRegistrantObserver;
+use App\Observers\PpdbPendaftaranObserver;
+use App\Observers\PpdbRegistrantObserver;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,8 +30,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Vite::prefetch(concurrency: 3);
-        SpmbPendaftaran::observe(SpmbRegistrantObserver::class);
-        SpmbPendaftaran::observe(SpmbPendaftaranObserver::class);
+        PpdbPendaftaran::observe(PpdbRegistrantObserver::class);
+        PpdbPendaftaran::observe(PpdbPendaftaranObserver::class);
         Guru::observe(GuruObserver::class);
 
         // Rate Limiter untuk Panel Admin

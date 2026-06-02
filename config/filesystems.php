@@ -47,10 +47,10 @@ return [
             'report' => false,
         ],
 
-        'spmb' => [
+        'ppdb' => [
             'driver' => 'local',
-            'root' => env('SPMB_STORAGE_PATH', base_path('SPMB/storage/app')),
-            'url' => '/spmb-storage',
+            'root' => env('PPDB_STORAGE_PATH', base_path('PPDB/storage/app')),
+            'url' => '/ppdb-storage',
             'visibility' => 'private',
             'serve' => true,
             'throw' => false,

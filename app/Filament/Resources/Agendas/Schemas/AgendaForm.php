@@ -28,7 +28,7 @@ class AgendaForm
                     Select::make('kategori')
                         ->label('Kategori')
                         ->options([
-                            'spmb' => 'Penerimaan Santri Baru (PPDB)',
+                            'ppdb' => 'Penerimaan Santri Baru (PPDB)',
                             'akademik' => 'Akademik & Sekolah',
                             'umum' => 'Kegiatan Umum / Pondok',
                         ])

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
-use App\Models\SpmbPendaftaran;
+use App\Models\PpdbPendaftaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +31,7 @@ class ExportController extends Controller
     {
         $this->authorizeAdmin();
 
-        $query = SpmbPendaftaran::with(['siswa', 'ayah', 'ibu', 'user'])
+        $query = PpdbPendaftaran::with(['siswa', 'ayah', 'ibu', 'user'])
             ->when($request->tingkat, fn($q) => $q->where('tingkat', $request->tingkat))
             ->when($request->status,  fn($q) => $q->where('status',  $request->status))
             ->orderBy('tanggal_daftar', 'desc')
@@ -95,7 +95,7 @@ class ExportController extends Controller
     {
         $this->authorizeAdmin();
 
-        $data = SpmbPendaftaran::with(['siswa', 'user'])
+        $data = PpdbPendaftaran::with(['siswa', 'user'])
             ->when($request->tingkat, fn($q) => $q->where('tingkat', $request->tingkat))
             ->when($request->status,  fn($q) => $q->where('status',  $request->status))
             ->orderBy('tanggal_daftar', 'desc')

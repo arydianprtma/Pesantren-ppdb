@@ -3,7 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\ContactMessage;
-use App\Models\SpmbPendaftaran;
+use App\Models\PpdbPendaftaran;
 use App\Models\Prestasi;
 use App\Models\Berita;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -53,24 +53,24 @@ class StatsOverview extends BaseWidget
                 ->descriptionIcon('heroicon-m-trophy')
                 ->color('warning'),
 
-            Stat::make('Total Pendaftar PPDB', SpmbPendaftaran::count())
+            Stat::make('Total Pendaftar PPDB', PpdbPendaftaran::count())
                 ->description('Total siswa mendaftar')
                 ->descriptionIcon('heroicon-m-users')
                 ->color('primary')
-                ->chart([10, 15, 8, 12, 11, 14, SpmbPendaftaran::count()]),
+                ->chart([10, 15, 8, 12, 11, 14, PpdbPendaftaran::count()]),
 
-            Stat::make('Pendaftar SMP', SpmbPendaftaran::where('tingkat', 'smp')->count())
+            Stat::make('Pendaftar SMP', PpdbPendaftaran::where('tingkat', 'smp')->count())
                 ->description('Siswa tingkat SMP')
                 ->descriptionIcon('heroicon-m-academic-cap')
                 ->color('success'),
 
-            Stat::make('Pendaftar SMA', SpmbPendaftaran::where('tingkat', 'sma')->count())
+            Stat::make('Pendaftar SMA', PpdbPendaftaran::where('tingkat', 'sma')->count())
                 ->description('Siswa tingkat SMA')
                 ->descriptionIcon('heroicon-m-building-office')
                 ->color('info'),
 
-            Stat::make('Pendaftar Hari Ini', SpmbPendaftaran::whereDate('created_at', today())->count())
-                ->description('Kemarin: ' . SpmbPendaftaran::whereDate('created_at', today()->subDay())->count() . ' pendaftar')
+            Stat::make('Pendaftar Hari Ini', PpdbPendaftaran::whereDate('created_at', today())->count())
+                ->description('Kemarin: ' . PpdbPendaftaran::whereDate('created_at', today()->subDay())->count() . ' pendaftar')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('success'),
         ];

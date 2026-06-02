@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::rename('kontaks', 'kontak');
         Schema::rename('prestasis', 'prestasi');
         Schema::rename('sejarahs', 'sejarah');
-        Schema::rename('spmb_registrants', 'pendaftar_spmb');
+        Schema::rename('ppdb_registrants', 'pendaftar_ppdb');
         Schema::rename('visi_misis', 'visi_misi');
         Schema::rename('web_settings', 'pengaturan_web');
     }
@@ -33,7 +33,7 @@ return new class extends Migration
         Schema::rename('kontak', 'kontaks');
         Schema::rename('prestasi', 'prestasis');
         Schema::rename('sejarah', 'sejarahs');
-        Schema::rename('pendaftar_spmb', 'spmb_registrants');
+        Schema::rename('pendaftar_ppdb', 'ppdb_registrants');
         Schema::rename('visi_misi', 'visi_misis');
         Schema::rename('pengaturan_web', 'web_settings');
     }

@@ -110,10 +110,10 @@ class RoleResource extends Resource
 
                     // Mapping Label Sistem
                     if ($groupName === 'Sistem') {
-                        if (str_contains($entity['resourceFqcn'], 'SpmbRegistrantResource')) $label = 'Pendaftaran PPDB';
+                        if (str_contains($entity['resourceFqcn'], 'PpdbRegistrantResource')) $label = 'Pendaftaran PPDB';
                         if (str_contains($entity['resourceFqcn'], 'UserResource')) $label = 'Manajemen Pengguna';
                         if (str_contains($entity['resourceFqcn'], 'ActivityLogResource')) $label = 'Log Aktivitas';
-                        if (str_contains($entity['resourceFqcn'], 'SpmbSettingResource')) $label = 'Tahun Ajaran PPDB';
+                        if (str_contains($entity['resourceFqcn'], 'PpdbSettingResource')) $label = 'Tahun Ajaran PPDB';
                     }
                     // Mapping Label Master Data
                     if ($groupName === 'Master Data') {

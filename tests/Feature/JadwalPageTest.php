@@ -26,10 +26,10 @@ class JadwalPageTest extends TestCase
     public function test_jadwal_page_receives_agendas(): void
     {
         Agenda::create([
-            'judul' => 'Ujian Seleksi SPMB Gelombang 1',
+            'judul' => 'Ujian Seleksi PPDB Gelombang 1',
             'deskripsi' => 'Ujian seleksi akademik dan wawancara',
             'tgl_mulai' => now()->addDays(5)->format('Y-m-d'),
-            'kategori' => 'spmb',
+            'kategori' => 'ppdb',
             'lokasi' => 'Gedung Madrasah Utama',
             'is_active' => true,
         ]);
