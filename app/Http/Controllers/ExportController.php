@@ -253,6 +253,7 @@ class ExportController extends Controller
             'tes_berlangsung' => 'Tes Berlangsung',
             'wawancara'       => 'Wawancara',
             'diterima_ula'    => 'Diterima - Ula',
+            'diterima_idadiyah' => 'Diterima - Idadiyah',
             'diterima_wustho' => 'Diterima - Wustho',
             'diterima_ulya'   => 'Diterima - Ulya',
             'ditolak'         => 'Tidak Diterima',

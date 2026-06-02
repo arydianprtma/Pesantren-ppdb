@@ -291,9 +291,10 @@ class PpdbRegistrantForm
                                         'jadwal_tes'       => 'Jadwal Tes Sudah Ditentukan',
                                         'tes_berlangsung'  => 'Tes Sedang Berlangsung',
                                         'wawancara'        => 'Tahap Wawancara',
-                                        'diterima_ula'     => 'Diterima - Kelas Ula (Dasar)',
-                                        'diterima_wustho'  => 'Diterima - Kelas Wustho (Menengah)',
-                                        'diterima_ulya'    => 'Diterima - Kelas Ulya (Lanjutan)',
+                                        'diterima_ula'      => 'Diterima - Kelas Ula (Dasar)',
+                                        'diterima_idadiyah' => 'Diterima - Kelas Idadiyah (Persiapan)',
+                                        'diterima_wustho'   => 'Diterima - Kelas Wustho (Menengah)',
+                                        'diterima_ulya'     => 'Diterima - Kelas Ulya (Lanjutan)',
                                         'ditolak'          => 'Tidak Diterima',
                                     ])
                                     ->required()

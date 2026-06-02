@@ -31,19 +31,27 @@ class PpdbRegistrantObserver
         }
 
         // --- AUTOMATIC NIS GENERATION ---
-        $acceptedStatuses = ['diterima_ula', 'diterima_wustho', 'diterima_ulya'];
+        $acceptedStatuses = ['diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya'];
         if (in_array($pendaftaran->status, $acceptedStatuses)) {
             if ($siswa && !$siswa->nis) {
-                // Determine kode jenjang
-                $kodeJenjang = match ($pendaftaran->status) {
+                // Determine kode keagamaan
+                $kodeKeagamaan = match ($pendaftaran->status) {
                     'diterima_ula' => '1',
-                    'diterima_wustho' => '2',
-                    'diterima_ulya' => '3',
+                    'diterima_idadiyah' => '2',
+                    'diterima_wustho' => '3',
+                    'diterima_ulya' => '4',
+                    default => '0',
+                };
+
+                // Determine kode sekolah formal
+                $kodeSekolah = match (strtolower($pendaftaran->tingkat ?? '')) {
+                    'smp' => '1',
+                    'sma' => '2',
                     default => '0',
                 };
                 
                 $year = Carbon::parse($pendaftaran->tanggal_daftar ?? now())->format('y');
-                $prefix = $year . $kodeJenjang; // e.g., '261' for 2026 Ula
+                $prefix = $year . $kodeKeagamaan . $kodeSekolah; // e.g., '2631' for 2026 Ulya SMP
                 
                 // Find the latest NIS with this prefix
                 $lastSiswa = PpdbSiswa::where('nis', 'like', $prefix . '%')
@@ -107,6 +115,7 @@ class PpdbRegistrantObserver
             'wawancara' => "Selamat *{$nama}*! Anda telah lolos tahap tes dan dijadwalkan untuk *Wawancara*. Silakan cek dashboard untuk detail waktunya.",
 
             'diterima_ula',
+            'diterima_idadiyah',
             'diterima_wustho',
             'diterima_ulya' => sprintf(
                 "ALHAMDULILLAH! Selamat *%s*, Anda dinyatakan *DITERIMA* di Pondok Pesantren Riyadussalikin (Tingkat: %s - %s).\n\n*Nomor Induk Siswa (NIS) Anda:* %s\n\nSilakan segera lakukan daftar ulang melalui dashboard pendaftaran.",

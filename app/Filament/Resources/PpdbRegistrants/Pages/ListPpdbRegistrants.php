@@ -46,8 +46,8 @@ class ListPpdbRegistrants extends ListRecords
                 ->badgeColor('purple'),
 
             'diterima' => Tab::make('Diterima')
-                ->modifyQueryUsing(fn(Builder $query) => $query->whereIn('status', ['diterima_ula', 'diterima_wustho', 'diterima_ulya']))
-                ->badge(PpdbPendaftaran::whereIn('status', ['diterima_ula', 'diterima_wustho', 'diterima_ulya'])->count())
+                ->modifyQueryUsing(fn(Builder $query) => $query->whereIn('status', ['diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya']))
+                ->badge(PpdbPendaftaran::whereIn('status', ['diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya'])->count())
                 ->badgeColor('success'),
 
             'ditolak' => Tab::make('Tidak Diterima')

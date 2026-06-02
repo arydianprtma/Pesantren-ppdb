@@ -38,6 +38,7 @@ class DataSiswaResource extends Resource
                 // (menyelesaikan seluruh proses seleksi & administrasi)
                 $query->whereIn('status', [
                     'diterima_ula',
+                    'diterima_idadiyah',
                     'diterima_wustho',
                     'diterima_ulya',
                 ]);
@@ -71,7 +72,7 @@ class DataSiswaResource extends Resource
                     ->label('Status')
                     ->badge()
                     ->color(fn($state) => match($state) {
-                        'diterima_ula', 'diterima_wustho', 'diterima_ulya' => 'success',
+                        'diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya' => 'success',
                         'ditolak'         => 'danger',
                         'wawancara'       => 'warning',
                         'jadwal_tes', 'tes_berlangsung' => 'info',
@@ -83,6 +84,7 @@ class DataSiswaResource extends Resource
                         'tes_berlangsung'   => 'Tes Berlangsung',
                         'wawancara'         => 'Wawancara',
                         'diterima_ula'      => 'Diterima - Ula',
+                        'diterima_idadiyah'  => 'Diterima - Idadiyah',
                         'diterima_wustho'   => 'Diterima - Wustho',
                         'diterima_ulya'     => 'Diterima - Ulya',
                         'ditolak'           => 'Tidak Diterima',
@@ -118,9 +120,10 @@ class DataSiswaResource extends Resource
                     ->label('Jenjang Diterima')
                     ->relationship('pendaftaran', 'status')
                     ->options([
-                        'diterima_ula'    => 'Ula',
-                        'diterima_wustho' => 'Wustho',
-                        'diterima_ulya'   => 'Ulya',
+                        'diterima_ula'      => 'Ula',
+                        'diterima_idadiyah' => 'Idadiyah',
+                        'diterima_wustho'   => 'Wustho',
+                        'diterima_ulya'     => 'Ulya',
                     ]),
 
                 SelectFilter::make('jenis_kelamin')

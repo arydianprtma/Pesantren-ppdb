@@ -49,7 +49,7 @@ class HomeController extends Controller
 
         // Calculate statistics
         $stats = [
-            'santri_aktif' => ($webSetting->base_santri_aktif ?? 0) + PpdbPendaftaran::whereIn('status', ['diterima', 'diterima_ula', 'diterima_wustho', 'diterima_ulya'])->count(),
+            'santri_aktif' => ($webSetting->base_santri_aktif ?? 0) + PpdbPendaftaran::whereIn('status', ['diterima', 'diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya'])->count(),
             'ekstrakurikuler' => Ekstrakurikuler::where('is_active', true)->count(),
             'akreditasi' => $webSetting->akreditasi ?? 'A',
             'kelulusan' => $webSetting->persentase_kelulusan ?? '100%',
@@ -85,7 +85,7 @@ class HomeController extends Controller
 
         $webSetting = WebSetting::first();
         $stats = [
-            'santri_aktif' => ($webSetting->base_santri_aktif ?? 0) + PpdbPendaftaran::whereIn('status', ['diterima', 'diterima_ula', 'diterima_wustho', 'diterima_ulya'])->count(),
+            'santri_aktif' => ($webSetting->base_santri_aktif ?? 0) + PpdbPendaftaran::whereIn('status', ['diterima', 'diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya'])->count(),
             'ekstrakurikuler' => Ekstrakurikuler::where('is_active', true)->count(),
             'akreditasi' => $webSetting->akreditasi ?? 'A',
             'kelulusan' => $webSetting->persentase_kelulusan ?? '100%',

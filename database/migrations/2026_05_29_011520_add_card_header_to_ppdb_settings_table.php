@@ -12,9 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('ppdb_settings', function (Blueprint $table) {
-            $table->string('kartu_header_1')->nullable(); // Contoh: Panitia Penerimaan Santri Baru (PSB)
-            $table->string('kartu_header_2')->nullable(); // Contoh: Pondok Pesantren Riyadussalikin
-            $table->string('kartu_alamat')->nullable(); // Contoh: Padaherang, Kabupaten Pangandaran, Jawa Barat
+            if (!Schema::hasColumn('ppdb_settings', 'kartu_header_1')) {
+                $table->string('kartu_header_1')->nullable(); // Contoh: Panitia Penerimaan Santri Baru (PSB)
+            }
+            if (!Schema::hasColumn('ppdb_settings', 'kartu_header_2')) {
+                $table->string('kartu_header_2')->nullable(); // Contoh: Pondok Pesantren Riyadussalikin
+            }
+            if (!Schema::hasColumn('ppdb_settings', 'kartu_alamat')) {
+                $table->string('kartu_alamat')->nullable(); // Contoh: Padaherang, Kabupaten Pangandaran, Jawa Barat
+            }
         });
     }
 

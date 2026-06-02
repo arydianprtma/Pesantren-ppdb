@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ppdb_settings', function (Blueprint $table) {
-            $table->id();
-            $table->string('tahun_ajaran'); // Contoh: 2026/2027
-            $table->dateTime('tgl_buka');
-            $table->dateTime('tgl_tutup');
-            $table->boolean('is_active')->default(true);
-            $table->text('pesan_tutup')->nullable(); // Pesan yang muncul saat pendaftaran ditutup
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('ppdb_settings')) {
+            Schema::create('ppdb_settings', function (Blueprint $table) {
+                $table->id();
+                $table->string('tahun_ajaran'); // Contoh: 2026/2027
+                $table->dateTime('tgl_buka');
+                $table->dateTime('tgl_tutup');
+                $table->boolean('is_active')->default(true);
+                $table->text('pesan_tutup')->nullable(); // Pesan yang muncul saat pendaftaran ditutup
+                $table->timestamps();
+            });
+        }
     }
 
     /**

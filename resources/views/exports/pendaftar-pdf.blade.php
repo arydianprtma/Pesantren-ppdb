@@ -159,7 +159,7 @@
             @php
                 $siswa = $row->siswa;
                 $statusBadge = match($row->status) {
-                    'diterima_ula', 'diterima_wustho', 'diterima_ulya' => 'badge-diterima',
+                    'diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya' => 'badge-diterima',
                     'ditolak' => 'badge-ditolak',
                     default   => '',
                 };
@@ -169,6 +169,7 @@
                     'tes_berlangsung' => 'Tes Berlangsung',
                     'wawancara'       => 'Wawancara',
                     'diterima_ula'    => 'Diterima - Ula',
+                    'diterima_idadiyah' => 'Diterima - Idadiyah',
                     'diterima_wustho' => 'Diterima - Wustho',
                     'diterima_ulya'   => 'Diterima - Ulya',
                     'ditolak'         => 'Tidak Diterima',

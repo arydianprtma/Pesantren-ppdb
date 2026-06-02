@@ -32,7 +32,7 @@ class ViewDataSiswa extends ViewRecord
                             ->label('Status Pendaftaran')
                             ->badge()
                             ->color(fn($state) => match($state) {
-                                'diterima_ula', 'diterima_wustho', 'diterima_ulya' => 'success',
+                                'diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya' => 'success',
                                 'ditolak' => 'danger',
                                 'wawancara' => 'warning',
                                 'jadwal_tes', 'tes_berlangsung' => 'info',
@@ -44,6 +44,7 @@ class ViewDataSiswa extends ViewRecord
                                 'tes_berlangsung'   => 'Tes Berlangsung',
                                 'wawancara'         => 'Wawancara',
                                 'diterima_ula'      => 'Diterima - Ula',
+                                'diterima_idadiyah'  => 'Diterima - Idadiyah',
                                 'diterima_wustho'   => 'Diterima - Wustho',
                                 'diterima_ulya'     => 'Diterima - Ulya',
                                 'ditolak'           => 'Tidak Diterima',
