@@ -296,12 +296,14 @@ class ListDataSiswa extends ListRecords
                 ->label('Export Excel')
                 ->icon('heroicon-o-document-text')
                 ->color('success')
-                ->url(route('export.siswa.excel')),
+                ->url(route('export.siswa.excel'))
+                ->openUrlInNewTab(),
             \Filament\Actions\Action::make('export_pdf')
                 ->label('Export PDF')
                 ->icon('heroicon-o-arrow-down-tray')
                 ->color('danger')
-                ->url(route('export.siswa.pdf')),
+                ->url(route('export.siswa.pdf'))
+                ->openUrlInNewTab(),
         ];
     }
 }
