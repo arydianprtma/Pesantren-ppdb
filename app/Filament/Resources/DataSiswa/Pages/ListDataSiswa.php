@@ -80,6 +80,20 @@ class ListDataSiswa extends ListRecords
                         $errors = [];
                         $rowCount = 0;
                         $successCount = 0;
+
+                        // In-memory lookups for high performance (reduces DB queries by thousands)
+                        $existingPhoneSiswa = \App\Models\PpdbSiswa::pluck('no_hp')->flip()->toArray();
+                        $existingWhatsappUser = \App\Models\User::whereNotNull('whatsapp')->pluck('whatsapp')->flip()->toArray();
+                        $existingNik = \App\Models\PpdbSiswa::whereNotNull('nik')->pluck('nik')->flip()->toArray();
+                        $existingNisn = \App\Models\PpdbSiswa::whereNotNull('nisn')->pluck('nisn')->flip()->toArray();
+                        $existingNis = \App\Models\PpdbSiswa::whereNotNull('nis')->pluck('nis')->flip()->toArray();
+                        $existingEmails = \App\Models\User::pluck('email')->flip()->toArray();
+
+                        // Pre-compute bcrypt password hash once to avoid 500x expensive CPU crypt cycles
+                        $hashedPassword = \Illuminate\Support\Facades\Hash::make('santri123');
+
+                        // Keep track of next sequences per prefix in memory to avoid running duplicate SELECT order-by queries per row
+                        $nextSequences = [];
                         
                         \Illuminate\Support\Facades\DB::beginTransaction();
                         
@@ -117,11 +131,11 @@ class ListDataSiswa extends ListRecords
                             if (empty($dataRow['no_hp'])) {
                                 $rowErrors[] = "Nomor HP kosong";
                             } else {
-                                // Check if no_hp/whatsapp unique
-                                if (\App\Models\PpdbSiswa::where('no_hp', $dataRow['no_hp'])->exists()) {
+                                // Check if no_hp/whatsapp unique using in-memory helper
+                                if (isset($existingPhoneSiswa[$dataRow['no_hp']])) {
                                     $rowErrors[] = "Nomor HP '{$dataRow['no_hp']}' sudah terdaftar pada siswa lain";
                                 }
-                                if (\App\Models\User::where('whatsapp', $dataRow['no_hp'])->exists()) {
+                                if (isset($existingWhatsappUser[$dataRow['no_hp']])) {
                                     $rowErrors[] = "Nomor WhatsApp '{$dataRow['no_hp']}' sudah terdaftar pada user lain";
                                 }
                             }
@@ -130,7 +144,7 @@ class ListDataSiswa extends ListRecords
                                 if (strlen($dataRow['nik']) !== 16) {
                                     $rowErrors[] = "NIK harus 16 digit";
                                 }
-                                if (\App\Models\PpdbSiswa::where('nik', $dataRow['nik'])->exists()) {
+                                if (isset($existingNik[$dataRow['nik']])) {
                                     $rowErrors[] = "NIK '{$dataRow['nik']}' sudah terdaftar";
                                 }
                             }
@@ -139,13 +153,13 @@ class ListDataSiswa extends ListRecords
                                 if (strlen($dataRow['nisn']) !== 10) {
                                     $rowErrors[] = "NISN harus 10 digit";
                                 }
-                                if (\App\Models\PpdbSiswa::where('nisn', $dataRow['nisn'])->exists()) {
+                                if (isset($existingNisn[$dataRow['nisn']])) {
                                     $rowErrors[] = "NISN '{$dataRow['nisn']}' sudah terdaftar";
                                 }
                             }
                             
                             if (!empty($dataRow['nis'])) {
-                                if (\App\Models\PpdbSiswa::where('nis', $dataRow['nis'])->exists()) {
+                                if (isset($existingNis[$dataRow['nis']])) {
                                     $rowErrors[] = "NIS '{$dataRow['nis']}' sudah terdaftar";
                                 }
                             }
@@ -184,15 +198,16 @@ class ListDataSiswa extends ListRecords
                                 $email = ($dataRow['nik'] ?: $dataRow['no_hp']) . '@riyadussalikin.sch.id';
                             }
                             
-                            if (\App\Models\User::where('email', $email)->exists()) {
-                                $email = ($dataRow['nik'] ?: $dataRow['no_hp']) . '-' . rand(10, 99) . '@riyadussalikin.sch.id';
+                            while (isset($existingEmails[$email])) {
+                                $email = ($dataRow['nik'] ?: $dataRow['no_hp']) . '-' . rand(100, 999) . '@riyadussalikin.sch.id';
                             }
+                            $existingEmails[$email] = true;
                             
                             $user = \App\Models\User::create([
                                 'name' => $dataRow['nama_lengkap'],
                                 'email' => $email,
                                 'whatsapp' => $dataRow['no_hp'],
-                                'password' => \Illuminate\Support\Facades\Hash::make('santri123'),
+                                'password' => $hashedPassword,
                                 'role' => 'siswa',
                                 'is_active' => true,
                             ]);
@@ -226,17 +241,21 @@ class ListDataSiswa extends ListRecords
                                 $year = date('y');
                                 $prefix = $year . $kodeKeagamaan . $kodeSekolah;
                                 
-                                $lastSiswa = \App\Models\PpdbSiswa::where('nis', 'like', $prefix . '%')
-                                    ->orderBy('nis', 'desc')
-                                    ->first();
-                                
-                                $nextSeq = 1;
-                                if ($lastSiswa && $lastSiswa->nis) {
-                                    $lastSeq = (int) substr($lastSiswa->nis, strlen($prefix));
-                                    $nextSeq = $lastSeq + 1;
+                                if (!isset($nextSequences[$prefix])) {
+                                    $lastSiswa = \App\Models\PpdbSiswa::where('nis', 'like', $prefix . '%')
+                                        ->orderBy('nis', 'desc')
+                                        ->first();
+                                    
+                                    $nextSeq = 1;
+                                    if ($lastSiswa && $lastSiswa->nis) {
+                                        $lastSeq = (int) substr($lastSiswa->nis, strlen($prefix));
+                                        $nextSeq = $lastSeq + 1;
+                                    }
+                                    $nextSequences[$prefix] = $nextSeq;
                                 }
                                 
-                                $nis = $prefix . sprintf('%04d', $nextSeq);
+                                $nis = $prefix . sprintf('%04d', $nextSequences[$prefix]);
+                                $nextSequences[$prefix]++;
                             }
                             
                             // Create PpdbSiswa
@@ -257,6 +276,19 @@ class ListDataSiswa extends ListRecords
                                 'provinsi' => $dataRow['provinsi'] ?: '-',
                                 'asal_sekolah' => $dataRow['asal_sekolah'] ?: '-',
                             ]);
+
+                            // Update in-memory collections to block subsequent row duplication checks
+                            $existingPhoneSiswa[$dataRow['no_hp']] = true;
+                            $existingWhatsappUser[$dataRow['no_hp']] = true;
+                            if (!empty($dataRow['nik'])) {
+                                $existingNik[$dataRow['nik']] = true;
+                            }
+                            if (!empty($dataRow['nisn'])) {
+                                $existingNisn[$dataRow['nisn']] = true;
+                            }
+                            if (!empty($nis)) {
+                                $existingNis[$nis] = true;
+                            }
                             
                             $successCount++;
                         }
@@ -267,14 +299,14 @@ class ListDataSiswa extends ListRecords
                         
                         if (!empty($errors)) {
                             \Illuminate\Support\Facades\DB::rollBack();
-                            $action->halt();
                             
                             \Filament\Notifications\Notification::make()
                                 ->danger()
                                 ->title('Impor Gagal (Rollback)')
                                 ->body("Terdapat kesalahan pada file CSV:\n\n" . implode("\n", array_slice($errors, 0, 5)) . (count($errors) > 5 ? "\n...dan " . (count($errors) - 5) . " kesalahan lainnya." : ""))
                                 ->send();
-                            return;
+                                
+                            $action->halt();
                         }
                         
                         \Illuminate\Support\Facades\DB::commit();
@@ -285,6 +317,8 @@ class ListDataSiswa extends ListRecords
                             ->body("Berhasil mengimpor {$successCount} data siswa baru.")
                             ->send();
                             
+                    } catch (\Filament\Support\Exceptions\Halt $e) {
+                        throw $e;
                     } catch (\Exception $e) {
                         \Illuminate\Support\Facades\Log::error('Import CSV error: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
                         if (isset($handle) && is_resource($handle)) {
@@ -294,13 +328,13 @@ class ListDataSiswa extends ListRecords
                             \Illuminate\Support\Facades\DB::rollBack();
                         } catch (\Exception $dbEx) {}
                         
-                        $action->halt();
-                        
                         \Filament\Notifications\Notification::make()
                             ->danger()
                             ->title('Terjadi Kesalahan')
                             ->body($e->getMessage())
                             ->send();
+
+                        $action->halt();
                     }
                 }),
             \Filament\Actions\Action::make('export_excel')
