@@ -116,15 +116,19 @@ class DataSiswaResource extends Resource
                     ->placeholder('-'),
             ])
             ->filters([
-                SelectFilter::make('pendaftaran.status')
+                SelectFilter::make('status')
                     ->label('Jenjang Diterima')
-                    ->relationship('pendaftaran', 'status')
                     ->options([
                         'diterima_ula'      => 'Ula',
                         'diterima_idadiyah' => 'Idadiyah',
                         'diterima_wustho'   => 'Wustho',
                         'diterima_ulya'     => 'Ulya',
-                    ]),
+                    ])
+                    ->query(fn (Builder $query, array $data) => 
+                        $query->when($data['value'], fn ($q, $value) => 
+                            $q->whereHas('pendaftaran', fn ($pq) => $pq->where('status', $value))
+                        )
+                    ),
 
                 SelectFilter::make('jenis_kelamin')
                     ->label('Jenis Kelamin')
