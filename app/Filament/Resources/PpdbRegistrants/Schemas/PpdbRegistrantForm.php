@@ -330,7 +330,7 @@ class PpdbRegistrantForm
                                                 'psikotes'   => 'Psikotes',
                                                 'akademik'   => 'Tes Akademik',
                                                 'baca_quran' => 'Tes Baca Al-Quran',
-                                                'sholat'     => 'Tes Sholat',
+                                                'sholat'     => 'Tes Ibadah',
                                             ])
                                             ->columns(2)
                                             ->required()
