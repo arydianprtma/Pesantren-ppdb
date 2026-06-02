@@ -12,6 +12,12 @@ class ListDataSiswa extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            \Filament\Actions\Action::make('download_template')
+                ->label('Template CSV')
+                ->icon('heroicon-o-document-arrow-down')
+                ->color('gray')
+                ->url(route('export.siswa.template'))
+                ->openUrlInNewTab(),
             \Filament\Actions\Action::make('import_csv')
                 ->label('Impor CSV')
                 ->icon('heroicon-o-arrow-up-tray')
