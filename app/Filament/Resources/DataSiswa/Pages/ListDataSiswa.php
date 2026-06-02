@@ -88,6 +88,7 @@ class ListDataSiswa extends ListRecords
                         $existingNisn = \App\Models\PpdbSiswa::whereNotNull('nisn')->pluck('nisn')->flip()->toArray();
                         $existingNis = \App\Models\PpdbSiswa::whereNotNull('nis')->pluck('nis')->flip()->toArray();
                         $existingEmails = \App\Models\User::pluck('email')->flip()->toArray();
+                        $existingNoRegs = \App\Models\PpdbPendaftaran::pluck('no_reg')->flip()->toArray();
 
                         // Pre-compute bcrypt password hash once to avoid 500x expensive CPU crypt cycles
                         $hashedPassword = \Illuminate\Support\Facades\Hash::make('santri123');
@@ -213,9 +214,15 @@ class ListDataSiswa extends ListRecords
                             ]);
                             
                             // Create PpdbPendaftaran
+                            $noReg = 'REG-' . date('Ymd') . '-' . strtoupper(bin2hex(random_bytes(4)));
+                            while (isset($existingNoRegs[$noReg])) {
+                                $noReg = 'REG-' . date('Ymd') . '-' . strtoupper(bin2hex(random_bytes(4)));
+                            }
+                            $existingNoRegs[$noReg] = true;
+
                             $pendaftaran = \App\Models\PpdbPendaftaran::create([
                                 'user_id' => $user->id,
-                                'no_reg' => 'REG-' . date('Ymd') . '-' . strtoupper(bin2hex(random_bytes(2))),
+                                'no_reg' => $noReg,
                                 'tanggal_daftar' => now(),
                                 'tingkat' => $tingkat,
                                 'status' => $status,
