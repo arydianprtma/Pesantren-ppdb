@@ -75,6 +75,7 @@ Route::middleware('auth')->prefix('export')->name('export.')->group(function () 
     Route::get('/guru/pdf',        [\App\Http\Controllers\ExportController::class, 'guruPdf'])->name('guru.pdf');
     Route::get('/siswa/excel',     [\App\Http\Controllers\ExportController::class, 'siswaExcel'])->name('siswa.excel');
     Route::get('/siswa/pdf',       [\App\Http\Controllers\ExportController::class, 'siswaPdf'])->name('siswa.pdf');
+    Route::get('/siswa/template',  [\App\Http\Controllers\ExportController::class, 'downloadSiswaTemplate'])->name('siswa.template');
 });
 
 use App\Http\Controllers\VerificationController;

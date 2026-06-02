@@ -204,6 +204,43 @@ class ExportController extends Controller
         return view('exports.siswa-pdf', compact('data'));
     }
 
+    public function downloadSiswaTemplate()
+    {
+        $this->authorizeAdmin();
+
+        $filename = 'template_impor_siswa.csv';
+
+        $headers = [
+            'Content-Type'        => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ];
+
+        $callback = function () {
+            $file = fopen('php://output', 'w');
+            fputs($file, "\xEF\xBB\xBF"); // BOM
+
+            // Header kolom template
+            fputcsv($file, [
+                'nama_lengkap', 'jenis_kelamin', 'nik', 'nisn', 'nis', 
+                'no_hp', 'email', 'tempat_lahir', 'tanggal_lahir', 
+                'alamat', 'kelurahan_desa', 'kecamatan', 'kabupaten_kota', 
+                'provinsi', 'tingkat', 'status_penerimaan', 'asal_sekolah'
+            ]);
+
+            // Tambahkan baris contoh (dummy data)
+            fputcsv($file, [
+                'Ahmad Fauzi', 'L', '3202151212990001', '0123456789', '', 
+                '081234567890', 'ahmad.fauzi@gmail.com', 'Pangandaran', '2012-08-15', 
+                'Jl. Raya Padaherang No. 12', 'Padaherang', 'Padaherang', 'Pangandaran', 
+                'Jawa Barat', 'smp', 'diterima_ula', 'SDN 1 Padaherang'
+            ]);
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
     // ─────────────────────────────────────────
     // HELPER
     // ─────────────────────────────────────────
