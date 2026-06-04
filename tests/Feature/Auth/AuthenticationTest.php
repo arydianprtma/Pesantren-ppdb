@@ -17,6 +17,14 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect('/portal/login');
     }
 
+    public function test_portal_login_screen_can_be_rendered(): void
+    {
+        config(['app.debug' => true]);
+        $response = $this->get('/portal/login');
+
+        $response->assertStatus(200);
+    }
+
     public function test_users_can_authenticate_using_the_login_screen(): void
     {
         $user = User::factory()->create();
