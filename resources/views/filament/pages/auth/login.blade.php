@@ -5,8 +5,8 @@
         <div class="bg-circle-2"></div>
     </div>
 
-    <!-- Inner Page Content -->
-    <div style="position: relative; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <!-- Glassmorphic Card Container -->
+    <div class="login-card">
         <!-- Logo and Heading -->
         <div class="logo-wrapper">
             <div style="position: relative; margin-bottom: 1rem;">
@@ -84,7 +84,26 @@
             font-family: 'Poppins', sans-serif !important;
         }
 
-        /* Styling for the outer Filament Simple Layout */
+        /* Our Custom Glassmorphic Card */
+        .login-card {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 24px !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+            padding: 2.5rem 2rem !important;
+            width: 100% !important;
+            max-width: 440px !important;
+            margin: 0 auto !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            position: relative !important;
+            z-index: 10 !important;
+        }
+
+        /* Reset and clean up Filament's outer layout components */
         .fi-simple-layout {
             background-color: #020617 !important; /* slate-950 */
             min-height: 100vh !important;
@@ -107,15 +126,17 @@
             margin: 0 !important;
         }
 
-        /* Style the main element as the glassmorphic card container */
+        /* Remove default Filament card styling to prevent conflicts with our login-card */
         .fi-simple-main {
-            background-color: rgba(255, 255, 255, 0.05) !important;
-            backdrop-filter: blur(20px) !important;
-            -webkit-backdrop-filter: blur(20px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            border-radius: 24px !important;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
-            padding: 2.5rem 2rem !important;
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            --tw-ring-offset-shadow: 0 0 #0000 !important;
+            --tw-ring-shadow: 0 0 #0000 !important;
+            --tw-shadow: 0 0 #0000 !important;
+            --tw-ring-color: transparent !important;
+            padding: 0 !important;
             max-width: 440px !important;
             width: 100% !important;
             margin: 0 auto !important;
