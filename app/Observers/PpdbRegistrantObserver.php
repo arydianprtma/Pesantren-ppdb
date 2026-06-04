@@ -91,6 +91,10 @@ class PpdbRegistrantObserver
         $admins = User::role(['admin', 'super_admin'])->get();
 
         if ($admins->isEmpty()) {
+            $admins = User::whereIn('role', ['admin', 'super_admin'])->get();
+        }
+
+        if ($admins->isEmpty()) {
             return;
         }
 
