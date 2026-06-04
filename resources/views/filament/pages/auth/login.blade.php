@@ -19,14 +19,9 @@
         </div>
 
         <!-- Form -->
-        <x-filament-panels::form wire:submit="authenticate" class="w-full space-y-6">
-            {{ $this->form }}
-
-            <x-filament-panels::form.actions
-                :actions="$this->getFormActions()"
-                :full-width="$this->hasFullWidthFormActions()"
-            />
-        </x-filament-panels::form>
+        <div class="w-full">
+            {{ $this->content }}
+        </div>
     </div>
 
     <!-- Inject Custom CSS to Override Filament Default Styles -->
