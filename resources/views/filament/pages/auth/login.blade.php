@@ -14,7 +14,7 @@
                 <img src="{{ asset('logo_pondok.png') }}" class="custom-logo" alt="Logo Pesantren">
             </div>
             <h2 class="custom-title">Pesantren Riyadussalikin</h2>
-            <p class="custom-subtitle">Portal Administrasi PPDB</p>
+            <p class="custom-subtitle">Portal Administrasi</p>
         </div>
 
         <!-- Form -->
