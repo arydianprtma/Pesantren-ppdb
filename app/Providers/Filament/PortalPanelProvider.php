@@ -29,7 +29,7 @@ class PortalPanelProvider extends PanelProvider
             ->default()
             ->id('portal')
             ->path('portal')
-            ->login()
+            ->login(\App\Filament\Pages\Auth\CustomLogin::class)
             ->passwordReset()
             ->emailVerification()
             ->profile(\App\Filament\Pages\Auth\EditProfile::class, isSimple: false)
