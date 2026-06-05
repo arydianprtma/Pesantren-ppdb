@@ -89,13 +89,35 @@ class PpdbRegistrantObserver
     public function created(PpdbPendaftaran $pendaftaran): void
     {
         try {
-            $admins = User::role(['admin', 'super_admin'])->get();
+            // Cek role yang benar-benar ada di database untuk mencegah RoleDoesNotExist exception dari Spatie
+            $existingRoles = \Illuminate\Support\Facades\DB::table('roles')
+                ->whereIn('name', ['admin', 'super_admin'])
+                ->where('guard_name', 'web')
+                ->pluck('name')
+                ->toArray();
+
+            if (!empty($existingRoles)) {
+                $admins = User::role($existingRoles)->get();
+            } else {
+                $admins = collect();
+            }
         } catch (\Throwable $e) {
             $admins = collect();
         }
 
         if ($admins->isEmpty()) {
             $admins = User::whereIn('role', ['admin', 'super_admin'])->get();
+        }
+
+        if ($admins->isEmpty()) {
+            // Jika masih kosong, coba ambil semua user yang memiliki is_active = true dan role super_admin/admin di database (sebagai perlindungan terakhir)
+            $admins = User::where('is_active', true)->where(function($q) {
+                $q->where('role', 'super_admin')
+                  ->orWhere('role', 'admin')
+                  ->orWhereHas('roles', function($rq) {
+                      $rq->whereIn('name', ['admin', 'super_admin']);
+                  });
+            })->get();
         }
 
         if ($admins->isEmpty()) {
