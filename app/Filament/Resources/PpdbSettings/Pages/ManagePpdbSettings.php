@@ -17,11 +17,4 @@ class ManagePpdbSettings extends ManageRecords
                 ->hidden(fn () => PpdbSettingResource::getModel()::count() >= 1),
         ];
     }
-
-    protected function getHeaderWidgets(): array
-    {
-        return [
-            \App\Filament\Widgets\PendaftaranChartWidget::class,
-        ];
-    }
 }
