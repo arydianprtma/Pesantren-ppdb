@@ -49,11 +49,15 @@ return [
 
         'ppdb' => [
             'driver' => 'local',
-            'root' => env('PPDB_STORAGE_PATH', is_dir(base_path('PPDB/storage/app')) 
-                ? base_path('PPDB/storage/app') 
-                : (is_dir(base_path('../spmb-ppdb/storage/app')) 
-                    ? base_path('../spmb-ppdb/storage/app') 
-                    : storage_path('app/ppdb'))),
+            'root' => env('PPDB_STORAGE_PATH', is_dir(base_path('PPDB/storage/app/private')) 
+                ? base_path('PPDB/storage/app/private') 
+                : (is_dir(base_path('PPDB/storage/app')) 
+                    ? base_path('PPDB/storage/app') 
+                    : (is_dir(base_path('../spmb-ppdb/storage/app/private')) 
+                        ? base_path('../spmb-ppdb/storage/app/private') 
+                        : (is_dir(base_path('../spmb-ppdb/storage/app')) 
+                            ? base_path('../spmb-ppdb/storage/app') 
+                            : storage_path('app/ppdb'))))),
             'url' => '/ppdb-storage',
             'visibility' => 'private',
             'serve' => true,
