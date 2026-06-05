@@ -67,7 +67,8 @@ class PpdbRegistrantsTable
                         'diterima_idadiyah',
                         'diterima_wustho',
                         'diterima_ulya'   => 'success',
-                        'ditolak'         => 'danger',
+                        'ditolak',
+                        'mengundurkan_diri' => 'danger',
                         default           => 'gray',
                     })
                     ->formatStateUsing(fn (string $state): string => match ($state) {
@@ -80,6 +81,7 @@ class PpdbRegistrantsTable
                         'diterima_wustho' => 'Diterima - Wustho',
                         'diterima_ulya'   => 'Diterima - Ulya',
                         'ditolak'         => 'Tidak Diterima',
+                        'mengundurkan_diri' => 'Mengundurkan Diri',
                         default           => ucfirst($state),
                     }),
 
@@ -105,6 +107,7 @@ class PpdbRegistrantsTable
                         'diterima_wustho' => 'Diterima - Wustho',
                         'diterima_ulya'   => 'Diterima - Ulya',
                         'ditolak'         => 'Tidak Diterima',
+                        'mengundurkan_diri' => 'Mengundurkan Diri',
                     ]),
             ])
             ->recordActions([

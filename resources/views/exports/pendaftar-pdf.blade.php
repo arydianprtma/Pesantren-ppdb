@@ -160,7 +160,7 @@
                 $siswa = $row->siswa;
                 $statusBadge = match($row->status) {
                     'diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya' => 'badge-diterima',
-                    'ditolak' => 'badge-ditolak',
+                    'ditolak', 'mengundurkan_diri' => 'badge-ditolak',
                     default   => '',
                 };
                 $statusLabel = match($row->status) {
@@ -173,6 +173,7 @@
                     'diterima_wustho' => 'Diterima - Wustho',
                     'diterima_ulya'   => 'Diterima - Ulya',
                     'ditolak'         => 'Tidak Diterima',
+                    'mengundurkan_diri' => 'Mengundurkan Diri',
                     default           => ucfirst($row->status),
                 };
             @endphp

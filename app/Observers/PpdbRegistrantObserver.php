@@ -131,6 +131,8 @@ class PpdbRegistrantObserver
 
             'ditolak' => "Mohon maaf *{$nama}*, berdasarkan hasil seleksi, pendaftaran Anda belum dapat kami terima saat ini. Tetap semangat!",
 
+            'mengundurkan_diri' => "Halo *{$nama}*, status pendaftaran Anda (No: {$noReg}) telah kami perbarui menjadi *Mengundurkan Diri*. Terima kasih atas ketertarikan dan partisipasi Anda dalam proses PPDB kami.",
+
             default => null,
         };
 

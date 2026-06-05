@@ -296,6 +296,7 @@ class PpdbRegistrantForm
                                         'diterima_wustho'   => 'Diterima - Kelas Wustho (Menengah)',
                                         'diterima_ulya'     => 'Diterima - Kelas Ulya (Lanjutan)',
                                         'ditolak'          => 'Tidak Diterima',
+                                        'mengundurkan_diri' => 'Mengundurkan Diri',
                                     ])
                                     ->required()
                                     ->default('pending')

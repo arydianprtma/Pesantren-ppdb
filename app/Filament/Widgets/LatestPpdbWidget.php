@@ -61,16 +61,17 @@ class LatestPpdbWidget extends BaseWidget
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->formatStateUsing(fn (string $state): string => match ($state) {
-                        'pending'         => 'Menunggu',
-                        'jadwal_tes'      => 'Jadwal Tes',
-                        'tes_berlangsung' => 'Tes Berlangsung',
-                        'wawancara'       => 'Wawancara',
-                        'diterima_ula'    => 'Diterima - Ula',
+                        'pending'           => 'Menunggu',
+                        'jadwal_tes'        => 'Jadwal Tes',
+                        'tes_berlangsung'   => 'Tes Berlangsung',
+                        'wawancara'         => 'Wawancara',
+                        'diterima_ula'      => 'Diterima - Ula',
                         'diterima_idadiyah' => 'Diterima - Idadiyah',
-                        'diterima_wustho' => 'Diterima - Wustho',
-                        'diterima_ulya'   => 'Diterima - Ulya',
-                        'ditolak'         => 'Tidak Diterima',
-                        default           => ucfirst($state),
+                        'diterima_wustho'   => 'Diterima - Wustho',
+                        'diterima_ulya'     => 'Diterima - Ulya',
+                        'ditolak'           => 'Tidak Diterima',
+                        'mengundurkan_diri' => 'Mengundurkan Diri',
+                        default             => ucfirst($state),
                     })
                     ->color(fn (string $state): string => match ($state) {
                         'pending'         => 'gray',
@@ -81,7 +82,8 @@ class LatestPpdbWidget extends BaseWidget
                         'diterima_idadiyah',
                         'diterima_wustho',
                         'diterima_ulya'   => 'success',
-                        'ditolak'         => 'danger',
+                        'ditolak',
+                        'mengundurkan_diri' => 'danger',
                         default           => 'gray',
                     }),
                 Tables\Columns\TextColumn::make('created_at')

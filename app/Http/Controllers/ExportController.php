@@ -257,6 +257,7 @@ class ExportController extends Controller
             'diterima_wustho' => 'Diterima - Wustho',
             'diterima_ulya'   => 'Diterima - Ulya',
             'ditolak'         => 'Tidak Diterima',
+            'mengundurkan_diri' => 'Mengundurkan Diri',
             default           => ucfirst($status),
         };
     }
