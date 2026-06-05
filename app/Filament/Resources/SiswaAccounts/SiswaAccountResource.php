@@ -114,7 +114,7 @@ class SiswaAccountResource extends Resource
                 ImageColumn::make('avatar')
                     ->label('Foto')
                     ->circular()
-                    ->imageUrl(fn($record) => $record->getFilamentAvatarUrl())
+                    ->getStateUsing(fn($record) => $record->getFilamentAvatarUrl())
                     ->defaultImageUrl(fn($record) => 'https://ui-avatars.com/api/?name=' . urlencode($record->name) . '&color=10b981&background=d1fae5'),
                 TextColumn::make('name')
                     ->label('Nama')
