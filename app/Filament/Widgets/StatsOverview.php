@@ -6,6 +6,10 @@ use App\Models\ContactMessage;
 use App\Models\PpdbPendaftaran;
 use App\Models\Prestasi;
 use App\Models\Berita;
+use App\Filament\Resources\ContactMessages\ContactMessageResource;
+use App\Filament\Resources\Prestasi\PrestasiResource;
+use App\Filament\Resources\PpdbRegistrants\PpdbRegistrantResource;
+use App\Filament\Resources\Berita\BeritaResource;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -32,12 +36,14 @@ class StatsOverview extends BaseWidget
                 Stat::make('Total Berita', Berita::count())
                     ->description('Artikel berita diterbitkan')
                     ->descriptionIcon('heroicon-m-newspaper')
-                    ->color('success'),
+                    ->color('success')
+                    ->url(BeritaResource::getUrl('index')),
 
                 Stat::make('Total Prestasi', Prestasi::count())
                     ->description('Prestasi tercatat')
                     ->descriptionIcon('heroicon-m-trophy')
-                    ->color('warning'),
+                    ->color('warning')
+                    ->url(PrestasiResource::getUrl('index')),
             ];
         }
 
@@ -72,33 +78,39 @@ class StatsOverview extends BaseWidget
                 ->description('Perlu dibaca segera')
                 ->descriptionIcon('heroicon-m-envelope')
                 ->color('danger')
-                ->chart([7, 2, 10, 3, 15, 4, 17]),
+                ->chart([7, 2, 10, 3, 15, 4, 17])
+                ->url(ContactMessageResource::getUrl('index')),
 
             Stat::make('Total Prestasi', Prestasi::count())
                 ->description('Prestasi tercatat')
                 ->descriptionIcon('heroicon-m-trophy')
-                ->color('warning'),
+                ->color('warning')
+                ->url(PrestasiResource::getUrl('index')),
 
             Stat::make('Total Pendaftar PPDB' . $taLabel, $totalCount)
                 ->description('Siswa mendaftar' . $taLabel)
                 ->descriptionIcon('heroicon-m-users')
                 ->color('primary')
-                ->chart([10, 15, 8, 12, 11, 14, $totalCount]),
+                ->chart([10, 15, 8, 12, 11, 14, $totalCount])
+                ->url(PpdbRegistrantResource::getUrl('index')),
 
             Stat::make('Pendaftar SMP' . $taLabel, $smpCount)
                 ->description('Siswa tingkat SMP' . $taLabel)
                 ->descriptionIcon('heroicon-m-academic-cap')
-                ->color('success'),
+                ->color('success')
+                ->url(PpdbRegistrantResource::getUrl('index', ['tableFilters' => ['tingkat' => ['value' => 'smp']]])),
 
             Stat::make('Pendaftar SMA' . $taLabel, $smaCount)
                 ->description('Siswa tingkat SMA' . $taLabel)
                 ->descriptionIcon('heroicon-m-building-office')
-                ->color('info'),
+                ->color('info')
+                ->url(PpdbRegistrantResource::getUrl('index', ['tableFilters' => ['tingkat' => ['value' => 'sma']]])),
 
             Stat::make('Pendaftar Hari Ini' . $taLabel, $hariIniCount)
                 ->description('Kemarin: ' . $kemarinCount . ' pendaftar')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
-                ->color('success'),
+                ->color('success')
+                ->url(PpdbRegistrantResource::getUrl('index')),
         ];
     }
 }

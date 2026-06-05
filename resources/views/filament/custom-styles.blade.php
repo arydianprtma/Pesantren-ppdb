@@ -154,5 +154,69 @@
             transition: transform 0.15s ease !important;
         }
     }
+
+    /* --- Premium Dashboard Enhancements --- */
+    
+    /* 1. Stats Cards Styling */
+    .fi-wi-stats-overview-stat-card {
+        border-radius: 1rem !important;
+        border: 1px solid rgba(229, 231, 235, 0.7) !important;
+        background-color: rgba(255, 255, 255, 0.75) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02) !important;
+    }
+
+    html.dark .fi-wi-stats-overview-stat-card {
+        border: 1px solid rgba(255, 255, 255, 0.06) !important;
+        background-color: rgba(30, 41, 59, 0.6) !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    }
+
+    /* Stats Cards Hover Effect */
+    .fi-wi-stats-overview-stat-card:hover {
+        transform: translateY(-5px) !important;
+        border-color: rgba(16, 185, 129, 0.45) !important;
+        box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03) !important;
+    }
+
+    html.dark .fi-wi-stats-overview-stat-card:hover {
+        border-color: rgba(16, 185, 129, 0.45) !important;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* 2. Table Widget Styling */
+    .fi-ta-ctn {
+        border-radius: 1.25rem !important;
+        border: 1px solid rgba(229, 231, 235, 0.7) !important;
+        background-color: rgba(255, 255, 255, 0.75) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        overflow: hidden !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.02) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    html.dark .fi-ta-ctn {
+        border: 1px solid rgba(255, 255, 255, 0.06) !important;
+        background-color: rgba(30, 41, 59, 0.6) !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* Clean spacing in table rows */
+    .fi-ta-table th {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        font-size: 0.75rem !important;
+        letter-spacing: 0.05em !important;
+    }
+
+    .fi-ta-table td {
+        padding-top: 1.125rem !important;
+        padding-bottom: 1.125rem !important;
+    }
 </style>
 

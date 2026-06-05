@@ -1,7 +1,8 @@
+@if (config('broadcasting.default') === 'reverb')
 <!-- Load Pusher and Laravel Echo from CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pusher/8.3.0/pusher.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.16.0/dist/echo.iife.js"></script>
-<script>
+<script data-navigate-once src="https://cdnjs.cloudflare.com/ajax/libs/pusher/8.3.0/pusher.min.js"></script>
+<script data-navigate-once src="https://cdn.jsdelivr.net/npm/laravel-echo@1.16.0/dist/echo.iife.js"></script>
+<script data-navigate-once>
     (function() {
         try {
             window.Pusher = Pusher;
@@ -12,7 +13,8 @@
             const reverbScheme = "{{ env('VITE_REVERB_SCHEME') ?? config('broadcasting.connections.reverb.options.scheme') ?? env('REVERB_SCHEME') ?? 'https' }}";
             
             if (reverbKey && reverbHost) {
-                window.Echo = new window.Echo({
+                const EchoConstructor = window.Echo.default || window.Echo;
+                window.Echo = new EchoConstructor({
                     broadcaster: 'reverb',
                     key: reverbKey,
                     wsHost: reverbHost,
@@ -21,7 +23,6 @@
                     forceTLS: reverbScheme === 'https',
                     enabledTransports: ['ws', 'wss'],
                 });
-                console.log("Laravel Echo initialized successfully with Reverb!");
             } else {
                 console.warn("Laravel Echo could not be initialized: Reverb credentials missing.");
             }
@@ -30,3 +31,4 @@
         }
     })();
 </script>
+@endif

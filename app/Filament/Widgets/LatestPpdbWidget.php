@@ -14,7 +14,7 @@ class LatestPpdbWidget extends BaseWidget
         return auth()->user()?->isAdmin() ?? false;
     }
 
-    protected static ?int $sort = 3;
+    protected static ?int $sort = 4;
 
     protected int|string|array $columnSpan = 'full';
 
@@ -34,6 +34,9 @@ class LatestPpdbWidget extends BaseWidget
             ->poll('5s')
             ->query(
                 PpdbPendaftaran::query()->latest()->limit(5)
+            )
+            ->recordUrl(
+                fn (PpdbPendaftaran $record): string => \App\Filament\Resources\PpdbRegistrants\PpdbRegistrantResource::getUrl('edit', ['record' => $record])
             )
             ->columns([
                 Tables\Columns\TextColumn::make('siswa.nama_lengkap')
