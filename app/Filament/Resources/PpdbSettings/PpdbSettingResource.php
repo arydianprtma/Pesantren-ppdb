@@ -75,33 +75,6 @@ class PpdbSettingResource extends Resource
                             ->placeholder('Pesan yang muncul jika pendaftaran sedang ditutup...')
                             ->columnSpanFull(),
                     ])->columns(2),
-
-                Section::make('Pengaturan Kop Kartu Pendaftaran')
-                    ->description('Sesuaikan teks dan logo yang muncul pada kop/header kartu bukti pendaftaran.')
-                    ->schema([
-                        FileUpload::make('kartu_logo')
-                            ->label('Logo Kop Surat')
-                            ->image()
-                            ->disk('public')
-                            ->directory('logo-kartu')
-                            ->imagePreviewHeight('80')
-                            ->maxSize(2048)
-                            ->helperText('Upload logo untuk kop surat kartu pendaftaran (maks 2MB). Kosongkan untuk gunakan logo default.')
-                            ->columnSpanFull(),
-                        TextInput::make('kartu_header_1')
-                            ->label('Header 1 (Nama Panitia)')
-                            ->placeholder('Contoh: Panitia Penerimaan Santri Baru (PSB)')
-                            ->maxLength(255),
-                        TextInput::make('kartu_header_2')
-                            ->label('Header 2 (Nama Lembaga)')
-                            ->placeholder('Contoh: Pondok Pesantren Riyadussalikin')
-                            ->maxLength(255),
-                        TextInput::make('kartu_alamat')
-                            ->label('Alamat / Subtitle')
-                            ->placeholder('Contoh: Padaherang, Kabupaten Pangandaran, Jawa Barat')
-                            ->maxLength(255)
-                            ->columnSpanFull(),
-                    ])->columns(2),
             ]);
     }
 
