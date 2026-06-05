@@ -27,13 +27,13 @@ class PpdbSettingResource extends Resource
 
     protected static ?string $model = PpdbSetting::class;
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-calendar-days';
     
-    protected static ?string $navigationLabel = 'Tahun Ajaran (PPDB)';
+    protected static ?string $navigationLabel = 'Tahun Ajaran PPDB';
     
     protected static ?string $modelLabel = 'Tahun Ajaran';
     
-    protected static ?string $pluralModelLabel = 'Tahun Ajaran (PPDB)';
+    protected static ?string $pluralModelLabel = 'Tahun Ajaran PPDB';
     
     protected static ?int $navigationSort = 2;
     
@@ -42,10 +42,7 @@ class PpdbSettingResource extends Resource
         return 'Sistem';
     }
 
-    public static function canCreate(): bool
-    {
-        return static::getModel()::count() < 1;
-    }
+
 
     public static function form(Schema $schema): Schema
     {
@@ -116,6 +113,17 @@ class PpdbSettingResource extends Resource
                     ->label('Tahun Ajaran')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('smp_count')
+                    ->label('Pendaftar SMP')
+                    ->getStateUsing(fn ($record) => \App\Models\PpdbPendaftaran::where('tahun_ajaran', $record->tahun_ajaran)->where('tingkat', 'smp')->count()),
+                TextColumn::make('sma_count')
+                    ->label('Pendaftar SMA')
+                    ->getStateUsing(fn ($record) => \App\Models\PpdbPendaftaran::where('tahun_ajaran', $record->tahun_ajaran)->where('tingkat', 'sma')->count()),
+                TextColumn::make('total_count')
+                    ->label('Total Pendaftar')
+                    ->getStateUsing(fn ($record) => \App\Models\PpdbPendaftaran::where('tahun_ajaran', $record->tahun_ajaran)->count())
+                    ->weight('bold')
+                    ->color('primary'),
                 TextColumn::make('tgl_buka')
                     ->label('Buka')
                     ->dateTime()

@@ -41,6 +41,30 @@ class StatsOverview extends BaseWidget
             ];
         }
 
+        $activeSetting = \App\Models\PpdbSetting::where('is_active', true)->first();
+        $tahunAjaran = $activeSetting ? $activeSetting->tahun_ajaran : null;
+        $taLabel = $tahunAjaran ? " (TA {$tahunAjaran})" : "";
+
+        $totalPendaftar = PpdbPendaftaran::query();
+        $smpPendaftar = PpdbPendaftaran::where('tingkat', 'smp');
+        $smaPendaftar = PpdbPendaftaran::where('tingkat', 'sma');
+        $hariIniPendaftar = PpdbPendaftaran::whereDate('created_at', today());
+        $kemarinPendaftar = PpdbPendaftaran::whereDate('created_at', today()->subDay());
+
+        if ($tahunAjaran) {
+            $totalPendaftar->where('tahun_ajaran', $tahunAjaran);
+            $smpPendaftar->where('tahun_ajaran', $tahunAjaran);
+            $smaPendaftar->where('tahun_ajaran', $tahunAjaran);
+            $hariIniPendaftar->where('tahun_ajaran', $tahunAjaran);
+            $kemarinPendaftar->where('tahun_ajaran', $tahunAjaran);
+        }
+
+        $totalCount = $totalPendaftar->count();
+        $smpCount = $smpPendaftar->count();
+        $smaCount = $smaPendaftar->count();
+        $hariIniCount = $hariIniPendaftar->count();
+        $kemarinCount = $kemarinPendaftar->count();
+
         return [
             Stat::make('Pesan Masuk Baru', ContactMessage::where('is_read', false)->count())
                 ->description('Perlu dibaca segera')
@@ -53,24 +77,24 @@ class StatsOverview extends BaseWidget
                 ->descriptionIcon('heroicon-m-trophy')
                 ->color('warning'),
 
-            Stat::make('Total Pendaftar PPDB', PpdbPendaftaran::count())
-                ->description('Total siswa mendaftar')
+            Stat::make('Total Pendaftar PPDB' . $taLabel, $totalCount)
+                ->description('Siswa mendaftar' . $taLabel)
                 ->descriptionIcon('heroicon-m-users')
                 ->color('primary')
-                ->chart([10, 15, 8, 12, 11, 14, PpdbPendaftaran::count()]),
+                ->chart([10, 15, 8, 12, 11, 14, $totalCount]),
 
-            Stat::make('Pendaftar SMP', PpdbPendaftaran::where('tingkat', 'smp')->count())
-                ->description('Siswa tingkat SMP')
+            Stat::make('Pendaftar SMP' . $taLabel, $smpCount)
+                ->description('Siswa tingkat SMP' . $taLabel)
                 ->descriptionIcon('heroicon-m-academic-cap')
                 ->color('success'),
 
-            Stat::make('Pendaftar SMA', PpdbPendaftaran::where('tingkat', 'sma')->count())
-                ->description('Siswa tingkat SMA')
+            Stat::make('Pendaftar SMA' . $taLabel, $smaCount)
+                ->description('Siswa tingkat SMA' . $taLabel)
                 ->descriptionIcon('heroicon-m-building-office')
                 ->color('info'),
 
-            Stat::make('Pendaftar Hari Ini', PpdbPendaftaran::whereDate('created_at', today())->count())
-                ->description('Kemarin: ' . PpdbPendaftaran::whereDate('created_at', today()->subDay())->count() . ' pendaftar')
+            Stat::make('Pendaftar Hari Ini' . $taLabel, $hariIniCount)
+                ->description('Kemarin: ' . $kemarinCount . ' pendaftar')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('success'),
         ];

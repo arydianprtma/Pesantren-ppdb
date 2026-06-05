@@ -28,9 +28,13 @@ class PpdbSetting extends Model
 
     protected static function booted()
     {
-        static::creating(function ($model) {
-            if (static::count() >= 1) {
-                throw new \Exception('Hanya diperbolehkan satu data pengaturan PPDB.');
+        static::saving(function ($model) {
+            if ($model->is_active) {
+                $query = static::query();
+                if ($model->exists) {
+                    $query->where('id', '!=', $model->id);
+                }
+                $query->update(['is_active' => false]);
             }
         });
     }

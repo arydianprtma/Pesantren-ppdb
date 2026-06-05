@@ -85,12 +85,22 @@ class PpdbRegistrantsTable
                         default           => ucfirst($state),
                     }),
 
+                TextColumn::make('tahun_ajaran')
+                    ->label('Tahun Ajaran')
+                    ->badge()
+                    ->color('gray')
+                    ->sortable()
+                    ->searchable(),
+
                 TextColumn::make('tanggal_daftar')
                     ->label('Tgl Daftar')
                     ->date('d M Y')
                     ->sortable(),
             ])
             ->filters([
+                SelectFilter::make('tahun_ajaran')
+                    ->label('Tahun Ajaran')
+                    ->options(fn () => \App\Models\PpdbSetting::pluck('tahun_ajaran', 'tahun_ajaran')->toArray()),
                 SelectFilter::make('tingkat')
                     ->options([
                         'smp' => 'SMP',

@@ -11,6 +11,13 @@ class PpdbPendaftaran extends Model
 
     protected static function booted()
     {
+        static::creating(function ($model) {
+            if (empty($model->tahun_ajaran)) {
+                $activeSetting = PpdbSetting::where('is_active', true)->first();
+                $model->tahun_ajaran = $activeSetting ? $activeSetting->tahun_ajaran : date('Y') . '/' . (date('Y') + 1);
+            }
+        });
+
         static::created(function ($pendaftaran) {
             \App\Events\PpdbPendaftaranCreated::dispatch($pendaftaran);
         });
