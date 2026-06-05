@@ -65,6 +65,19 @@ return [
             'report' => false,
         ],
 
+        'ppdb_public' => [
+            'driver' => 'local',
+            'root' => env('PPDB_PUBLIC_STORAGE_PATH', is_dir(base_path('PPDB/storage/app/public')) 
+                ? base_path('PPDB/storage/app/public') 
+                : (is_dir(base_path('../spmb-ppdb/storage/app/public')) 
+                    ? base_path('../spmb-ppdb/storage/app/public') 
+                    : storage_path('app/ppdb_public'))),
+            'url' => '/ppdb-public-storage',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

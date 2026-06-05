@@ -67,6 +67,10 @@ class SiswaAccountResource extends Resource
                             ->saveUploadedFileUsing(function ($file) {
                                 return \App\Services\ImageService::processUpload($file, 'avatars', 400);
                             })
+                            ->getUploadedFileUrlUsing(function ($file, $component) {
+                                $record = $component->getRecord();
+                                return $record ? $record->getFilamentAvatarUrl() : asset('storage/' . $file);
+                            })
                             ->maxSize(2048)
                             ->columnSpanFull()
                             ->helperText('Maksimal 2MB. Gambar akan dikonversi otomatis ke format WebP.'),
@@ -110,6 +114,7 @@ class SiswaAccountResource extends Resource
                 ImageColumn::make('avatar')
                     ->label('Foto')
                     ->circular()
+                    ->imageUrl(fn($record) => $record->getFilamentAvatarUrl())
                     ->defaultImageUrl(fn($record) => 'https://ui-avatars.com/api/?name=' . urlencode($record->name) . '&color=10b981&background=d1fae5'),
                 TextColumn::make('name')
                     ->label('Nama')

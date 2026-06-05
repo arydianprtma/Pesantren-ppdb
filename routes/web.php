@@ -48,6 +48,20 @@ Route::get('/ppdb-storage/{path}', function ($path) {
     return response($file)->header('Content-Type', $type);
 })->where('path', '.*');
 
+// Proxy route for PPDB public storage to avoid CORS issues
+Route::get('/ppdb-public-storage/{path}', function ($path) {
+    $fullPath = config('filesystems.disks.ppdb_public.root') . '/' . $path;
+
+    if (!file_exists($fullPath)) {
+        abort(404);
+    }
+
+    $file = file_get_contents($fullPath);
+    $type = mime_content_type($fullPath);
+
+    return response($file)->header('Content-Type', $type);
+})->where('path', '.*');
+
 // Login Route (for Admin access)
 // Route::get('/login', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'create'])->name('login');
 // Route::post('/login', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store']);
