@@ -51,7 +51,9 @@ class StatsOverview extends BaseWidget
         $hariIniPendaftar = PpdbPendaftaran::whereDate('created_at', today());
         $kemarinPendaftar = PpdbPendaftaran::whereDate('created_at', today()->subDay());
 
-        if ($tahunAjaran) {
+        $hasTahunAjaran = \Illuminate\Support\Facades\Schema::hasColumn('ppdb_pendaftaran', 'tahun_ajaran');
+
+        if ($tahunAjaran && $hasTahunAjaran) {
             $totalPendaftar->where('tahun_ajaran', $tahunAjaran);
             $smpPendaftar->where('tahun_ajaran', $tahunAjaran);
             $smaPendaftar->where('tahun_ajaran', $tahunAjaran);
