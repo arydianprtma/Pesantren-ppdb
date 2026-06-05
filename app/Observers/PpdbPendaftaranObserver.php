@@ -12,9 +12,9 @@ class PpdbPendaftaranObserver
         AdminActivityLog::catat(
             modul: 'ppdb',
             aksi: 'created',
-            deskripsi: "Pendaftaran baru no. reg \"{$data->no_registrasi}\" dibuat",
+            deskripsi: "Pendaftaran baru no. reg \"{$data->no_reg}\" dibuat",
             model: $data,
-            sesudah: ['no_registrasi' => $data->no_registrasi, 'status' => $data->status, 'tingkat' => $data->tingkat],
+            sesudah: ['no_reg' => $data->no_reg, 'status' => $data->status, 'tingkat' => $data->tingkat],
         );
     }
 
@@ -28,7 +28,7 @@ class PpdbPendaftaranObserver
         AdminActivityLog::catat(
             modul: 'ppdb',
             aksi: 'updated',
-            deskripsi: "Data pendaftaran \"{$data->no_registrasi}\" diperbarui",
+            deskripsi: "Data pendaftaran \"{$data->no_reg}\" diperbarui",
             model: $data,
             sebelum: array_intersect_key($data->getOriginal(), $changes),
             sesudah: $changes,
@@ -40,7 +40,7 @@ class PpdbPendaftaranObserver
         AdminActivityLog::catat(
             modul: 'ppdb',
             aksi: 'deleted',
-            deskripsi: "Pendaftaran \"{$data->no_registrasi}\" dihapus",
+            deskripsi: "Pendaftaran \"{$data->no_reg}\" dihapus",
             model: $data,
         );
     }
