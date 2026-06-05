@@ -149,6 +149,10 @@ class PortalPanelProvider extends PanelProvider
                 fn() => view('filament.custom-sidebar-styles')
             )
             ->renderHook(
+                'panels::head.end',
+                fn() => view('filament.echo-setup')
+            )
+            ->renderHook(
                 'panels::scripts.end',
                 fn() => view('filament.custom-sidebar-scripts')
             );
