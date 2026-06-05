@@ -155,11 +155,16 @@ class PpdbRegistrantObserver
         ]);
     }
 
-    /**
-     * URL portal PPDB (port terpisah dari app utama).
-     */
     protected function portalUrl(): string
     {
+        if ($url = env('PPDB_PORTAL_URL')) {
+            return $url;
+        }
+
+        if (config('app.env') === 'production') {
+            return 'https://ppdb.riyadussalikin.my.id';
+        }
+
         $parts = parse_url(config('app.url') ?? 'http://192.168.1.8');
 
         return sprintf('%s://%s:8001', (string) ($parts['scheme'] ?? 'http'), (string) ($parts['host'] ?? '192.168.1.8'));
