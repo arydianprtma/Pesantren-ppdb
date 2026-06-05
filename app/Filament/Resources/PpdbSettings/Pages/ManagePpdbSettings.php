@@ -13,8 +13,7 @@ class ManagePpdbSettings extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make()
-                ->hidden(fn () => PpdbSettingResource::getModel()::count() >= 1),
+            CreateAction::make(),
         ];
     }
 }
