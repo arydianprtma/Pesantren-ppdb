@@ -36,7 +36,12 @@ Route::post('/kontak', [ContactController::class, 'store'])->name('kontak.store'
 
 // Proxy route for PPDB storage to avoid CORS issues
 Route::get('/ppdb-storage/{path}', function ($path) {
-    $fullPath = config('filesystems.disks.ppdb.root') . '/' . $path;
+    $root = config('filesystems.disks.ppdb.root');
+    if (!$root) {
+        abort(404);
+    }
+    
+    $fullPath = $root . '/' . $path;
 
     if (!file_exists($fullPath)) {
         abort(404);
@@ -50,7 +55,12 @@ Route::get('/ppdb-storage/{path}', function ($path) {
 
 // Proxy route for PPDB public storage to avoid CORS issues
 Route::get('/ppdb-public-storage/{path}', function ($path) {
-    $fullPath = config('filesystems.disks.ppdb_public.root') . '/' . $path;
+    $root = config('filesystems.disks.ppdb_public.root');
+    if (!$root) {
+        abort(404);
+    }
+    
+    $fullPath = $root . '/' . $path;
 
     if (!file_exists($fullPath)) {
         abort(404);
