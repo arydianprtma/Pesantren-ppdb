@@ -71,10 +71,10 @@ class PpdbRegistrantObserver
         // --------------------------------
 
         $message = $this->buildMessage(
-            nama:   $siswa->nama_lengkap,
-            status: $pendaftaran->status,
-            tingkat: strtoupper($pendaftaran->tingkat),
-            noReg:  $pendaftaran->no_reg,
+            nama:   $siswa->nama_lengkap ?? '',
+            status: $pendaftaran->status ?? '',
+            tingkat: strtoupper($pendaftaran->tingkat ?? ''),
+            noReg:  $pendaftaran->no_reg ?? '',
             nis:    $siswa->nis,
         );
 
