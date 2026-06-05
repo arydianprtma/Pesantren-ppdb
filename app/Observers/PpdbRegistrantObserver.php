@@ -88,7 +88,11 @@ class PpdbRegistrantObserver
      */
     public function created(PpdbPendaftaran $pendaftaran): void
     {
-        $admins = User::role(['admin', 'super_admin'])->get();
+        try {
+            $admins = User::role(['admin', 'super_admin'])->get();
+        } catch (\Throwable $e) {
+            $admins = collect();
+        }
 
         if ($admins->isEmpty()) {
             $admins = User::whereIn('role', ['admin', 'super_admin'])->get();
