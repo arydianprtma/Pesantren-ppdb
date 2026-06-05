@@ -6,10 +6,10 @@
         try {
             window.Pusher = Pusher;
             
-            const reverbKey = "{{ config('broadcasting.connections.reverb.key') ?? env('REVERB_APP_KEY') }}";
-            const reverbHost = "{{ config('broadcasting.connections.reverb.options.host') ?? env('REVERB_HOST') }}";
-            const reverbPort = "{{ config('broadcasting.connections.reverb.options.port') ?? env('REVERB_PORT') ?? 80 }}";
-            const reverbScheme = "{{ config('broadcasting.connections.reverb.options.scheme') ?? env('REVERB_SCHEME') ?? 'https' }}";
+            const reverbKey = "{{ env('VITE_REVERB_APP_KEY') ?? config('broadcasting.connections.reverb.key') ?? env('REVERB_APP_KEY') }}";
+            const reverbHost = "{{ env('VITE_REVERB_HOST') ?? config('broadcasting.connections.reverb.options.host') ?? env('REVERB_HOST') }}";
+            const reverbPort = "{{ env('VITE_REVERB_PORT') ?? config('broadcasting.connections.reverb.options.port') ?? env('REVERB_PORT') ?? 80 }}";
+            const reverbScheme = "{{ env('VITE_REVERB_SCHEME') ?? config('broadcasting.connections.reverb.options.scheme') ?? env('REVERB_SCHEME') ?? 'https' }}";
             
             if (reverbKey && reverbHost) {
                 window.Echo = new window.Echo({
