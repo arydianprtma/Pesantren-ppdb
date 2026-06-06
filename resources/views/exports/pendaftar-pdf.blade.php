@@ -7,428 +7,241 @@
         /* ── Reset & Base ── */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             font-size: 11px;
-            color: #1e293b;
-            background: #f1f5f9;
-            padding-top: 64px;
-            line-height: 1.5;
+            color: #000;
+            background: #fff;
+            padding-top: 56px;
+            line-height: 1.4;
         }
 
-        /* ── Print Toolbar (Glassmorphic) ── */
+        /* ── Toolbar ── */
         .print-controls {
             position: fixed; top: 0; left: 0; right: 0; z-index: 999;
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a2f 50%, #14532d 100%);
-            color: white;
-            padding: 10px 20px;
-            display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
-            border-bottom: 2px solid rgba(255,255,255,0.08);
+            background: #111; color: #fff;
+            padding: 8px 16px;
+            display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+            box-shadow: 0 2px 6px rgba(0,0,0,.3);
         }
-        .ctrl-label {
-            font-size: 12px; font-weight: 700;
-            letter-spacing: 0.3px;
-            display: flex; align-items: center; gap: 6px;
-        }
-        .ctrl-label svg { width: 16px; height: 16px; }
-        .divider { width: 1px; height: 28px; background: rgba(255,255,255,0.15); margin: 0 6px; }
+        .ctrl-label { font-family: sans-serif; font-size: 12px; font-weight: 700; }
+        .divider { width: 1px; height: 24px; background: #444; margin: 0 4px; }
         .size-btn {
-            padding: 6px 14px; border-radius: 8px;
-            border: 1.5px solid rgba(255,255,255,0.15);
-            background: rgba(255,255,255,0.06);
-            color: #94a3b8; font-size: 11px; font-weight: 600;
-            cursor: pointer; transition: all .2s ease;
-            backdrop-filter: blur(4px);
+            font-family: sans-serif;
+            padding: 5px 12px; border-radius: 4px;
+            border: 1px solid #555; background: #222;
+            color: #ccc; font-size: 11px; font-weight: 600;
+            cursor: pointer; transition: all .15s;
         }
-        .size-btn:hover {
-            border-color: #34d399; background: rgba(52,211,153,0.12);
-            color: #fff; transform: translateY(-1px);
-        }
-        .size-btn.active {
-            border-color: #10b981; background: linear-gradient(135deg, #059669, #047857);
-            color: #fff; box-shadow: 0 2px 8px rgba(16,185,129,0.35);
-        }
+        .size-btn:hover { background: #333; color: #fff; border-color: #888; }
+        .size-btn.active { background: #fff; color: #000; border-color: #fff; }
         .print-btn {
-            margin-left: auto;
-            background: linear-gradient(135deg, #059669, #047857);
-            color: white; border: none;
-            padding: 8px 22px; border-radius: 8px;
-            font-size: 12px; font-weight: 700;
-            cursor: pointer; transition: all .2s ease;
-            box-shadow: 0 2px 12px rgba(5,150,105,0.3);
-            display: flex; align-items: center; gap: 6px;
+            font-family: sans-serif;
+            margin-left: auto; background: #fff; color: #000; border: none;
+            padding: 6px 16px; border-radius: 4px;
+            font-size: 12px; font-weight: 700; cursor: pointer;
         }
-        .print-btn:hover {
-            background: linear-gradient(135deg, #047857, #065f46);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(5,150,105,0.4);
-        }
-        .print-btn svg { width: 16px; height: 16px; }
-
-        /* ── Page Container ── */
-        .page-container {
-            max-width: 100%;
-            background: #fff;
-            padding: 0;
-        }
+        .print-btn:hover { background: #ddd; }
 
         /* ── Kop Surat ── */
         .kop {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding-bottom: 12px;
-            margin-bottom: 0;
+            display: flex; align-items: center; gap: 14px;
+            padding-bottom: 8px;
         }
-        .kop img {
-            width: 70px; height: 70px;
-            object-fit: contain; flex-shrink: 0;
-        }
+        .kop img { width: 60px; height: 60px; object-fit: contain; flex-shrink: 0; }
         .kop-text { flex: 1; text-align: center; }
         .kop-text h1 {
-            font-size: 16px; font-weight: 800;
-            color: #14532d; letter-spacing: 1px;
-            text-transform: uppercase;
+            font-size: 15px; font-weight: bold;
+            text-transform: uppercase; letter-spacing: .5px;
         }
-        .kop-text .alamat {
-            font-size: 10px; color: #475569;
-            margin-top: 2px; letter-spacing: 0.2px;
-        }
-        .kop-text .sub {
-            font-size: 9.5px; color: #64748b;
-            margin-top: 1px; font-style: italic;
-        }
-        .kop-spacer { width: 70px; flex-shrink: 0; }
+        .kop-text .alamat { font-size: 10px; margin-top: 1px; }
+        .kop-text .sub { font-size: 9.5px; font-style: italic; }
+        .kop-spacer { width: 60px; flex-shrink: 0; }
 
-        /* Double-line border (formal Indonesian kop surat style) */
-        .kop-border {
-            border: none;
-            border-top: 3px solid #14532d;
-            margin-bottom: 2px;
-        }
-        .kop-border-thin {
-            border: none;
-            border-top: 1px solid #14532d;
-            margin-bottom: 14px;
-        }
+        .kop-border { border: none; border-top: 3px solid #000; margin-bottom: 1px; }
+        .kop-border-thin { border: none; border-top: 1px solid #000; margin-bottom: 10px; }
 
-        /* ── Judul Laporan ── */
+        /* ── Judul ── */
         .judul-laporan {
             text-align: center;
-            font-size: 13px;
-            font-weight: 700;
+            font-size: 12px; font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #14532d;
-            margin: 0 0 16px;
-            padding-bottom: 8px;
-            position: relative;
-        }
-        .judul-laporan::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 50%;
-            transform: translateX(-50%);
-            width: 80px; height: 2px;
-            background: linear-gradient(90deg, transparent, #14532d, transparent);
+            text-decoration: underline;
+            letter-spacing: .5px;
+            margin-bottom: 12px;
         }
 
-        /* ── Meta Info Card ── */
-        .meta-card {
-            display: flex; gap: 16px; flex-wrap: wrap;
-            margin-bottom: 16px;
-            padding: 10px 14px;
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 8px;
-            font-size: 10px; color: #166534;
+        /* ── Meta ── */
+        .meta {
+            margin-bottom: 8px;
+            font-size: 10px;
+            display: flex; gap: 16px;
         }
-        .meta-item {
-            display: flex; align-items: center; gap: 4px;
-        }
-        .meta-item strong { font-weight: 700; }
 
         /* ── Tabel ── */
-        table {
-            width: 100%; border-collapse: collapse;
-            border: 1px solid #cbd5e1;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        thead tr {
-            background: linear-gradient(135deg, #14532d, #166534) !important;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-        }
+        table { width: 100%; border-collapse: collapse; }
         thead th {
-            padding: 8px 6px;
-            text-align: left;
+            background: #000 !important; color: #fff !important;
+            padding: 5px 4px; text-align: left;
             font-size: 9px; font-weight: 700;
-            color: #fff !important;
-            border: 1px solid #15803d;
+            border: 1px solid #000;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
         }
-        tbody tr { transition: background .15s; }
         tbody tr:nth-child(even) {
-            background: #f8fafc;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
+            background: #f2f2f2;
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
         }
-        tbody tr:hover { background: #f0fdf4; }
         tbody td {
-            padding: 6px;
-            border: 1px solid #e2e8f0;
+            padding: 4px;
+            border: 1px solid #999;
             font-size: 9.5px;
             vertical-align: top;
-            color: #334155;
         }
-        tbody td strong { color: #0f172a; font-weight: 600; }
-        /* Nomor column center */
-        thead th:first-child,
-        tbody td:first-child { text-align: center; width: 30px; }
+        thead th:first-child, tbody td:first-child { text-align: center; width: 26px; }
 
-        /* ── Status Badges ── */
+        /* ── Badge ── */
         .badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 10px;
+            display: inline-block; padding: 1px 6px;
+            border: 1px solid #333; border-radius: 3px;
             font-size: 8px; font-weight: 700;
-            letter-spacing: 0.3px;
             text-transform: uppercase;
-            white-space: nowrap;
-        }
-        .badge-pending {
-            background: #fef3c7; color: #92400e;
-            border: 1px solid #fcd34d;
-        }
-        .badge-proses {
-            background: #dbeafe; color: #1e40af;
-            border: 1px solid #93c5fd;
-        }
-        .badge-diterima {
-            background: #dcfce7; color: #166534;
-            border: 1px solid #86efac;
-        }
-        .badge-ditolak {
-            background: #fee2e2; color: #991b1b;
-            border: 1px solid #fca5a5;
         }
 
-        /* ── Summary Row ── */
-        .summary-row {
-            margin-top: 12px;
-            display: flex; gap: 12px; flex-wrap: wrap;
-            font-size: 10px;
-        }
-        .summary-chip {
-            padding: 4px 12px; border-radius: 6px;
-            font-weight: 600;
-        }
-
-        /* ── TTD (Tanda Tangan) ── */
+        /* ── TTD ── */
         .ttd-section {
-            margin-top: 36px;
-            display: flex;
-            justify-content: flex-end;
+            margin-top: 32px;
+            display: flex; justify-content: flex-end;
             page-break-inside: avoid;
         }
-        .ttd-box {
-            text-align: center;
-            font-size: 10px;
-            color: #334155;
-        }
-        .ttd-box .ttd-lokasi {
-            font-size: 10px;
-            margin-bottom: 2px;
-        }
-        .ttd-box .ttd-jabatan {
-            font-size: 10px;
-            font-weight: 600;
-            margin-bottom: 56px;
-        }
+        .ttd-box { text-align: center; font-size: 10px; }
+        .ttd-box .ttd-jabatan { margin-bottom: 56px; }
         .ttd-box .ttd-name {
-            border-top: 1.5px solid #14532d;
-            padding-top: 4px;
-            font-weight: 700;
-            font-size: 10px;
-            min-width: 180px;
-            color: #14532d;
+            border-top: 1px solid #000; padding-top: 4px;
+            font-weight: bold; min-width: 180px;
         }
 
         /* ── Footer ── */
         .footer {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 8.5px;
-            color: #94a3b8;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 8px;
+            margin-top: 16px;
+            display: flex; justify-content: space-between;
+            font-size: 8px; color: #666;
+            border-top: 1px solid #ccc; padding-top: 4px;
         }
-        .footer-left { display: flex; align-items: center; gap: 4px; }
 
-        /* ── Print Styles ── */
         @media print {
             .print-controls { display: none !important; }
-            body {
-                padding-top: 0 !important;
-                font-size: 10px;
-                background: #fff;
-            }
-            .meta-card {
-                background: #f0fdf4 !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            tbody tr:nth-child(even) {
-                background: #f8fafc !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .badge-pending, .badge-proses, .badge-diterima, .badge-ditolak {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
+            body { padding-top: 0 !important; }
         }
     </style>
-    <style id="page-style">
-        @page { margin: 1.5cm; size: A4 landscape; }
-    </style>
+    <style id="page-style">@page { margin: 1.5cm; size: A4 landscape; }</style>
 </head>
 <body>
 
-{{-- ── Toolbar ── --}}
 <div class="print-controls">
-    <span class="ctrl-label">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-        Ukuran Kertas
-    </span>
+    <span class="ctrl-label">📄 Ukuran Kertas:</span>
     <button class="size-btn active" onclick="setSize('A4 landscape', this)">A4 Landscape</button>
     <button class="size-btn"        onclick="setSize('A4 portrait',  this)">A4 Portrait</button>
     <div class="divider"></div>
     <button class="size-btn" onclick="setSize('330mm 210mm', this)">F4 Landscape</button>
     <button class="size-btn" onclick="setSize('210mm 330mm', this)">F4 Portrait</button>
-    <button class="print-btn" onclick="window.print()">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18.75 9H5.25" /></svg>
-        Cetak / Simpan PDF
-    </button>
+    <button class="print-btn" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
 </div>
 
-<div class="page-container">
-
-    {{-- ── Kop Surat ── --}}
-    <div class="kop">
-        <img src="/Logo Riyad.png" alt="Logo Pesantren" onerror="this.style.display='none'">
-        <div class="kop-text">
-            <h1>Pondok Pesantren Riyadussalikin Padaherang</h1>
-            <p class="alamat">Jl. Raya Padaherang, Kab. Pangandaran, Jawa Barat</p>
-            <p class="sub">Portal PPDB &mdash; Penerimaan Peserta Didik Baru</p>
-        </div>
-        <div class="kop-spacer"></div>
+{{-- ── Kop Surat ── --}}
+<div class="kop">
+    <img src="/Logo Riyad.png" alt="Logo" onerror="this.style.display='none'">
+    <div class="kop-text">
+        <h1>Pondok Pesantren Riyadussalikin Padaherang</h1>
+        <p class="alamat">Jl. Raya Padaherang, Kab. Pangandaran, Jawa Barat</p>
+        <p class="sub">Portal PPDB &mdash; Penerimaan Peserta Didik Baru</p>
     </div>
-    <hr class="kop-border">
-    <hr class="kop-border-thin">
+    <div class="kop-spacer"></div>
+</div>
+<hr class="kop-border">
+<hr class="kop-border-thin">
 
-    {{-- ── Judul Laporan ── --}}
-    <div class="judul-laporan">Laporan Data Pendaftar PPDB</div>
+<div class="judul-laporan">Laporan Data Pendaftar PPDB</div>
 
-    {{-- ── Meta Info ── --}}
-    <div class="meta-card">
-        <div class="meta-item"><strong>Total Data:</strong> {{ count($data) }} pendaftar</div>
-        <div class="meta-item"><strong>Tanggal Cetak:</strong> {{ now()->translatedFormat('d F Y, H:i') }} WIB</div>
-        <div class="meta-item"><strong>Sumber:</strong> Sistem Portal Admin PPDB</div>
-    </div>
+<div class="meta">
+    <span>Total: <strong>{{ count($data) }}</strong> pendaftar</span>
+    <span>Dicetak: <strong>{{ now()->translatedFormat('d F Y, H:i') }}</strong></span>
+</div>
 
-    {{-- ── Tabel Data ── --}}
-    <table>
-        <thead>
+<table>
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>No. Registrasi</th>
+            <th>Nama Calon Santri</th>
+            <th>L/P</th>
+            <th>Tingkat</th>
+            <th>NIK</th>
+            <th>NISN</th>
+            <th>Tgl Lahir</th>
+            <th>No. WA</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Tgl Daftar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse($data as $i => $row)
+            @php
+                $siswa = $row->siswa;
+                $statusLabel = match($row->status) {
+                    'pending'           => 'Menunggu',
+                    'jadwal_tes'        => 'Jadwal Tes',
+                    'tes_berlangsung'   => 'Tes Berlangsung',
+                    'wawancara'         => 'Wawancara',
+                    'diterima_ula'      => 'Diterima - Ula',
+                    'diterima_idadiyah' => 'Diterima - Idadiyah',
+                    'diterima_wustho'   => 'Diterima - Wustho',
+                    'diterima_ulya'     => 'Diterima - Ulya',
+                    'ditolak'           => 'Tidak Diterima',
+                    'mengundurkan_diri' => 'Mengundurkan Diri',
+                    default             => ucfirst($row->status),
+                };
+            @endphp
             <tr>
-                <th>No</th>
-                <th>No. Registrasi</th>
-                <th>Nama Calon Santri</th>
-                <th>L/P</th>
-                <th>Tingkat</th>
-                <th>NIK</th>
-                <th>NISN</th>
-                <th>Tgl Lahir</th>
-                <th>No. WA</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Tgl Daftar</th>
+                <td>{{ $i + 1 }}</td>
+                <td><strong>{{ $row->no_reg }}</strong></td>
+                <td>{{ $siswa?->nama_lengkap ?? '-' }}</td>
+                <td>{{ $siswa?->jenis_kelamin ?? '-' }}</td>
+                <td><strong>{{ strtoupper($row->tingkat) }}</strong></td>
+                <td>{{ $siswa?->nik ?? '-' }}</td>
+                <td>{{ $siswa?->nisn ?? '-' }}</td>
+                <td>{{ $siswa?->tanggal_lahir ? \Carbon\Carbon::parse($siswa->tanggal_lahir)->format('d/m/Y') : '-' }}</td>
+                <td>{{ $siswa?->no_hp ?? '-' }}</td>
+                <td>{{ $row->user?->email ?? '-' }}</td>
+                <td><span class="badge">{{ $statusLabel }}</span></td>
+                <td>{{ \Carbon\Carbon::parse($row->tanggal_daftar)->format('d/m/Y') }}</td>
             </tr>
-        </thead>
-        <tbody>
-            @forelse($data as $i => $row)
-                @php
-                    $siswa = $row->siswa;
-                    $badgeClass = match($row->status) {
-                        'diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya' => 'badge-diterima',
-                        'ditolak', 'mengundurkan_diri' => 'badge-ditolak',
-                        'jadwal_tes', 'tes_berlangsung', 'wawancara' => 'badge-proses',
-                        default => 'badge-pending',
-                    };
-                    $statusLabel = match($row->status) {
-                        'pending'           => 'Menunggu',
-                        'jadwal_tes'        => 'Jadwal Tes',
-                        'tes_berlangsung'   => 'Tes Berlangsung',
-                        'wawancara'         => 'Wawancara',
-                        'diterima_ula'      => 'Diterima - Ula',
-                        'diterima_idadiyah' => 'Diterima - Idadiyah',
-                        'diterima_wustho'   => 'Diterima - Wustho',
-                        'diterima_ulya'     => 'Diterima - Ulya',
-                        'ditolak'           => 'Tidak Diterima',
-                        'mengundurkan_diri' => 'Mengundurkan Diri',
-                        default             => ucfirst($row->status),
-                    };
-                @endphp
-                <tr>
-                    <td>{{ $i + 1 }}</td>
-                    <td><strong>{{ $row->no_reg }}</strong></td>
-                    <td>{{ $siswa?->nama_lengkap ?? '-' }}</td>
-                    <td>{{ $siswa?->jenis_kelamin ?? '-' }}</td>
-                    <td><strong>{{ strtoupper($row->tingkat) }}</strong></td>
-                    <td>{{ $siswa?->nik ?? '-' }}</td>
-                    <td>{{ $siswa?->nisn ?? '-' }}</td>
-                    <td>{{ $siswa?->tanggal_lahir ? \Carbon\Carbon::parse($siswa->tanggal_lahir)->format('d/m/Y') : '-' }}</td>
-                    <td>{{ $siswa?->no_hp ?? '-' }}</td>
-                    <td>{{ $row->user?->email ?? '-' }}</td>
-                    <td><span class="badge {{ $badgeClass }}">{{ $statusLabel }}</span></td>
-                    <td>{{ \Carbon\Carbon::parse($row->tanggal_daftar)->format('d/m/Y') }}</td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="12" style="text-align:center; padding:24px; color:#94a3b8; font-style:italic;">
-                        Tidak ada data pendaftar yang dapat ditampilkan.
-                    </td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+        @empty
+            <tr>
+                <td colspan="12" style="text-align:center; padding:20px; color:#666; font-style:italic;">Tidak ada data pendaftar.</td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
 
-    {{-- ── Tanda Tangan ── --}}
-    <div class="ttd-section">
-        <div class="ttd-box">
-            <div class="ttd-lokasi">Padaherang, {{ now()->translatedFormat('d F Y') }}</div>
-            <div class="ttd-jabatan">Kepala Pesantren,</div>
-            <div class="ttd-name">( __________________________ )</div>
-        </div>
+<div class="ttd-section">
+    <div class="ttd-box">
+        <div>Padaherang, {{ now()->translatedFormat('d F Y') }}</div>
+        <div class="ttd-jabatan">Kepala Pesantren,</div>
+        <div class="ttd-name">( __________________________ )</div>
     </div>
+</div>
 
-    {{-- ── Footer ── --}}
-    <div class="footer">
-        <span class="footer-left">Dokumen ini dicetak dari Sistem Portal Admin PPDB &mdash; {{ config('app.name') }}</span>
-        <span>Halaman dicetak: {{ now()->format('d/m/Y H:i') }}</span>
-    </div>
-
+<div class="footer">
+    <span>Dokumen dicetak dari Sistem Portal Admin PPDB &mdash; {{ config('app.name') }}</span>
+    <span>{{ now()->format('d/m/Y H:i') }}</span>
 </div>
 
 <script>
-function setSize(pageSize, btn) {
-    document.getElementById('page-style').textContent = '@page { margin: 1.5cm; size: ' + pageSize + '; }';
-    document.querySelectorAll('.size-btn').forEach(function(b) { b.classList.remove('active'); });
-    btn.classList.add('active');
+function setSize(s, b) {
+    document.getElementById('page-style').textContent = '@page { margin: 1.5cm; size: ' + s + '; }';
+    document.querySelectorAll('.size-btn').forEach(function(e) { e.classList.remove('active'); });
+    b.classList.add('active');
 }
 </script>
 </body>
