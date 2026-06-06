@@ -180,8 +180,8 @@ class DataSiswaResource extends Resource
                     ->options(['L' => 'Laki-laki', 'P' => 'Perempuan']),
             ])
             ->actions([
-                \Filament\Tables\Actions\ViewAction::make(),
-                \Filament\Tables\Actions\EditAction::make()
+                \Filament\Actions\ViewAction::make(),
+                \Filament\Actions\EditAction::make()
                     ->form([
                         \Filament\Forms\Components\TextInput::make('nis')
                             ->label('NIS (Nomor Induk Siswa)')
