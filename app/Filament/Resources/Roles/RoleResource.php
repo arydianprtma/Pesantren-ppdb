@@ -119,6 +119,7 @@ class RoleResource extends Resource
                     if ($groupName === 'Master Data') {
                         if (str_contains($entity['resourceFqcn'], 'DataSiswaResource')) $label = 'Data Siswa';
                         if (str_contains($entity['resourceFqcn'], 'GuruResource')) $label = 'Data Guru';
+                        if (str_contains($entity['resourceFqcn'], 'KelasResource')) $label = 'Data Kelas';
                     }
 
                     $items[] = Section::make($label)
@@ -148,8 +149,7 @@ class RoleResource extends Resource
                     foreach ($page['permissions'] as $key => $pageLabel) {
                         // Mapping Label Page
                         if ($groupName === 'Master Data') {
-                            if (str_contains($page['pageFqcn'], 'DataKelas')) $pageLabel = 'Akses Data Kelas';
-                            if (str_contains($page['pageFqcn'], 'MataPelajaran')) $pageLabel = 'Akses Mata Pelajaran';
+                            // Deleted placeholder pages
                         }
                         if ($groupName === 'Sistem' && str_contains($page['pageFqcn'], 'TahunAjaran')) {
                             $pageLabel = 'Akses Tahun Ajaran PPDB';
