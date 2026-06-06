@@ -53,7 +53,7 @@ class UserResource extends Resource
                             ->saveUploadedFileUsing(function ($file) {
                                 return \App\Services\ImageService::processUpload($file, 'avatars', 400); // Pas foto cukup 400px
                             })
-                            ->getUploadedFileUrlUsing(function ($file, $component) {
+                            ->getOpenableFileUrlUsing(function ($file, $component) {
                                 $record = $component->getRecord();
                                 return $record ? $record->getFilamentAvatarUrl() : asset('storage/' . $file);
                             })

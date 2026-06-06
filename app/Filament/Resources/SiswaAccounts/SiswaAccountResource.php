@@ -67,7 +67,7 @@ class SiswaAccountResource extends Resource
                             ->saveUploadedFileUsing(function ($file) {
                                 return \App\Services\ImageService::processUpload($file, 'avatars', 400);
                             })
-                            ->getUploadedFileUrlUsing(function ($file, $component) {
+                            ->getOpenableFileUrlUsing(function ($file, $component) {
                                 $record = $component->getRecord();
                                 return $record ? $record->getFilamentAvatarUrl() : asset('storage/' . $file);
                             })
