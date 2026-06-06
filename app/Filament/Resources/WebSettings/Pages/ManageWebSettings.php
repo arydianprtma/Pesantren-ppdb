@@ -14,6 +14,7 @@ class ManageWebSettings extends ManageRecords
     {
         return [
             CreateAction::make()
+                ->modalWidth('3xl')
                 ->hidden(fn () => \App\Models\WebSetting::count() > 0),
         ];
     }

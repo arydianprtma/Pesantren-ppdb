@@ -52,13 +52,16 @@ class WebSettingResource extends Resource
                         Toggle::make('is_virtual_tour_active')
                             ->label('Aktifkan Virtual Tour')
                             ->helperText('Jika dinonaktifkan, bagian Virtual Tour tidak akan muncul di website.')
+                            ->inline(false)
                             ->default(true),
                         TextInput::make('virtual_tour_url')
                             ->label('URL Video Virtual Tour')
                             ->placeholder('https://www.youtube.com/embed/...')
                             ->helperText('Masukkan URL embed video (YouTube/Vimeo).')
                             ->url(),
-                    ]),
+                    ])
+                    ->columns(2)
+                    ->columnSpanFull(),
                 \Filament\Schemas\Components\Section::make('Media Sosial')
                     ->description('Kelola link media sosial pondok pesantren.')
                     ->collapsible()
@@ -83,7 +86,9 @@ class WebSettingResource extends Resource
                             ->label('WhatsApp')
                             ->placeholder('081234567890')
                             ->tel(),
-                    ]),
+                    ])
+                    ->columns(2)
+                    ->columnSpanFull(),
                 \Filament\Schemas\Components\Section::make('Statistik Pondok')
                     ->description('Kelola data statistik yang ditampilkan di beranda dan halaman tentang pondok.')
                     ->collapsible()
@@ -105,7 +110,9 @@ class WebSettingResource extends Resource
                             ->label('Persentase Kelulusan')
                             ->placeholder('100%')
                             ->default('100%'),
-                    ]),
+                    ])
+                    ->columns(2)
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -141,8 +148,8 @@ class WebSettingResource extends Resource
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()->modalWidth('3xl'),
+                EditAction::make()->modalWidth('3xl'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
