@@ -316,7 +316,7 @@ class PpdbRegistrantForm
                                     })
                                     ->nullable()
                                     ->placeholder('Belum Masuk Kelas')
-                                    ->helperText('Pilih kelas untuk siswa yang sudah di terima atau dinyatakan diterima.')
+                                    ->helperText('Pilih kelas untuk pendaftar yang telah dinyatakan diterima.')
                                     ->native(false),
 
                                 // Jadwal Tes section
