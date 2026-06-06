@@ -102,7 +102,8 @@ class SiswaAccountResource extends Resource
                             ->default(true)
                             ->helperText('Akun yang tidak aktif tidak dapat login ke portal pendaftaran.'),
                     ])
-                    ->columns(2),
+                    ->columns(2)
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -149,7 +150,7 @@ class SiswaAccountResource extends Resource
                     ]),
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()->modalWidth('2xl'),
                 DeleteAction::make(),
             ])
             ->toolbarActions([

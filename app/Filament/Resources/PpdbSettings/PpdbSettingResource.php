@@ -56,25 +56,29 @@ class PpdbSettingResource extends Resource
                             ->placeholder('Contoh: 2026/2027')
                             ->required()
                             ->maxLength(255),
+                        Toggle::make('is_active')
+                            ->label('Status Aktif')
+                            ->default(true)
+                            ->inline(false)
+                            ->required(),
                         DateTimePicker::make('tgl_buka')
                             ->label('Tanggal Buka')
-                            ->native(true)
+                            ->native(false)
                             ->seconds(false)
                             ->required(),
                         DateTimePicker::make('tgl_tutup')
                             ->label('Tanggal Tutup')
-                            ->native(true)
+                            ->native(false)
                             ->seconds(false)
-                            ->required(),
-                        Toggle::make('is_active')
-                            ->label('Status Aktif')
-                            ->default(true)
                             ->required(),
                         Textarea::make('pesan_tutup')
                             ->label('Pesan Penutupan')
                             ->placeholder('Pesan yang muncul jika pendaftaran sedang ditutup...')
+                            ->rows(3)
                             ->columnSpanFull(),
-                    ])->columns(2),
+                    ])
+                    ->columns(2)
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -117,7 +121,7 @@ class PpdbSettingResource extends Resource
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()->modalWidth('2xl'),
                 DeleteAction::make(),
             ])
             ->bulkActions([

@@ -14,6 +14,7 @@ class ManageSiswaAccounts extends ManageRecords
     {
         return [
             CreateAction::make()
+                ->modalWidth('2xl')
                 ->mutateFormDataUsing(function (array $data): array {
                     $data['role'] = 'siswa';
                     return $data;
