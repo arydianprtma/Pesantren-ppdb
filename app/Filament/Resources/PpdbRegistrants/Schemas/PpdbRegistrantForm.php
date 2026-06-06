@@ -306,7 +306,14 @@ class PpdbRegistrantForm
 
                                 Select::make('kelas_id')
                                     ->label('Kelas Siswa')
-                                    ->relationship('kelas', 'nama', fn ($query) => $query->where('is_active', true))
+                                    ->relationship('kelas', 'nama', function ($query, \Filament\Forms\Get $get) {
+                                        $tingkat = $get('tingkat');
+                                        $query->where('is_active', true);
+                                        if ($tingkat) {
+                                            $query->where('tingkat', $tingkat);
+                                        }
+                                        return $query;
+                                    })
                                     ->nullable()
                                     ->placeholder('Belum Masuk Kelas')
                                     ->helperText('Pilih kelas untuk siswa yang sudah diterima/lulus.')
