@@ -34,14 +34,13 @@ class DataSiswaResource extends Resource
         return parent::getEloquentQuery()
             ->with(['pendaftaran.user'])
             ->whereHas('pendaftaran', function (Builder $query) {
-                // Hanya tampilkan siswa yang SUDAH DITERIMA ATAU LULUS
+                // Hanya tampilkan siswa yang SUDAH DITERIMA
                 // (menyelesaikan seluruh proses seleksi & administrasi)
                 $query->whereIn('status', [
                     'diterima_ula',
                     'diterima_idadiyah',
                     'diterima_wustho',
                     'diterima_ulya',
-                    'lulus',
                 ]);
             });
     }
@@ -69,11 +68,28 @@ class DataSiswaResource extends Resource
                     ->color(fn($state) => $state === 'L' ? 'info' : 'pink')
                     ->formatStateUsing(fn($state) => $state === 'L' ? 'Laki-laki' : 'Perempuan'),
 
-                TextColumn::make('pendaftaran.status')
-                    ->label('Status')
+                TextColumn::make('status')
+                    ->label('Status Siswa')
                     ->badge()
                     ->color(fn($state) => match($state) {
-                        'diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya', 'lulus' => 'success',
+                        'aktif' => 'success',
+                        'lulus' => 'info',
+                        'keluar', 'mutasi' => 'danger',
+                        default => 'gray',
+                    })
+                    ->formatStateUsing(fn($state) => match($state) {
+                        'aktif' => 'Aktif',
+                        'lulus' => 'Lulus / Alumni',
+                        'keluar' => 'Keluar',
+                        'mutasi' => 'Mutasi',
+                        default => ucfirst($state),
+                    }),
+
+                TextColumn::make('pendaftaran.status')
+                    ->label('Status Admission')
+                    ->badge()
+                    ->color(fn($state) => match($state) {
+                        'diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya' => 'success',
                         'ditolak'         => 'danger',
                         'wawancara'       => 'warning',
                         'jadwal_tes', 'tes_berlangsung' => 'info',
@@ -88,10 +104,10 @@ class DataSiswaResource extends Resource
                         'diterima_idadiyah'  => 'Diterima - Idadiyah',
                         'diterima_wustho'   => 'Diterima - Wustho',
                         'diterima_ulya'     => 'Diterima - Ulya',
-                        'lulus'             => 'Lulus / Alumni',
                         'ditolak'           => 'Tidak Diterima',
                         default             => ucfirst($state),
-                    }),
+                    })
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('pendaftaran.tingkat')
                     ->label('Tingkat')
@@ -125,13 +141,21 @@ class DataSiswaResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('status')
+                    ->label('Status Siswa')
+                    ->options([
+                        'aktif' => 'Aktif',
+                        'lulus' => 'Lulus / Alumni',
+                        'keluar' => 'Keluar',
+                        'mutasi' => 'Mutasi',
+                    ]),
+
+                SelectFilter::make('jenjang_diterima')
                     ->label('Jenjang Diterima')
                     ->options([
                         'diterima_ula'      => 'Ula',
                         'diterima_idadiyah' => 'Idadiyah',
                         'diterima_wustho'   => 'Wustho',
                         'diterima_ulya'     => 'Ulya',
-                        'lulus'             => 'Lulus / Alumni',
                     ])
                     ->query(fn (Builder $query, array $data) => 
                         $query->when($data['value'], fn ($q, $value) => 
@@ -154,6 +178,25 @@ class DataSiswaResource extends Resource
                 SelectFilter::make('jenis_kelamin')
                     ->label('Jenis Kelamin')
                     ->options(['L' => 'Laki-laki', 'P' => 'Perempuan']),
+            ])
+            ->actions([
+                \Filament\Tables\Actions\ViewAction::make(),
+                \Filament\Tables\Actions\EditAction::make()
+                    ->form([
+                        \Filament\Forms\Components\TextInput::make('nis')
+                            ->label('NIS (Nomor Induk Siswa)')
+                            ->placeholder('Masukkan NIS baru')
+                            ->maxLength(15),
+                        \Filament\Forms\Components\Select::make('status')
+                            ->label('Status Siswa')
+                            ->options([
+                                'aktif' => 'Aktif',
+                                'lulus' => 'Lulus / Alumni',
+                                'keluar' => 'Keluar',
+                                'mutasi' => 'Mutasi',
+                            ])
+                            ->required(),
+                    ]),
             ])
             ->recordUrl(fn($record) => static::getUrl('view', ['record' => $record]));
     }

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('ppdb_pendaftaran', function (Blueprint $table) {
-            $table->foreignId('kelas_id')->nullable()->after('status')->constrained('kelas')->onDelete('set null');
+        Schema::table('ppdb_siswa', function (Blueprint $table) {
+            $table->enum('status', ['aktif', 'lulus', 'keluar', 'mutasi'])->default('aktif')->after('nis');
         });
     }
 
@@ -21,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('ppdb_pendaftaran', function (Blueprint $table) {
-            $table->dropForeign(['kelas_id']);
-            $table->dropColumn('kelas_id');
+        Schema::table('ppdb_siswa', function (Blueprint $table) {
+            $table->dropColumn('status');
         });
     }
 };

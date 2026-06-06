@@ -297,7 +297,6 @@ class PpdbRegistrantForm
                                         'diterima_ulya'     => 'Diterima - Kelas Ulya (Lanjutan)',
                                         'ditolak'          => 'Tidak Diterima',
                                         'mengundurkan_diri' => 'Mengundurkan Diri',
-                                        'lulus'            => 'Lulus / Alumni',
                                     ])
                                     ->required()
                                     ->default('pending')
