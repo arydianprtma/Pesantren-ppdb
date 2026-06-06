@@ -45,12 +45,12 @@ class HomeController extends Controller
         $ppdbSetting = \App\Models\PpdbSetting::where('is_active', true)->first();
         $webSetting = WebSetting::first();
         
-        $ekstrakurikuler = Ekstrakurikuler::where('is_active', true)->get();
+        $ekstrakurikuler = Ekstrakurikuler::where('is_active', true)->whereIn('tampil_di', ['pesantren', 'keduanya'])->get();
 
         // Calculate statistics
         $stats = [
             'santri_aktif' => ($webSetting->base_santri_aktif ?? 0) + PpdbPendaftaran::whereIn('status', ['diterima', 'diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya'])->count(),
-            'ekstrakurikuler' => Ekstrakurikuler::where('is_active', true)->count(),
+            'ekstrakurikuler' => Ekstrakurikuler::where('is_active', true)->whereIn('tampil_di', ['pesantren', 'keduanya'])->count(),
             'akreditasi' => $webSetting->akreditasi ?? 'A',
             'kelulusan' => $webSetting->persentase_kelulusan ?? '100%',
             'tenaga_pengajar' => Guru::where('is_active', true)->count(),
@@ -75,8 +75,8 @@ class HomeController extends Controller
 
     public function tentangPondok(): Response
     {
-        $fasilitasList = Cache::remember('fasilitas', 60 * 60, function () {
-            return Fasilitas::where('is_active', true)->orderBy('urutan')->get();
+        $fasilitasList = Cache::remember('fasilitas_pesantren', 60 * 60, function () {
+            return Fasilitas::where('is_active', true)->whereIn('tampil_di', ['pesantren', 'keduanya'])->orderBy('urutan')->get();
         });
 
         $sejarahList = Cache::remember('sejarah', 60 * 60, function () {
@@ -86,7 +86,7 @@ class HomeController extends Controller
         $webSetting = WebSetting::first();
         $stats = [
             'santri_aktif' => ($webSetting->base_santri_aktif ?? 0) + PpdbPendaftaran::whereIn('status', ['diterima', 'diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya'])->count(),
-            'ekstrakurikuler' => Ekstrakurikuler::where('is_active', true)->count(),
+            'ekstrakurikuler' => Ekstrakurikuler::where('is_active', true)->whereIn('tampil_di', ['pesantren', 'keduanya'])->count(),
             'akreditasi' => $webSetting->akreditasi ?? 'A',
             'kelulusan' => $webSetting->persentase_kelulusan ?? '100%',
             'tenaga_pengajar' => Guru::where('is_active', true)->count(),
@@ -102,8 +102,8 @@ class HomeController extends Controller
 
     public function fasilitas(): Response
     {
-        $fasilitasList = Cache::remember('fasilitas', 60 * 60, function () {
-            return Fasilitas::where('is_active', true)->orderBy('urutan')->get();
+        $fasilitasList = Cache::remember('fasilitas_pesantren', 60 * 60, function () {
+            return Fasilitas::where('is_active', true)->whereIn('tampil_di', ['pesantren', 'keduanya'])->orderBy('urutan')->get();
         });
 
         $webSetting = \App\Models\WebSetting::first();
@@ -148,17 +148,25 @@ class HomeController extends Controller
 
         $agendas = $allAgendas->where('kategori', 'ppdb')->values();
         $ekstrakurikuler = Ekstrakurikuler::where('is_active', true)
-            ->where('is_unggulan', true)
+            ->whereIn('tampil_di', ['sekolah', 'keduanya'])
             ->get();
 
         $profil = Cache::remember('smp_profil', 60 * 60, function () {
             return SekolahProfil::where('is_active', true)->latest()->first();
         });
 
+        $fasilitas = Cache::remember('fasilitas_sekolah', 60 * 60, function () {
+            return Fasilitas::where('is_active', true)
+                ->whereIn('tampil_di', ['sekolah', 'keduanya'])
+                ->orderBy('urutan')
+                ->get();
+        });
+
         return Inertia::render('Smp', [
             'agendas' => $agendas,
             'ekstrakurikuler' => $ekstrakurikuler,
             'profil' => $profil,
+            'fasilitas' => $fasilitas,
         ]);
     }
 

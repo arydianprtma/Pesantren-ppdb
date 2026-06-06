@@ -35,9 +35,21 @@ class EkstrakurikulerTable
                     ->label('Aktif')
                     ->boolean(),
 
-                IconColumn::make('is_unggulan')
-                    ->label('Unggulan')
-                    ->boolean()
+                TextColumn::make('tampil_di')
+                    ->label('Target Tampil')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'sekolah' => 'warning',
+                        'pesantren' => 'success',
+                        'keduanya' => 'info',
+                        default => 'gray',
+                    })
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'sekolah' => 'Sekolah (SMP)',
+                        'pesantren' => 'Pesantren',
+                        'keduanya' => 'Keduanya',
+                        default => $state,
+                    })
                     ->sortable(),
 
                 TextColumn::make('created_at')

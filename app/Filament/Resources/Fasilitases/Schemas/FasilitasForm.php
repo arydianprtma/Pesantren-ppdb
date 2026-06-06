@@ -72,12 +72,22 @@ class FasilitasForm
                         ->placeholder('Deskripsikan fasilitas ini secara singkat...')
                         ->columnSpanFull(),
 
-                    Grid::make(2)->schema([
+                    Grid::make(3)->schema([
                         TextInput::make('urutan')
                             ->label('Urutan Tampil')
                             ->numeric()
                             ->default(0)
                             ->helperText('Angka kecil tampil lebih dulu'),
+
+                        Select::make('tampil_di')
+                            ->label('Target Tampilan')
+                            ->options([
+                                'sekolah' => 'Sekolah Saja (SMP)',
+                                'pesantren' => 'Web Utama Pesantren Saja',
+                                'keduanya' => 'Keduanya (Sekolah & Web Utama)',
+                            ])
+                            ->required()
+                            ->default('keduanya'),
 
                         Toggle::make('is_active')
                             ->label('Tampilkan di Website')

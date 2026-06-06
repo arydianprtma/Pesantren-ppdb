@@ -47,14 +47,30 @@ class SmpPageTest extends TestCase
             'nama' => 'Pramuka',
             'deskripsi' => 'Klub Pramuka',
             'is_active' => true,
-            'is_unggulan' => true,
+            'tampil_di' => 'keduanya',
         ]);
 
         \App\Models\Ekstrakurikuler::create([
             'nama' => 'Paskibra',
             'deskripsi' => 'Klub Paskibra',
             'is_active' => true,
-            'is_unggulan' => false,
+            'tampil_di' => 'pesantren',
+        ]);
+
+        \App\Models\Fasilitas::create([
+            'nama' => 'Lapangan Olahraga',
+            'kategori' => 'Olahraga',
+            'ikon' => 'olahraga',
+            'is_active' => true,
+            'tampil_di' => 'keduanya',
+        ]);
+
+        \App\Models\Fasilitas::create([
+            'nama' => 'Asrama Putra',
+            'kategori' => 'Asrama',
+            'ikon' => 'asrama',
+            'is_active' => true,
+            'tampil_di' => 'pesantren',
         ]);
 
         $response = $this->get(route('sekolah.smp'));
@@ -63,7 +79,8 @@ class SmpPageTest extends TestCase
         $response->assertInertia(fn ($page) => $page
             ->component('Smp')
             ->has('agendas', 1) // Only category 'ppdb' agenda is passed
-            ->has('ekstrakurikuler', 1) // Only is_unggulan=true is passed
+            ->has('ekstrakurikuler', 1) // Only tampil_di = sekolah/keduanya is passed
+            ->has('fasilitas', 1) // Only tampil_di = sekolah/keduanya is passed
         );
     }
 

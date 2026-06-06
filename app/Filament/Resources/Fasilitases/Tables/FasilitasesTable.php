@@ -61,6 +61,23 @@ class FasilitasesTable
                     ->label('Aktif')
                     ->boolean(),
 
+                TextColumn::make('tampil_di')
+                    ->label('Target Tampil')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'sekolah' => 'warning',
+                        'pesantren' => 'success',
+                        'keduanya' => 'info',
+                        default => 'gray',
+                    })
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'sekolah' => 'Sekolah (SMP)',
+                        'pesantren' => 'Pesantren',
+                        'keduanya' => 'Keduanya',
+                        default => $state,
+                    })
+                    ->sortable(),
+
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime('d M Y')

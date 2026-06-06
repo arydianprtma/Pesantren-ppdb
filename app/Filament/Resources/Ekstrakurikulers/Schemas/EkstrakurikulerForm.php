@@ -6,6 +6,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -44,9 +45,15 @@ class EkstrakurikulerForm
                         ->label('Aktif')
                         ->default(true),
 
-                    Toggle::make('is_unggulan')
-                        ->label('Tampilkan sebagai Unggulan')
-                        ->default(false),
+                    Select::make('tampil_di')
+                        ->label('Target Tampilan')
+                        ->options([
+                            'sekolah' => 'Sekolah Saja (SMP)',
+                            'pesantren' => 'Web Utama Pesantren Saja',
+                            'keduanya' => 'Keduanya (Sekolah & Web Utama)',
+                        ])
+                        ->required()
+                        ->default('keduanya'),
                 ]),
         ]);
     }
