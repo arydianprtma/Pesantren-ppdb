@@ -96,14 +96,13 @@ class ExportController extends Controller
         $this->authorizeAdmin();
 
         $data = PpdbPendaftaran::with(['siswa', 'user'])
+            ->where('status', 'like', 'diterima_%')
             ->when($request->tingkat, fn($q) => $q->where('tingkat', $request->tingkat))
-            ->when($request->status,  fn($q) => $q->where('status',  $request->status))
             ->orderBy('tanggal_daftar', 'desc')
             ->get();
 
         $filter = [
             'tingkat' => $request->tingkat ? strtoupper($request->tingkat) : 'Semua',
-            'status'  => $request->status  ? self::statusLabel($request->status) : 'Semua',
         ];
 
         return view('exports.pendaftar-pdf', compact('data', 'filter'));

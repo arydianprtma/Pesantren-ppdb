@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Data Pendaftar PPDB</title>
+    <title>Laporan Santri Diterima PPDB</title>
     <style>
         /* ── Reset & Base ── */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -99,13 +99,7 @@
         }
         thead th:first-child, tbody td:first-child { text-align: center; width: 26px; }
 
-        /* ── Badge ── */
-        .badge {
-            display: inline-block; padding: 1px 6px;
-            border: 1px solid #333; border-radius: 3px;
-            font-size: 8px; font-weight: 700;
-            text-transform: uppercase;
-        }
+
 
         /* ── TTD ── */
         .ttd-section {
@@ -160,10 +154,10 @@
 <hr class="kop-border">
 <hr class="kop-border-thin">
 
-<div class="judul-laporan">Laporan Data Pendaftar PPDB</div>
+<div class="judul-laporan">Laporan Data Santri Diterima PPDB</div>
 
 <div class="meta">
-    <span>Total: <strong>{{ count($data) }}</strong> pendaftar</span>
+    <span>Total: <strong>{{ count($data) }}</strong> santri diterima</span>
     <span>Dicetak: <strong>{{ now()->translatedFormat('d F Y, H:i') }}</strong></span>
 </div>
 
@@ -180,28 +174,12 @@
             <th>Tgl Lahir</th>
             <th>No. WA</th>
             <th>Email</th>
-            <th>Status</th>
             <th>Tgl Daftar</th>
         </tr>
     </thead>
     <tbody>
         @forelse($data as $i => $row)
-            @php
-                $siswa = $row->siswa;
-                $statusLabel = match($row->status) {
-                    'pending'           => 'Menunggu',
-                    'jadwal_tes'        => 'Jadwal Tes',
-                    'tes_berlangsung'   => 'Tes Berlangsung',
-                    'wawancara'         => 'Wawancara',
-                    'diterima_ula'      => 'Diterima - Ula',
-                    'diterima_idadiyah' => 'Diterima - Idadiyah',
-                    'diterima_wustho'   => 'Diterima - Wustho',
-                    'diterima_ulya'     => 'Diterima - Ulya',
-                    'ditolak'           => 'Tidak Diterima',
-                    'mengundurkan_diri' => 'Mengundurkan Diri',
-                    default             => ucfirst($row->status),
-                };
-            @endphp
+            @php $siswa = $row->siswa; @endphp
             <tr>
                 <td>{{ $i + 1 }}</td>
                 <td><strong>{{ $row->no_reg }}</strong></td>
@@ -213,12 +191,11 @@
                 <td>{{ $siswa?->tanggal_lahir ? \Carbon\Carbon::parse($siswa->tanggal_lahir)->format('d/m/Y') : '-' }}</td>
                 <td>{{ $siswa?->no_hp ?? '-' }}</td>
                 <td>{{ $row->user?->email ?? '-' }}</td>
-                <td><span class="badge">{{ $statusLabel }}</span></td>
                 <td>{{ \Carbon\Carbon::parse($row->tanggal_daftar)->format('d/m/Y') }}</td>
             </tr>
         @empty
             <tr>
-                <td colspan="12" style="text-align:center; padding:20px; color:#666; font-style:italic;">Tidak ada data pendaftar.</td>
+                <td colspan="11" style="text-align:center; padding:20px; color:#666; font-style:italic;">Tidak ada data santri diterima.</td>
             </tr>
         @endforelse
     </tbody>
