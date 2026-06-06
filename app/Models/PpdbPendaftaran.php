@@ -76,4 +76,9 @@ class PpdbPendaftaran extends Model
     {
         return $this->hasOne(PpdbBerkas::class, 'pendaftaran_id');
     }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id');
+    }
 }

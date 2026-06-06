@@ -67,7 +67,8 @@ class PpdbRegistrantsTable
                         'diterima_ula',
                         'diterima_idadiyah',
                         'diterima_wustho',
-                        'diterima_ulya'   => 'success',
+                        'diterima_ulya',
+                        'lulus'           => 'success',
                         'ditolak',
                         'mengundurkan_diri' => 'danger',
                         default           => 'gray',
@@ -81,10 +82,17 @@ class PpdbRegistrantsTable
                         'diterima_idadiyah' => 'Diterima - Idadiyah',
                         'diterima_wustho' => 'Diterima - Wustho',
                         'diterima_ulya'   => 'Diterima - Ulya',
+                        'lulus'           => 'Lulus / Alumni',
                         'ditolak'         => 'Tidak Diterima',
                         'mengundurkan_diri' => 'Mengundurkan Diri',
                         default           => ucfirst($state),
                     }),
+
+                TextColumn::make('kelas.nama')
+                    ->label('Kelas')
+                    ->placeholder('-')
+                    ->sortable()
+                    ->searchable(),
 
                 TextColumn::make('tahun_ajaran')
                     ->label('Tahun Ajaran')
@@ -117,6 +125,7 @@ class PpdbRegistrantsTable
                         'diterima_idadiyah' => 'Diterima - Idadiyah',
                         'diterima_wustho' => 'Diterima - Wustho',
                         'diterima_ulya'   => 'Diterima - Ulya',
+                        'lulus'           => 'Lulus / Alumni',
                         'ditolak'         => 'Tidak Diterima',
                         'mengundurkan_diri' => 'Mengundurkan Diri',
                     ]),

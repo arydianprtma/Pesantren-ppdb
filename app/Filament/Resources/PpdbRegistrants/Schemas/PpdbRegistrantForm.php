@@ -297,12 +297,21 @@ class PpdbRegistrantForm
                                         'diterima_ulya'     => 'Diterima - Kelas Ulya (Lanjutan)',
                                         'ditolak'          => 'Tidak Diterima',
                                         'mengundurkan_diri' => 'Mengundurkan Diri',
+                                        'lulus'            => 'Lulus / Alumni',
                                     ])
                                     ->required()
                                     ->default('pending')
                                     ->selectablePlaceholder(false)
                                     ->native(false)
                                     ->live(),
+
+                                Select::make('kelas_id')
+                                    ->label('Kelas Siswa')
+                                    ->relationship('kelas', 'nama', fn ($query) => $query->where('is_active', true))
+                                    ->nullable()
+                                    ->placeholder('Belum Masuk Kelas')
+                                    ->helperText('Pilih kelas untuk siswa yang sudah diterima/lulus.')
+                                    ->native(false),
 
                                 // Jadwal Tes section
                                 Section::make('Jadwal Ujian Masuk')

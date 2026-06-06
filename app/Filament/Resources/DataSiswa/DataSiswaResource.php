@@ -34,13 +34,14 @@ class DataSiswaResource extends Resource
         return parent::getEloquentQuery()
             ->with(['pendaftaran.user'])
             ->whereHas('pendaftaran', function (Builder $query) {
-                // Hanya tampilkan siswa yang SUDAH DITERIMA
+                // Hanya tampilkan siswa yang SUDAH DITERIMA ATAU LULUS
                 // (menyelesaikan seluruh proses seleksi & administrasi)
                 $query->whereIn('status', [
                     'diterima_ula',
                     'diterima_idadiyah',
                     'diterima_wustho',
                     'diterima_ulya',
+                    'lulus',
                 ]);
             });
     }
@@ -72,7 +73,7 @@ class DataSiswaResource extends Resource
                     ->label('Status')
                     ->badge()
                     ->color(fn($state) => match($state) {
-                        'diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya' => 'success',
+                        'diterima_ula', 'diterima_idadiyah', 'diterima_wustho', 'diterima_ulya', 'lulus' => 'success',
                         'ditolak'         => 'danger',
                         'wawancara'       => 'warning',
                         'jadwal_tes', 'tes_berlangsung' => 'info',
@@ -87,6 +88,7 @@ class DataSiswaResource extends Resource
                         'diterima_idadiyah'  => 'Diterima - Idadiyah',
                         'diterima_wustho'   => 'Diterima - Wustho',
                         'diterima_ulya'     => 'Diterima - Ulya',
+                        'lulus'             => 'Lulus / Alumni',
                         'ditolak'           => 'Tidak Diterima',
                         default             => ucfirst($state),
                     }),
@@ -96,6 +98,12 @@ class DataSiswaResource extends Resource
                     ->formatStateUsing(fn($state) => strtoupper($state))
                     ->badge()
                     ->color('gray'),
+
+                TextColumn::make('pendaftaran.kelas.nama')
+                    ->label('Kelas')
+                    ->placeholder('-')
+                    ->sortable()
+                    ->searchable(),
 
                 TextColumn::make('nis')
                     ->label('NIS (Nomor Induk Siswa)')
@@ -123,6 +131,7 @@ class DataSiswaResource extends Resource
                         'diterima_idadiyah' => 'Idadiyah',
                         'diterima_wustho'   => 'Wustho',
                         'diterima_ulya'     => 'Ulya',
+                        'lulus'             => 'Lulus / Alumni',
                     ])
                     ->query(fn (Builder $query, array $data) => 
                         $query->when($data['value'], fn ($q, $value) => 
