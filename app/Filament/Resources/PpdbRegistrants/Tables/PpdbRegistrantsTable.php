@@ -131,14 +131,18 @@ class PpdbRegistrantsTable
                     ->label('Export Excel')
                     ->icon('heroicon-o-table-cells')
                     ->color('success')
-                    ->url(fn () => route('export.pendaftar.excel'))
+                    ->url(fn ($livewire) => route('export.pendaftar.excel', [
+                        'tingkat' => $livewire->tableFilters['tingkat']['value'] ?? null,
+                    ]))
                     ->openUrlInNewTab(),
 
                 \Filament\Actions\Action::make('export_pdf')
                     ->label('Export PDF')
                     ->icon('heroicon-o-document-arrow-down')
                     ->color('danger')
-                    ->url(fn () => route('export.pendaftar.pdf'))
+                    ->url(fn ($livewire) => route('export.pendaftar.pdf', [
+                        'tingkat' => $livewire->tableFilters['tingkat']['value'] ?? null,
+                    ]))
                     ->openUrlInNewTab(),
 
                 BulkActionGroup::make([

@@ -113,6 +113,14 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     }
 
     /**
+     * Relationship to PPDB Pendaftaran
+     */
+    public function pendaftaran(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(PpdbPendaftaran::class, 'user_id');
+    }
+
+    /**
      * Get the custom permissions attribute.
      * Mencegah konflik dengan sistem Spatie Permission.
      */

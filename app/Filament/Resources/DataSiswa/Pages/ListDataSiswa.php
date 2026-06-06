@@ -348,13 +348,17 @@ class ListDataSiswa extends ListRecords
                 ->label('Export Excel')
                 ->icon('heroicon-o-document-text')
                 ->color('success')
-                ->url(route('export.siswa.excel'))
+                ->url(fn ($livewire) => route('export.siswa.excel', [
+                    'tingkat' => $livewire->tableFilters['tingkat']['value'] ?? null,
+                ]))
                 ->openUrlInNewTab(),
             \Filament\Actions\Action::make('export_pdf')
                 ->label('Export PDF')
                 ->icon('heroicon-o-arrow-down-tray')
                 ->color('danger')
-                ->url(route('export.siswa.pdf'))
+                ->url(fn ($livewire) => route('export.siswa.pdf', [
+                    'tingkat' => $livewire->tableFilters['tingkat']['value'] ?? null,
+                ]))
                 ->openUrlInNewTab(),
         ];
     }

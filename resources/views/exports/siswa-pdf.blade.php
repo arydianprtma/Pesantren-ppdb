@@ -121,24 +121,56 @@
 </div>
 
 <div class="kop">
-    <div class="kop-header">
-        <div>YAYASAN AL MASRUHIYAH</div>
-        <div>PONDOK PESANTREN RIYADUSSALIKIN PADAHERANG</div>
-        <div>SMP DHARMA KSATRIA &amp; SMA KSATRIA NUSANTARA</div>
-    </div>
-    <div class="kop-alamat">
-        <div>Jalan Paledah Dusun Patinggen II RT 020 / RW 005 Desa Karangpawitan Kecamatan Padaherang</div>
-        <div>Kabupaten Pangandaran Kode Pos 46384 No HP 087725807558</div>
-        <div>Email: <span style="text-decoration: underline; color: #000;">smpdharmaksatria@gmail.com</span> / <span style="text-decoration: underline; color: #000;">smaksatrianusantara01@gmail.com</span></div>
-    </div>
+    @php
+        $tingkat = isset($filter['tingkat']) ? strtoupper($filter['tingkat']) : 'SEMUA';
+    @endphp
+
+    @if($tingkat === 'SMA')
+        <div class="kop-header">
+            <div>PEMERINTAH PROVINSI JAWA BARAT</div>
+            <div>DINAS PENDIDIKAN</div>
+            <div>YAYASAN AL MASRUHIYAH</div>
+            <div>SMA KSATRIA NUSANTARA</div>
+        </div>
+        <div class="kop-alamat">
+            <div>No Izin Operasional : 421.3/0442-Disdikbudpora/2016 &nbsp; NPSN : 69935515</div>
+            <div>Jalan Paledah Dusun Patinggen II RT 020 / RW 005 Desa Karangpawitan Kecamatan Padaherang</div>
+            <div>Kabupaten Pangandaran Kode Pos 46384 No HP 087725807558</div>
+            <div>Email: <span style="text-decoration: underline; color: #000;">smaksatrianusantara01@gmail.com</span></div>
+        </div>
+    @elseif($tingkat === 'SMP')
+        <div class="kop-header">
+            <div>PEMERINTAH KABUPATEN PANGANDARAN</div>
+            <div>DINAS PENDIDIKAN KEPEMUDAAN DAN OLAHRAGA</div>
+            <div>YAYASAN AL MASRUHIYAH</div>
+            <div>SMP DHARMA KSATRIA</div>
+        </div>
+        <div class="kop-alamat">
+            <div>No Izin Operasional : 421/3143/Disdikbudpora/2016 &nbsp; NPSN : 69950605</div>
+            <div>Jalan Paledah Dusun Patinggen II RT 020 / RW 005 Desa Karangpawitan Kecamatan Padaherang</div>
+            <div>Kabupaten Pangandaran Kode Pos 46384 No HP 087725807558</div>
+            <div>Email: <span style="text-decoration: underline; color: #000;">smpdharmaksatria@gmail.com</span></div>
+        </div>
+    @else
+        <div class="kop-header">
+            <div>YAYASAN AL MASRUHIYAH</div>
+            <div>PONDOK PESANTREN RIYADUSSALIKIN PADAHERANG</div>
+            <div>SMP DHARMA KSATRIA &amp; SMA KSATRIA NUSANTARA</div>
+        </div>
+        <div class="kop-alamat">
+            <div>Jalan Paledah Dusun Patinggen II RT 020 / RW 005 Desa Karangpawitan Kecamatan Padaherang</div>
+            <div>Kabupaten Pangandaran Kode Pos 46384 No HP 087725807558</div>
+            <div>Email: <span style="text-decoration: underline; color: #000;">smpdharmaksatria@gmail.com</span> / <span style="text-decoration: underline; color: #000;">smaksatrianusantara01@gmail.com</span></div>
+        </div>
+    @endif
 </div>
 <hr class="kop-border">
 <hr class="kop-border-thick">
 
-<div class="judul-laporan">Daftar Santri / Siswa Terdaftar</div>
+<div class="judul-laporan">Daftar Santri / Siswa Terdaftar {{ $tingkat !== 'SEMUA' ? '('.$tingkat.')' : '' }}</div>
 
 <div class="meta">
-    <span>Total: <strong>{{ count($data) }}</strong> santri</span>
+    <span>Total: <strong>{{ count($data) }}</strong> santri {{ $tingkat !== 'SEMUA' ? $tingkat : '' }}</span>
     <span>Dicetak: <strong>{{ now()->translatedFormat('d F Y, H:i') }}</strong></span>
 </div>
 

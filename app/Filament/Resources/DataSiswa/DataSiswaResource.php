@@ -130,6 +130,18 @@ class DataSiswaResource extends Resource
                         )
                     ),
 
+                SelectFilter::make('tingkat')
+                    ->label('Tingkat Sekolah')
+                    ->options([
+                        'smp' => 'SMP',
+                        'sma' => 'SMA',
+                    ])
+                    ->query(fn (Builder $query, array $data) => 
+                        $query->when($data['value'], fn ($q, $value) => 
+                            $q->whereHas('pendaftaran', fn ($pq) => $pq->where('tingkat', $value))
+                        )
+                    ),
+
                 SelectFilter::make('jenis_kelamin')
                     ->label('Jenis Kelamin')
                     ->options(['L' => 'Laki-laki', 'P' => 'Perempuan']),

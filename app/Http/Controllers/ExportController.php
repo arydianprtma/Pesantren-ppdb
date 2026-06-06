@@ -163,11 +163,19 @@ class ExportController extends Controller
     // EXPORT DATA SISWA (Users dengan role siswa)
     // ─────────────────────────────────────────
 
-    public function siswaExcel()
+    public function siswaExcel(Request $request)
     {
         $this->authorizeAdmin();
 
-        $data     = User::where('role', 'siswa')->orderBy('name')->get();
+        $data = User::where('role', 'siswa')
+            ->whereHas('pendaftaran', function ($q) use ($request) {
+                if ($request->tingkat) {
+                    $q->where('tingkat', $request->tingkat);
+                }
+            })
+            ->orderBy('name')
+            ->get();
+
         $filename = 'data_siswa_' . now()->format('Ymd_His') . '.csv';
 
         $headers = [
@@ -196,11 +204,24 @@ class ExportController extends Controller
         return response()->stream($callback, 200, $headers);
     }
 
-    public function siswaPdf()
+    public function siswaPdf(Request $request)
     {
         $this->authorizeAdmin();
-        $data = User::where('role', 'siswa')->orderBy('name')->get();
-        return view('exports.siswa-pdf', compact('data'));
+
+        $data = User::where('role', 'siswa')
+            ->whereHas('pendaftaran', function ($q) use ($request) {
+                if ($request->tingkat) {
+                    $q->where('tingkat', $request->tingkat);
+                }
+            })
+            ->orderBy('name')
+            ->get();
+
+        $filter = [
+            'tingkat' => $request->tingkat ? strtoupper($request->tingkat) : 'Semua',
+        ];
+
+        return view('exports.siswa-pdf', compact('data', 'filter'));
     }
 
     public function downloadSiswaTemplate()
