@@ -37,18 +37,36 @@
         }
         .print-btn:hover { background: #ddd; }
 
+        /* ── Kop Surat ── */
         .kop {
-            display: flex; align-items: center; gap: 14px;
-            padding-bottom: 8px;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+            color: #000;
+            padding-bottom: 4px;
         }
-        .kop img { width: 60px; height: 60px; object-fit: contain; flex-shrink: 0; }
-        .kop-text { flex: 1; text-align: center; }
-        .kop-text h1 { font-size: 15px; font-weight: bold; text-transform: uppercase; letter-spacing: .5px; }
-        .kop-text .alamat { font-size: 10px; margin-top: 1px; }
-        .kop-text .sub { font-size: 9.5px; font-style: italic; }
-        .kop-spacer { width: 60px; flex-shrink: 0; }
-        .kop-border { border: none; border-top: 3px solid #000; margin-bottom: 1px; }
-        .kop-border-thin { border: none; border-top: 1px solid #000; margin-bottom: 10px; }
+        .kop-header {
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.3;
+            text-transform: uppercase;
+        }
+        .kop-alamat {
+            font-size: 10.5px;
+            line-height: 1.3;
+            margin-top: 4px;
+            font-weight: normal;
+        }
+        .kop-border {
+            border: none;
+            border-top: 1px solid #000;
+            margin-top: 6px;
+            margin-bottom: 1px;
+        }
+        .kop-border-thick {
+            border: none;
+            border-top: 3px solid #000;
+            margin-bottom: 12px;
+        }
 
         .judul-laporan {
             text-align: center; font-size: 12px; font-weight: bold;
@@ -103,16 +121,19 @@
 </div>
 
 <div class="kop">
-    <img src="/Logo Riyad.png" alt="Logo" onerror="this.style.display='none'">
-    <div class="kop-text">
-        <h1>Pondok Pesantren Riyadussalikin Padaherang</h1>
-        <p class="alamat">Jl. Raya Padaherang, Kab. Pangandaran, Jawa Barat</p>
-        <p class="sub">Data Guru &amp; Tenaga Pendidik</p>
+    <div class="kop-header">
+        <div>YAYASAN AL MASRUHIYAH</div>
+        <div>PONDOK PESANTREN RIYADUSSALIKIN PADAHERANG</div>
+        <div>SMP DHARMA KSATRIA &amp; SMA KSATRIA NUSANTARA</div>
     </div>
-    <div class="kop-spacer"></div>
+    <div class="kop-alamat">
+        <div>Jalan Paledah Dusun Patinggen II RT 020 / RW 005 Desa Karangpawitan Kecamatan Padaherang</div>
+        <div>Kabupaten Pangandaran Kode Pos 46384 No HP 087725807558</div>
+        <div>Email: <span style="text-decoration: underline; color: #000;">smpdharmaksatria@gmail.com</span> / <span style="text-decoration: underline; color: #000;">smaksatrianusantara01@gmail.com</span></div>
+    </div>
 </div>
 <hr class="kop-border">
-<hr class="kop-border-thin">
+<hr class="kop-border-thick">
 
 <div class="judul-laporan">Daftar Guru &amp; Tenaga Pendidik</div>
 
