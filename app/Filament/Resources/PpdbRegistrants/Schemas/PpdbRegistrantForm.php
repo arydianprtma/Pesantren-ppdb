@@ -306,7 +306,7 @@ class PpdbRegistrantForm
 
                                 Select::make('kelas_id')
                                     ->label('Kelas Siswa')
-                                    ->relationship('kelas', 'nama', function ($query, \Filament\Forms\Get $get) {
+                                    ->relationship('kelas', 'nama', function ($query, $get) {
                                         $tingkat = $get('tingkat');
                                         $query->where('is_active', true);
                                         if ($tingkat) {
