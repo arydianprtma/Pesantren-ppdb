@@ -39,6 +39,7 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+            'remember' => 20160, // 14 days in minutes (14 * 24 * 60)
         ],
     ],
 
