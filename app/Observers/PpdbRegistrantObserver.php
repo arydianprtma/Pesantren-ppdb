@@ -191,8 +191,8 @@ class PpdbRegistrantObserver
             return 'https://ppdb.riyadussalikin.my.id';
         }
 
-        $parts = parse_url(config('app.url') ?? 'http://192.168.1.8');
+        $parts = parse_url(config('app.url') ?? 'http://192.168.1.9');
 
-        return sprintf('%s://%s:8001', (string) ($parts['scheme'] ?? 'http'), (string) ($parts['host'] ?? '192.168.1.8'));
+        return sprintf('%s://%s:8001', (string) ($parts['scheme'] ?? 'http'), (string) ($parts['host'] ?? '192.168.1.9'));
     }
 }

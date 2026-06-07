@@ -14,7 +14,7 @@ const onScanSuccess = (decodedText, decodedResult) => {
     scanResult.value = decodedText;
     
     // Redirect ke URL verifikasi yang ada di QR
-    // URL QR sudah lengkap dengan token: http://192.168.1.8:8000/verifikasi/REG-xxx?token=xxx
+    // URL QR sudah lengkap dengan token: http://192.168.1.9:8000/verifikasi/REG-xxx?token=xxx
     window.location.href = decodedText;
 };
 
