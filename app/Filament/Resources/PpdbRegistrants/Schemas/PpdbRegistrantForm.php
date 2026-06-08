@@ -232,6 +232,12 @@ class PpdbRegistrantForm
                                                     ->label('Ijazah / SKHU')
                                                     ->disk('ppdb')
                                                     ->disabled()->openable()->downloadable(),
+                                                \Filament\Forms\Components\FileUpload::make('rapot_legalisir')
+                                                    ->label(fn ($record) => $record?->tingkat === 'smp' 
+                                                        ? 'Rapot Terakhir SD/MI & Data Siswa' 
+                                                        : 'Rapot Terakhir SMP/MTs & Data Siswa')
+                                                    ->disk('ppdb')
+                                                    ->disabled()->openable()->downloadable(),
                                                 \Filament\Forms\Components\FileUpload::make('akte_kelahiran')
                                                     ->label('Akte Kelahiran')
                                                     ->disk('ppdb')
