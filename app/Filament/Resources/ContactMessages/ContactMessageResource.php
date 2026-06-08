@@ -21,9 +21,19 @@ class ContactMessageResource extends Resource
 
     protected static ?string $navigationLabel = 'Pesan Masuk';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Manajemen Web';
+    protected static string|\UnitEnum|null $navigationGroup = 'Sistem';
 
     protected static ?int $navigationSort = 2;
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::where('is_read', false)->count() ?: null;
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
+    }
 
     protected static ?string $modelLabel = 'Pesan Masuk';
 
