@@ -125,7 +125,8 @@
                         >
                             Kontak
                         </Link>
-                        <!-- Dropdown Menu -->
+                        <!-- Dropdown Menu (Dihilangkan Sementara) -->
+                        <!-- 
                         <div class="relative group">
                             <button 
                                 @mouseenter="isDropdownOpen = true"
@@ -133,12 +134,11 @@
                                 :class="getDropdownTriggerClass(['sekolah.sma', 'sekolah.smp'], isDropdownOpen)"
                             >
                                 Lembaga Pendidikan
-                                <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': isDropdownOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4.5 h-4.5 transition-transform duration-200" :class="{'rotate-180': isDropdownOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
                             
-                            <!-- Dropdown Content -->
                             <div 
                                 v-show="isDropdownOpen" 
                                 @mouseleave="isDropdownOpen = false"
@@ -160,6 +160,7 @@
                                 </Link>
                             </div>
                         </div>
+                        -->
 
                         <a 
                             href="https://ppdb.riyadussalikin.my.id/login"
@@ -208,7 +209,8 @@
                             </template>
                         </div>
 
-                        <!-- Mobile Dropdown -->
+                        <!-- Mobile Dropdown (Dihilangkan Sementara) -->
+                        <!-- 
                         <div class="border-l-2 pl-4 space-y-2 py-2" :class="isSmpPage ? 'border-blue-100' : 'border-emerald-100'">
                             <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Lembaga Pendidikan</div>
                             <Link :href="route('sekolah.sma')" class="block text-gray-700 font-medium" :class="[route().current('sekolah.sma') ? (isSmpPage ? 'text-blue-600' : 'text-emerald-600') : (isSmpPage ? 'hover:text-blue-600' : 'hover:text-emerald-600')]">
@@ -218,6 +220,7 @@
                                 SMP Dharma Ksatria
                             </Link>
                         </div>
+                        -->
                         <Link :href="route('prestasi')" :class="isActive('prestasi') ? (isSmpPage ? 'text-blue-600 font-bold' : 'navbar-link-active') : (isSmpPage ? 'text-gray-650 hover:text-blue-600 font-medium' : 'navbar-link')">
                             Prestasi
                         </Link>
