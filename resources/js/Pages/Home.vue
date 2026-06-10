@@ -176,11 +176,13 @@
                         <p class="text-gray-600 text-lg leading-relaxed mb-6">
                             Pondok Pesantren Riyadussalikin Padaherang adalah lembaga pendidikan Islam yang berkomitmen untuk mencetak generasi yang beriman, berilmu, dan berakhlak mulia.
                         </p>
-                        <div v-if="visiMisi" class="mb-8 bg-emerald-50/50 border-l-4 border-emerald-500 p-5 rounded-r-2xl">
-                            <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider block mb-2">Visi Kami</span>
-                            <p class="text-gray-700 italic leading-relaxed font-medium text-sm md:text-base">
-                                "{{ stripHtml(visiMisi.visi) }}"
-                            </p>
+                        <div v-if="visiMisi" class="mb-8">
+                            <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider block mb-3">Visi Kami</span>
+                            <div class="relative bg-gradient-to-br from-emerald-50/70 to-white/70 border-2 border-emerald-100/80 p-6 rounded-3xl max-h-64 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                                <div class="prose prose-sm prose-emerald text-gray-900 leading-relaxed text-justify text-xs md:text-sm" v-html="visiMisi.visi"></div>
+                                <!-- Gradient Overlay to indicate more content -->
+                                <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+                            </div>
                         </div>
                         <p v-else class="text-gray-500 leading-relaxed mb-8">
                             Dengan kurikulum terpadu antara pendidikan agama dan umum, kami membentuk santri yang berkarakter holistik, adaptif, dan berdaya saing di era global.
@@ -859,5 +861,27 @@ const stripHtml = (html) => {
 
 .animate-progress {
     animation: progress 5s linear infinite;
+}
+
+/* Fix: Tailwind reset hides list markers inside v-html content */
+.prose :deep(ol) {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.prose :deep(ul) {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.prose :deep(ol li),
+.prose :deep(ul li) {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
 }
 </style>
