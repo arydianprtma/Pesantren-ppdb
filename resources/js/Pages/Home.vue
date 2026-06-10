@@ -51,7 +51,7 @@
             <div class="container mx-auto px-4 pt-24 pb-12 relative z-10">
                 <div class="text-center">
                     <div class="mb-6">
-                        <img :src="logoUrl" alt="Logo Riyadussalikin" class="h-24 w-24 mx-auto mb-4" />
+                        <img :src="logoUrl" alt="Logo Riyadussalikin" class="h-24 w-24 mx-auto mb-4" width="96" height="96" fetchpriority="high" />
                     </div>
                     <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight tracking-tight">
                         Pondok Pesantren <span class="text-gradient">Riyadussalikin</span>
