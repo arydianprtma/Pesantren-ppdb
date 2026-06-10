@@ -33,11 +33,11 @@
     <!-- Fonts: Non-render-blocking loading -->
     <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
     <link rel="dns-prefetch" href="https://fonts.bunny.net">
-    <link rel="preload" href="https://fonts.bunny.net/css?family=poppins:400,500,600,700,800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.bunny.net/css?family=poppins:400,500,600,700,800&display=optional" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=optional" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet">
-        <link href="https://fonts.bunny.net/css?family=poppins:400,500,600,700,800&display=swap" rel="stylesheet">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=optional" rel="stylesheet">
+        <link href="https://fonts.bunny.net/css?family=poppins:400,500,600,700,800&display=optional" rel="stylesheet">
     </noscript>
 
     <!-- Scripts -->

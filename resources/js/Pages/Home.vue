@@ -562,7 +562,7 @@ import MainLayout from '../Layouts/MainLayout.vue';
 import CallToAction from '../Components/CallToAction.vue';
 import { Link, Head } from '@inertiajs/vue3';
 import { ref, onMounted, onUnmounted, computed } from 'vue';
-import logoUrl from '../../assets/logo/logo_pondok.png';
+import logoUrl from '../../assets/logo/logo_pondok.webp';
 
 const activeFaq = ref(null);
 const currentTime = ref(new Date());
