@@ -8,6 +8,7 @@
     <title inertia>{{ config('app.name', 'Pondok Pesantren Riyadussalikin Padaherang') }}</title>
     <meta name="description"
         content="Official website Pondok Pesantren Riyadussalikin Padaherang. Pusat pendidikan Islam, tahfidz Al-Quran, dan pembentukan karakter santri yang berakhlakul karimah.">
+    <link rel="canonical" href="{{ url()->current() }}">
     <meta name="keywords"
         content="pondok pesantren, riyadussalikin, padaherang, pesantren jawa barat, pendidikan islam, tahfidz al-quran, ppdb pesantren">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
