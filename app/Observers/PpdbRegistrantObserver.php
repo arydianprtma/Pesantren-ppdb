@@ -188,7 +188,7 @@ class PpdbRegistrantObserver
         }
 
         if (config('app.env') === 'production') {
-            return 'https://ppdb.riyadussalikin.my.id';
+            return 'https://ppdb.riyadussalikin.ponpes.id';
         }
 
         $parts = parse_url(config('app.url') ?? 'http://192.168.1.9');

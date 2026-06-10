@@ -221,7 +221,7 @@
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <a 
-                        href="https://ppdb.riyadussalikin.my.id/login"
+                        :href="ppdbUrl"
                         class="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-blue-500 transition-all duration-300 shadow-lg shadow-blue-900/30 border border-blue-500 hover:scale-105"
                     >
                         Daftar PPDB SMP
@@ -241,12 +241,20 @@
 <script setup>
 import MainLayout from '../Layouts/MainLayout.vue';
 import { Link, Head } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
 defineProps({
     profil: {
         type: Object,
         default: () => null
     }
+});
+
+const ppdbUrl = computed(() => {
+    if (window.location.hostname.startsWith('192.168.') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return `http://${window.location.hostname}:8001/login`;
+    }
+    return 'https://ppdb.riyadussalikin.ponpes.id/login';
 });
 </script>
 

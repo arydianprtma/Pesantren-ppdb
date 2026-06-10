@@ -614,7 +614,7 @@ const ppdbUrl = computed(() => {
         return `http://${window.location.hostname}:8001/login`;
     }
     // Default to production URL
-    return 'https://ppdb.riyadussalikin.my.id/login';
+    return 'https://ppdb.riyadussalikin.ponpes.id/login';
 });
 
 const isFutureOpen = computed(() => {

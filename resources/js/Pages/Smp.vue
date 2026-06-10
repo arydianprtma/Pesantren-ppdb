@@ -773,7 +773,7 @@ const ppdbUrl = computed(() => {
         return `http://${window.location.hostname}:8001/register?tingkat=smp`;
     }
     // Default to production URL
-    return 'https://ppdb.riyadussalikin.my.id/register?tingkat=smp';
+    return 'https://ppdb.riyadussalikin.ponpes.id/register?tingkat=smp';
 });
 </script>
 

@@ -163,7 +163,7 @@
                         -->
 
                         <a 
-                            href="https://ppdb.riyadussalikin.my.id/login"
+                            href="https://ppdb.riyadussalikin.ponpes.id/login"
                             :class="isSmpPage ? 'bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all shadow-md hover:shadow-lg' : 'btn-primary'"
                         >
                             PPDB
@@ -233,7 +233,7 @@
                         <Link :href="route('kontak')" :class="isActive('kontak') ? (isSmpPage ? 'text-blue-600 font-bold' : 'navbar-link-active') : (isSmpPage ? 'text-gray-650 hover:text-blue-600 font-medium' : 'navbar-link')">
                             Kontak
                         </Link>
-                        <a href="https://ppdb.riyadussalikin.my.id/login" :class="isSmpPage ? 'bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all text-center shadow-md' : 'btn-primary text-center'">
+                        <a href="https://ppdb.riyadussalikin.ponpes.id/login" :class="isSmpPage ? 'bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all text-center shadow-md' : 'btn-primary text-center'">
                             PPDB
                         </a>
                     </div>
