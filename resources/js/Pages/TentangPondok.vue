@@ -186,8 +186,8 @@
                     <div class="card text-center">
                         <div class="text-emerald-600 font-bold mb-1">WhatsApp</div>
                         <a v-if="$page.props.kontak?.whatsapp"
-                            :href="'https://wa.me/' + $page.props.kontak.whatsapp.replace(/[^0-9]/g, '')"
-                            target="_blank"
+                            :href="'https://wa.me/' + $page.props.kontak.whatsapp.replace(/[^0-9]/g, '').replace(/^0/, '62')"
+                            target="_blank" rel="noopener noreferrer"
                             class="text-sm text-emerald-600 hover:text-emerald-700 font-semibold">
                             {{ $page.props.kontak.whatsapp }}
                         </a>

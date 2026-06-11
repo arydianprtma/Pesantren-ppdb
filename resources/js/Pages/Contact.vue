@@ -50,7 +50,7 @@
                                 </div>
                                 <div>
                                     <h3 class="font-bold text-gray-900 mb-1">WhatsApp / Telepon</h3>
-                                    <a v-if="$page.props.kontak?.whatsapp" :href="'https://wa.me/' + $page.props.kontak.whatsapp.replace(/[^0-9]/g, '')" target="_blank" class="text-emerald-600 hover:text-emerald-700 font-semibold">
+                                    <a v-if="$page.props.kontak?.whatsapp" :href="'https://wa.me/' + $page.props.kontak.whatsapp.replace(/[^0-9]/g, '').replace(/^0/, '62')" target="_blank" rel="noopener noreferrer" class="text-emerald-600 hover:text-emerald-700 font-semibold">
                                         {{ $page.props.kontak.whatsapp }}
                                     </a>
                                     <a v-else-if="$page.props.kontak?.telepon" :href="'tel:' + $page.props.kontak.telepon" class="text-emerald-600 hover:text-emerald-700 font-semibold">
