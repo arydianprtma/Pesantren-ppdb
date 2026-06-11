@@ -138,11 +138,47 @@ class WebSettingResource extends Resource
         return $table
             ->columns([
                 IconColumn::make('is_virtual_tour_active')
-                    ->label('Virtual Tour Aktif')
-                    ->boolean(),
+                    ->label('Virtual Tour')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-check-circle')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->falseColor('danger')
+                    ->alignCenter(),
                 TextColumn::make('virtual_tour_url')
-                    ->label('URL Video')
-                    ->limit(50),
+                    ->label('URL Video Tour')
+                    ->limit(40)
+                    ->placeholder('Belum diisi')
+                    ->url(fn ($record) => $record->virtual_tour_url ?: null)
+                    ->openUrlInNewTab()
+                    ->color('primary'),
+                TextColumn::make('instagram')
+                    ->label('Instagram')
+                    ->placeholder('–')
+                    ->limit(30)
+                    ->icon('heroicon-o-globe-alt'),
+                TextColumn::make('whatsapp')
+                    ->label('WhatsApp')
+                    ->placeholder('–')
+                    ->icon('heroicon-o-phone'),
+                TextColumn::make('base_santri_aktif')
+                    ->label('Santri Aktif')
+                    ->placeholder('–')
+                    ->suffix(' santri')
+                    ->numeric()
+                    ->alignCenter(),
+                TextColumn::make('akreditasi')
+                    ->label('Akreditasi')
+                    ->placeholder('–')
+                    ->badge()
+                    ->color('success')
+                    ->alignCenter(),
+                TextColumn::make('updated_at')
+                    ->label('Diperbarui')
+                    ->dateTime('d M Y, H:i')
+                    ->sortable()
+                    ->since()
+                    ->tooltip(fn ($record) => $record->updated_at?->format('d M Y, H:i')),
             ])
             ->filters([
                 //
@@ -157,6 +193,7 @@ class WebSettingResource extends Resource
                 ]),
             ]);
     }
+
 
     public static function getPages(): array
     {
