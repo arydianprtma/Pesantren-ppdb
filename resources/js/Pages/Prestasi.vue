@@ -154,7 +154,7 @@
                             <Link
                                 v-if="link.url"
                                 :href="link.url"
-                                v-html="link.label"
+                                v-html="getPaginationLabel(link.label)"
                                 class="px-4 py-2 rounded-md text-sm font-medium transition-all"
                                 :class="{
                                     'bg-emerald-600 text-white shadow-md': link.active,
@@ -164,7 +164,7 @@
                             />
                             <span
                                 v-else
-                                v-html="link.label"
+                                v-html="getPaginationLabel(link.label)"
                                 class="px-4 py-2 text-sm font-medium text-gray-300 cursor-not-allowed"
                             ></span>
                         </template>
@@ -279,5 +279,17 @@ const getRankColorClass = (text) => {
     if (lower.includes('3') || lower.includes('tiga') || lower.includes('perunggu') || lower.includes('bronze')) return 'text-amber-700'; // Bronze color
     if (lower.includes('harapan') || lower.includes('favorit')) return 'text-blue-500';
     return 'text-emerald-500';
+};
+
+const getPaginationLabel = (label) => {
+    if (!label) return '';
+    // Replace raw translation keys or HTML entities with proper labels
+    if (label.includes('pagination.previous') || label === '&laquo; Previous' || label.includes('Previous')) {
+        return '&laquo; Sebelumnya';
+    }
+    if (label.includes('pagination.next') || label === 'Next &raquo;' || label.includes('Next')) {
+        return 'Selanjutnya &raquo;';
+    }
+    return label;
 };
 </script>
