@@ -22,6 +22,7 @@ class ContactController extends Controller
         $validated = $request->validate([
             'nama'     => 'required|string|max:255',
             'whatsapp' => 'required|string|max:255',
+            'email'    => 'nullable|email|max:255',
             'pesan'    => 'required|string',
         ]);
 

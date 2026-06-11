@@ -11,6 +11,7 @@ class ContactMessage extends Model
     protected $fillable = [
         'nama',
         'whatsapp',
+        'email',
         'pesan',
         'is_read',
     ];

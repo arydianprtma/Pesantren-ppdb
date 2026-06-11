@@ -148,6 +148,20 @@
                                 </div>
 
                                 <div>
+                                    <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                                        Email <span class="text-gray-400 font-normal">(opsional)</span>
+                                    </label>
+                                    <input 
+                                        v-model="form.email"
+                                        type="email" 
+                                        id="email" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 focus:outline-none"
+                                        placeholder="Contoh: nama@email.com"
+                                    />
+                                    <p v-if="form.errors.email" class="mt-1 text-sm text-red-600">{{ form.errors.email }}</p>
+                                </div>
+
+                                <div>
                                     <label for="pesan" class="block text-sm font-semibold text-gray-700 mb-2">
                                         Pesan <span class="text-red-500">*</span>
                                     </label>
@@ -160,6 +174,7 @@
                                         placeholder="Tuliskan pesan atau pertanyaan Anda"
                                     ></textarea>
                                     <p v-if="form.errors.pesan" class="mt-1 text-sm text-red-600">{{ form.errors.pesan }}</p>
+
                                 </div>
 
                                 <button 
@@ -186,6 +201,7 @@ import { useForm, Head } from '@inertiajs/vue3';
 const form = useForm({
     nama: '',
     whatsapp: '',
+    email: '',
     pesan: ''
 });
 
