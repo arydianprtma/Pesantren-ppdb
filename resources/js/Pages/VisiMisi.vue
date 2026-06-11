@@ -31,8 +31,8 @@
                                 VISI
                             </div>
                             <div class="card bg-gradient-to-br from-emerald-50 to-white border-2 border-emerald-200 p-8 shadow-sm rounded-3xl">
-                                <div v-if="visiMisi" class="prose prose-emerald max-w-none text-gray-900 leading-relaxed text-justify" v-html="visiMisi.visi"></div>
-                                <p v-else class="text-2xl font-bold text-gray-900 leading-relaxed text-justify">
+                                <div v-if="visiMisi" class="prose prose-emerald max-w-none text-gray-900 leading-relaxed text-left md:text-justify" v-html="visiMisi.visi"></div>
+                                <p v-else class="text-2xl font-bold text-gray-900 leading-relaxed text-left md:text-justify">
                                     "Menjadi Lembaga Pendidikan Islam Terdepan dalam Mencetak Generasi Qur'ani yang Berakhlak Mulia, Berilmu Luas, dan Mandiri"
                                 </p>
                             </div>
@@ -44,18 +44,18 @@
                                 MISI
                             </div>
                             <div v-if="visiMisi" class="card bg-gradient-to-br from-emerald-50 to-white border-2 border-emerald-200 p-8 shadow-sm rounded-3xl">
-                                <div class="prose prose-emerald max-w-none text-gray-900 leading-relaxed text-justify prose-ol:list-decimal prose-ol:pl-5" v-html="visiMisi.misi"></div>
+                                <div class="prose prose-emerald max-w-none text-gray-900 leading-relaxed text-left md:text-justify prose-ol:list-decimal prose-ol:pl-5" v-html="visiMisi.misi"></div>
                             </div>
                             <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="group card bg-gradient-to-br from-emerald-50 to-white border-2 border-emerald-200 p-6 shadow-sm rounded-2xl hover:shadow-lg transition-all duration-300">
                                     <div class="w-12 h-12 bg-emerald-600 text-white rounded-xl flex items-center justify-center mb-4 font-bold text-lg shadow-emerald-200 shadow-lg">1</div>
                                     <h3 class="font-bold text-gray-900 mb-2">Pendidikan Al-Qur'an</h3>
-                                    <p class="text-sm text-gray-600 text-justify">Menyelenggarakan pendidikan Al-Qur'an yang komprehensif dengan metode tahfidz dan tahsin.</p>
+                                    <p class="text-sm text-gray-600 text-left">Menyelenggarakan pendidikan Al-Qur'an yang komprehensif dengan metode tahfidz dan tahsin.</p>
                                 </div>
                                 <div class="group card bg-gradient-to-br from-emerald-50 to-white border-2 border-emerald-200 p-6 shadow-sm rounded-2xl hover:shadow-lg transition-all duration-300">
                                     <div class="w-12 h-12 bg-emerald-600 text-white rounded-xl flex items-center justify-center mb-4 font-bold text-lg shadow-emerald-200 shadow-lg">2</div>
                                     <h3 class="font-bold text-gray-900 mb-2">Karakter Islami</h3>
-                                    <p class="text-sm text-gray-600 text-justify">Membina akhlak mulia melalui keteladanan dan pembiasaan ibadah sesuai sunnah.</p>
+                                    <p class="text-sm text-gray-600 text-left">Membina akhlak mulia melalui keteladanan dan pembiasaan ibadah sesuai sunnah.</p>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                                 <h2 class="text-2xl font-extrabold text-gray-900 mb-4 leading-tight">
                                     {{ visiMisi.nama_pengasuh }}
                                 </h2>
-                                <div class="prose prose-sm prose-emerald text-gray-700 leading-relaxed mb-6 text-justify" v-html="visiMisi.kata_sambutan"></div>
+                                <div class="prose prose-sm prose-emerald text-gray-700 leading-relaxed mb-6 text-left md:text-justify" v-html="visiMisi.kata_sambutan"></div>
                                 <div class="h-1 w-16 bg-emerald-600 rounded-full mx-auto lg:mx-0"></div>
                             </div>
                         </div>
