@@ -91,6 +91,19 @@
     text-align: justify !important;
 }
 
+/* Fix: spasi berlebih pada text-justify di mobile.
+   hyphens: auto memotong kata panjang dengan tanda hubung (-) sehingga
+   browser tidak perlu merentangkan spasi antar kata secara berlebihan. */
+.text-justify,
+.prose.text-justify,
+[class*="text-justify"] {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
 /* Table Styling for Tiptap */
 .prose table {
     width: 100% !important;

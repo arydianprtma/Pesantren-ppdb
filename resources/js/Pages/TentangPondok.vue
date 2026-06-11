@@ -28,10 +28,10 @@
                         <h2 class="text-3xl font-bold text-gray-900 mb-4 leading-snug">
                             Pondok Pesantren Riyadussalikin Padaherang
                         </h2>
-                        <p class="text-gray-600 leading-relaxed mb-4 text-left md:text-justify">
+                        <p class="text-gray-600 leading-relaxed mb-4 text-justify">
                             Pondok Pesantren Riyadussalikin adalah lembaga pendidikan Islam yang berdiri di Padaherang, Pangandaran, Jawa Barat. Didirikan dengan semangat untuk mencetak generasi muslim yang berilmu, berakhlak mulia, dan mandiri.
                         </p>
-                        <p class="text-gray-600 leading-relaxed text-left md:text-justify">
+                        <p class="text-gray-600 leading-relaxed text-justify">
                             Pondok ini mengintegrasikan pendidikan agama Islam yang mendalam dengan kurikulum pendidikan formal, menjadikan santri siap menghadapi tantangan zaman tanpa meninggalkan nilai-nilai Islam.
                         </p>
                     </div>
@@ -77,7 +77,7 @@
                         </div>
                         <div class="card flex-1">
                             <h3 class="text-lg font-bold text-gray-900 mb-2">{{ item.judul }}</h3>
-                            <div class="text-gray-600 text-sm leading-relaxed prose prose-sm max-w-none text-left md:text-justify" v-html="item.konten"></div>
+                            <div class="text-gray-600 text-sm leading-relaxed prose prose-sm max-w-none text-justify" v-html="item.konten"></div>
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                         </div>
                         <div class="card flex-1">
                             <h3 class="text-lg font-bold text-gray-900 mb-2">{{ fase.judul }}</h3>
-                            <p class="text-gray-600 text-sm leading-relaxed text-left md:text-justify">{{ fase.konten }}</p>
+                            <p class="text-gray-600 text-sm leading-relaxed text-justify">{{ fase.konten }}</p>
                         </div>
                     </div>
                 </div>
