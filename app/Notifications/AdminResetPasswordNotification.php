@@ -2,44 +2,11 @@
 
 namespace App\Notifications;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Filament\Auth\Notifications\ResetPassword as FilamentResetPassword;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
-class AdminResetPasswordNotification extends Notification
+class AdminResetPasswordNotification extends FilamentResetPassword
 {
-    use Queueable;
-
-    /**
-     * The password reset token.
-     *
-     * @var string
-     */
-    public $token;
-
-    /**
-     * Create a new notification instance.
-     *
-     * @param  string  $token
-     * @return void
-     */
-    public function __construct($token)
-    {
-        $this->token = $token;
-    }
-
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return ['mail'];
-    }
-
     /**
      * Get the mail representation of the notification.
      *
@@ -48,7 +15,7 @@ class AdminResetPasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = route('filament.portal.auth.password-reset.reset', [
+        $url = $this->url ?? route('filament.portal.auth.password-reset.reset', [
             'token' => $this->token,
             'email' => $notifiable->getEmailForPasswordReset(),
         ]);
