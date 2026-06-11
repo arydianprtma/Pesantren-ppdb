@@ -30,13 +30,11 @@ class PrestasiController extends Controller
             ->paginate(9)
             ->withQueryString();
 
-        // Ambil daftar tahun unik untuk filter (cached)
-        $tahunList = \Illuminate\Support\Facades\Cache::remember('prestasi_tahun_list', 60 * 60, function () {
-            return Prestasi::select('tahun')
-                ->distinct()
-                ->orderBy('tahun', 'desc')
-                ->pluck('tahun');
-        });
+        // Ambil daftar tahun unik untuk filter (selalu fresh)
+        $tahunList = Prestasi::select('tahun')
+            ->distinct()
+            ->orderBy('tahun', 'desc')
+            ->pluck('tahun');
 
         return Inertia::render('Prestasi', [
             'prestasi' => $prestasi,
