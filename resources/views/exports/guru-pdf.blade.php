@@ -78,7 +78,7 @@
 
         table { width: 100%; border-collapse: collapse; }
         thead th {
-            background: #000 !important; color: #fff !important;
+            background: #fff !important; color: #000 !important;
             padding: 5px 4px; text-align: left;
             font-size: 9px; font-weight: 700; border: 1px solid #000;
             text-transform: uppercase;
