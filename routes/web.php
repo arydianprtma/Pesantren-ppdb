@@ -34,6 +34,62 @@ Route::get('/smp-dharma-ksatria/profil', [HomeController::class, 'smpProfil'])->
 Route::get('/kontak', [ContactController::class, 'index'])->name('kontak');
 Route::post('/kontak', [ContactController::class, 'store'])->name('kontak.store');
 
+// Sitemap Dinamis
+Route::get('/sitemap.xml', function () {
+    $baseUrl = 'https://www.riyadussalikin.ponpes.id';
+    $now = now()->toAtomString();
+
+    // Halaman statis
+    $staticPages = [
+        ['url' => $baseUrl,                         'priority' => '1.0', 'freq' => 'weekly'],
+        ['url' => $baseUrl . '/berita',             'priority' => '0.9', 'freq' => 'daily'],
+        ['url' => $baseUrl . '/prestasi',           'priority' => '0.8', 'freq' => 'weekly'],
+        ['url' => $baseUrl . '/jadwal',             'priority' => '0.7', 'freq' => 'weekly'],
+        ['url' => $baseUrl . '/tentang-pondok',     'priority' => '0.6', 'freq' => 'monthly'],
+        ['url' => $baseUrl . '/visi-misi',          'priority' => '0.6', 'freq' => 'monthly'],
+        ['url' => $baseUrl . '/fasilitas',          'priority' => '0.6', 'freq' => 'monthly'],
+        ['url' => $baseUrl . '/kontak',             'priority' => '0.5', 'freq' => 'monthly'],
+        ['url' => $baseUrl . '/smp-dharma-ksatria', 'priority' => '0.5', 'freq' => 'monthly'],
+        ['url' => $baseUrl . '/smp-dharma-ksatria/profil', 'priority' => '0.5', 'freq' => 'monthly'],
+    ];
+
+    // Halaman berita dinamis
+    $beritaPages = \App\Models\Berita::select('slug', 'updated_at')
+        ->latest('updated_at')
+        ->get()
+        ->map(fn($b) => [
+            'url'      => $baseUrl . '/berita/' . $b->slug,
+            'lastmod'  => $b->updated_at->toAtomString(),
+            'priority' => '0.7',
+            'freq'     => 'monthly',
+        ]);
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+    foreach ($staticPages as $page) {
+        $xml .= "  <url>\n";
+        $xml .= "    <loc>{$page['url']}</loc>\n";
+        $xml .= "    <lastmod>{$now}</lastmod>\n";
+        $xml .= "    <changefreq>{$page['freq']}</changefreq>\n";
+        $xml .= "    <priority>{$page['priority']}</priority>\n";
+        $xml .= "  </url>\n";
+    }
+
+    foreach ($beritaPages as $page) {
+        $xml .= "  <url>\n";
+        $xml .= "    <loc>{$page['url']}</loc>\n";
+        $xml .= "    <lastmod>{$page['lastmod']}</lastmod>\n";
+        $xml .= "    <changefreq>{$page['freq']}</changefreq>\n";
+        $xml .= "    <priority>{$page['priority']}</priority>\n";
+        $xml .= "  </url>\n";
+    }
+
+    $xml .= '</urlset>';
+
+    return response($xml, 200)->header('Content-Type', 'application/xml');
+})->name('sitemap');
+
 // Proxy route for PPDB storage to avoid CORS issues
 Route::get('/ppdb-storage/{path}', function ($path) {
     $root = config('filesystems.disks.ppdb.root');
