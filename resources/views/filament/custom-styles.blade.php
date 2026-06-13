@@ -31,11 +31,16 @@
             gap: 0.5rem !important;
         }
 
-        /* Ensure hamburger trigger is clickable and positioned on top */
-        .fi-topbar-trigger {
+        /* Ensure hamburger, database notifications, and user menu triggers are clickable and positioned on top of search */
+        .fi-topbar-trigger,
+        .fi-topbar-database-notifications-btn,
+        .fi-user-menu {
             z-index: 20 !important;
             position: relative !important;
             cursor: pointer !important;
+        }
+
+        .fi-topbar-trigger {
             padding: 0.5rem !important;
         }
 
@@ -146,10 +151,10 @@
             transition: all 0.2s ease !important;
         }
 
-        /* Active micro-animations for triggers on tap */
+        /* Active micro-animations for triggers on tap - target buttons only to avoid aborting dropdown item clicks */
         .fi-topbar-trigger:active,
-        .fi-database-notifications-trigger:active,
-        .fi-user-menu:active {
+        .fi-topbar-database-notifications-btn:active,
+        .fi-user-menu-trigger:active {
             transform: scale(0.92) !important;
             transition: transform 0.15s ease !important;
         }
@@ -217,6 +222,11 @@
     .fi-ta-table td {
         padding-top: 1.125rem !important;
         padding-bottom: 1.125rem !important;
+    }
+
+    /* Ensure dropdown panels are always on top of all other elements to receive clicks/taps */
+    .fi-dropdown-panel {
+        z-index: 9999 !important;
     }
 </style>
 
