@@ -30,6 +30,7 @@ class KelasForm
                                 'smp' => 'SMP',
                                 'sma' => 'SMA',
                             ])
+                            ->native(false)
                             ->required()
                             ->default('smp'),
                     ]),

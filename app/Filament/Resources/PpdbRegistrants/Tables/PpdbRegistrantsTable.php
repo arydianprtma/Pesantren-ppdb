@@ -150,9 +150,52 @@ class PpdbRegistrantsTable
                         'tingkat' => $livewire->tableFilters['tingkat']['value'] ?? null,
                     ]))
                     ->openUrlInNewTab(),
-
+            ])
+            ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    \Filament\Actions\BulkAction::make('assign_kelas')
+                        ->label('Masukkan ke Kelas')
+                        ->icon('heroicon-o-academic-cap')
+                        ->color('success')
+                        ->form([
+                            \Filament\Forms\Components\Select::make('kelas_id')
+                                ->label('Pilih Kelas')
+                                ->options(fn () => \App\Models\Kelas::pluck('nama', 'id')->toArray())
+                                ->required(),
+                        ])
+                        ->action(function (\Illuminate\Database\Eloquent\Collection $records, array $data): void {
+                            $kelas = \App\Models\Kelas::find($data['kelas_id']);
+                            if (! $kelas) {
+                                return;
+                            }
+
+                            $kapasitas = (int) $kelas->kapasitas;
+                            $currentCount = $kelas->pendaftarans()->count();
+                            $availableSlots = $kapasitas - $currentCount;
+
+                            $selectedCount = $records->count();
+
+                            if ($selectedCount > $availableSlots) {
+                                \Filament\Notifications\Notification::make()
+                                    ->title('Kapasitas kelas tidak mencukupi!')
+                                    ->body("Gagal memasukkan siswa. Kelas {$kelas->nama} memiliki kapasitas {$kapasitas}, terisi {$currentCount}, hanya tersedia {$availableSlots} slot. Anda mencoba memasukkan {$selectedCount} siswa.")
+                                    ->danger()
+                                    ->send();
+                                return;
+                            }
+
+                            foreach ($records as $record) {
+                                $record->update(['kelas_id' => $kelas->id]);
+                            }
+
+                            \Filament\Notifications\Notification::make()
+                                ->title('Siswa berhasil dimasukkan ke kelas')
+                                ->body("{$selectedCount} siswa berhasil dimasukkan ke kelas {$kelas->nama}.")
+                                ->success()
+                                ->send();
+                        })
+                        ->deselectRecordsAfterCompletion(),
                 ]),
             ]);
     }

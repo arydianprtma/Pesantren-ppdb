@@ -228,5 +228,16 @@
     .fi-dropdown-panel {
         z-index: 9999 !important;
     }
+
+    /* ===== Slide-over: Checkbox List Scrollable Area ===== */
+    /* Make only the options list scroll, while search bar and action buttons stay fixed */
+    .fi-modal-slide-over .fi-fo-checkbox-list-options {
+        max-height: calc(100vh - 320px) !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        display: grid !important;
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+        padding-left: 2px !important;
+    }
 </style>
 

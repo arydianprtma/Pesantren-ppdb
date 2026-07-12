@@ -310,20 +310,7 @@ class PpdbRegistrantForm
                                     ->native(false)
                                     ->live(),
 
-                                Select::make('kelas_id')
-                                    ->label('Kelas Siswa')
-                                    ->relationship('kelas', 'nama', function ($query, $get) {
-                                        $tingkat = $get('tingkat');
-                                        $query->where('is_active', true);
-                                        if ($tingkat) {
-                                            $query->where('tingkat', $tingkat);
-                                        }
-                                        return $query;
-                                    })
-                                    ->nullable()
-                                    ->placeholder('Belum Masuk Kelas')
-                                    ->helperText('Pilih kelas untuk pendaftar yang telah dinyatakan diterima.')
-                                    ->native(false),
+
 
                                 // Jadwal Tes section
                                 Section::make('Jadwal Ujian Masuk')

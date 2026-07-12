@@ -31,7 +31,7 @@ class EkstrakurikulerResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Manajemen Sekolah';
+    protected static string|\UnitEnum|null $navigationGroup = 'Manajemen Web';
 
     public static function form(Schema $schema): Schema
     {

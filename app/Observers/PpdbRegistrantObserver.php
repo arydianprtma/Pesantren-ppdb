@@ -16,15 +16,34 @@ class PpdbRegistrantObserver
     ) {}
 
     /**
-     * Kirim notifikasi WA saat status pendaftaran berubah.
+     * Kirim notifikasi WA saat status atau kelas pendaftaran berubah.
      */
     public function updated(PpdbPendaftaran $pendaftaran): void
     {
+        $siswa = $pendaftaran->siswa;
+
+        // ===== NOTIFIKASI PERUBAHAN KELAS =====
+        if ($pendaftaran->isDirty('kelas_id')) {
+            $oldKelasId = $pendaftaran->getOriginal('kelas_id');
+            $newKelasId = $pendaftaran->kelas_id;
+
+            $kelasMessage = $this->buildKelasMessage(
+                nama: $siswa?->nama_lengkap ?? '',
+                nis: $siswa?->nis ?? '',
+                noReg: $pendaftaran->no_reg ?? '',
+                oldKelasId: $oldKelasId,
+                newKelasId: $newKelasId,
+            );
+
+            if ($kelasMessage && $siswa?->no_hp) {
+                $this->whatsapp->sendMessage($siswa->no_hp, $kelasMessage);
+            }
+        }
+        // ======================================
+
         if (! $pendaftaran->isDirty('status')) {
             return;
         }
-
-        $siswa = $pendaftaran->siswa;
 
         if (! $siswa?->no_hp) {
             return;
@@ -175,6 +194,62 @@ class PpdbRegistrantObserver
             $body,
             "",
             "Cek status pendaftaran Anda di:",
+            $this->portalUrl(),
+            "",
+            "_Pesan ini dikirim otomatis oleh sistem. Mohon tidak membalas._",
+        ]);
+    }
+
+    /**
+     * Buat isi pesan WA saat kelas_id berubah.
+     * Menangani 3 skenario: masuk kelas, pindah/naik kelas, keluar kelas.
+     */
+    protected function buildKelasMessage(
+        string $nama,
+        string $nis,
+        string $noReg,
+        ?int $oldKelasId,
+        ?int $newKelasId,
+    ): ?string {
+        $nisInfo = $nis ? "*NIS: {$nis}*" : "*No. Reg: {$noReg}*";
+
+        // Keluar dari kelas (kelas_id menjadi null)
+        if ($oldKelasId && ! $newKelasId) {
+            $oldKelas = \App\Models\Kelas::find($oldKelasId);
+            $namaKelasLama = $oldKelas ? "{$oldKelas->nama} (" . strtoupper($oldKelas->tingkat) . ")" : 'kelas sebelumnya';
+            $body = "Halo *{$nama}*, kami informasikan bahwa Anda telah *dikeluarkan* dari {$namaKelasLama}.\n\n{$nisInfo}\n\nHubungi pihak pesantren jika ada pertanyaan.";
+        }
+
+        // Masuk kelas pertama kali (dari null ke kelas baru)
+        elseif (! $oldKelasId && $newKelasId) {
+            $newKelas = \App\Models\Kelas::find($newKelasId);
+            $namaKelasBaru = $newKelas ? "{$newKelas->nama} (" . strtoupper($newKelas->tingkat) . ")" : 'kelas baru';
+            $body = "Alhamdulillah, *{$nama}* telah resmi ditempatkan di:\n\n🏫 *Kelas: {$namaKelasBaru}*\n\n{$nisInfo}\n\nSelamat belajar dan semoga sukses! 🎉";
+        }
+
+        // Pindah / naik kelas (dari kelas lama ke kelas baru)
+        elseif ($oldKelasId && $newKelasId && $oldKelasId !== $newKelasId) {
+            $oldKelas = \App\Models\Kelas::find($oldKelasId);
+            $newKelas = \App\Models\Kelas::find($newKelasId);
+            $namaKelasLama = $oldKelas ? "{$oldKelas->nama} (" . strtoupper($oldKelas->tingkat) . ")" : 'kelas sebelumnya';
+            $namaKelasBaru = $newKelas ? "{$newKelas->nama} (" . strtoupper($newKelas->tingkat) . ")" : 'kelas baru';
+            $body = "Halo *{$nama}*, Anda telah dipindahkan / naik kelas:\n\n📌 Dari: *{$namaKelasLama}*\n✅ Ke: *{$namaKelasBaru}*\n\n{$nisInfo}\n\nSelamat dan tetap semangat belajar! 🎉";
+        }
+
+        // Tidak ada perubahan bermakna
+        else {
+            return null;
+        }
+
+        return implode("\n", [
+            "*INFORMASI KELAS*",
+            "*Pondok Pesantren Riyadussalikin*",
+            "",
+            "Assalamu'alaikum wr. wb.,",
+            "",
+            $body,
+            "",
+            "Cek portal Anda di:",
             $this->portalUrl(),
             "",
             "_Pesan ini dikirim otomatis oleh sistem. Mohon tidak membalas._",
