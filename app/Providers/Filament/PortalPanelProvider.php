@@ -89,8 +89,26 @@ class PortalPanelProvider extends PanelProvider
                         if (typeof window.isFormDirty === 'undefined') {
                             window.isFormDirty = false;
                             
-                            document.addEventListener('input', () => { window.isFormDirty = true; });
-                            document.addEventListener('change', () => { window.isFormDirty = true; });
+                            const handleInput = (e) => {
+                                const target = e.target;
+                                if (!target || !target.closest('form')) return;
+                                if (
+                                    target.closest('.fi-ta-header') || 
+                                    target.closest('.fi-ta-filters') || 
+                                    target.closest('.fi-ta-pagination') ||
+                                    target.closest('.fi-global-search') ||
+                                    target.closest('.fi-topbar') ||
+                                    target.closest('.fi-ta-table') ||
+                                    target.closest('.fi-ta-content') ||
+                                    target.closest('.fi-ta-col-manager') ||
+                                    target.getAttribute('type') === 'search'
+                                ) {
+                                    return;
+                                }
+                                window.isFormDirty = true;
+                            };
+                            document.addEventListener('input', handleInput);
+                            document.addEventListener('change', handleInput);
                             document.addEventListener('click', (e) => {
                                 if (e.target.closest('button[type=\"submit\"]')) { window.isFormDirty = false; }
                             });
