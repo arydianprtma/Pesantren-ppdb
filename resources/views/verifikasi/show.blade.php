@@ -107,6 +107,16 @@
                         <span class="text-slate-700 font-bold text-xs italic">{{ $pendaftaran->created_at->translatedFormat('d F Y') }}</span>
                     </div>
                 </div>
+
+                <!-- Back to Scan Button -->
+                <div class="pt-4">
+                    <a href="/portal/ppdb/scan" class="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white py-3.5 rounded-2xl font-bold text-sm shadow-lg shadow-slate-200 transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                        </svg>
+                        <span>Kembali ke Scan</span>
+                    </a>
+                </div>
             </div>
         @else
             <!-- Error Message -->
@@ -117,9 +127,14 @@
                         Maaf, data pendaftaran dengan nomor registrasi <strong>{{ $no_reg }}</strong> tidak ditemukan atau token verifikasi tidak valid.
                     </p>
                 </div>
-                <a href="/" class="inline-block mt-8 text-slate-400 font-bold text-xs uppercase tracking-widest hover:text-slate-600 transition-colors">
-                    ← Kembali ke Beranda
-                </a>
+                <div class="pt-6">
+                    <a href="/portal/ppdb/scan" class="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white py-3.5 rounded-2xl font-bold text-sm shadow-lg shadow-slate-200 transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                        </svg>
+                        <span>Kembali ke Scan</span>
+                    </a>
+                </div>
             </div>
         @endif
 
