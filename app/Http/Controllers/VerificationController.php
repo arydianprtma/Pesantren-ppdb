@@ -15,21 +15,14 @@ class VerificationController extends Controller
         // Debugging manual untuk memastikan user terdeteksi
         $user = \Illuminate\Support\Facades\Auth::user();
         
+        // Jika belum login, arahkan ke halaman login admin
         if (!$user) {
-            // Jika tidak terdeteksi, coba cek session via request
-            if ($request->user()) {
-                $user = $request->user();
-            }
-        }
-        
-        // Jika masih tidak login, abort 404
-        if (!$user) {
-            abort(404);
+            return redirect()->guest('/portal/login');
         }
 
         // Cek apakah user memiliki role admin atau super_admin
         if (!$user->hasAnyRole(['admin', 'super_admin']) && ($user->role ?? null) !== 'admin' && ($user->role ?? null) !== 'super_admin') {
-            abort(404);
+            abort(403, 'Akses ditolak. Halaman ini hanya dapat diakses oleh Administrator.');
         }
 
         $token = $request->query('token');
