@@ -58,7 +58,7 @@ class ExportController extends Controller
                 'Nama Ayah', 'No. HP Ayah',
                 'Nama Ibu',  'No. HP Ibu',
                 'Status', 'Tanggal Daftar',
-            ]);
+            ], ';');
 
             foreach ($query as $row) {
                 $siswa = $row->siswa;
@@ -83,7 +83,7 @@ class ExportController extends Controller
                     $ibu?->no_hp,
                     self::statusLabel($row->status),
                     $row->tanggal_daftar,
-                ]);
+                ], ';');
             }
 
             fclose($file);
@@ -134,7 +134,7 @@ class ExportController extends Controller
             fputcsv($file, [
                 'Nama Lengkap', 'NIP / NIK', 'Jabatan', 'Mata Pelajaran',
                 'Pendidikan Terakhir', 'No. HP', 'Email', 'Tanggal Bergabung',
-            ]);
+            ], ';');
 
             foreach ($data as $row) {
                 fputcsv($file, [
@@ -146,7 +146,7 @@ class ExportController extends Controller
                     $row->no_hp,
                     $row->email,
                     $row->tanggal_bergabung,
-                ]);
+                ], ';');
             }
 
             fclose($file);
@@ -190,7 +190,7 @@ class ExportController extends Controller
             $file = fopen('php://output', 'w');
             fputs($file, "\xEF\xBB\xBF");
 
-            fputcsv($file, ['Nama', 'Email', 'No. WhatsApp', 'Tanggal Daftar']);
+            fputcsv($file, ['Nama', 'Email', 'No. WhatsApp', 'Tanggal Daftar'], ';');
 
             foreach ($data as $row) {
                 fputcsv($file, [
@@ -198,7 +198,7 @@ class ExportController extends Controller
                     $row->email,
                     $row->whatsapp ?? '-',
                     $row->created_at->format('d/m/Y'),
-                ]);
+                ], ';');
             }
 
             fclose($file);
@@ -248,7 +248,7 @@ class ExportController extends Controller
                 'no_hp', 'email', 'tempat_lahir', 'tanggal_lahir', 
                 'alamat', 'kelurahan_desa', 'kecamatan', 'kabupaten_kota', 
                 'provinsi', 'tingkat', 'status_penerimaan', 'asal_sekolah'
-            ]);
+            ], ';');
 
             // Tambahkan baris contoh (dummy data)
             fputcsv($file, [
@@ -256,7 +256,7 @@ class ExportController extends Controller
                 '081234567890', 'ahmad.fauzi@gmail.com', 'Pangandaran', '2012-08-15', 
                 'Jl. Raya Padaherang No. 12', 'Padaherang', 'Padaherang', 'Pangandaran', 
                 'Jawa Barat', 'smp', 'diterima_ula', 'SDN 1 Padaherang'
-            ]);
+            ], ';');
 
             fclose($file);
         };
