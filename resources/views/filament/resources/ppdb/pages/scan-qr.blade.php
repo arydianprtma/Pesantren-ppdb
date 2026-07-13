@@ -364,25 +364,7 @@
 
 <div class="sqr-wrap">
 
-    {{-- HTTPS Warning Banner --}}
-    <div class="sqr-https-warn" id="sqr-https-warn">
-        <div class="sqr-https-warn-head">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
-            </svg>
-            <p class="sqr-https-warn-title">⚠ Kamera Butuh HTTPS</p>
-        </div>
-        <div class="sqr-https-warn-body">
-            <p>Browser memblokir akses kamera karena halaman ini dibuka via <strong>HTTP</strong> (tidak terenkripsi). Kamera hanya bisa diakses melalui <strong>HTTPS</strong>.</p>
-            <ul class="sqr-https-warn-steps">
-                <li>Buka <strong>Laragon</strong> → klik kanan tray icon → <strong>Laragon → SSL → Enable SSL</strong></li>
-                <li>Atau buka menu <strong>Apache → SSL → laragon.test</strong> dan aktifkan untuk domain Anda</li>
-                <li>Akses menggunakan <code>https://</code> bukan <code>http://</code></li>
-                <li>Di HP: pastikan mengakses lewat HTTPS dan izinkan sertifikat jika diminta</li>
-            </ul>
-            <div class="sqr-https-current-url" id="sqr-current-url"></div>
-        </div>
-    </div>
+
 
     <div class="sqr-card">
 
@@ -465,50 +447,6 @@
 <script>
 (function () {
 
-    /* ── 1. Deteksi HTTPS ── */
-    var isSecure = window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-
-    if (!isSecure) {
-        var warnBanner  = document.getElementById('sqr-https-warn');
-        var currentUrl  = document.getElementById('sqr-current-url');
-        var startBtn    = document.getElementById('sqr-start-btn');
-
-        if (warnBanner) {
-            warnBanner.classList.add('show');
-        }
-        if (currentUrl) {
-            var httpsUrl = window.location.href.replace('http://', 'https://');
-            currentUrl.innerHTML = 'URL sekarang: <strong>' + window.location.href + '</strong><br>Coba akses: <strong>' + httpsUrl + '</strong>';
-        }
-        /* Disable tombol start jika tidak HTTPS */
-        if (startBtn) {
-            startBtn.disabled = true;
-            startBtn.style.opacity = '0.4';
-            startBtn.style.cursor  = 'not-allowed';
-            startBtn.textContent   = 'Butuh HTTPS';
-        }
-        return; /* Hentikan init scanner */
-    }
-
-    /* ── 2. Cek apakah getUserMedia tersedia ── */
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        var startBtn = document.getElementById('sqr-start-btn');
-        var errorBox = document.getElementById('sqr-error');
-        var errorMsg = document.getElementById('sqr-error-msg');
-        if (startBtn) {
-            startBtn.disabled = true;
-            startBtn.style.opacity = '0.4';
-            startBtn.style.cursor  = 'not-allowed';
-            startBtn.textContent   = 'Kamera Tidak Didukung';
-        }
-        if (errorBox && errorMsg) {
-            errorMsg.textContent = 'Browser tidak mendukung akses kamera. Gunakan Chrome atau Edge versi terbaru.';
-            errorBox.classList.add('show');
-        }
-        return;
-    }
-
-    /* ── 3. Init scanner ── */
     function waitForLib(cb) {
         if (typeof Html5Qrcode !== 'undefined') { cb(); }
         else { setTimeout(function(){ waitForLib(cb); }, 100); }
