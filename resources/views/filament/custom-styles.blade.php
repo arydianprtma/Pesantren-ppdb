@@ -198,7 +198,6 @@
         background-color: rgba(255, 255, 255, 0.75) !important;
         backdrop-filter: blur(12px) !important;
         -webkit-backdrop-filter: blur(12px) !important;
-        overflow: hidden !important;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.02) !important;
         transition: all 0.3s ease !important;
     }
