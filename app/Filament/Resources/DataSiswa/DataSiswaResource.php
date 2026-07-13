@@ -140,6 +140,20 @@ class DataSiswaResource extends Resource
                     ->placeholder('-'),
             ])
             ->filters([
+                SelectFilter::make('tahun_ajaran')
+                    ->label('Tahun Ajaran')
+                    ->options(fn () => \App\Models\PpdbPendaftaran::whereNotNull('tahun_ajaran')
+                        ->distinct()
+                        ->pluck('tahun_ajaran', 'tahun_ajaran')
+                        ->toArray()
+                    )
+                    ->default(fn () => \App\Models\PpdbSetting::where('is_active', true)->first()?->tahun_ajaran)
+                    ->query(fn (Builder $query, array $data) => 
+                        $query->when($data['value'], fn ($q, $value) => 
+                            $q->whereHas('pendaftaran', fn ($pq) => $pq->where('tahun_ajaran', $value))
+                        )
+                    ),
+
                 SelectFilter::make('status')
                     ->label('Status Siswa')
                     ->options([
