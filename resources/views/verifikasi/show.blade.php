@@ -14,7 +14,7 @@
     <div class="max-w-md w-full bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100">
         <!-- Header -->
         <div class="p-8 text-center border-b border-slate-50 bg-gradient-to-b from-slate-50 to-white">
-            <img src="/Logo Riyad.png" alt="Logo" class="h-20 mx-auto mb-4 drop-shadow-md">
+            <img src="/logo_pondok.png" alt="Logo" class="h-20 mx-auto mb-4 drop-shadow-md">
             <h1 class="text-xl font-extrabold text-slate-800 uppercase tracking-tight">E-Verification System</h1>
             <p class="text-slate-500 text-sm font-medium mt-1">SPMB Online PP. Riyadussalikin</p>
         </div>
@@ -54,7 +54,9 @@
                                     $avatarUrl = $pendaftaran->user->avatar;
                                 } else {
                                     $avatarPath = ltrim($pendaftaran->user->avatar, '/');
-                                    if (\Illuminate\Support\Facades\Storage::disk('public')->exists($avatarPath)) {
+                                    if (\Illuminate\Support\Facades\Storage::disk('ppdb_public')->exists($avatarPath)) {
+                                        $avatarUrl = asset('ppdb-public-storage/' . $avatarPath);
+                                    } elseif (\Illuminate\Support\Facades\Storage::disk('public')->exists($avatarPath)) {
                                         $avatarUrl = asset('storage/' . $avatarPath);
                                     } elseif (\Illuminate\Support\Facades\Storage::disk('ppdb')->exists($avatarPath)) {
                                         $avatarUrl = asset('ppdb-storage/' . $avatarPath);
