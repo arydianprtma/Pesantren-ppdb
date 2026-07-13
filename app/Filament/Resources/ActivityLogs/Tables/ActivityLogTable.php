@@ -35,14 +35,28 @@ class ActivityLogTable
                     ->label('Modul')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'ppdb'       => 'info',
-                        'guru'       => 'success',
-                        'siswa'      => 'warning',
-                        'auth'       => 'danger',
-                        'pengaturan' => 'gray',
-                        default      => 'primary',
+                        'ppdb'            => 'info',
+                        'guru'            => 'success',
+                        'siswa'           => 'warning',
+                        'agenda'          => 'primary',
+                        'berita'          => 'warning',
+                        'ekstrakurikuler' => 'success',
+                        'fasilitas'       => 'info',
+                        'kelas'           => 'gray',
+                        'prestasi'        => 'success',
+                        'sejarah'         => 'primary',
+                        'visi_misi'       => 'warning',
+                        'user'            => 'gray',
+                        'auth'            => 'danger',
+                        'pengaturan'      => 'gray',
+                        default           => 'primary',
                     })
-                    ->formatStateUsing(fn (string $state): string => $state === 'ppdb' ? 'SPMB' : strtoupper($state))
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'ppdb'            => 'SPMB',
+                        'visi_misi'       => 'Visi Misi',
+                        'ekstrakurikuler' => 'Ekstrakurikuler',
+                        default           => strtoupper($state),
+                    })
                     ->searchable(),
 
                 TextColumn::make('aksi')
@@ -81,19 +95,45 @@ class ActivityLogTable
                     ->formatStateUsing(function ($state, $record): string {
                         $sebelum = $record->sebelum ?? [];
                         $sesudah = $record->sesudah ?? [];
+                        $aksi = $record->aksi;
 
-                        if (empty($sebelum) || empty($sesudah)) {
-                            return '-';
+                        if ($aksi === 'created' && !empty($sesudah)) {
+                            $fields = [];
+                            foreach ($sesudah as $key => $val) {
+                                if (in_array($key, ['created_at', 'updated_at', 'id', 'password', 'remember_token'])) continue;
+                                if (is_array($val)) {
+                                    $val = json_encode($val);
+                                }
+                                $fields[] = "{$key}: {$val}";
+                            }
+                            return implode(' | ', array_slice($fields, 0, 3)) ?: '-';
                         }
 
-                        $changes = [];
-                        foreach ($sesudah as $key => $val) {
-                            if ($key === 'updated_at') continue;
-                            $lama = $sebelum[$key] ?? '–';
-                            $changes[] = "{$key}: {$lama} → {$val}";
+                        if ($aksi === 'deleted' && !empty($sebelum)) {
+                            $fields = [];
+                            foreach ($sebelum as $key => $val) {
+                                if (in_array($key, ['created_at', 'updated_at', 'id', 'password', 'remember_token'])) continue;
+                                if (is_array($val)) {
+                                    $val = json_encode($val);
+                                }
+                                $fields[] = "{$key}: {$val}";
+                            }
+                            return implode(' | ', array_slice($fields, 0, 3)) ?: '-';
                         }
 
-                        return implode(' | ', array_slice($changes, 0, 3)) ?: '-';
+                        if ($aksi === 'updated' && !empty($sebelum) && !empty($sesudah)) {
+                            $changes = [];
+                            foreach ($sesudah as $key => $val) {
+                                if ($key === 'updated_at') continue;
+                                $lama = $sebelum[$key] ?? '–';
+                                if (is_array($lama)) $lama = json_encode($lama);
+                                if (is_array($val)) $val = json_encode($val);
+                                $changes[] = "{$key}: {$lama} → {$val}";
+                            }
+                            return implode(' | ', array_slice($changes, 0, 3)) ?: '-';
+                        }
+
+                        return '-';
                     })
                     ->wrap()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -102,11 +142,20 @@ class ActivityLogTable
                 SelectFilter::make('modul')
                     ->label('Modul')
                     ->options([
-                        'ppdb'       => 'SPMB',
-                        'guru'       => 'Guru',
-                        'siswa'      => 'Siswa',
-                        'auth'       => 'Login/Logout',
-                        'pengaturan' => 'Pengaturan',
+                        'ppdb'            => 'SPMB',
+                        'guru'            => 'Guru',
+                        'siswa'           => 'Siswa',
+                        'agenda'          => 'Agenda',
+                        'berita'          => 'Berita',
+                        'ekstrakurikuler' => 'Ekstrakurikuler',
+                        'fasilitas'       => 'Fasilitas',
+                        'kelas'           => 'Kelas',
+                        'prestasi'        => 'Prestasi',
+                        'sejarah'         => 'Sejarah',
+                        'visi_misi'       => 'Visi Misi',
+                        'user'            => 'User',
+                        'auth'            => 'Login/Logout',
+                        'pengaturan'      => 'Pengaturan',
                     ]),
 
                 SelectFilter::make('aksi')

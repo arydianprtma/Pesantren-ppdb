@@ -37,6 +37,54 @@ class AppServiceProvider extends ServiceProvider
         PpdbPendaftaran::observe(PpdbPendaftaranObserver::class);
         Guru::observe(GuruObserver::class);
 
+        // Registrasi GeneralActivityObserver untuk modul konten dan pengaturan lainnya
+        $modelsToLog = [
+            \App\Models\Agenda::class,
+            \App\Models\Berita::class,
+            \App\Models\Ekstrakurikuler::class,
+            \App\Models\Fasilitas::class,
+            \App\Models\Kelas::class,
+            \App\Models\Prestasi::class,
+            \App\Models\Sejarah::class,
+            \App\Models\VisiMisi::class,
+            \App\Models\WebSetting::class,
+            \App\Models\PpdbSetting::class,
+            \App\Models\User::class,
+        ];
+
+        foreach ($modelsToLog as $model) {
+            if (class_exists($model)) {
+                $model::observe(\App\Observers\GeneralActivityObserver::class);
+            }
+        }
+
+        // Catat log login dan logout Administrator secara otomatis
+        \Illuminate\Support\Facades\Event::listen(
+            \Illuminate\Auth\Events\Login::class,
+            function ($event) {
+                if ($event->user && ($event->user->hasAnyRole(['admin', 'super_admin']) || ($event->user->role ?? null) === 'admin' || ($event->user->role ?? null) === 'super_admin')) {
+                    \App\Models\AdminActivityLog::catat(
+                        modul: 'auth',
+                        aksi: 'login',
+                        deskripsi: "Admin \"{$event->user->name}\" masuk ke sistem",
+                    );
+                }
+            }
+        );
+
+        \Illuminate\Support\Facades\Event::listen(
+            \Illuminate\Auth\Events\Logout::class,
+            function ($event) {
+                if ($event->user && ($event->user->hasAnyRole(['admin', 'super_admin']) || ($event->user->role ?? null) === 'admin' || ($event->user->role ?? null) === 'super_admin')) {
+                    \App\Models\AdminActivityLog::catat(
+                        modul: 'auth',
+                        aksi: 'logout',
+                        deskripsi: "Admin \"{$event->user->name}\" keluar dari sistem",
+                    );
+                }
+            }
+        );
+
         // Rate Limiter untuk Panel Admin
         RateLimiter::for('admin', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
