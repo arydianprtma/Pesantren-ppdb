@@ -34,7 +34,7 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Masuk Akun PPDB" />
+        <Head title="Masuk Akun SPMB" />
 
         <div class="mb-8 text-center">
             <h2 class="text-2xl font-black text-gray-900">Masuk Akun</h2>

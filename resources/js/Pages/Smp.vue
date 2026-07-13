@@ -27,7 +27,7 @@
                         :href="ppdbUrl"
                         class="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-blue-500 transition-all duration-300 shadow-lg shadow-blue-900/30 border border-blue-500 hover:scale-105"
                     >
-                        Daftar PPDB SMP
+                        Daftar SPMB SMP
                     </a>
                     <Link 
                         :href="route('kontak')"
@@ -337,7 +337,7 @@
         <!-- Alur Pendaftaran Section -->
         <section class="py-20 bg-slate-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-sm font-bold rounded-full uppercase tracking-wider mb-3">Informasi PPDB</span>
+                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-sm font-bold rounded-full uppercase tracking-wider mb-3">Informasi SPMB</span>
                 <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">Alur Pendaftaran SMP</h2>
                 <p class="text-slate-650 text-sm font-semibold max-w-xl mx-auto mt-2 mb-16">
                     Sistem pendaftaran terintegrasi secara online untuk memudahkan proses admisi santri baru.
@@ -348,7 +348,7 @@
                     <div class="bg-white border border-slate-100 p-6 rounded-3xl relative shadow-sm hover:scale-102 transition-transform duration-300">
                         <div class="absolute -top-5 left-6 w-10 h-10 bg-blue-600 text-white font-black rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200">01</div>
                         <h4 class="font-bold text-slate-900 text-base mt-2 mb-2">Pendaftaran Online</h4>
-                        <p class="text-sm text-slate-700 leading-relaxed">Membuat akun pendaftaran di portal PPDB online dan mengisi biodata serta tingkat pendaftaran (SMP).</p>
+                        <p class="text-sm text-slate-700 leading-relaxed">Membuat akun pendaftaran di portal SPMB online dan mengisi biodata serta tingkat pendaftaran (SMP).</p>
                     </div>
 
                     <!-- Step 2 -->
@@ -381,7 +381,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
                     <!-- Left: Jadwal Pendaftaran (7 cols) -->
                     <div class="lg:col-span-7 space-y-6">
-                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-sm font-bold rounded-full uppercase tracking-wider">Agenda PPDB</span>
+                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-sm font-bold rounded-full uppercase tracking-wider">Agenda SPMB</span>
                         <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">Jadwal & Gelombang Pendaftaran</h2>
                         <p class="text-slate-650 text-sm font-medium">Timeline gelombang seleksi penerimaan santri baru SMP Dharma Ksatria:</p>
 
@@ -592,7 +592,7 @@
                         :href="ppdbUrl"
                         class="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-blue-500 transition-all duration-300 shadow-lg shadow-blue-900/30 border border-blue-500"
                     >
-                        Mulai Registrasi PPDB
+                        Mulai Registrasi SPMB
                     </a>
                     <Link 
                         :href="route('kontak')"

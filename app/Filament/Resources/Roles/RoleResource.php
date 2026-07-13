@@ -110,10 +110,10 @@ class RoleResource extends Resource
 
                     // Mapping Label Sistem
                     if ($groupName === 'Sistem') {
-                        if (str_contains($entity['resourceFqcn'], 'PpdbRegistrantResource')) $label = 'Pendaftaran PPDB';
+                        if (str_contains($entity['resourceFqcn'], 'PpdbRegistrantResource')) $label = 'Pendaftaran SPMB';
                         if (str_contains($entity['resourceFqcn'], 'UserResource')) $label = 'Manajemen Pengguna';
                         if (str_contains($entity['resourceFqcn'], 'ActivityLogResource')) $label = 'Log Aktivitas';
-                        if (str_contains($entity['resourceFqcn'], 'PpdbSettingResource')) $label = 'Tahun Ajaran PPDB';
+                        if (str_contains($entity['resourceFqcn'], 'PpdbSettingResource')) $label = 'Tahun Ajaran SPMB';
                     }
                     // Mapping Label Master Data
                     if ($groupName === 'Master Data') {
@@ -152,7 +152,7 @@ class RoleResource extends Resource
                             // Deleted placeholder pages
                         }
                         if ($groupName === 'Sistem' && str_contains($page['pageFqcn'], 'TahunAjaran')) {
-                            $pageLabel = 'Akses Tahun Ajaran PPDB';
+                            $pageLabel = 'Akses Tahun Ajaran SPMB';
                         }
                         $pageOptions[$key] = $pageLabel;
                     }

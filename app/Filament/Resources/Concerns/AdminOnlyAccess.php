@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
  * Trait untuk Resource yang hanya dapat diakses oleh Super Admin dan Admin
  * (tidak termasuk Editor)
  *
- * Gunakan pada: PPDB, DataSiswa, Guru, Pesan Masuk, Pengaturan, PpdbSetting
+ * Gunakan pada: SPMB, DataSiswa, Guru, Pesan Masuk, Pengaturan, PpdbSetting
  */
 trait AdminOnlyAccess
 {

@@ -33,7 +33,7 @@ class AgendaTable
                         default => 'gray',
                     })
                     ->formatStateUsing(fn (string $state): string => match ($state) {
-                        'ppdb' => 'PPDB',
+                        'ppdb' => 'SPMB',
                         'akademik' => 'Akademik',
                         'umum' => 'Umum',
                         default => $state,
@@ -70,7 +70,7 @@ class AgendaTable
             ->filters([
                 SelectFilter::make('kategori')
                     ->options([
-                        'ppdb' => 'PPDB',
+                        'ppdb' => 'SPMB',
                         'akademik' => 'Akademik',
                         'umum' => 'Umum',
                     ]),

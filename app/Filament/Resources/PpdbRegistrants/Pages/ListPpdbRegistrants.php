@@ -9,9 +9,23 @@ use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
 use Illuminate\Database\Eloquent\Builder;
 
+use Livewire\Attributes\Url;
+
 class ListPpdbRegistrants extends ListRecords
 {
     protected static string $resource = PpdbRegistrantResource::class;
+
+    #[Url]
+    public ?array $tableFilters = null;
+
+    #[Url]
+    public ?string $tableSortColumn = null;
+
+    #[Url]
+    public ?string $tableSortDirection = null;
+
+    #[Url]
+    public $tableSearch = '';
 
     protected function getHeaderActions(): array
     {

@@ -83,7 +83,7 @@ class ViewDataSiswa extends ViewRecord
                                 ]),
                         ]),
 
-                    Tab::make('Data PPDB & Bantuan')
+                    Tab::make('Data SPMB & Bantuan')
                         ->icon('heroicon-m-academic-cap')
                         ->schema([
                             Grid::make(3)->schema([

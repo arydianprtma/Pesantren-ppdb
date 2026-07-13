@@ -29,11 +29,11 @@ class PpdbSettingResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-calendar-days';
     
-    protected static ?string $navigationLabel = 'Tahun Ajaran PPDB';
+    protected static ?string $navigationLabel = 'Tahun Ajaran SPMB';
     
     protected static ?string $modelLabel = 'Tahun Ajaran';
     
-    protected static ?string $pluralModelLabel = 'Tahun Ajaran PPDB';
+    protected static ?string $pluralModelLabel = 'Tahun Ajaran SPMB';
     
     protected static ?int $navigationSort = 2;
     
@@ -92,15 +92,28 @@ class PpdbSettingResource extends Resource
                     ->searchable(),
                 TextColumn::make('smp_count')
                     ->label('Pendaftar SMP')
-                    ->getStateUsing(fn ($record) => \App\Models\PpdbPendaftaran::where('tahun_ajaran', $record->tahun_ajaran)->where('tingkat', 'smp')->count()),
+                    ->getStateUsing(fn ($record) => \App\Models\PpdbPendaftaran::where('tahun_ajaran', $record->tahun_ajaran)->where('tingkat', 'smp')->count())
+                    ->url(fn ($record) => route('filament.portal.resources.ppdb.index', [
+                        'tableFilters[tahun_ajaran][value]' => $record->tahun_ajaran,
+                        'tableFilters[tingkat][value]' => 'smp',
+                    ]))
+                    ->color('primary'),
                 TextColumn::make('sma_count')
                     ->label('Pendaftar SMA')
-                    ->getStateUsing(fn ($record) => \App\Models\PpdbPendaftaran::where('tahun_ajaran', $record->tahun_ajaran)->where('tingkat', 'sma')->count()),
+                    ->getStateUsing(fn ($record) => \App\Models\PpdbPendaftaran::where('tahun_ajaran', $record->tahun_ajaran)->where('tingkat', 'sma')->count())
+                    ->url(fn ($record) => route('filament.portal.resources.ppdb.index', [
+                        'tableFilters[tahun_ajaran][value]' => $record->tahun_ajaran,
+                        'tableFilters[tingkat][value]' => 'sma',
+                    ]))
+                    ->color('primary'),
                 TextColumn::make('total_count')
                     ->label('Total Pendaftar')
                     ->getStateUsing(fn ($record) => \App\Models\PpdbPendaftaran::where('tahun_ajaran', $record->tahun_ajaran)->count())
+                    ->url(fn ($record) => route('filament.portal.resources.ppdb.index', [
+                        'tableFilters[tahun_ajaran][value]' => $record->tahun_ajaran,
+                    ]))
                     ->weight('bold')
-                    ->color('primary'),
+                    ->color('success'),
                 TextColumn::make('tgl_buka')
                     ->label('Buka')
                     ->dateTime()

@@ -22,11 +22,11 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Buat Akun PPDB" />
+        <Head title="Buat Akun SPMB" />
 
         <div class="mb-8 text-center">
             <h2 class="text-2xl font-black text-gray-900">Buat Akun Baru</h2>
-            <p class="text-sm text-gray-500 mt-2">Silakan buat akun pendaftar terlebih dahulu untuk melanjutkan pengisian formulir PPDB.</p>
+            <p class="text-sm text-gray-500 mt-2">Silakan buat akun pendaftar terlebih dahulu untuk melanjutkan pengisian formulir SPMB.</p>
         </div>
 
         <form @submit.prevent="submit">

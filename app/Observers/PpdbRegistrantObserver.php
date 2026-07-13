@@ -144,7 +144,7 @@ class PpdbRegistrantObserver
         }
 
         Notification::make()
-            ->title('Pendaftaran PPDB Baru')
+            ->title('Pendaftaran SPMB Baru')
             ->body("Siswa baru: {$pendaftaran->siswa?->nama_lengkap} telah mendaftar.")
             ->icon('heroicon-o-user-plus')
             ->iconColor('success')
@@ -176,7 +176,7 @@ class PpdbRegistrantObserver
 
             'ditolak' => "Mohon maaf *{$nama}*, berdasarkan hasil seleksi, pendaftaran Anda belum dapat kami terima saat ini. Tetap semangat!",
 
-            'mengundurkan_diri' => "Halo *{$nama}*, status pendaftaran Anda (No: {$noReg}) telah kami perbarui menjadi *Mengundurkan Diri*. Terima kasih atas ketertarikan dan partisipasi Anda dalam proses PPDB kami.",
+            'mengundurkan_diri' => "Halo *{$nama}*, status pendaftaran Anda (No: {$noReg}) telah kami perbarui menjadi *Mengundurkan Diri*. Terima kasih atas ketertarikan dan partisipasi Anda dalam proses SPMB kami.",
 
             default => null,
         };
@@ -186,7 +186,7 @@ class PpdbRegistrantObserver
         }
 
         return implode("\n", [
-            "*PENGUMUMAN PPDB*",
+            "*PENGUMUMAN SPMB*",
             "*Pondok Pesantren Riyadussalikin*",
             "",
             "Assalamu'alaikum wr. wb.,",
@@ -224,7 +224,7 @@ class PpdbRegistrantObserver
         elseif (! $oldKelasId && $newKelasId) {
             $newKelas = \App\Models\Kelas::find($newKelasId);
             $namaKelasBaru = $newKelas ? "{$newKelas->nama} (" . strtoupper($newKelas->tingkat) . ")" : 'kelas baru';
-            $body = "Alhamdulillah, *{$nama}* telah resmi ditempatkan di:\n\n🏫 *Kelas: {$namaKelasBaru}*\n\n{$nisInfo}\n\nSelamat belajar dan semoga sukses! 🎉";
+            $body = "Alhamdulillah, *{$nama}* telah resmi ditempatkan di:\n\nKelas: *{$namaKelasBaru}*\n\n{$nisInfo}\n\nSelamat belajar dan semoga sukses!";
         }
 
         // Pindah / naik kelas (dari kelas lama ke kelas baru)
@@ -233,7 +233,7 @@ class PpdbRegistrantObserver
             $newKelas = \App\Models\Kelas::find($newKelasId);
             $namaKelasLama = $oldKelas ? "{$oldKelas->nama} (" . strtoupper($oldKelas->tingkat) . ")" : 'kelas sebelumnya';
             $namaKelasBaru = $newKelas ? "{$newKelas->nama} (" . strtoupper($newKelas->tingkat) . ")" : 'kelas baru';
-            $body = "Halo *{$nama}*, Anda telah dipindahkan / naik kelas:\n\n📌 Dari: *{$namaKelasLama}*\n✅ Ke: *{$namaKelasBaru}*\n\n{$nisInfo}\n\nSelamat dan tetap semangat belajar! 🎉";
+            $body = "Halo *{$nama}*, Anda telah dipindahkan / naik kelas:\n\nDari: *{$namaKelasLama}*\nKe: *{$namaKelasBaru}*\n\n{$nisInfo}\n\nSelamat dan tetap semangat belajar!";
         }
 
         // Tidak ada perubahan bermakna
@@ -258,7 +258,7 @@ class PpdbRegistrantObserver
 
     protected function portalUrl(): string
     {
-        if ($url = env('PPDB_PORTAL_URL')) {
+        if ($url = env('SPMB_PORTAL_URL')) {
             return $url;
         }
 

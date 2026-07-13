@@ -182,7 +182,7 @@
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a :href="ppdbUrl" class="bg-white text-emerald-600 hover:bg-gray-50 font-bold py-4 px-8 rounded-lg inline-block transition-all duration-300 shadow-lg hover:shadow-xl">
-                        Daftar PPDB
+                        Daftar SPMB
                     </a>
                     <Link :href="route('kontak')" class="bg-emerald-800 text-white hover:bg-emerald-900 font-bold py-4 px-8 rounded-lg inline-block transition-all duration-300">
                         Hubungi Kami

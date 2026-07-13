@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Santri Diterima PPDB</title>
+    <title>Laporan Santri Diterima SPMB</title>
     <style>
         /* ── Reset & Base ── */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -202,10 +202,12 @@
 <hr class="kop-border">
 <hr class="kop-border-thick">
 
-<div class="judul-laporan">Laporan Data Santri Diterima PPDB</div>
+<div class="judul-laporan">Laporan Data Santri Diterima SPMB</div>
 
 <div class="meta">
-    <span>Total: <strong>{{ count($data) }}</strong> santri diterima</span>
+    <span>Tingkat: <strong>{{ $filter['tingkat'] }}</strong></span>
+    <span>Tahun Ajaran: <strong>{{ $filter['tahun_ajaran'] }}</strong></span>
+    <span>Total: <strong>{{ count($data) }}</strong> santri</span>
     <span>Dicetak: <strong>{{ now()->translatedFormat('d F Y, H:i') }}</strong></span>
 </div>
 
@@ -258,7 +260,7 @@
 </div>
 
 <div class="footer">
-    <span>Dokumen dicetak dari Sistem Portal Admin PPDB &mdash; {{ config('app.name') }}</span>
+    <span>Dokumen dicetak dari Sistem Portal Admin SPMB &mdash; {{ config('app.name') }}</span>
     <span>{{ now()->format('d/m/Y H:i') }}</span>
 </div>
 

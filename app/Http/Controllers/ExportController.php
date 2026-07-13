@@ -34,10 +34,11 @@ class ExportController extends Controller
         $query = PpdbPendaftaran::with(['siswa', 'ayah', 'ibu', 'user'])
             ->when($request->tingkat, fn($q) => $q->where('tingkat', $request->tingkat))
             ->when($request->status,  fn($q) => $q->where('status',  $request->status))
+            ->when($request->tahun_ajaran, fn($q) => $q->where('tahun_ajaran', $request->tahun_ajaran))
             ->orderBy('tanggal_daftar', 'desc')
             ->get();
 
-        $filename = 'pendaftar_ppdb_' . now()->format('Ymd_His') . '.csv';
+        $filename = 'pendaftar_spmb_' . now()->format('Ymd_His') . '.csv';
 
         $headers = [
             'Content-Type'        => 'text/csv; charset=UTF-8',
@@ -98,11 +99,13 @@ class ExportController extends Controller
         $data = PpdbPendaftaran::with(['siswa', 'user'])
             ->where('status', 'like', 'diterima_%')
             ->when($request->tingkat, fn($q) => $q->where('tingkat', $request->tingkat))
+            ->when($request->tahun_ajaran, fn($q) => $q->where('tahun_ajaran', $request->tahun_ajaran))
             ->orderBy('tanggal_daftar', 'desc')
             ->get();
 
         $filter = [
             'tingkat' => $request->tingkat ? strtoupper($request->tingkat) : 'Semua',
+            'tahun_ajaran' => $request->tahun_ajaran ?? 'Semua',
         ];
 
         return view('exports.pendaftar-pdf', compact('data', 'filter'));

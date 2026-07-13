@@ -55,7 +55,7 @@
                             </h1>
                             
                             <p style="font-size: 15px; line-height: 1.6; color: #374151; margin-bottom: 24px;">
-                                Kami menerima permintaan untuk mengatur ulang kata sandi akun Administrator Anda di portal PPDB Pesantren Riyadussalikin.
+                                Kami menerima permintaan untuk mengatur ulang kata sandi akun Administrator Anda di portal SPMB Pesantren Riyadussalikin.
                             </p>
 
                             <!-- CTA Button Container -->
@@ -100,7 +100,7 @@
                     <tr>
                         <td align="center" style="padding-top: 30px;">
                             <p style="margin: 0; font-size: 12px; color: #9ca3af; line-height: 1.5;">
-                                Email ini dikirim secara otomatis oleh sistem portal PPDB Pesantren Riyadussalikin.
+                                Email ini dikirim secara otomatis oleh sistem portal SPMB Pesantren Riyadussalikin.
                             </p>
                             <p style="margin: 6px 0 0 0; font-size: 12px; color: #9ca3af;">
                                 &copy; {{ date('Y') }} Pondok Pesantren Riyadussalikin Padaherang.

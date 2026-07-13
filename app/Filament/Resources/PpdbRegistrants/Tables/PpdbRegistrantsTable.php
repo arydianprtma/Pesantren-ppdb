@@ -139,6 +139,8 @@ class PpdbRegistrantsTable
                     ->color('success')
                     ->url(fn ($livewire) => route('export.pendaftar.excel', [
                         'tingkat' => $livewire->tableFilters['tingkat']['value'] ?? null,
+                        'status' => $livewire->tableFilters['status']['value'] ?? null,
+                        'tahun_ajaran' => $livewire->tableFilters['tahun_ajaran']['value'] ?? null,
                     ]))
                     ->openUrlInNewTab(),
 
@@ -148,6 +150,8 @@ class PpdbRegistrantsTable
                     ->color('danger')
                     ->url(fn ($livewire) => route('export.pendaftar.pdf', [
                         'tingkat' => $livewire->tableFilters['tingkat']['value'] ?? null,
+                        'status' => $livewire->tableFilters['status']['value'] ?? null,
+                        'tahun_ajaran' => $livewire->tableFilters['tahun_ajaran']['value'] ?? null,
                     ]))
                     ->openUrlInNewTab(),
             ])

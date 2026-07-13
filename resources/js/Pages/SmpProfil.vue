@@ -224,7 +224,7 @@
                         :href="ppdbUrl"
                         class="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-blue-500 transition-all duration-300 shadow-lg shadow-blue-900/30 border border-blue-500 hover:scale-105"
                     >
-                        Daftar PPDB SMP
+                        Daftar SPMB SMP
                     </a>
                     <Link 
                         :href="route('kontak')"

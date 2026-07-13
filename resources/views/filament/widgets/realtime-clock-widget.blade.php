@@ -59,7 +59,7 @@
                         </div>
                         <span
                             style="color: #a7f3d0; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em;">Dashboard
-                            Admin PPDB</span>
+                            Admin SPMB</span>
                     </div>
 
                     <h2

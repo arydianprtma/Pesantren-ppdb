@@ -68,7 +68,7 @@ Exception: {{ $debug['class'] }}</pre>
 
         <!-- Footer -->
         <div class="p-6 bg-slate-50 text-center border-t border-slate-100">
-            <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.3em]">&copy; 2026 Sistem Informasi PPDB Riyadussalikin</p>
+            <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.3em]">&copy; 2026 Sistem Informasi SPMB Riyadussalikin</p>
         </div>
     </div>
 </body>

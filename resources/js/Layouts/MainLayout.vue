@@ -166,7 +166,7 @@
                             href="https://ppdb.riyadussalikin.ponpes.id/login"
                             :class="isSmpPage ? 'bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all shadow-md hover:shadow-lg' : 'btn-primary'"
                         >
-                            PPDB
+                            SPMB
                         </a>
                     </div>
 
@@ -234,7 +234,7 @@
                             Kontak
                         </Link>
                         <a href="https://ppdb.riyadussalikin.ponpes.id/login" :class="isSmpPage ? 'bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all text-center shadow-md' : 'btn-primary text-center'">
-                            PPDB
+                            SPMB
                         </a>
                     </div>
                 </div>
