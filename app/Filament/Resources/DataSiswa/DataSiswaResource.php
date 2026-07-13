@@ -147,7 +147,6 @@ class DataSiswaResource extends Resource
                         ->pluck('tahun_ajaran', 'tahun_ajaran')
                         ->toArray()
                     )
-                    ->default(fn () => \App\Models\PpdbSetting::where('is_active', true)->first()?->tahun_ajaran)
                     ->query(fn (Builder $query, array $data) => 
                         $query->when($data['value'], fn ($q, $value) => 
                             $q->whereHas('pendaftaran', fn ($pq) => $pq->where('tahun_ajaran', $value))
