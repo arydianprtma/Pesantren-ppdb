@@ -96,12 +96,6 @@
                         <span class="text-slate-400 font-bold uppercase text-[10px] tracking-wider">Jenjang Pendidikan</span>
                         <span class="text-emerald-700 font-black uppercase">{{ $pendaftaran->tingkat }}</span>
                     </div>
-                    <div class="flex justify-between items-center py-2 border-b border-slate-50">
-                        <span class="text-slate-400 font-bold uppercase text-[10px] tracking-wider">Status Akun</span>
-                        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-bold text-[10px] uppercase italic">
-                            {{ $pendaftaran->status }}
-                        </span>
-                    </div>
                     <div class="flex justify-between items-center py-2">
                         <span class="text-slate-400 font-bold uppercase text-[10px] tracking-wider">Tgl Pendaftaran</span>
                         <span class="text-slate-700 font-bold text-xs italic">{{ $pendaftaran->created_at->translatedFormat('d F Y') }}</span>
