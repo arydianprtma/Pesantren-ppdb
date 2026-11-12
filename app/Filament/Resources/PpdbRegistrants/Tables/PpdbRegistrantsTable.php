@@ -132,29 +132,6 @@ class PpdbRegistrantsTable
                 EditAction::make(),
                 DeleteAction::make(),
             ])
-            ->toolbarActions([
-                \Filament\Actions\Action::make('export_excel')
-                    ->label('Export Excel')
-                    ->icon('heroicon-o-table-cells')
-                    ->color('success')
-                    ->url(fn ($livewire) => route('export.pendaftar.excel', [
-                        'tingkat' => $livewire->tableFilters['tingkat']['value'] ?? null,
-                        'status' => $livewire->tableFilters['status']['value'] ?? null,
-                        'tahun_ajaran' => $livewire->tableFilters['tahun_ajaran']['value'] ?? null,
-                    ]))
-                    ->openUrlInNewTab(),
-
-                \Filament\Actions\Action::make('export_pdf')
-                    ->label('Export PDF')
-                    ->icon('heroicon-o-document-arrow-down')
-                    ->color('danger')
-                    ->url(fn ($livewire) => route('export.pendaftar.pdf', [
-                        'tingkat' => $livewire->tableFilters['tingkat']['value'] ?? null,
-                        'status' => $livewire->tableFilters['status']['value'] ?? null,
-                        'tahun_ajaran' => $livewire->tableFilters['tahun_ajaran']['value'] ?? null,
-                    ]))
-                    ->openUrlInNewTab(),
-            ])
             ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

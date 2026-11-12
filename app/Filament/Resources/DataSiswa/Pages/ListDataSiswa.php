@@ -344,22 +344,6 @@ class ListDataSiswa extends ListRecords
                         $action->halt();
                     }
                 }),
-            \Filament\Actions\Action::make('export_excel')
-                ->label('Export Excel')
-                ->icon('heroicon-o-document-text')
-                ->color('success')
-                ->url(fn ($livewire) => route('export.siswa.excel', [
-                    'tingkat' => $livewire->tableFilters['tingkat']['value'] ?? null,
-                ]))
-                ->openUrlInNewTab(),
-            \Filament\Actions\Action::make('export_pdf')
-                ->label('Export PDF')
-                ->icon('heroicon-o-arrow-down-tray')
-                ->color('danger')
-                ->url(fn ($livewire) => route('export.siswa.pdf', [
-                    'tingkat' => $livewire->tableFilters['tingkat']['value'] ?? null,
-                ]))
-                ->openUrlInNewTab(),
         ];
     }
 }
