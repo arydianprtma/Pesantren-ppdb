@@ -39,6 +39,7 @@ class HandleInertiaRequests extends Middleware
             'kontak' => fn () => Cache::remember('global_kontak', 60 * 60 * 24, function () {
                 return Kontak::first();
             }),
+            'turnstile_site_key' => config('services.cloudflare.turnstile_site_key') ?? env('VITE_TURNSTILE_SITE_KEY', '0x4AAAAAADiJFNnVjj_xSKi_'),
         ];
     }
 }

@@ -26,6 +26,45 @@ class ContactController extends Controller
             'pesan'    => 'required|string',
         ]);
 
+        if (!app()->environment('local')) {
+            $turnstileToken = $request->input('cf-turnstile-response') ?? $request->input('turnstile_token');
+            $secret = config('services.cloudflare.turnstile_secret_key') ?? env('TURNSTILE_SECRET_KEY');
+
+            if ($secret) {
+                if (!$turnstileToken) {
+                    return back()->withErrors([
+                        'turnstile_token' => 'Verifikasi keamanan Turnstile wajib diselesaikan.',
+                    ])->withInput();
+                }
+
+                $response = \Illuminate\Support\Facades\Http::asForm()->timeout(10)->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+                    'secret' => $secret,
+                    'response' => $turnstileToken,
+                    'remoteip' => $request->ip(),
+                ]);
+
+                $data = $response->json();
+                $allowedHostnames = [
+                    'ppdb.riyadussalikin.ponpes.id',
+                    'riyadussalikin.ponpes.id',
+                    'www.riyadussalikin.ponpes.id',
+                    'localhost',
+                    '127.0.0.1',
+                ];
+
+                if (
+                    !$response->successful() ||
+                    !($data['success'] ?? false) ||
+                    (!empty($data['action']) && $data['action'] !== 'contact') ||
+                    (!empty($data['hostname']) && !in_array($data['hostname'], $allowedHostnames, true))
+                ) {
+                    return back()->withErrors([
+                        'turnstile_token' => 'Verifikasi keamanan Turnstile gagal. Silakan coba lagi.',
+                    ])->withInput();
+                }
+            }
+        }
+
         $message = ContactMessage::create($validated);
 
         // Kirim notifikasi Filament ke semua admin

@@ -177,6 +177,13 @@
 
                                 </div>
 
+                                <div class="flex justify-center my-2">
+                                    <div id="turnstile-container-contact"></div>
+                                </div>
+                                <p v-if="form.errors.turnstile_token || form.errors['cf-turnstile-response']" class="text-sm text-red-600 text-center">
+                                    {{ form.errors.turnstile_token || form.errors['cf-turnstile-response'] }}
+                                </p>
+
                                 <button 
                                     type="submit" 
                                     :disabled="form.processing"
@@ -196,19 +203,85 @@
 
 <script setup>
 import MainLayout from '../Layouts/MainLayout.vue';
-import { useForm, Head } from '@inertiajs/vue3';
+import { useForm, Head, usePage } from '@inertiajs/vue3';
+import { ref, onMounted, onUnmounted } from 'vue';
+
+const page = usePage();
+const siteKey = page.props.turnstile_site_key || import.meta.env.VITE_TURNSTILE_SITE_KEY || '0x4AAAAAADiJFNnVjj_xSKi_';
+let turnstileWidgetId = null;
 
 const form = useForm({
     nama: '',
     whatsapp: '',
     email: '',
-    pesan: ''
+    pesan: '',
+    turnstile_token: '',
+    'cf-turnstile-response': '',
+});
+
+const renderTurnstile = () => {
+    if (window.turnstile && document.getElementById('turnstile-container-contact')) {
+        turnstileWidgetId = window.turnstile.render('#turnstile-container-contact', {
+            sitekey: siteKey,
+            action: 'contact',
+            callback: (token) => {
+                form.turnstile_token = token;
+                form['cf-turnstile-response'] = token;
+                form.clearErrors('turnstile_token');
+                form.clearErrors('cf-turnstile-response');
+            },
+            'expired-callback': () => {
+                form.turnstile_token = '';
+                form['cf-turnstile-response'] = '';
+            },
+            'error-callback': () => {
+                form.turnstile_token = '';
+                form['cf-turnstile-response'] = '';
+            }
+        });
+    }
+};
+
+onMounted(() => {
+    let script = document.getElementById('cloudflare-turnstile-script');
+    if (!script) {
+        script = document.createElement('script');
+        script.id = 'cloudflare-turnstile-script';
+        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+    }
+    if (window.turnstile) {
+        renderTurnstile();
+    } else {
+        script.onload = renderTurnstile;
+    }
+});
+
+onUnmounted(() => {
+    if (window.turnstile && turnstileWidgetId !== null) {
+        window.turnstile.remove(turnstileWidgetId);
+    }
 });
 
 const submitForm = () => {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    if (!isLocal && !form.turnstile_token && !form['cf-turnstile-response']) {
+        form.errors.turnstile_token = 'Silakan selesaikan verifikasi keamanan Turnstile.';
+        return;
+    }
+
     form.post(route('kontak.store'), {
         onSuccess: () => {
             form.reset();
+        },
+        onFinish: () => {
+            if (window.turnstile && turnstileWidgetId !== null) {
+                window.turnstile.reset(turnstileWidgetId);
+                form.turnstile_token = '';
+                form['cf-turnstile-response'] = '';
+            }
         }
     });
 };
