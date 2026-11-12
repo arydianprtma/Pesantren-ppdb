@@ -24,7 +24,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
                     <!-- Left Column: Visi & Misi -->
-                    <div class="w-full lg:w-2/3 space-y-12">
+                    <div :class="(visiMisi?.nama_pengasuh || visiMisi?.foto_pengasuh) ? 'w-full lg:w-2/3 space-y-12' : 'w-full max-w-4xl mx-auto space-y-12'">
                         <!-- Visi Part -->
                         <div>
                             <div class="inline-block bg-emerald-100 text-emerald-700 px-6 py-2 rounded-full font-semibold mb-6">
@@ -62,15 +62,15 @@
                     </div>
 
                     <!-- Right Column: Pengasuh -->
-                    <div v-if="visiMisi?.nama_pengasuh" class="w-full lg:w-1/3">
+                    <div v-if="visiMisi?.nama_pengasuh || visiMisi?.foto_pengasuh" class="w-full lg:w-1/3">
                         <div class="sticky top-24 space-y-8">
                             <!-- Foto Pengasuh -->
                             <div class="relative group">
-                                <div class="aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl relative z-10 border-8 border-white group transform-gpu transition-transform duration-500 hover:scale-105 ">
+                                <div class="aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl relative z-10 border-8 border-white group transform-gpu transition-transform duration-500 hover:scale-105 bg-emerald-50">
                                     <img 
                                         v-if="visiMisi.foto_pengasuh" 
                                         :src="'/storage/' + visiMisi.foto_pengasuh" 
-                                        :alt="visiMisi.nama_pengasuh"
+                                        :alt="visiMisi.nama_pengasuh || 'Pengasuh Pondok'"
                                         loading="lazy"
                                         class="w-full h-full object-cover transform-gpu backface-hidden"
                                     />
@@ -90,10 +90,10 @@
                                 <div class="inline-block px-4 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold mb-4">
                                     Pengasuh Pondok
                                 </div>
-                                <h2 class="text-2xl font-extrabold text-gray-900 mb-4 leading-tight">
+                                <h2 v-if="visiMisi.nama_pengasuh" class="text-2xl font-extrabold text-gray-900 mb-4 leading-tight">
                                     {{ visiMisi.nama_pengasuh }}
                                 </h2>
-                                <div class="prose prose-sm prose-emerald text-gray-700 leading-relaxed mb-6 text-justify" v-html="visiMisi.kata_sambutan"></div>
+                                <div v-if="visiMisi.kata_sambutan" class="prose prose-sm prose-emerald text-gray-700 leading-relaxed mb-6 text-justify" v-html="visiMisi.kata_sambutan"></div>
                                 <div class="h-1 w-16 bg-emerald-600 rounded-full mx-auto lg:mx-0"></div>
                             </div>
                         </div>
