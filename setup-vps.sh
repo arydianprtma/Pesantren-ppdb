@@ -23,7 +23,8 @@ if [ ! -d "PPDB" ] || [ ! -f "PPDB/composer.json" ]; then
     echo "📥 Mengkloning repositori PPDB (spmb-ppdb)..."
     git clone https://github.com/arydianprtma/spmb-ppdb.git PPDB
 else
-    echo "✅ Repositori PPDB (spmb-ppdb) sudah tersedia."
+    echo "✅ Repositori PPDB (spmb-ppdb) sudah tersedia. Memperbarui..."
+    cd PPDB && git pull origin main && cd ..
 fi
 
 # 3. Buat folder sertifikat Cloudflare jika belum ada
@@ -31,12 +32,17 @@ mkdir -p /etc/ssl/cloudflare
 
 if [ ! -f /etc/ssl/cloudflare/riyadussalikin.crt ]; then
     echo "⚠️  PERINGATAN: Berkas sertifikat /etc/ssl/cloudflare/riyadussalikin.crt belum ditemukan!"
-    echo "   Silakan buat sertifikat Cloudflare Origin CA di dashboard Cloudflare dan simpan di folder tersebut."
+    echo "   Membuat self-signed certificate sementara agar Nginx langsung berjalan aman..."
+    openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
+        -keyout /etc/ssl/cloudflare/riyadussalikin.key \
+        -out /etc/ssl/cloudflare/riyadussalikin.crt \
+        -subj "/C=ID/ST=JawaBarat/L=Sukabumi/O=PondokPesantrenRiyadussalikin/CN=riyadussalikin.ponpes.id"
+    echo "✅ SSL Certificate siap."
 fi
 
 # 4. Jalankan Docker Compose
 echo "🐳 Menjalankan seluruh sistem via Docker Compose..."
-docker compose up -d --build
+docker compose up -d
 
 echo "✅ Sistem Pesantren PPDB berhasil dijalankan!"
 echo "   Periksa status container: docker compose ps"

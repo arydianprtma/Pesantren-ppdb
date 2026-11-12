@@ -20,17 +20,25 @@ echo "✅ Database terhubung!"
 # ─────────────────────────────────────────────
 cd /var/www/pesantren-ppdb
 
+echo "📁 Menyiapkan direktori storage & cache (Aplikasi Utama)..."
+mkdir -p storage/framework/{sessions,views,cache/data} storage/app/public storage/logs bootstrap/cache
+chmod -R 775 storage bootstrap/cache
+
 if [ ! -f .env ]; then
     if [ -f .env.production ]; then
         cp .env.production .env
     else
         cp .env.example .env
     fi
-    php artisan key:generate --force || true
 fi
 
 echo "📦 Menginstall dependensi Composer (Aplikasi Utama)..."
 composer install --no-dev --optimize-autoloader --no-interaction
+
+if ! grep -q "^APP_KEY=base64:" .env 2>/dev/null; then
+    echo "🔑 Menghasilkan APP_KEY (Aplikasi Utama)..."
+    php artisan key:generate --force
+fi
 
 echo "🗄️ Menjalankan migrasi database..."
 php artisan migrate --force
@@ -54,15 +62,27 @@ if [ -d "/var/www/pesantren-ppdb/PPDB" ]; then
     echo "🚀 Inisialisasi Submodul PPDB..."
     cd /var/www/pesantren-ppdb/PPDB
 
+    echo "📁 Menyiapkan direktori storage & cache (PPDB)..."
+    mkdir -p storage/framework/{sessions,views,cache/data} storage/app/public storage/app/private storage/logs bootstrap/cache
+    chmod -R 775 storage bootstrap/cache
+
     if [ ! -f .env ]; then
-        if [ -f .env.example ]; then
+        if [ -f .env.production ]; then
+            cp .env.production .env
+        elif [ -f .env.example ]; then
             cp .env.example .env
         fi
-        php artisan key:generate --force || true
+        sed -i "s/DB_HOST=127.0.0.1/DB_HOST=${DB_HOST}/" .env || true
+        sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=${DB_PASS}/" .env || true
     fi
 
     echo "📦 Menginstall dependensi Composer (PPDB)..."
     composer install --no-dev --optimize-autoloader --no-interaction
+
+    if ! grep -q "^APP_KEY=base64:" .env 2>/dev/null; then
+        echo "🔑 Menghasilkan APP_KEY (PPDB)..."
+        php artisan key:generate --force
+    fi
 
     echo "🔗 Membuat storage symlink PPDB..."
     php artisan storage:link || true
@@ -74,7 +94,7 @@ if [ -d "/var/www/pesantren-ppdb/PPDB" ]; then
     fi
 
     echo "⚡ Mengoptimalkan cache PPDB..."
-    php artisan optimize || true
+    php artisan optimize --except=views || true
     cd /var/www/pesantren-ppdb
 fi
 

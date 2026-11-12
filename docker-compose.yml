@@ -41,6 +41,7 @@ services:
       DB_PASSWORD: ${DB_PASSWORD:-REXUSlit-535}
     volumes:
       - .:/var/www/pesantren-ppdb
+      - ./docker/entrypoint.sh:/usr/local/bin/entrypoint.sh:ro
     networks:
       - ppdb_network
 
