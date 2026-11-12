@@ -33,7 +33,7 @@ class PortalPanelProvider extends PanelProvider
             ->passwordReset()
             ->emailVerification()
             ->profile(\App\Filament\Pages\Auth\EditProfile::class, isSimple: false)
-            ->spa() // Increase performance
+            // ->spa() // Dinonaktifkan agar tidak konflik dengan WAF/Cloudflare saat redirect
             ->databaseNotifications()
             ->databaseNotificationsPolling('10s')
             ->colors([
