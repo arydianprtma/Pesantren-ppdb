@@ -46,6 +46,9 @@ php artisan migrate --force
 echo "🔗 Membuat storage symlink..."
 php artisan storage:link || true
 
+echo "📦 Mempublikasikan aset Livewire..."
+php artisan livewire:publish --assets || true
+
 if [ ! -d "public/build" ]; then
     echo "🎨 Membangun frontend assets (Vite)..."
     npm install
@@ -86,6 +89,9 @@ if [ -d "/var/www/pesantren-ppdb/PPDB" ]; then
 
     echo "🔗 Membuat storage symlink PPDB..."
     php artisan storage:link || true
+
+    echo "📦 Mempublikasikan aset Livewire PPDB..."
+    php artisan livewire:publish --assets || true
 
     if [ ! -d "public/build" ]; then
         echo "🎨 Membangun frontend assets PPDB (Vite)..."
