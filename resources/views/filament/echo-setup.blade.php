@@ -1,7 +1,7 @@
 @if (config('broadcasting.default') === 'reverb')
-<!-- Load Pusher and Laravel Echo from CDN -->
-<script data-navigate-once src="https://cdnjs.cloudflare.com/ajax/libs/pusher/8.3.0/pusher.min.js"></script>
-<script data-navigate-once src="https://cdn.jsdelivr.net/npm/laravel-echo@1.16.0/dist/echo.iife.js"></script>
+<!-- Load Pusher and Laravel Echo locally -->
+<script data-navigate-once src="{{ asset('js/pusher.min.js') }}"></script>
+<script data-navigate-once src="{{ asset('js/echo.iife.js') }}"></script>
 <script data-navigate-once>
     (function() {
         try {
