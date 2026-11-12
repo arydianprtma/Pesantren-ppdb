@@ -11,6 +11,13 @@ if ! command -v docker &> /dev/null; then
     systemctl start docker
 fi
 
+# Konfigurasi DNS Docker agar docker build tidak gagal resolving domain di VPS
+if [ ! -f /etc/docker/daemon.json ] || ! grep -q "8.8.8.8" /etc/docker/daemon.json; then
+    echo "🌐 Mengonfigurasi DNS resolver untuk Docker..."
+    echo '{"dns": ["8.8.8.8", "1.1.1.1"]}' > /etc/docker/daemon.json
+    systemctl restart docker
+fi
+
 # 2. Pastikan submodul repositori PPDB (spmb-ppdb) tersedia
 if [ ! -d "PPDB" ] || [ ! -f "PPDB/composer.json" ]; then
     echo "📥 Mengkloning repositori PPDB (spmb-ppdb)..."
