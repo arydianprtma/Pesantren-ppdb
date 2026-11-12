@@ -90,42 +90,54 @@ Route::get('/sitemap.xml', function () {
     return response($xml, 200)->header('Content-Type', 'application/xml');
 })->name('sitemap');
 
-// Proxy route for PPDB storage to avoid CORS issues
-Route::get('/ppdb-storage/{path}', function ($path) {
-    $root = config('filesystems.disks.ppdb.root');
-    if (!$root) {
-        abort(404);
-    }
-    
-    $fullPath = $root . '/' . $path;
-
-    if (!file_exists($fullPath)) {
+// Proxy route for PPDB storage with strict security & path traversal prevention
+Route::get('/ppdb-storage/{path}', function (\Illuminate\Http\Request $request, $path) {
+    if (str_contains($path, '..') || str_contains($path, "\0")) {
         abort(404);
     }
 
-    $file = file_get_contents($fullPath);
-    $type = mime_content_type($fullPath);
+    $rawRoot = config('filesystems.disks.ppdb.root');
+    if (!$rawRoot || !is_dir($rawRoot)) {
+        abort(404);
+    }
 
-    return response($file)->header('Content-Type', $type);
+    $realRoot = realpath($rawRoot);
+    $fullPath = realpath($realRoot . DIRECTORY_SEPARATOR . $path);
+
+    if (!$fullPath || !str_starts_with($fullPath, $realRoot) || !is_file($fullPath)) {
+        abort(404);
+    }
+
+    // Protect sensitive berkas: must be authenticated
+    $normalized = str_replace('\\', '/', ltrim($path, '/\\'));
+    if (str_starts_with($normalized, 'berkas')) {
+        if (!auth()->check()) {
+            abort(403, 'Akses ditolak.');
+        }
+    }
+
+    return response()->file($fullPath);
 })->where('path', '.*');
 
-// Proxy route for PPDB public storage to avoid CORS issues
+// Proxy route for PPDB public storage with strict path traversal prevention
 Route::get('/ppdb-public-storage/{path}', function ($path) {
-    $root = config('filesystems.disks.ppdb_public.root');
-    if (!$root) {
-        abort(404);
-    }
-    
-    $fullPath = $root . '/' . $path;
-
-    if (!file_exists($fullPath)) {
+    if (str_contains($path, '..') || str_contains($path, "\0")) {
         abort(404);
     }
 
-    $file = file_get_contents($fullPath);
-    $type = mime_content_type($fullPath);
+    $rawRoot = config('filesystems.disks.ppdb_public.root');
+    if (!$rawRoot || !is_dir($rawRoot)) {
+        abort(404);
+    }
 
-    return response($file)->header('Content-Type', $type);
+    $realRoot = realpath($rawRoot);
+    $fullPath = realpath($realRoot . DIRECTORY_SEPARATOR . $path);
+
+    if (!$fullPath || !str_starts_with($fullPath, $realRoot) || !is_file($fullPath)) {
+        abort(404);
+    }
+
+    return response()->file($fullPath);
 })->where('path', '.*');
 
 // Login Route (for Admin access)
