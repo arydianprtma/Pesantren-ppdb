@@ -15,15 +15,17 @@ class UserSeeder extends Seeder
         \Spatie\Permission\Models\Role::findOrCreate('admin');
         \Spatie\Permission\Models\Role::findOrCreate('panel_user');
 
-        // Buat admin user
-        $user = User::create([
-            'name' => 'Admin Riyadussalikin',
-            'email' => 'admin@riyadussalikin.sch.id',
-            'password' => Hash::make('admin123'),
-            'email_verified_at' => now(),
-            'role' => 'super_admin',
-        ]);
+        // Buat atau perbarui admin user
+        $user = User::updateOrCreate(
+            ['email' => 'admin@riyadussalikin.sch.id'],
+            [
+                'name' => 'Admin Riyadussalikin',
+                'password' => Hash::make('admin123'),
+                'email_verified_at' => now(),
+                'role' => 'super_admin',
+            ]
+        );
 
-        $user->assignRole('super_admin');
+        $user->syncRoles(['super_admin']);
     }
 }
